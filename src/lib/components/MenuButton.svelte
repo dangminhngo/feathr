@@ -15,8 +15,8 @@
 <style lang="scss">
   .menu-button {
     cursor: pointer;
-    width: 2.25rem;
-    height: 2.25rem;
+    width: var(--button-height);
+    height: var(--button-height);
     display: flex;
     align-items: center;
     justify-content: center;

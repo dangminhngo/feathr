@@ -46,12 +46,12 @@
     height = 20
 </script>
 
-<span class="icon">
-  <svelte:component this={icons[name]} {width} {height} />
+<span class={$$props.class} style="width: {width}px; height: {height}px;">
+  <svelte:component this={icons[name]} width="100%" height="100%" />
 </span>
 
-<style>
-  .icon {
-    color: inherit;
+<style lang="scss">
+  span {
+    display: block;
   }
 </style>
