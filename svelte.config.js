@@ -25,7 +25,6 @@ const config = {
           $components: path.resolve('./src/components'),
           $lib: path.resolve('./src/lib'),
           $routes: path.resolve('./src/routes'),
-          $styles: path.resolve('./src/styles'),
         },
       },
     },
