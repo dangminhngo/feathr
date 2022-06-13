@@ -1,8 +1,10 @@
 <script lang="ts">
   import ThemeContext from '$lib/theming/ThemeContext.svelte'
+  import Header from '$layouts/Header.svelte'
 </script>
 
 <ThemeContext>
+  <Header />
   <slot />
 </ThemeContext>
 
@@ -16,5 +18,12 @@
   :global(body) {
     color: var(--theme-fg);
     background-color: var(--theme-bg);
+  }
+
+  :global(button, input) {
+    border: none;
+    outline: none;
+    background-color: inherit;
+    color: inherit;
   }
 </style>

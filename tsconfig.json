@@ -14,10 +14,11 @@
       "$/*": ["src/*"],
       "$assets/*": ["src/assets/*"],
       "$components/*": ["src/components/*"],
+      "$layouts/*": ["src/layouts/*"],
       "$lib": ["src/lib"],
       "$lib/*": ["src/lib/*"],
-      "$routes/*": ["src/routes/*"],
+      "$routes/*": ["src/routes/*"]
     },
-    "typeRoots": ["./node_modules/@types", "./src/global.d.ts"],
+    "typeRoots": ["./node_modules/@types", "./src/global.d.ts"]
   }
 }

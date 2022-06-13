@@ -23,6 +23,7 @@ const config = {
           $: path.resolve('./src'),
           $assets: path.resolve('./src/assets'),
           $components: path.resolve('./src/components'),
+          $layouts: path.resolve('./src/layouts'),
           $lib: path.resolve('./src/lib'),
           $routes: path.resolve('./src/routes'),
         },
