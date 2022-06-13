@@ -16,3 +16,7 @@ export interface Theme {
   name: string
   palette: Palette
 }
+
+export interface LayoutStore {
+  navOpen: boolean
+}

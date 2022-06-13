@@ -1,10 +1,8 @@
 <script lang="ts">
-  let open = false
-
-  const toggle = () => (open = !open)
+  import layoutStore from '$lib/stores/layout'
 </script>
 
-<button class="menu-button" class:open on:click={toggle}>
+<button class="menu-button" class:open={$layoutStore.navOpen} on:click={layoutStore.toggleNav}>
   <div>
     <span>&nbsp;</span>
     <span>&nbsp;</span>
