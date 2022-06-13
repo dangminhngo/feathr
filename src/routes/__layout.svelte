@@ -32,8 +32,8 @@
   }
 
   :global(body) {
-    color: var(--theme-fg);
-    background-color: var(--theme-bg);
+    color: var(--theme-primary-200);
+    background-color: var(--theme-primary-900);
     font-size: 1rem;
     font-family: 'Roboto', sans-serif;
   }

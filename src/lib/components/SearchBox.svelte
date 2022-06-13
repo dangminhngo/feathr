@@ -20,7 +20,7 @@
     right: 1rem;
     transform: translateY(-50%);
     display: block;
-    color: var(--theme-searchBoxPlaceholderFg);
+    color: var(--theme-primary-500);
   }
 
   input {
@@ -28,11 +28,11 @@
     width: 20rem;
     height: var(--input-height);
     border-radius: var(--rounded);
-    background-color: var(--theme-searchBoxBg);
-    color: var(--theme-searchBoxFg);
+    background-color: var(--theme-primary-800);
+    color: var(--theme-primary-200);
 
     &::placeholder {
-      color: var(--theme-searchBoxPlaceholderFg);
+      color: var(--theme-primary-500);
     }
   }
 </style>

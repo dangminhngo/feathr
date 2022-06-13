@@ -33,7 +33,7 @@
       width: 100%;
       height: 2px;
       display: block;
-      background-color: var(--theme-fg);
+      background-color: var(--theme-primary-200);
       transition: all 0.15s ease-out;
     }
 
