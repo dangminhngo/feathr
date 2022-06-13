@@ -20,12 +20,12 @@ const config = {
       ],
       resolve: {
         alias: {
-          '@': path.resolve('./src'),
-          '@assets': path.resolve('./src/assets'),
-          '@components': path.resolve('./src/components'),
-          '@lib': path.resolve('./src/lib'),
-          '@routes': path.resolve('./src/routes'),
-          '@styles': path.resolve('./src/styles'),
+          $: path.resolve('./src'),
+          $assets: path.resolve('./src/assets'),
+          $components: path.resolve('./src/components'),
+          $lib: path.resolve('./src/lib'),
+          $routes: path.resolve('./src/routes'),
+          $styles: path.resolve('./src/styles'),
         },
       },
     },
