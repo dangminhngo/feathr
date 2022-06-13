@@ -18,5 +18,5 @@ export interface Theme {
 }
 
 export interface LayoutStore {
-  navOpen: boolean
+  navShrink: boolean
 }

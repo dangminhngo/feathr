@@ -2,7 +2,7 @@
   import layoutStore from '$lib/stores/layout'
 </script>
 
-<button class="menu-button" class:open={$layoutStore.navOpen} on:click={layoutStore.toggleNav}>
+<button class="menu-button" on:click={layoutStore.toggleNavShrink}>
   <div>
     <span>&nbsp;</span>
     <span>&nbsp;</span>
@@ -18,6 +18,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: var(--rounded);
+    transition: background-color 0.15s ease-out;
+
+    &:hover {
+      background-color: var(--theme-primary-800);
+    }
 
     div {
       position: relative;
@@ -39,29 +45,12 @@
       top: 0;
     }
 
-    &.open span:nth-child(1) {
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) rotate(45deg);
-    }
-
-    &.open span:nth-child(2) {
-      transform: translateX(-1rem);
-      opacity: 0;
-    }
-
     span:nth-child(2) {
       top: 5px;
     }
 
     span:nth-child(3) {
       top: 10px;
-    }
-
-    &.open span:nth-child(3) {
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) rotate(-45deg);
     }
   }
 </style>

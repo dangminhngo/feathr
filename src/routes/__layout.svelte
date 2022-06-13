@@ -1,6 +1,7 @@
 <script lang="ts">
   import ThemeContext from '$lib/theming/ThemeContext.svelte'
   import Header from '$layouts/Header.svelte'
+  import Nav from '$layouts/Nav.svelte'
 </script>
 
 <svelte:head>
@@ -13,11 +14,17 @@
 </svelte:head>
 <ThemeContext>
   <Header />
-  <slot />
+  <div class="main">
+    <Nav />
+    <main>
+      <slot />
+    </main>
+  </div>
 </ThemeContext>
 
 <style lang="scss">
   :global(:root) {
+    --sidenav-width: 16rem;
     --button-height: 2.25rem;
     --input-height: 2.25rem;
 
@@ -45,5 +52,18 @@
     color: inherit;
     font-family: inherit;
     font-size: inherit;
+  }
+
+  :global(a) {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .main {
+    display: flex;
+  }
+
+  main {
+    padding: 2rem;
   }
 </style>
