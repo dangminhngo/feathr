@@ -2,6 +2,7 @@ import path from 'path'
 
 import adapter from '@sveltejs/adapter-auto'
 import preprocess from 'svelte-preprocess'
+import svg from '@poppanator/sveltekit-svg'
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -12,6 +13,11 @@ const config = {
   kit: {
     adapter: adapter(),
     vite: {
+      plugins: [
+        svg({
+          includePaths: ['./src/assets/icons'],
+        }),
+      ],
       resolve: {
         alias: {
           '@': path.resolve('./src'),
