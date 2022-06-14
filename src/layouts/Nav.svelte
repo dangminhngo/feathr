@@ -55,7 +55,7 @@
     &.grow > a:link,
     &.grow > a:visited {
       margin: 0;
-      padding: 0.375rem 1.5rem;
+      padding: 0.25rem 1.5rem;
     }
 
     &.grow > a > span:nth-child(2) {
@@ -66,12 +66,14 @@
     a:link,
     a:visited {
       margin: 0 1.125rem;
-      padding: 0.375rem;
+      padding: 0.25rem;
       display: flex;
       align-items: center;
       gap: 1.5rem;
       border-radius: var(--rounded);
       color: var(--theme-primary-300);
+      font-size: var(--text-sm);
+      font-weight: 500;
       transition: background-color 0.15s ease-out;
     }
 
