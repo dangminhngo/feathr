@@ -28,7 +28,7 @@ export interface Note {
   body: string
   images: string[]
   tagIds: string[]
-  color: string
+  color?: string
   pinned: boolean
   trash: boolean
 }
@@ -43,7 +43,7 @@ export interface Task {
   id: string
   title: string
   tasks: TaskItem[]
-  color: string
+  color?: string
   pinned: boolean
   trash: boolean
 }
