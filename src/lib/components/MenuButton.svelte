@@ -23,7 +23,7 @@
 
     div {
       position: relative;
-      width: 1.25rem;
+      width: 1rem;
       height: 0.75rem;
     }
 
