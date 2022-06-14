@@ -1,5 +1,6 @@
 <script lang="ts">
   import ContentEditable from '$/lib/components/ContentEditable.svelte'
+  import Icon from '$lib/components/Icon.svelte'
   import IconButton from '$lib/components/IconButton.svelte'
   import EditableTaskItem from '$lib/components/EditableTaskItem.svelte'
 
@@ -39,6 +40,10 @@
   {#each undoneTasks as task (task.id)}
     <EditableTaskItem title={task.title} done={task.done} />
   {/each}
+  <div class="new">
+    <Icon name="plus" width={16} height={16} />
+    <ContentEditable size="sm" placeholder="Add a task" />
+  </div>
   <p>{doneTasks.length} tasks done</p>
   {#each doneTasks as task (task.id)}
     <EditableTaskItem title={task.title} done={task.done} />
@@ -62,6 +67,13 @@
     width: 100%;
     border: 1px solid var(--theme-primary-500);
     border-radius: var(--rounded);
+  }
+
+  .new {
+    padding-left: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
   }
 
   p {
