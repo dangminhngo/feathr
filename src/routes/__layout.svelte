@@ -43,6 +43,7 @@
     background-color: var(--theme-primary-900);
     font-size: 1rem;
     font-family: 'Roboto', sans-serif;
+    overflow: hidden;
   }
 
   :global(button, input) {

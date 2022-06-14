@@ -1,8 +1,4 @@
-<script lang="ts">
-  import layoutStore from '$lib/stores/layout'
-</script>
-
-<button class="menu-button" on:click={layoutStore.toggleNavShrink}>
+<button class="menu-button" on:click>
   <div>
     <span>&nbsp;</span>
     <span>&nbsp;</span>

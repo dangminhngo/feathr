@@ -17,6 +17,6 @@ export interface Theme {
   palette: Palette
 }
 
-export interface LayoutStore {
+export interface UIStore {
   navShrink: boolean
 }

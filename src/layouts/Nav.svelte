@@ -1,5 +1,5 @@
 <script lang="ts">
-  import layoutStore from '$lib/stores/layout'
+  import { uiStore } from '$lib/stores'
   import Icon from '$lib/components/Icon.svelte'
 
   const items = [
@@ -22,7 +22,7 @@
   ]
 </script>
 
-<div class="navigation" class:shrink={$layoutStore.navShrink}>
+<div class="navigation" class:shrink={$uiStore.navShrink}>
   {#each items as { icon, label }}
     <a href="/">
       <span>

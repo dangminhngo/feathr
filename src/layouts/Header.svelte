@@ -1,11 +1,13 @@
 <script lang="ts">
+  import { uiStore } from '$lib/stores'
+
   import MenuButton from '$lib/components/MenuButton.svelte'
   import SearchBox from '$lib/components/SearchBox.svelte'
   import IconButton from '$lib/components/IconButton.svelte'
 </script>
 
 <header class="header">
-  <MenuButton />
+  <MenuButton on:click={uiStore.toggleNavShrink} />
   <SearchBox placeholder="Search notes or tasks ..." />
   <IconButton name="cog" on:click={() => console.log('Clicked')} />
 </header>

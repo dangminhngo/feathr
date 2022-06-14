@@ -1,11 +1,11 @@
 import { writable } from 'svelte/store'
-import type { LayoutStore } from '$lib/types'
+import type { UIStore } from '$lib/types'
 
-const initialStore: LayoutStore = {
+const initialStore: UIStore = {
   navShrink: false,
 }
 
-const createLayoutStore = (initialStore: LayoutStore) => {
+const createLayoutStore = (initialStore: UIStore) => {
   const { subscribe, update } = writable(initialStore)
 
   return {
@@ -14,6 +14,4 @@ const createLayoutStore = (initialStore: LayoutStore) => {
   }
 }
 
-const layoutStore = createLayoutStore(initialStore)
-
-export default layoutStore
+export const uiStore = createLayoutStore(initialStore)
