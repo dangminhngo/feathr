@@ -1,4 +1,5 @@
 <script lang="ts">
+  import ContentEditable from '$/lib/components/ContentEditable.svelte'
   import IconButton from '$lib/components/IconButton.svelte'
   let title = '',
     body = ''
@@ -7,30 +8,18 @@
 </script>
 
 <div class="form">
-  <form>
-    <div class="title">
-      <div class="content" contenteditable="true" bind:textContent={title} />
-      {#if !title}
-        <div class="placeholder">Title</div>
-      {/if}
-    </div>
-    <hr class="sep" />
-    <div class="body">
-      <div class="content" contenteditable="true" bind:textContent={body} />
-      {#if !body}
-        <div class="placeholder">Body</div>
-      {/if}
-    </div>
-  </form>
+  <ContentEditable placeholder="Title" value={title} />
+  <hr class="sep" />
+  <ContentEditable size="sm" placeholder="Body" value={body} />
   <div class="actions">
     <div class="left">
-      <IconButton name="pin" size="sm" />
+      <IconButton name="pin" size="md" />
     </div>
     <div class="right">
-      <IconButton name="picture" size="sm" />
-      <IconButton name="tags" size="sm" />
-      <IconButton name="brush" size="sm" />
-      <IconButton name="delete" size="sm" />
+      <IconButton name="picture" size="md" />
+      <IconButton name="tags" size="md" />
+      <IconButton name="brush" size="md" />
+      <IconButton name="delete" size="md" />
     </div>
   </div>
 </div>
@@ -41,11 +30,6 @@
     width: 100%;
     border: 1px solid var(--theme-primary-500);
     border-radius: var(--rounded);
-  }
-
-  form {
-    display: flex;
-    flex-direction: column;
   }
 
   .title,

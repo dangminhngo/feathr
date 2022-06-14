@@ -42,7 +42,7 @@ export interface TaskItem {
 export interface Task {
   id: string
   title: string
-  taskIds: string[]
+  tasks: TaskItem[]
   color: string
   pinned: boolean
   trash: boolean

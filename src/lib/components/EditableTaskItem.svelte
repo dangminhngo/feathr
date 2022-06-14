@@ -1,0 +1,70 @@
+<script lang="ts">
+  import CheckBox from '$lib/components/CheckBox.svelte'
+  import ContentEditable from '$lib/components/ContentEditable.svelte'
+  import Icon from '$lib/components/Icon.svelte'
+  import IconButton from '$lib/components/IconButton.svelte'
+
+  export let title = '',
+    done = false
+  let showDraggableButton = false
+
+  const handleMouseLeave = () => {
+    showDraggableButton = false
+  }
+
+  const handleMouseEnter = () => {
+    showDraggableButton = true
+  }
+</script>
+
+<div class="task-item" class:done on:mouseleave={handleMouseLeave} on:mouseenter={handleMouseEnter}>
+  <div class="prefix">
+    <div class="draggable" class:show={showDraggableButton}>
+      <Icon name="link" width={16} height={16} />
+    </div>
+    <CheckBox bind:checked={done} />
+  </div>
+  <ContentEditable size="sm" bind:value={title} />
+  <div class="postfix">
+    <IconButton size="sm" name="close" />
+  </div>
+</div>
+
+<style lang="scss">
+  .task-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .task-item:not(:first-child) {
+    border-bottom: 1px solid var(--theme-primary-700);
+  }
+
+  .task-item.done {
+    text-decoration: line-through;
+    color: var(--theme-primary-500);
+  }
+
+  .prefix {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .postfix {
+    color: var(--theme-primary-400);
+  }
+
+  .draggable {
+    cursor: grabbing;
+    opacity: 0;
+    pointer-events: none;
+    color: var(--theme-primary-400);
+  }
+
+  .draggable.show {
+    opacity: 1;
+    pointer-events: all;
+  }
+</style>

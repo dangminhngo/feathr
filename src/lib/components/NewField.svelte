@@ -1,8 +1,9 @@
 <script lang="ts">
   import IconButton from '$lib/components/IconButton.svelte'
   import NoteForm from '$containers/NoteForm.svelte'
+  import TaskForm from '$containers/TaskForm.svelte'
 
-  let newNoteType: null | 'note' | 'task' = 'note'
+  let newNoteType: null | 'note' | 'task' = 'task'
 
   const setNewNoteType = (noteType: 'note' | 'task') => (newNoteType = noteType)
 
@@ -13,7 +14,7 @@
   {#if newNoteType === 'note'}
     <NoteForm />
   {:else if newNoteType === 'task'}
-    <div>Task Form</div>
+    <TaskForm />
   {:else}
     <div class="field">
       <div class="placeholder" on:click={() => setNewNoteType('note')}>Add a note ...</div>

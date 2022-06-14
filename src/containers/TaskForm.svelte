@@ -1,0 +1,92 @@
+<script lang="ts">
+  import ContentEditable from '$/lib/components/ContentEditable.svelte'
+  import IconButton from '$lib/components/IconButton.svelte'
+  import EditableTaskItem from '$lib/components/EditableTaskItem.svelte'
+
+  import type { TaskItem } from '$lib/types'
+
+  let title = ''
+  let tasks: TaskItem[] = [
+    {
+      id: '1',
+      title: 'Task 1',
+      done: false,
+    },
+    {
+      id: '2',
+      title: 'Task 2',
+      done: false,
+    },
+    {
+      id: '3',
+      title: 'Task 3',
+      done: true,
+    },
+    {
+      id: '4',
+      title: 'Task 4',
+      done: true,
+    },
+  ]
+
+  $: undoneTasks = tasks.filter((t) => !t.done)
+  $: doneTasks = tasks.filter((t) => t.done)
+</script>
+
+<div class="form">
+  <ContentEditable placeholder="Title" value={title} />
+  <hr class="sep" />
+  {#each undoneTasks as task (task.id)}
+    <EditableTaskItem title={task.title} done={task.done} />
+  {/each}
+  <p>{doneTasks.length} tasks done</p>
+  {#each doneTasks as task (task.id)}
+    <EditableTaskItem title={task.title} done={task.done} />
+  {/each}
+  <div class="actions">
+    <div class="left">
+      <IconButton name="pin" size="md" />
+    </div>
+    <div class="right">
+      <IconButton name="picture" size="md" />
+      <IconButton name="tags" size="md" />
+      <IconButton name="brush" size="md" />
+      <IconButton name="delete" size="md" />
+    </div>
+  </div>
+</div>
+
+<style lang="scss">
+  .form {
+    padding: 0 1rem;
+    width: 100%;
+    border: 1px solid var(--theme-primary-500);
+    border-radius: var(--rounded);
+  }
+
+  p {
+    padding-top: 0.75rem;
+    padding-bottom: 0.25rem;
+    font-size: var(--text-sm);
+    color: var(--theme-primary-300);
+  }
+
+  .sep {
+    border-color: var(--theme-primary-500);
+  }
+
+  .actions {
+    padding-top: 0.5rem;
+    padding-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--theme-primary-400);
+  }
+
+  .left,
+  .right {
+    display: flex;
+    align-items: center;
+  }
+</style>

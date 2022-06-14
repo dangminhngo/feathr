@@ -10,10 +10,12 @@
   import Delete from '$assets/icons/delete.svg'
   import Download from '$assets/icons/download.svg'
   import Feather from '$assets/icons/feather.svg'
+  import Link from '$assets/icons/link.svg'
   import MoreVerticalFull from '$assets/icons/more-vertical-f.svg'
   import Pencil from '$assets/icons/pencil.svg'
   import Picture from '$assets/icons/picture.svg'
   import Pin from '$assets/icons/pin.svg'
+  import Plus from '$assets/icons/plus.svg'
   import Search from '$assets/icons/search.svg'
   import Tag from '$assets/icons/tag.svg'
   import Tags from '$assets/icons/tags.svg'
@@ -30,10 +32,12 @@
     delete: Delete,
     download: Download,
     feather: Feather,
+    link: Link,
     more: MoreVerticalFull,
     pencil: Pencil,
     picture: Picture,
     pin: Pin,
+    plus: Plus,
     search: Search,
     tag: Tag,
     tags: Tags,
