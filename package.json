@@ -16,6 +16,7 @@
     "@poppanator/sveltekit-svg": "^0.3.2",
     "@sveltejs/adapter-auto": "next",
     "@sveltejs/kit": "next",
+    "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.27.0",
     "@typescript-eslint/parser": "^5.27.0",
     "eslint": "^8.16.0",
@@ -35,6 +36,7 @@
   },
   "type": "module",
   "dependencies": {
-    "svelte-portal": "^2.2.0"
+    "svelte-portal": "^2.2.0",
+    "uuid": "^8.3.2"
   }
 }

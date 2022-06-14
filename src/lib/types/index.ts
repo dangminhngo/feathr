@@ -17,6 +17,50 @@ export interface Theme {
   palette: Palette
 }
 
+export interface Tag {
+  id: string
+  label: string
+}
+
+export interface Note {
+  id: string
+  title: string
+  body: string
+  images: string[]
+  tagIds: string[]
+  pinned: boolean
+  trash: boolean
+}
+
+export interface TaskItem {
+  id: string
+  title: string
+  done: boolean
+}
+
+export interface Task {
+  id: string
+  title: string
+  taskIds: string[]
+  pinned: boolean
+  trash: boolean
+}
+
 export interface UIStore {
   navShrink: boolean
+}
+
+export interface NotesStore {
+  notes: Note[]
+  currentNoteId: string
+}
+
+export interface TasksStore {
+  tasks: Task[]
+  currentTaskId: string
+}
+
+export interface TagsStore {
+  tags: Tag[]
+  currentTagId: string
 }
