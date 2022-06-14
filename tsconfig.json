@@ -13,7 +13,7 @@
     "paths": {
       "$/*": ["src/*"],
       "$assets/*": ["src/assets/*"],
-      "$components/*": ["src/components/*"],
+      "$containers/*": ["src/containers/*"],
       "$layouts/*": ["src/layouts/*"],
       "$lib": ["src/lib"],
       "$lib/*": ["src/lib/*"],

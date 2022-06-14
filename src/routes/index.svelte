@@ -1,8 +1,10 @@
 <script lang="ts">
-  import Icon from '$lib/components/Icon.svelte'
   import { notesStore } from '$lib/stores'
+  import NewField from '$lib/components/NewField.svelte'
   console.log($notesStore)
+  let value = ''
+
+  $: console.log(value)
 </script>
 
-<h1>Welcome to SvelteKit</h1>
-<Icon name="bandage" width={32} height={32} />
+<NewField {value} />

@@ -1,13 +1,12 @@
 <script lang="ts">
   import Icon from '$lib/components/Icon.svelte'
 
-  export let name = ''
-  export let width = 36,
-    height = 36
+  export let name = '',
+    size: 'lg' | 'sm' = 'lg'
 </script>
 
-<button on:click style="width: {width}px; height: {height}px;">
-  <Icon class="icon" {name} />
+<button class:lg={size === 'lg'} class:sm={size === 'sm'} on:click>
+  <Icon class="icon" {name} width={20} height={20} />
 </button>
 
 <style lang="scss">
@@ -18,6 +17,16 @@
     justify-content: center;
     border-radius: var(--rounded);
     transition: background-color 0.15s ease-out;
+  }
+
+  button.lg {
+    width: 2.25rem;
+    height: 2.25rem;
+  }
+
+  button.sm {
+    width: 2rem;
+    height: 2rem;
   }
 
   button:hover {

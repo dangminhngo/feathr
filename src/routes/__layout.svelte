@@ -24,6 +24,9 @@
 
 <style lang="scss">
   :global(:root) {
+    --text-md: 1rem;
+    --text-sm: 0.875rem;
+
     --sidenav-width: 16rem;
     --button-height: 2.25rem;
     --input-height: 2.25rem;
@@ -66,5 +69,6 @@
 
   main {
     padding: 2rem;
+    width: 100%;
   }
 </style>
