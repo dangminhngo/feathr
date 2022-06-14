@@ -49,7 +49,7 @@ export interface Task {
 }
 
 export interface UIStore {
-  navShrink: boolean
+  navGrow: boolean
 }
 
 export interface NotesStore {

@@ -8,7 +8,7 @@
 </script>
 
 <header class="header">
-  <MenuButton on:click={uiStore.toggleNavShrink} />
+  <MenuButton on:click={uiStore.toggleNav} />
   <SearchBox placeholder="Search notes or tasks ..." />
   <div class="buttons">
     <IconButton name="cog" on:click={() => console.log('Clicked')} />

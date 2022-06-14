@@ -2,7 +2,7 @@ import { writable } from 'svelte/store'
 import type { UIStore } from '$lib/types'
 
 const initialStore: UIStore = {
-  navShrink: false,
+  navGrow: false,
 }
 
 const createLayoutStore = (initialStore: UIStore) => {
@@ -10,7 +10,11 @@ const createLayoutStore = (initialStore: UIStore) => {
 
   return {
     subscribe,
-    toggleNavShrink: () => update((store) => ({ ...store, navShrink: !store.navShrink })),
+    toggleNav: () =>
+      update((s) => {
+        s.navGrow = !s.navGrow
+        return s
+      }),
   }
 }
 
