@@ -3,23 +3,22 @@
   import NoteForm from '$containers/NoteForm.svelte'
   import TaskForm from '$containers/TaskForm.svelte'
 
-  let newNoteType: null | 'note' | 'task' = 'task'
+  type NoteFormType = null | 'note' | 'task'
+  let noteFormType: NoteFormType = null
 
-  const setNewNoteType = (noteType: 'note' | 'task') => (newNoteType = noteType)
-
-  $: console.log(newNoteType)
+  const setFormType = (formType: NoteFormType) => (noteFormType = formType)
 </script>
 
 <div class="wrapper">
-  {#if newNoteType === 'note'}
-    <NoteForm />
-  {:else if newNoteType === 'task'}
-    <TaskForm />
+  {#if noteFormType === 'note'}
+    <NoteForm on:close={() => setFormType(null)} />
+  {:else if noteFormType === 'task'}
+    <TaskForm on:close={() => setFormType(null)} />
   {:else}
     <div class="field">
-      <div class="placeholder" on:click={() => setNewNoteType('note')}>Add a note ...</div>
+      <div class="placeholder" on:click={() => setFormType('note')}>Add a note ...</div>
       <div class="buttons">
-        <IconButton name="taskList" on:click={() => setNewNoteType('task')} />
+        <IconButton name="taskList" on:click={() => setFormType('task')} />
       </div>
     </div>
   {/if}
@@ -56,5 +55,6 @@
     top: 50%;
     right: 0;
     transform: translateY(-50%);
+    color: var(--theme-primary-400);
   }
 </style>

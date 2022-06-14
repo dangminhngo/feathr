@@ -1,8 +1,16 @@
 <script lang="ts">
+  import { createEventDispatcher } from 'svelte'
+
   import ContentEditable from '$/lib/components/ContentEditable.svelte'
   import IconButton from '$lib/components/IconButton.svelte'
   let title = '',
     body = ''
+
+  const dispatch = createEventDispatcher()
+
+  const closeForm = () => {
+    dispatch('close')
+  }
 
   $: console.log(title, body)
 </script>
@@ -14,12 +22,12 @@
   <div class="actions">
     <div class="left">
       <IconButton name="pin" size="md" />
-    </div>
-    <div class="right">
       <IconButton name="picture" size="md" />
       <IconButton name="tags" size="md" />
       <IconButton name="brush" size="md" />
-      <IconButton name="delete" size="md" />
+    </div>
+    <div class="right">
+      <button class="close-button" on:click={closeForm}>Close</button>
     </div>
   </div>
 </div>
@@ -72,5 +80,18 @@
   .right {
     display: flex;
     align-items: center;
+  }
+
+  .close-button {
+    cursor: pointer;
+    padding: 0 0.5rem;
+    height: 2rem;
+    border-radius: var(--rounded);
+    font-size: var(--text-sm);
+    transition: all 0.15s ease-out;
+
+    &:hover {
+      background-color: var(--theme-primary-700);
+    }
   }
 </style>
