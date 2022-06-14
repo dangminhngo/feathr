@@ -11,8 +11,6 @@
   const closeForm = () => {
     dispatch('close')
   }
-
-  $: console.log(title, body)
 </script>
 
 <div class="form">
@@ -38,29 +36,6 @@
     width: 100%;
     border: 1px solid var(--theme-primary-500);
     border-radius: var(--rounded);
-  }
-
-  .title,
-  .body {
-    position: relative;
-    padding: 0.75rem 0;
-
-    .content {
-      outline: none;
-    }
-
-    .placeholder {
-      position: absolute;
-      top: 0;
-      left: 0;
-      padding: 0.75rem 0;
-      pointer-events: none;
-      color: var(--theme-primary-400);
-    }
-  }
-
-  .body {
-    font-size: var(--text-sm);
   }
 
   .sep {
