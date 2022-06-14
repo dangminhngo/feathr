@@ -6,26 +6,24 @@
 
   export let title = '',
     done = false
-  let showDraggableButton = false
+  let showButton = false
 
   const handleMouseLeave = () => {
-    showDraggableButton = false
+    showButton = false
   }
 
   const handleMouseEnter = () => {
-    showDraggableButton = true
+    showButton = true
   }
 </script>
 
 <div class="task-item" class:done on:mouseleave={handleMouseLeave} on:mouseenter={handleMouseEnter}>
-  <div class="prefix">
-    <div class="draggable" class:show={showDraggableButton}>
-      <Icon name="link" width={16} height={16} />
-    </div>
-    <CheckBox bind:checked={done} />
+  <div class="draggable" class:show={showButton}>
+    <Icon name="link" width={16} height={16} />
   </div>
+  <CheckBox bind:checked={done} />
   <ContentEditable size="sm" bind:value={title} />
-  <div class="postfix">
+  <div class="buttons" class:show={showButton}>
     <IconButton size="sm" name="close" />
   </div>
 </div>
@@ -46,16 +44,6 @@
     color: var(--theme-primary-500);
   }
 
-  .prefix {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .postfix {
-    color: var(--theme-primary-400);
-  }
-
   .draggable {
     cursor: grabbing;
     opacity: 0;
@@ -63,7 +51,14 @@
     color: var(--theme-primary-400);
   }
 
-  .draggable.show {
+  .buttons {
+    opacity: 0;
+    pointer-events: none;
+    color: var(--theme-primary-400);
+  }
+
+  .draggable.show,
+  .buttons.show {
     opacity: 1;
     pointer-events: all;
   }
