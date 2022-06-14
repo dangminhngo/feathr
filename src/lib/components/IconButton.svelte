@@ -2,12 +2,19 @@
   import Icon from '$lib/components/Icon.svelte'
 
   export let name = '',
-    size: 'lg' | 'md' | 'sm' = 'lg'
+    size: 'lg' | 'md' | 'sm' = 'lg',
+    active = false
 
   const iconSize = size !== 'sm' ? 20 : 18
 </script>
 
-<button class:lg={size === 'lg'} class:md={size === 'md'} class:sm={size === 'sm'} on:click>
+<button
+  class:lg={size === 'lg'}
+  class:md={size === 'md'}
+  class:sm={size === 'sm'}
+  class:active
+  on:click
+>
   <Icon class="icon" {name} width={iconSize} height={iconSize} />
 </button>
 
@@ -34,6 +41,10 @@
   button.sm {
     width: 1.5rem;
     height: 1.5rem;
+  }
+
+  button.active {
+    color: var(--theme-accent);
   }
 
   button:hover {

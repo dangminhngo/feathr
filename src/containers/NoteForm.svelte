@@ -3,23 +3,50 @@
 
   import ContentEditable from '$/lib/components/ContentEditable.svelte'
   import IconButton from '$lib/components/IconButton.svelte'
+
+  import { createEmptyNote } from '$lib/helpers'
+
   let title = '',
-    body = ''
+    body = '',
+    images: string[] = [],
+    tagIds: string[] = [],
+    pinned = false,
+    trash = false
+
+  let note = createEmptyNote()
+
+  $: {
+    note = {
+      ...note,
+      title,
+      body,
+      images,
+      tagIds,
+      pinned,
+      trash,
+    }
+
+    console.log(note)
+  }
 
   const dispatch = createEventDispatcher()
 
   const closeForm = () => {
     dispatch('close')
   }
+
+  const togglePinned = () => {
+    pinned = !pinned
+  }
 </script>
 
 <div class="form">
-  <ContentEditable placeholder="Title" value={title} />
+  <ContentEditable placeholder="Title" bind:value={title} />
   <hr class="sep" />
-  <ContentEditable size="sm" placeholder="Body" value={body} />
+  <ContentEditable size="sm" placeholder="Body" bind:value={body} />
   <div class="actions">
     <div class="left">
-      <IconButton name="pin" size="md" />
+      <IconButton name="pin" size="md" on:click={togglePinned} active={pinned} />
       <IconButton name="picture" size="md" />
       <IconButton name="tags" size="md" />
       <IconButton name="brush" size="md" />
