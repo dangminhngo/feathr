@@ -3,6 +3,7 @@
 
   import Bandage from '$assets/icons/bandage.svg'
   import Brush from '$assets/icons/brush.svg'
+  import BrushFull from '$assets/icons/brush-f.svg'
   import Check from '$assets/icons/check.svg'
   import Close from '$assets/icons/close.svg'
   import Cog from '$assets/icons/cog.svg'
@@ -15,6 +16,7 @@
   import Pencil from '$assets/icons/pencil.svg'
   import Picture from '$assets/icons/picture.svg'
   import Pin from '$assets/icons/pin.svg'
+  import PinFull from '$assets/icons/pin-f.svg'
   import Plus from '$assets/icons/plus.svg'
   import Search from '$assets/icons/search.svg'
   import Tag from '$assets/icons/tag.svg'
@@ -25,6 +27,7 @@
   const icons: { [key: string]: SvelteComponent } = {
     bandage: Bandage,
     brush: Brush,
+    brushFull: BrushFull,
     check: Check,
     close: Close,
     cog: Cog,
@@ -37,6 +40,7 @@
     pencil: Pencil,
     picture: Picture,
     pin: Pin,
+    pinFull: PinFull,
     plus: Plus,
     search: Search,
     tag: Tag,
