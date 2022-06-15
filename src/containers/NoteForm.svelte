@@ -54,7 +54,12 @@
   <ContentEditable size="sm" placeholder="Body" bind:value={body} />
   <div class="actions">
     <div class="left">
-      <IconButton name="pin" size="md" on:click={togglePinned} active={pinned} />
+      <IconButton
+        name={pinned ? 'pinFull' : 'pin'}
+        size="md"
+        on:click={togglePinned}
+        active={pinned}
+      />
       <IconButton name="picture" size="md" />
       <IconButton name="tags" size="md" />
       <IconButton name="brush" size="md" />
