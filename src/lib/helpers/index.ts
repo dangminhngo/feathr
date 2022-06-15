@@ -14,12 +14,14 @@ export const createEmptyNote = (): Note => ({
 
 export const clickOutside: Action<HTMLElement, undefined> = (node: HTMLElement) => {
   const handleClick = (e: MouseEvent) => {
-    if (node && !node.contains(e.target as HTMLElement) && !e.defaultPrevented) {
+    if (node && !node.contains(e.target as HTMLElement)) {
       node.dispatchEvent(
         new CustomEvent<HTMLElement>('outsideclick', node as CustomEventInit<HTMLElement>)
       )
     }
   }
+
+  document.addEventListener('click', handleClick, true)
 
   return {
     destroy() {
