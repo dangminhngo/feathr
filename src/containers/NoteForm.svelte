@@ -32,13 +32,6 @@
     console.log(note)
   }
 
-  const dispatch = createEventDispatcher()
-
-  const closeForm = () => {
-    notesStore.addNote(note)
-    dispatch('close')
-  }
-
   const togglePinned = () => {
     pinned = !pinned
   }
@@ -46,6 +39,14 @@
   onMount(() => titleContentEditable.focus())
 
   $: console.log($notesStore)
+
+  const dispatch = createEventDispatcher()
+  const { addNote } = notesStore
+
+  const closeForm = () => {
+    addNote(note)
+    dispatch('close')
+  }
 </script>
 
 <div class="form">
