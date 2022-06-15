@@ -44,9 +44,9 @@
   const { addNote } = notesStore
 
   const handleSubmit = () => {
+    dispatch('close')
     if (isEmptyNote(note)) return
     addNote(note)
-    dispatch('close')
   }
 </script>
 
