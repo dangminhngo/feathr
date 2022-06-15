@@ -20,6 +20,10 @@ export const isEmptyNote = (note: Note): boolean => {
   return false
 }
 
+export const filterNotes = (notes: Note[]): Note[] => {
+  return notes.filter((n) => !n.trash).sort((a, b) => Number(b.pinned) - Number(a.pinned))
+}
+
 export const clickOutside: Action<HTMLElement, undefined> = (node: HTMLElement) => {
   const handleClick = (e: MouseEvent) => {
     if (node && !node.contains(e.target as HTMLElement)) {

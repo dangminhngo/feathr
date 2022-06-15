@@ -68,7 +68,7 @@
   }
 
   main {
-    padding: 2rem;
+    padding: 2rem 4rem;
     width: 100%;
   }
 </style>

@@ -23,9 +23,15 @@ const createNotesStore = (initialValue: NotesStore) => {
         return s
       })
     },
+    togglePinnedNote: (id: string) => {
+      update((s) => {
+        s.notes = s.notes.map((n) => (n.id === id ? { ...n, pinned: !n.pinned } : n))
+        return s
+      })
+    },
     assignTrashToNote: (id: string) => {
       update((s) => {
-        s.notes = s.notes.map((note) => (note.id === id ? { ...note, trash: true } : note))
+        s.notes = s.notes.map((n) => (n.id === id ? { ...n, trash: true } : n))
         return s
       })
     },
