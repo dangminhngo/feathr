@@ -5,7 +5,7 @@
   import IconButton from '$lib/components/IconButton.svelte'
 
   import { notesStore } from '$lib/stores'
-  import { createEmptyNote, clickOutside } from '$lib/helpers'
+  import { createEmptyNote, isEmptyNote, clickOutside } from '$lib/helpers'
 
   let titleContentEditable: ContentEditable
 
@@ -43,13 +43,14 @@
   const dispatch = createEventDispatcher()
   const { addNote } = notesStore
 
-  const closeForm = () => {
+  const handleSubmit = () => {
+    if (isEmptyNote(note)) return
     addNote(note)
     dispatch('close')
   }
 </script>
 
-<div class="form" use:clickOutside on:outsideclick={closeForm}>
+<div class="form" use:clickOutside on:outsideclick={handleSubmit}>
   <ContentEditable bind:this={titleContentEditable} placeholder="Title" bind:value={title} />
   <hr class="sep" />
   <ContentEditable size="sm" placeholder="Body" bind:value={body} />
@@ -66,7 +67,9 @@
       <IconButton name="brush" size="md" />
     </div>
     <div class="right">
-      <button class="close-button" on:click={closeForm}>Close</button>
+      <button class="close-button" on:click={handleSubmit}
+        >{isEmptyNote(note) ? 'Close' : 'Save'}</button
+      >
     </div>
   </div>
 </div>
