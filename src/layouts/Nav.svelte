@@ -47,7 +47,7 @@
     transition: width 0.25s ease-out;
 
     &.grow {
-      width: var(--sidenav-width);
+      min-width: var(--sidenav-width);
       background-color: var(--theme-primary-800);
     }
 
