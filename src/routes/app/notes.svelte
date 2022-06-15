@@ -1,5 +1,5 @@
 <script lang="ts">
-  import NewField from '$lib/components/NewField.svelte'
+  import FormField from '$lib/components/FormField.svelte'
 </script>
 
-<NewField />
+<FormField />
