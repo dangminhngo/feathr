@@ -33,7 +33,7 @@
   .field {
     position: relative;
     width: 100%;
-    border: 1px solid var(--theme-primary-700);
+    border: 1px solid var(--theme-primary-600);
     border-radius: var(--rounded);
     outline: none;
   }
