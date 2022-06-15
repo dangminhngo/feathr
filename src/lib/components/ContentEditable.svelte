@@ -1,11 +1,17 @@
 <script lang="ts">
+  let input: HTMLDivElement
+
   export let size: 'lg' | 'sm' = 'lg',
     value = '',
     placeholder = ''
+
+  export function focus() {
+    input.focus()
+  }
 </script>
 
 <div class="content-editable" class:lg={size === 'lg'} class:sm={size === 'sm'}>
-  <div class="content" contenteditable="true" bind:textContent={value} />
+  <div class="content" contenteditable="true" bind:this={input} bind:textContent={value} />
   {#if !value}
     <div class="placeholder">{placeholder}</div>
   {/if}

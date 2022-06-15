@@ -1,10 +1,12 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte'
+  import { onMount, createEventDispatcher } from 'svelte'
 
   import ContentEditable from '$/lib/components/ContentEditable.svelte'
   import IconButton from '$lib/components/IconButton.svelte'
 
   import { createEmptyNote } from '$lib/helpers'
+
+  let titleContentEditable: HTMLDivElement
 
   let title = '',
     body = '',
@@ -38,10 +40,12 @@
   const togglePinned = () => {
     pinned = !pinned
   }
+
+  onMount(() => titleContentEditable.focus())
 </script>
 
 <div class="form">
-  <ContentEditable placeholder="Title" bind:value={title} />
+  <ContentEditable bind:this={titleContentEditable} placeholder="Title" bind:value={title} />
   <hr class="sep" />
   <ContentEditable size="sm" placeholder="Body" bind:value={body} />
   <div class="actions">

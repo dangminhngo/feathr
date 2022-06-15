@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte'
+  import { onMount, createEventDispatcher } from 'svelte'
 
   import ContentEditable from '$/lib/components/ContentEditable.svelte'
   import Icon from '$lib/components/Icon.svelte'
@@ -7,6 +7,8 @@
   import EditableTaskItem from '$lib/components/EditableTaskItem.svelte'
 
   import type { TaskItem } from '$lib/types'
+
+  let titleContentEditable: HTMLDivElement
 
   let title = ''
   let tasks: TaskItem[] = [
@@ -40,10 +42,12 @@
 
   $: undoneTasks = tasks.filter((t) => !t.done)
   $: doneTasks = tasks.filter((t) => t.done)
+
+  onMount(() => titleContentEditable.focus())
 </script>
 
 <div class="form">
-  <ContentEditable placeholder="Title" value={title} />
+  <ContentEditable bind:this={titleContentEditable} placeholder="Title" value={title} />
   <hr class="sep" />
   {#each undoneTasks as task (task.id)}
     <EditableTaskItem title={task.title} done={task.done} />
