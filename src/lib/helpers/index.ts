@@ -12,16 +12,8 @@ export const createEmptyNote = (): Note => ({
   trash: false,
 })
 
-export const checkEmptyNote = (note: Note): boolean => {
-  const emptyNote = createEmptyNote()
-
-  if (
-    note.id === emptyNote.id &&
-    note.title === '' &&
-    note.body === '' &&
-    !note.images.length &&
-    !note.tagIds.length
-  ) {
+export const isEmptyNote = (note: Note): boolean => {
+  if (note.title === '' && note.body === '' && !note.images.length && !note.tagIds.length) {
     return true
   }
 
