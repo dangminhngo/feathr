@@ -2,7 +2,26 @@ import { writable } from 'svelte/store'
 import type { NotesStore, Note } from '$lib/types'
 
 const initialValue: NotesStore = {
-  notes: [],
+  notes: [
+    {
+      id: '1',
+      title: 'This is the first note',
+      body: 'This is the first note body',
+      images: [],
+      tagIds: [],
+      pinned: false,
+      trash: false,
+    },
+    {
+      id: '2',
+      title: 'This is the second note',
+      body: 'This is the second note body',
+      images: [],
+      tagIds: [],
+      pinned: true,
+      trash: false,
+    },
+  ],
   currentNoteId: '',
 }
 
