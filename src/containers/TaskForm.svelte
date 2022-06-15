@@ -8,7 +8,7 @@
 
   import type { TaskItem } from '$lib/types'
 
-  let titleContentEditable: HTMLDivElement
+  let titleContentEditable: ContentEditable
 
   let title = ''
   let tasks: TaskItem[] = [

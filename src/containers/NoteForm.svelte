@@ -4,9 +4,10 @@
   import ContentEditable from '$/lib/components/ContentEditable.svelte'
   import IconButton from '$lib/components/IconButton.svelte'
 
+  import { notesStore } from '$lib/stores'
   import { createEmptyNote } from '$lib/helpers'
 
-  let titleContentEditable: HTMLDivElement
+  let titleContentEditable: ContentEditable
 
   let title = '',
     body = '',
@@ -34,6 +35,7 @@
   const dispatch = createEventDispatcher()
 
   const closeForm = () => {
+    notesStore.addNote(note)
     dispatch('close')
   }
 
@@ -42,6 +44,8 @@
   }
 
   onMount(() => titleContentEditable.focus())
+
+  $: console.log($notesStore)
 </script>
 
 <div class="form">
