@@ -1,3 +1,9 @@
+declare namespace svelte.JSX {
+  interface HTMLAttributes<T> {
+    onoutsideclick?: (event: any) => any
+  }
+}
+
 declare module '*.svg' {
   const content: any
   export default content

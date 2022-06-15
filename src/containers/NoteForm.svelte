@@ -5,7 +5,7 @@
   import IconButton from '$lib/components/IconButton.svelte'
 
   import { notesStore } from '$lib/stores'
-  import { createEmptyNote } from '$lib/helpers'
+  import { createEmptyNote, clickOutside } from '$lib/helpers'
 
   let titleContentEditable: ContentEditable
 
@@ -49,7 +49,7 @@
   }
 </script>
 
-<div class="form">
+<div class="form" use:clickOutside on:outsideclick={closeForm}>
   <ContentEditable bind:this={titleContentEditable} placeholder="Title" bind:value={title} />
   <hr class="sep" />
   <ContentEditable size="sm" placeholder="Body" bind:value={body} />

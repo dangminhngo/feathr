@@ -6,6 +6,7 @@
   import IconButton from '$lib/components/IconButton.svelte'
   import EditableTaskItem from '$lib/components/EditableTaskItem.svelte'
 
+  import { clickOutside } from '$lib/helpers'
   import type { TaskItem } from '$lib/types'
 
   let titleContentEditable: ContentEditable
@@ -46,7 +47,7 @@
   onMount(() => titleContentEditable.focus())
 </script>
 
-<div class="form">
+<div class="form" use:clickOutside on:outsideclick={closeForm}>
   <ContentEditable bind:this={titleContentEditable} placeholder="Title" value={title} />
   <hr class="sep" />
   {#each undoneTasks as task (task.id)}
