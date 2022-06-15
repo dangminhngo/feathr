@@ -28,8 +28,6 @@
       pinned,
       trash,
     }
-
-    console.log(note)
   }
 
   const togglePinned = () => {
