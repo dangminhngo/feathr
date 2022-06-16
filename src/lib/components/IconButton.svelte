@@ -13,7 +13,7 @@
   class:md={size === 'md'}
   class:sm={size === 'sm'}
   class:active
-  on:click
+  on:click|stopPropagation
 >
   <Icon class="icon" {name} width={iconSize} height={iconSize} />
 </button>
