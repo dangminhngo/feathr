@@ -5,7 +5,8 @@
   import IconButton from '$lib/components/IconButton.svelte'
   import type { TaskItem } from '$lib/types'
 
-  export let taskItem: TaskItem
+  export let taskItem: TaskItem,
+    editable = true
   let showButton = false
 
   const handleMouseLeave = () => {
@@ -24,7 +25,7 @@
     <Icon name="link" width={16} height={16} />
   </div>
   <CheckBox bind:checked={done} />
-  <ContentEditable size="sm" bind:value={title} />
+  <ContentEditable {editable} size="sm" bind:value={title} />
   <div class="buttons" class:show={showButton}>
     <IconButton size="sm" name="close" />
   </div>

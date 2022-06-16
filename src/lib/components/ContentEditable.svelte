@@ -1,7 +1,8 @@
 <script lang="ts">
   let input: HTMLDivElement
 
-  export let size: 'lg' | 'sm' = 'lg',
+  export let editable = true,
+    size: 'lg' | 'sm' = 'lg',
     value = '',
     placeholder = ''
 
@@ -11,7 +12,9 @@
 </script>
 
 <div class="content-editable" class:lg={size === 'lg'} class:sm={size === 'sm'}>
-  <div class="content" contenteditable="true" bind:this={input} bind:textContent={value} />
+  {#if editable}
+    <div class="content" contenteditable="true" bind:this={input} bind:textContent={value} />
+  {/if}
   {#if !value}
     <div class="placeholder">{placeholder}</div>
   {/if}

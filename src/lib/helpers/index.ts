@@ -1,6 +1,6 @@
 import type { Action } from 'svelte/types/runtime/action'
 import { v4 as uuid } from 'uuid'
-import type { Note, Task } from '$lib/types'
+import type { Note, Task, TaskItem } from '$lib/types'
 
 export const getNoteById = (notes: Note[], id: string): Note | undefined => {
   return notes.find((n) => n.id === id)
@@ -48,6 +48,15 @@ export const isEmptyTask = (task: Task): boolean => {
 
 export function filterItems<T extends Note | Task>(items: T[]): T[] {
   return items.filter((item) => !item.trash).sort((a, b) => Number(b.pinned) - Number(a.pinned))
+}
+
+export const getFilteredTaskItems = (
+  task: Task
+): { undoneTaskItems: TaskItem[]; doneTaskItems: TaskItem[] } => {
+  return {
+    undoneTaskItems: task.tasks.filter((t) => !t.done),
+    doneTaskItems: task.tasks.filter((t) => t.done),
+  }
 }
 
 export const clickOutside: Action<HTMLElement, undefined> = (node: HTMLElement) => {
