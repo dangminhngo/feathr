@@ -4,7 +4,7 @@
   import ContentEditable from '$/lib/components/ContentEditable.svelte'
   import Icon from '$lib/components/Icon.svelte'
   import IconButton from '$lib/components/IconButton.svelte'
-  import EditableTaskItem from '$lib/components/EditableTaskItem.svelte'
+  import EditableTask from '$lib/components/EditableTask.svelte'
 
   import {
     createEmptyTaskList,
@@ -42,7 +42,7 @@
   <ContentEditable bind:this={titleContentEditable} placeholder="Title" value={taskList.title} />
   <hr class="sep" />
   {#each undoneTasks as task (task.id)}
-    <EditableTaskItem {task} handleDelete={() => handleDeleteTask(task.id)} />
+    <EditableTask {task} handleDelete={() => handleDeleteTask(task.id)} />
   {/each}
   <button class="add" on:click={handleAddTask}>
     <Icon name="plus" width={16} height={16} />
@@ -52,7 +52,7 @@
     <p>{doneTasks.length} tasks done</p>
   {/if}
   {#each doneTasks as task (task.id)}
-    <EditableTaskItem {task} handleDelete={() => handleDeleteTask(task.id)} />
+    <EditableTask {task} handleDelete={() => handleDeleteTask(task.id)} />
   {/each}
   <div class="actions">
     <div class="left">
