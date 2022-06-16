@@ -1,13 +1,17 @@
 <script lang="ts">
+  import { createEventDispatcher } from 'svelte'
   import CheckBox from '$lib/components/CheckBox.svelte'
   import ContentEditable from '$lib/components/ContentEditable.svelte'
   import Icon from '$lib/components/Icon.svelte'
   import IconButton from '$lib/components/IconButton.svelte'
   import type { Task } from '$lib/types'
 
+  const dispatch = createEventDispatcher()
   export let task: Task,
     editable = true,
-    handleDelete: () => void
+    handleDelete: () => void = () => {
+      /**/
+    }
   let showButton = false
 
   const handleMouseLeave = () => {
@@ -18,6 +22,10 @@
     showButton = true
   }
 
+  const handleCheckBoxChange = () => {
+    dispatch('toggle')
+  }
+
   let { title, done } = task
 </script>
 
@@ -25,7 +33,7 @@
   <div class="draggable" class:show={showButton}>
     <Icon name="link" width={16} height={16} />
   </div>
-  <CheckBox bind:checked={done} />
+  <CheckBox bind:checked={done} on:change={handleCheckBoxChange} />
   <ContentEditable {editable} size="sm" bind:value={title} />
   <div class="buttons" class:show={showButton}>
     <IconButton size="sm" name="close" on:click={handleDelete} />
@@ -39,8 +47,8 @@
     gap: 0.5rem;
   }
 
-  .task:not(:first-child) {
-    border-bottom: 1px solid var(--theme-primary-700);
+  .task:not(:last-child) {
+    border-bottom: 1px solid var(--theme-primary-800);
   }
 
   .task.done {

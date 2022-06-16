@@ -46,6 +46,11 @@ export const removeTask = (taskList: TaskList, id: string) => {
   return taskList
 }
 
+export const toggleTask = (taskList: TaskList, id: string) => {
+  taskList.tasks = taskList.tasks.map((t) => (t.id === id ? { ...t, done: !t.done } : t))
+  return taskList
+}
+
 export const isEmptyNote = (note: Note): boolean => {
   if (note.title === '' && note.body === '' && !note.images.length && !note.tagIds.length) {
     return true
@@ -59,6 +64,24 @@ export const isEmptyTaskList = (taskList: TaskList): boolean => {
     return true
   }
 
+  return false
+}
+
+export const isEmptyTask = (task: Task): boolean => {
+  if (task.title === '' && !task.done) {
+    return true
+  }
+
+  return false
+}
+
+export const lastTaskInTaskListIsEmptyTask = (taskList: TaskList): boolean => {
+  if (taskList.tasks.length > 0) {
+    const lastTask = taskList.tasks[taskList.tasks.length - 1]
+    if (isEmptyTask(lastTask)) {
+      return true
+    }
+  }
   return false
 }
 

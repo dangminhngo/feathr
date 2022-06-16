@@ -7,20 +7,26 @@
   import EditableTask from '$lib/components/EditableTask.svelte'
 
   import {
+    isEmptyTaskList,
+    lastTaskInTaskListIsEmptyTask,
     createEmptyTaskList,
     getFilteredTasks,
     addTask,
     removeTask,
+    toggleTask,
     clickOutside,
   } from '$lib/helpers'
+  import { taskListsStore } from '$lib/stores'
   import type { TaskList, Task } from '$lib/types'
 
   let titleContentEditable: ContentEditable
   let taskList: TaskList = createEmptyTaskList()
 
+  const { addTaskList } = taskListsStore
   const dispatch = createEventDispatcher()
 
   const handleAddTask = () => {
+    if (lastTaskInTaskListIsEmptyTask(taskList)) return
     taskList = addTask(taskList)
   }
 
@@ -28,8 +34,18 @@
     taskList = removeTask(taskList, id)
   }
 
+  const togglePinned = () => {
+    taskList.pinned = !taskList.pinned
+  }
+
+  const handleToggleTask = (id: string) => {
+    taskList = toggleTask(taskList, id)
+  }
+
   const closeForm = () => {
     dispatch('close')
+    if (isEmptyTaskList(taskList)) return
+    addTaskList(taskList)
   }
 
   let undoneTasks: Task[], doneTasks: Task[]
@@ -39,10 +55,18 @@
 </script>
 
 <div class="form" use:clickOutside on:outsideclick={closeForm}>
-  <ContentEditable bind:this={titleContentEditable} placeholder="Title" value={taskList.title} />
+  <ContentEditable
+    bind:this={titleContentEditable}
+    placeholder="Title"
+    bind:value={taskList.title}
+  />
   <hr class="sep" />
   {#each undoneTasks as task (task.id)}
-    <EditableTask {task} handleDelete={() => handleDeleteTask(task.id)} />
+    <EditableTask
+      {task}
+      handleDelete={() => handleDeleteTask(task.id)}
+      on:toggle={() => handleToggleTask(task.id)}
+    />
   {/each}
   <button class="add" on:click={handleAddTask}>
     <Icon name="plus" width={16} height={16} />
@@ -52,11 +76,20 @@
     <p>{doneTasks.length} tasks done</p>
   {/if}
   {#each doneTasks as task (task.id)}
-    <EditableTask {task} handleDelete={() => handleDeleteTask(task.id)} />
+    <EditableTask
+      {task}
+      handleDelete={() => handleDeleteTask(task.id)}
+      on:toggle={() => handleToggleTask(task.id)}
+    />
   {/each}
   <div class="actions">
     <div class="left">
-      <IconButton name="pin" size="md" />
+      <IconButton
+        name={taskList.pinned ? 'pinFull' : 'pin'}
+        size="md"
+        active={taskList.pinned}
+        on:click={togglePinned}
+      />
       <IconButton name="picture" size="md" />
       <IconButton name="tags" size="md" />
       <IconButton name="brush" size="md" />
