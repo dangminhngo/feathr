@@ -31,6 +31,8 @@ export interface Note {
   color?: string
   pinned: boolean
   trash: boolean
+  createdAt: Date
+  updatedAt: Date
 }
 
 export interface TaskItem {
@@ -47,6 +49,8 @@ export interface Task {
   color?: string
   pinned: boolean
   trash: boolean
+  createdAt: Date
+  updatedAt: Date
 }
 
 export interface UIStore {
@@ -62,6 +66,11 @@ export interface UIStore {
 export interface NotesStore {
   notes: Note[]
   currentNoteId: string
+}
+
+export interface TasksStore {
+  tasks: Task[]
+  currentTaskId: string
 }
 
 export interface TasksStore {

@@ -13,6 +13,8 @@ const initialValue: NotesStore = {
       tagIds: [],
       pinned: false,
       trash: false,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
     {
       id: uuid(),
@@ -22,6 +24,8 @@ const initialValue: NotesStore = {
       tagIds: [],
       pinned: true,
       trash: false,
+      createdAt: new Date(),
+      updatedAt: new Date(),
     },
   ],
   currentNoteId: '',
@@ -46,7 +50,9 @@ const createNotesStore = (initialValue: NotesStore) => {
     },
     updateNote: (id: string, updateNote: Note) => {
       update((s) => {
-        s.notes = s.notes.map((n) => (n.id === id ? { ...n, ...updateNote } : n))
+        s.notes = s.notes.map((n) =>
+          n.id === id ? { ...n, ...updateNote, updatedAt: new Date() } : n
+        )
         return s
       })
     },

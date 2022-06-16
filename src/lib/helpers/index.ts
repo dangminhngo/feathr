@@ -14,6 +14,8 @@ export const createEmptyNote = (): Note => ({
   tagIds: [],
   pinned: false,
   trash: false,
+  createdAt: new Date(),
+  updatedAt: new Date(),
 })
 
 export const isEmptyNote = (note: Note): boolean => {
