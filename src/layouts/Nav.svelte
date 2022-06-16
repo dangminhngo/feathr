@@ -41,10 +41,13 @@
 <style lang="scss">
   nav {
     padding: 0.25rem 0;
-    width: 5.25rem;
+    min-width: 5rem;
     height: calc(100vh - 4rem);
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
     background-color: transparent;
-    transition: width 0.25s ease-out;
+    transition: background-color 0.25s ease-out, min-width 0.15s ease-out;
 
     &.grow {
       min-width: var(--sidenav-width);
