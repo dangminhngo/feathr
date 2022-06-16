@@ -1,7 +1,7 @@
 <script lang="ts">
   import NoteCard from '$lib/components/NoteCard.svelte'
 
-  import { filterNotes } from '$lib/helpers'
+  import { filterItems } from '$lib/helpers'
   import { uiStore, notesStore } from '$lib/stores'
   import type { Note } from '$lib/types'
 
@@ -9,7 +9,7 @@
   const { openModal } = uiStore
 
   export let notes: Note[] = []
-  $: filteredNotes = filterNotes(notes)
+  $: filteredNotes = filterItems(notes)
 
   const openEditNoteForm = (id: string) => {
     setCurrentNote(id)
@@ -23,7 +23,7 @@
       {note}
       on:click={() => openEditNoteForm(note.id)}
       handlePinned={() => togglePinnedNote(note.id)}
-      handleDeleteNote={() => assignTrashToNote(note.id)}
+      handleDelete={() => assignTrashToNote(note.id)}
     />
   {/each}
 </div>

@@ -45,6 +45,7 @@ export interface Task {
   id: string
   title: string
   tasks: TaskItem[]
+  images: string[]
   tagIds: string[]
   color?: string
   pinned: boolean

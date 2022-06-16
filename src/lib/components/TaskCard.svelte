@@ -1,23 +1,21 @@
 <script lang="ts">
   import IconButton from '$lib/components/IconButton.svelte'
-  import type { Note } from '$lib/types'
-  export let note: Note
-  export let handlePinned: () => void, handleDelete: () => void
+  import type { Task } from '$lib/types'
+  export let task: Task, handlePinned: () => void, handleDelete: () => void
   let buttonsShow = false
 
   const handleMouseEnter = () => (buttonsShow = true)
   const handleMouseLeave = () => (buttonsShow = false)
 </script>
 
-<div class="note" on:mouseenter={handleMouseEnter} on:mouseleave={handleMouseLeave} on:click>
-  <div class="title">{note.title}</div>
-  <div class="body">{note.body}</div>
+<div class="task" on:mouseenter={handleMouseEnter} on:mouseleave={handleMouseLeave} on:click>
+  <div class="title">{task.title}</div>
   <div class="buttons">
-    <div class="left" class:pinned={note.pinned} class:show={buttonsShow}>
+    <div class="left" class:pinned={task.pinned} class:show={buttonsShow}>
       <IconButton
         size="sm"
-        name={note.pinned ? 'pinFull' : 'pin'}
-        active={note.pinned}
+        name={task.pinned ? 'pinFull' : 'pin'}
+        active={task.pinned}
         on:click={handlePinned}
       />
     </div>
@@ -31,7 +29,7 @@
 </div>
 
 <style lang="scss">
-  .note {
+  .task {
     padding: 1rem;
     display: flex;
     flex-direction: column;
@@ -43,10 +41,6 @@
 
   .title {
     font-weight: 500;
-  }
-
-  .body {
-    font-size: var(--text-sm);
   }
 
   .buttons {

@@ -3,9 +3,9 @@
   import ContentEditable from '$lib/components/ContentEditable.svelte'
   import Icon from '$lib/components/Icon.svelte'
   import IconButton from '$lib/components/IconButton.svelte'
+  import type { TaskItem } from '$lib/types'
 
-  export let title = '',
-    done = false
+  export let taskItem: TaskItem
   let showButton = false
 
   const handleMouseLeave = () => {
@@ -15,6 +15,8 @@
   const handleMouseEnter = () => {
     showButton = true
   }
+
+  let { title, done } = taskItem
 </script>
 
 <div class="task-item" class:done on:mouseleave={handleMouseLeave} on:mouseenter={handleMouseEnter}>

@@ -1,6 +1,6 @@
 import type { Action } from 'svelte/types/runtime/action'
 import { v4 as uuid } from 'uuid'
-import type { Note } from '$lib/types'
+import type { Note, Task } from '$lib/types'
 
 export const getNoteById = (notes: Note[], id: string): Note | undefined => {
   return notes.find((n) => n.id === id)
@@ -18,6 +18,18 @@ export const createEmptyNote = (): Note => ({
   updatedAt: new Date(),
 })
 
+export const createEmptyTask = (): Task => ({
+  id: uuid(),
+  title: '',
+  tasks: [],
+  images: [],
+  tagIds: [],
+  pinned: false,
+  trash: false,
+  createdAt: new Date(),
+  updatedAt: new Date(),
+})
+
 export const isEmptyNote = (note: Note): boolean => {
   if (note.title === '' && note.body === '' && !note.images.length && !note.tagIds.length) {
     return true
@@ -26,8 +38,16 @@ export const isEmptyNote = (note: Note): boolean => {
   return false
 }
 
-export const filterNotes = (notes: Note[]): Note[] => {
-  return notes.filter((n) => !n.trash).sort((a, b) => Number(b.pinned) - Number(a.pinned))
+export const isEmptyTask = (task: Task): boolean => {
+  if (task.title === '' && task.tasks.length === 0 && !task.tagIds.length) {
+    return true
+  }
+
+  return false
+}
+
+export function filterItems<T extends Note | Task>(items: T[]): T[] {
+  return items.filter((item) => !item.trash).sort((a, b) => Number(b.pinned) - Number(a.pinned))
 }
 
 export const clickOutside: Action<HTMLElement, undefined> = (node: HTMLElement) => {

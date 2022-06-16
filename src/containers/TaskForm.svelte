@@ -41,8 +41,8 @@
     dispatch('close')
   }
 
-  $: undoneTasks = tasks.filter((t) => !t.done)
-  $: doneTasks = tasks.filter((t) => t.done)
+  $: undoneTaskItems = tasks.filter((t) => !t.done)
+  $: doneTaskItems = tasks.filter((t) => t.done)
 
   onMount(() => titleContentEditable.focus())
 </script>
@@ -50,16 +50,16 @@
 <div class="form" use:clickOutside on:outsideclick={closeForm}>
   <ContentEditable bind:this={titleContentEditable} placeholder="Title" value={title} />
   <hr class="sep" />
-  {#each undoneTasks as task (task.id)}
-    <EditableTaskItem title={task.title} done={task.done} />
+  {#each undoneTaskItems as taskItem (taskItem.id)}
+    <EditableTaskItem {taskItem} />
   {/each}
   <div class="new">
     <Icon name="plus" width={16} height={16} />
     <ContentEditable size="sm" placeholder="Add a task" />
   </div>
-  <p>{doneTasks.length} tasks done</p>
-  {#each doneTasks as task (task.id)}
-    <EditableTaskItem title={task.title} done={task.done} />
+  <p>{doneTaskItems.length} tasks done</p>
+  {#each doneTaskItems as taskItem (taskItem.id)}
+    <EditableTaskItem {taskItem} />
   {/each}
   <div class="actions">
     <div class="left">
