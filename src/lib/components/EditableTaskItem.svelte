@@ -3,9 +3,9 @@
   import ContentEditable from '$lib/components/ContentEditable.svelte'
   import Icon from '$lib/components/Icon.svelte'
   import IconButton from '$lib/components/IconButton.svelte'
-  import type { TaskItem } from '$lib/types'
+  import type { Task } from '$lib/types'
 
-  export let taskItem: TaskItem,
+  export let task: Task,
     editable = true
   let showButton = false
 
@@ -17,10 +17,10 @@
     showButton = true
   }
 
-  let { title, done } = taskItem
+  let { title, done } = task
 </script>
 
-<div class="task-item" class:done on:mouseleave={handleMouseLeave} on:mouseenter={handleMouseEnter}>
+<div class="task" class:done on:mouseleave={handleMouseLeave} on:mouseenter={handleMouseEnter}>
   <div class="draggable" class:show={showButton}>
     <Icon name="link" width={16} height={16} />
   </div>
@@ -32,17 +32,17 @@
 </div>
 
 <style lang="scss">
-  .task-item {
+  .task {
     display: flex;
     align-items: center;
     gap: 0.5rem;
   }
 
-  .task-item:not(:first-child) {
+  .task:not(:first-child) {
     border-bottom: 1px solid var(--theme-primary-700);
   }
 
-  .task-item.done {
+  .task.done {
     text-decoration: line-through;
     color: var(--theme-primary-500);
   }

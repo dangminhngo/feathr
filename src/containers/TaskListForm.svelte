@@ -6,34 +6,12 @@
   import IconButton from '$lib/components/IconButton.svelte'
   import EditableTaskItem from '$lib/components/EditableTaskItem.svelte'
 
-  import { clickOutside } from '$lib/helpers'
-  import type { TaskItem } from '$lib/types'
+  import { createEmptyTaskList, getFilteredTasks, clickOutside } from '$lib/helpers'
+  import type { TaskList, Task } from '$lib/types'
 
   let titleContentEditable: ContentEditable
 
-  let title = ''
-  let tasks: TaskItem[] = [
-    {
-      id: '1',
-      title: 'Task 1',
-      done: false,
-    },
-    {
-      id: '2',
-      title: 'Task 2',
-      done: false,
-    },
-    {
-      id: '3',
-      title: 'Task 3',
-      done: true,
-    },
-    {
-      id: '4',
-      title: 'Task 4',
-      done: true,
-    },
-  ]
+  let taskList: TaskList = createEmptyTaskList()
 
   const dispatch = createEventDispatcher()
 
@@ -41,25 +19,25 @@
     dispatch('close')
   }
 
-  $: undoneTaskItems = tasks.filter((t) => !t.done)
-  $: doneTaskItems = tasks.filter((t) => t.done)
+  let undoneTasks: Task[], doneTasks: Task[]
+  $: ({ undoneTasks, doneTasks } = getFilteredTasks(taskList))
 
   onMount(() => titleContentEditable.focus())
 </script>
 
 <div class="form" use:clickOutside on:outsideclick={closeForm}>
-  <ContentEditable bind:this={titleContentEditable} placeholder="Title" value={title} />
+  <ContentEditable bind:this={titleContentEditable} placeholder="Title" value={taskList.title} />
   <hr class="sep" />
-  {#each undoneTaskItems as taskItem (taskItem.id)}
-    <EditableTaskItem {taskItem} />
+  {#each undoneTasks as task (task.id)}
+    <EditableTaskItem {task} />
   {/each}
   <div class="new">
     <Icon name="plus" width={16} height={16} />
     <ContentEditable size="sm" placeholder="Add a task" />
   </div>
-  <p>{doneTaskItems.length} tasks done</p>
-  {#each doneTaskItems as taskItem (taskItem.id)}
-    <EditableTaskItem {taskItem} />
+  <p>{doneTasks.length} tasks done</p>
+  {#each doneTasks as task (task.id)}
+    <EditableTaskItem {task} />
   {/each}
   <div class="actions">
     <div class="left">

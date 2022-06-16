@@ -1,10 +1,10 @@
 import { writable } from 'svelte/store'
 import { v4 as uuid } from 'uuid'
 
-import type { TasksStore, Task } from '$lib/types'
+import type { TaskListsStore, TaskList } from '$lib/types'
 
-const initialValue: TasksStore = {
-  tasks: [
+const initialValue: TaskListsStore = {
+  taskLists: [
     {
       id: uuid(),
       title: 'This is the first task',
@@ -50,42 +50,42 @@ const initialValue: TasksStore = {
       updatedAt: new Date(),
     },
   ],
-  currentTaskId: '',
+  currentTaskListId: '',
 }
 
-const createTasksStore = (initialValue: TasksStore) => {
+const createTaskListsStore = (initialValue: TaskListsStore) => {
   const { subscribe, update } = writable(initialValue)
 
   return {
     subscribe,
-    setCurrentTask: (id: string) => {
+    setCurrentTaskList: (id: string) => {
       update((s) => {
-        s.currentTaskId = id
+        s.currentTaskListId = id
         return s
       })
     },
-    addTask: (task: Task) => {
+    addTaskList: (taskList: TaskList) => {
       update((s) => {
-        s.tasks.push(task)
+        s.taskLists.push(taskList)
         return s
       })
     },
-    deleteTask: (id: string) => {
+    deleteTaskList: (id: string) => {
       update((s) => {
-        s.tasks = s.tasks.filter((t) => t.id !== id)
+        s.taskLists = s.taskLists.filter((t) => t.id !== id)
         return s
       })
     },
-    assignTaskToTrash: (id: string) => {
+    assignTaskListToTrash: (id: string) => {
       update((s) => {
-        const task = s.tasks.find((t) => t.id === id)
+        const task = s.taskLists.find((t) => t.id === id)
         if (task) task.trash = true
         return s
       })
     },
-    togglePinnedTask: (id: string) => {
+    togglePinnedTaskList: (id: string) => {
       update((s) => {
-        const task = s.tasks.find((t) => t.id === id)
+        const task = s.taskLists.find((t) => t.id === id)
         if (task) task.pinned = !task.pinned
         return s
       })
@@ -93,4 +93,4 @@ const createTasksStore = (initialValue: TasksStore) => {
   }
 }
 
-export const tasksStore = createTasksStore(initialValue)
+export const taskListsStore = createTaskListsStore(initialValue)

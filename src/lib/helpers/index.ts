@@ -1,6 +1,6 @@
 import type { Action } from 'svelte/types/runtime/action'
 import { v4 as uuid } from 'uuid'
-import type { Note, Task, TaskItem } from '$lib/types'
+import type { Note, TaskList, Task } from '$lib/types'
 
 export const getNoteById = (notes: Note[], id: string): Note | undefined => {
   return notes.find((n) => n.id === id)
@@ -18,7 +18,7 @@ export const createEmptyNote = (): Note => ({
   updatedAt: new Date(),
 })
 
-export const createEmptyTask = (): Task => ({
+export const createEmptyTaskList = (): TaskList => ({
   id: uuid(),
   title: '',
   tasks: [],
@@ -38,24 +38,24 @@ export const isEmptyNote = (note: Note): boolean => {
   return false
 }
 
-export const isEmptyTask = (task: Task): boolean => {
-  if (task.title === '' && task.tasks.length === 0 && !task.tagIds.length) {
+export const isEmptyTaskList = (taskList: TaskList): boolean => {
+  if (taskList.title === '' && taskList.tasks.length === 0 && !taskList.tagIds.length) {
     return true
   }
 
   return false
 }
 
-export function filterItems<T extends Note | Task>(items: T[]): T[] {
+export function filterItems<T extends Note | TaskList>(items: T[]): T[] {
   return items.filter((item) => !item.trash).sort((a, b) => Number(b.pinned) - Number(a.pinned))
 }
 
-export const getFilteredTaskItems = (
-  task: Task
-): { undoneTaskItems: TaskItem[]; doneTaskItems: TaskItem[] } => {
+export const getFilteredTasks = (
+  taskList: TaskList
+): { undoneTasks: Task[]; doneTasks: Task[] } => {
   return {
-    undoneTaskItems: task.tasks.filter((t) => !t.done),
-    doneTaskItems: task.tasks.filter((t) => t.done),
+    undoneTasks: taskList.tasks.filter((t) => !t.done),
+    doneTasks: taskList.tasks.filter((t) => t.done),
   }
 }
 

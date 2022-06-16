@@ -1,7 +1,7 @@
 <script lang="ts">
   import IconButton from '$lib/components/IconButton.svelte'
   import NoteForm from '$containers/NoteForm.svelte'
-  import TaskForm from '$containers/TaskForm.svelte'
+  import TaskListForm from '$containers/TaskListForm.svelte'
 
   type NoteFormType = null | 'note' | 'task'
   let noteFormType: NoteFormType = null
@@ -13,7 +13,7 @@
   {#if noteFormType === 'note'}
     <NoteForm on:close={() => setFormType(null)} />
   {:else if noteFormType === 'task'}
-    <TaskForm on:close={() => setFormType(null)} />
+    <TaskListForm on:close={() => setFormType(null)} />
   {:else}
     <div class="field">
       <div class="placeholder" on:click={() => setFormType('note')}>Add a note ...</div>

@@ -1,18 +1,18 @@
 <script lang="ts">
   import FormField from '$lib/components/FormField.svelte'
-  import TaskGrid from '$/containers/TaskGrid.svelte'
+  import TaskListGrid from '$/containers/TaskListGrid.svelte'
   import Modal from '$lib/components/Modal.svelte'
 
-  import { uiStore, tasksStore } from '$lib/stores'
+  import { uiStore, taskListsStore } from '$lib/stores'
 
-  const { setCurrentTask } = tasksStore
+  const { setCurrentTaskList } = taskListsStore
   const { closeAllModals } = uiStore
 
   const handleModalClose = () => {
-    setCurrentTask('')
+    setCurrentTaskList('')
     closeAllModals()
   }
 </script>
 
 <FormField />
-<TaskGrid tasks={$tasksStore.tasks} />
+<TaskListGrid taskLists={$taskListsStore.taskLists} />

@@ -4,6 +4,7 @@
   import { filterItems } from '$lib/helpers'
   import { uiStore, notesStore } from '$lib/stores'
   import type { Note } from '$lib/types'
+  import { ModalType } from '$lib/enums'
 
   const { setCurrentNote, togglePinnedNote, assignTrashToNote } = notesStore
   const { openModal } = uiStore
@@ -13,7 +14,7 @@
 
   const openEditNoteForm = (id: string) => {
     setCurrentNote(id)
-    openModal('note')
+    openModal(ModalType.Note)
   }
 </script>
 

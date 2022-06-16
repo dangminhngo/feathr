@@ -1,21 +1,21 @@
 <script lang="ts">
   import IconButton from '$lib/components/IconButton.svelte'
-  import type { Task } from '$lib/types'
-  export let task: Task, handlePinned: () => void, handleDelete: () => void
+  import type { TaskList } from '$lib/types'
+  export let taskList: TaskList, handlePinned: () => void, handleDelete: () => void
   let buttonsShow = false
 
   const handleMouseEnter = () => (buttonsShow = true)
   const handleMouseLeave = () => (buttonsShow = false)
 </script>
 
-<div class="task" on:mouseenter={handleMouseEnter} on:mouseleave={handleMouseLeave} on:click>
-  <div class="title">{task.title}</div>
+<div class="task-list" on:mouseenter={handleMouseEnter} on:mouseleave={handleMouseLeave} on:click>
+  <div class="title">{taskList.title}</div>
   <div class="buttons">
-    <div class="left" class:pinned={task.pinned} class:show={buttonsShow}>
+    <div class="left" class:pinned={taskList.pinned} class:show={buttonsShow}>
       <IconButton
         size="sm"
-        name={task.pinned ? 'pinFull' : 'pin'}
-        active={task.pinned}
+        name={taskList.pinned ? 'pinFull' : 'pin'}
+        active={taskList.pinned}
         on:click={handlePinned}
       />
     </div>
@@ -29,7 +29,7 @@
 </div>
 
 <style lang="scss">
-  .task {
+  .task-list {
     padding: 1rem;
     display: flex;
     flex-direction: column;

@@ -35,16 +35,16 @@ export interface Note {
   updatedAt: Date
 }
 
-export interface TaskItem {
+export interface Task {
   id: string
   title: string
   done: boolean
 }
 
-export interface Task {
+export interface TaskList {
   id: string
   title: string
-  tasks: TaskItem[]
+  tasks: Task[]
   images: string[]
   tagIds: string[]
   color?: string
@@ -69,14 +69,9 @@ export interface NotesStore {
   currentNoteId: string
 }
 
-export interface TasksStore {
-  tasks: Task[]
-  currentTaskId: string
-}
-
-export interface TasksStore {
-  tasks: Task[]
-  currentTaskId: string
+export interface TaskListsStore {
+  taskLists: TaskList[]
+  currentTaskListId: string
 }
 
 export interface TagsStore {

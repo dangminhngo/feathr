@@ -1,7 +1,8 @@
 import { writable } from 'svelte/store'
 import type { UIStore } from '$lib/types'
+import type { ModalType } from '$lib/enums'
 
-const initialStore: UIStore = {
+const initialValue: UIStore = {
   navGrow: false,
   modal: {
     note: false,
@@ -11,8 +12,8 @@ const initialStore: UIStore = {
   },
 }
 
-const createLayoutStore = (initialStore: UIStore) => {
-  const { subscribe, update } = writable(initialStore)
+const createLayoutStore = (initialValue: UIStore) => {
+  const { subscribe, update } = writable(initialValue)
 
   return {
     subscribe,
@@ -22,9 +23,9 @@ const createLayoutStore = (initialStore: UIStore) => {
         return s
       })
     },
-    openModal: (modalType: 'note' | 'task' | 'brush' | 'tags') => {
+    openModal: (modalType: ModalType) => {
       update((s) => {
-        s.modal[modalType] = true
+        s.modal[modalType as keyof typeof initialValue.modal] = true
         return s
       })
     },
@@ -42,4 +43,4 @@ const createLayoutStore = (initialStore: UIStore) => {
   }
 }
 
-export const uiStore = createLayoutStore(initialStore)
+export const uiStore = createLayoutStore(initialValue)
