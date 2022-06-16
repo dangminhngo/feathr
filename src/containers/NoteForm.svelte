@@ -10,13 +10,16 @@
 
   let titleContentEditable: ContentEditable
 
-  let note: Note, notes: Note[], currentNoteId: string, editingNote: Note | undefined
+  let note: Note = createEmptyNote(),
+    notes: Note[],
+    currentNoteId: string,
+    editingNote: Note | undefined
 
   $: {
     ;({ notes, currentNoteId } = $notesStore)
     editingNote = getNoteById(notes, currentNoteId)
-    console.log('editing', editingNote)
-    note = editingNote ?? createEmptyNote()
+
+    if (editingNote) note = editingNote
   }
 
   const togglePinned = () => {
