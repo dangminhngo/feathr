@@ -6,14 +6,27 @@
   import IconButton from '$lib/components/IconButton.svelte'
   import EditableTaskItem from '$lib/components/EditableTaskItem.svelte'
 
-  import { createEmptyTaskList, getFilteredTasks, clickOutside } from '$lib/helpers'
+  import {
+    createEmptyTaskList,
+    getFilteredTasks,
+    addTask,
+    removeTask,
+    clickOutside,
+  } from '$lib/helpers'
   import type { TaskList, Task } from '$lib/types'
 
   let titleContentEditable: ContentEditable
-
   let taskList: TaskList = createEmptyTaskList()
 
   const dispatch = createEventDispatcher()
+
+  const handleAddTask = () => {
+    taskList = addTask(taskList)
+  }
+
+  const handleDeleteTask = (id: string) => {
+    taskList = removeTask(taskList, id)
+  }
 
   const closeForm = () => {
     dispatch('close')
@@ -29,15 +42,17 @@
   <ContentEditable bind:this={titleContentEditable} placeholder="Title" value={taskList.title} />
   <hr class="sep" />
   {#each undoneTasks as task (task.id)}
-    <EditableTaskItem {task} />
+    <EditableTaskItem {task} handleDelete={() => handleDeleteTask(task.id)} />
   {/each}
-  <div class="new">
+  <button class="add" on:click={handleAddTask}>
     <Icon name="plus" width={16} height={16} />
-    <ContentEditable size="sm" placeholder="Add a task" />
-  </div>
-  <p>{doneTasks.length} tasks done</p>
+    <span>Add a task</span>
+  </button>
+  {#if doneTasks.length !== 0}
+    <p>{doneTasks.length} tasks done</p>
+  {/if}
   {#each doneTasks as task (task.id)}
-    <EditableTaskItem {task} />
+    <EditableTaskItem {task} handleDelete={() => handleDeleteTask(task.id)} />
   {/each}
   <div class="actions">
     <div class="left">
@@ -56,13 +71,27 @@
   .form {
     padding: 0 1rem;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
   }
 
-  .new {
+  .add {
+    cursor: pointer;
+    margin: 0.5rem 0;
     padding-left: 1.5rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    font-size: var(--text-sm);
+    border-radius: var(--rounded);
+    transition: background-color 0.15s ease-out;
+  }
+
+  .add:hover {
+    background-color: var(--theme-primary-700);
   }
 
   p {

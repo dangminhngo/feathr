@@ -13,7 +13,15 @@
 
 <div class="content-editable" class:lg={size === 'lg'} class:sm={size === 'sm'}>
   {#if editable}
-    <div class="content" contenteditable="true" bind:this={input} bind:textContent={value} />
+    <div
+      class="content"
+      contenteditable="true"
+      bind:this={input}
+      bind:textContent={value}
+      on:input
+    />
+  {:else}
+    <div class="content">{value}</div>
   {/if}
   {#if !value}
     <div class="placeholder">{placeholder}</div>

@@ -30,6 +30,22 @@ export const createEmptyTaskList = (): TaskList => ({
   updatedAt: new Date(),
 })
 
+export const createEmptyTask = (): Task => ({
+  id: uuid(),
+  title: '',
+  done: false,
+})
+
+export const addTask = (taskList: TaskList) => {
+  const task = createEmptyTask()
+  return { ...taskList, tasks: [...taskList.tasks, task] }
+}
+
+export const removeTask = (taskList: TaskList, id: string) => {
+  taskList.tasks = taskList.tasks.filter((t) => t.id !== id)
+  return taskList
+}
+
 export const isEmptyNote = (note: Note): boolean => {
   if (note.title === '' && note.body === '' && !note.images.length && !note.tagIds.length) {
     return true

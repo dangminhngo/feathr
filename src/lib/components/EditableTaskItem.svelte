@@ -6,7 +6,8 @@
   import type { Task } from '$lib/types'
 
   export let task: Task,
-    editable = true
+    editable = true,
+    handleDelete: () => void
   let showButton = false
 
   const handleMouseLeave = () => {
@@ -27,7 +28,7 @@
   <CheckBox bind:checked={done} />
   <ContentEditable {editable} size="sm" bind:value={title} />
   <div class="buttons" class:show={showButton}>
-    <IconButton size="sm" name="close" />
+    <IconButton size="sm" name="close" on:click={handleDelete} />
   </div>
 </div>
 
