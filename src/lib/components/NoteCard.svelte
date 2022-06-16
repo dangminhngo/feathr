@@ -1,18 +1,14 @@
 <script lang="ts">
   import IconButton from '$lib/components/IconButton.svelte'
-  export let id: string,
-    title: string,
-    body: string,
-    images: string[],
-    tagIds: string[],
-    color = '',
-    pinned: boolean,
-    trash: boolean
+  import type { Note } from '$lib/types'
+  export let note: Note
   export let handlePinned: () => void, handleDeleteNote: () => void
   let buttonsShow = false
 
   const handleMouseEnter = () => (buttonsShow = true)
   const handleMouseLeave = () => (buttonsShow = false)
+
+  const { title, body, tags, images, pinned, trash, createdAt, updatedAt } = note
 </script>
 
 <div class="note" on:mouseenter={handleMouseEnter} on:mouseleave={handleMouseLeave} on:click>

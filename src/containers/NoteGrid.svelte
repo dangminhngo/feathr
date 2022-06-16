@@ -20,7 +20,7 @@
 <div class="grid">
   {#each filteredNotes as note (note.id)}
     <NoteCard
-      {...note}
+      {note}
       on:click={() => openEditNoteForm(note.id)}
       handlePinned={() => togglePinnedNote(note.id)}
       handleDeleteNote={() => assignTrashToNote(note.id)}
