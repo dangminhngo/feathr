@@ -28,13 +28,13 @@
   .wrapper {
     margin: 0 auto;
     width: 30rem;
+    border: 1px solid var(--theme-primary-600);
+    border-radius: var(--rounded);
   }
 
   .field {
     position: relative;
     width: 100%;
-    border: 1px solid var(--theme-primary-600);
-    border-radius: var(--rounded);
     outline: none;
   }
 

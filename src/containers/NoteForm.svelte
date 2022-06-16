@@ -4,61 +4,55 @@
   import ContentEditable from '$/lib/components/ContentEditable.svelte'
   import IconButton from '$lib/components/IconButton.svelte'
 
-  import { notesStore } from '$lib/stores'
-  import { createEmptyNote, isEmptyNote, clickOutside } from '$lib/helpers'
+  import { uiStore, notesStore } from '$lib/stores'
+  import { getNoteById, isEmptyNote, clickOutside, createEmptyNote } from '$lib/helpers'
+  import type { Note } from '$lib/types'
 
   let titleContentEditable: ContentEditable
 
-  let title = '',
-    body = '',
-    images: string[] = [],
-    tagIds: string[] = [],
-    pinned = false,
-    trash = false
-
-  let note = createEmptyNote()
+  let note: Note, notes: Note[], currentNoteId: string, editingNote: Note | undefined
 
   $: {
-    note = {
-      ...note,
-      title,
-      body,
-      images,
-      tagIds,
-      pinned,
-      trash,
-    }
+    ;({ notes, currentNoteId } = $notesStore)
+    editingNote = getNoteById(notes, currentNoteId)
+    console.log('editing', editingNote)
+    note = editingNote ?? createEmptyNote()
   }
 
   const togglePinned = () => {
-    pinned = !pinned
+    note.pinned = !note.pinned
   }
 
   onMount(() => titleContentEditable.focus())
 
-  $: console.log($notesStore)
-
   const dispatch = createEventDispatcher()
-  const { addNote } = notesStore
+  const { setCurrentNote, addNote, updateNote } = notesStore
+  const { closeAllModals } = uiStore
 
   const handleSubmit = () => {
+    closeAllModals()
     dispatch('close')
     if (isEmptyNote(note)) return
-    addNote(note)
+    if (editingNote) {
+      updateNote(note.id, note)
+    } else {
+      addNote(note)
+    }
+    setCurrentNote('')
   }
 </script>
 
 <div class="form" use:clickOutside on:outsideclick={handleSubmit}>
-  <ContentEditable bind:this={titleContentEditable} placeholder="Title" bind:value={title} />
+  <ContentEditable bind:this={titleContentEditable} placeholder="Title" bind:value={note.title} />
   <hr class="sep" />
-  <ContentEditable size="sm" placeholder="Body" bind:value={body} />
+  <ContentEditable size="sm" placeholder="Body" bind:value={note.body} />
   <div class="actions">
     <div class="left">
       <IconButton
-        name={pinned ? 'pinFull' : 'pin'}
+        name={note.pinned ? 'pinFull' : 'pin'}
         size="md"
         on:click={togglePinned}
-        active={pinned}
+        active={note.pinned}
       />
       <IconButton name="picture" size="md" />
       <IconButton name="tags" size="md" />
@@ -76,7 +70,6 @@
   .form {
     padding: 0 1rem;
     width: 100%;
-    border: 1px solid var(--theme-primary-500);
     border-radius: var(--rounded);
   }
 
@@ -103,9 +96,9 @@
     cursor: pointer;
     padding: 0 0.5rem;
     height: 2rem;
-    border-radius: var(--rounded);
     font-size: var(--text-sm);
     transition: all 0.15s ease-out;
+    border-radius: var(--rounded);
 
     &:hover {
       background-color: var(--theme-primary-700);

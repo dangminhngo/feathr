@@ -1,10 +1,12 @@
+import { v4 as uuid } from 'uuid'
+
 import { writable } from 'svelte/store'
 import type { NotesStore, Note } from '$lib/types'
 
 const initialValue: NotesStore = {
   notes: [
     {
-      id: '1',
+      id: uuid(),
       title: 'This is the first note',
       body: 'This is the first note body',
       images: [],
@@ -13,7 +15,7 @@ const initialValue: NotesStore = {
       trash: false,
     },
     {
-      id: '2',
+      id: uuid(),
       title: 'This is the second note',
       body: 'This is the second note body',
       images: [],
@@ -39,6 +41,12 @@ const createNotesStore = (initialValue: NotesStore) => {
     addNote: (note: Note) => {
       update((s) => {
         s.notes.push(note)
+        return s
+      })
+    },
+    updateNote: (id: string, updateNote: Note) => {
+      update((s) => {
+        s.notes = s.notes.map((n) => (n.id === id ? { ...n, ...updateNote } : n))
         return s
       })
     },

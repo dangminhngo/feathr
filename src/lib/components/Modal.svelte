@@ -1,11 +1,24 @@
 <script lang="ts">
   import Portal from 'svelte-portal/src/Portal.svelte'
-  export let width = 30
+  import { clickOutside } from '$lib/helpers'
+
+  export let width = 30,
+    backdrop = true,
+    handleOutsideClick: () => void
 </script>
 
 <Portal target="body">
-  <div class="backdrop">&nbsp;</div>
-  <div class="wrapper" style="width: {width}rem;"><slot /></div>
+  {#if backdrop}
+    <div class="backdrop">&nbsp;</div>
+  {/if}
+  <div
+    class="wrapper"
+    style="width: {width}rem;"
+    use:clickOutside
+    on:outsideclick={handleOutsideClick}
+  >
+    <slot />
+  </div>
 </Portal>
 
 <style lang="scss">
@@ -15,7 +28,8 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: hsla(0, 0%, 0%, 0.6);
+    background-color: var(--theme-primary-800);
+    opacity: 0.75;
   }
 
   .wrapper {
@@ -23,6 +37,9 @@
     top: 25%;
     left: 50%;
     transform: translate(-50%, 0);
+    border: 1px solid var(--theme-primary-700);
+    border-radius: var(--rounded);
     background-color: var(--theme-primary-900);
+    box-shadow: var(--shadow);
   }
 </style>

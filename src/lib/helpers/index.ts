@@ -2,6 +2,10 @@ import type { Action } from 'svelte/types/runtime/action'
 import { v4 as uuid } from 'uuid'
 import type { Note } from '$lib/types'
 
+export const getNoteById = (notes: Note[], id: string): Note | undefined => {
+  return notes.find((n) => n.id === id)
+}
+
 export const createEmptyNote = (): Note => ({
   id: uuid(),
   title: '',

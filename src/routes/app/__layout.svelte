@@ -33,6 +33,8 @@
 
     --rounded: 4px;
     --rounded-lg: 8px;
+
+    --shadow: 0 0 1rem hsla(0, 0%, 0%, 0.8);
   }
 
   :global(*, *::before, *::after) {

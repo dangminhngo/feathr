@@ -78,8 +78,6 @@
   .form {
     padding: 0 1rem;
     width: 100%;
-    border: 1px solid var(--theme-primary-500);
-    border-radius: var(--rounded);
   }
 
   .new {

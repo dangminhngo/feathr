@@ -2,19 +2,26 @@
   import NoteCard from '$lib/components/NoteCard.svelte'
 
   import { filterNotes } from '$lib/helpers'
-  import { notesStore } from '$lib/stores'
+  import { uiStore, notesStore } from '$lib/stores'
   import type { Note } from '$lib/types'
 
-  const { togglePinnedNote, assignTrashToNote } = notesStore
+  const { setCurrentNote, togglePinnedNote, assignTrashToNote } = notesStore
+  const { openModal } = uiStore
 
   export let notes: Note[] = []
   $: filteredNotes = filterNotes(notes)
+
+  const openEditNoteForm = (id: string) => {
+    setCurrentNote(id)
+    openModal('note')
+  }
 </script>
 
 <div class="grid">
   {#each filteredNotes as note (note.id)}
     <NoteCard
       {...note}
+      on:click={() => openEditNoteForm(note.id)}
       handlePinned={() => togglePinnedNote(note.id)}
       handleDeleteNote={() => assignTrashToNote(note.id)}
     />

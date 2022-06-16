@@ -15,7 +15,7 @@
   const handleMouseLeave = () => (buttonsShow = false)
 </script>
 
-<div class="note" on:mouseenter={handleMouseEnter} on:mouseleave={handleMouseLeave}>
+<div class="note" on:mouseenter={handleMouseEnter} on:mouseleave={handleMouseLeave} on:click>
   <div class="title">{title}</div>
   <div class="body">{body}</div>
   <div class="buttons">

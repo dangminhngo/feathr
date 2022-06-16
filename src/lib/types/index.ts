@@ -51,6 +51,12 @@ export interface Task {
 
 export interface UIStore {
   navGrow: boolean
+  modal: {
+    note: boolean
+    task: boolean
+    brush: boolean
+    tags: boolean
+  }
 }
 
 export interface NotesStore {

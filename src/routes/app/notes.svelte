@@ -4,13 +4,22 @@
   import NoteForm from '$containers/NoteForm.svelte'
   import Modal from '$lib/components/Modal.svelte'
 
-  import { notesStore } from '$lib/stores'
+  import { uiStore, notesStore } from '$lib/stores'
 
-  $: notes = $notesStore.notes
+  const { setCurrentNote } = notesStore
+  const { closeAllModals } = uiStore
+
+  const handleModalClose = () => {
+    setCurrentNote('')
+    closeAllModals()
+  }
 </script>
 
 <FormField />
-<NoteGrid notes={notes.filter((n) => !n.trash)} />
-<Modal>
-  <NoteForm />
-</Modal>
+<NoteGrid notes={$notesStore.notes.filter((n) => !n.trash)} />
+
+{#if $uiStore.modal.note}
+  <Modal handleOutsideClick={handleModalClose}>
+    <NoteForm />
+  </Modal>
+{/if}
