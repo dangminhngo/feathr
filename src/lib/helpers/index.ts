@@ -2,8 +2,8 @@ import type { Action } from 'svelte/types/runtime/action'
 import { v4 as uuid } from 'uuid'
 import type { Note, TaskList, Task } from '$lib/types'
 
-export const getNoteById = (notes: Note[], id: string): Note | undefined => {
-  return notes.find((n) => n.id === id)
+export function getItemById<T extends Note | TaskList>(items: T[], id: string): T | undefined {
+  return items.find((item) => item.id === id)
 }
 
 export const createEmptyNote = (): Note => ({

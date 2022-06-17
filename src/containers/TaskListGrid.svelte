@@ -15,8 +15,6 @@
     setCurrentTaskList(id)
     openModal(ModalType.TaskList)
   }
-
-  $: console.log($taskListsStore)
 </script>
 
 <div class="grid">

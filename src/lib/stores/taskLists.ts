@@ -70,6 +70,12 @@ const createTaskListsStore = (initialValue: TaskListsStore) => {
         return s
       })
     },
+    updateTaskList: (id: string, updateTaskList: TaskList) => {
+      update((s) => {
+        s.taskLists = s.taskLists.map((tl) => (tl.id === id ? { ...tl, ...updateTaskList } : tl))
+        return s
+      })
+    },
     deleteTaskList: (id: string) => {
       update((s) => {
         s.taskLists = s.taskLists.filter((t) => t.id !== id)

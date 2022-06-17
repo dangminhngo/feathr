@@ -6,7 +6,7 @@
   import IconButton from '$lib/components/IconButton.svelte'
 
   import { uiStore, notesStore } from '$lib/stores'
-  import { getNoteById, isEmptyNote, clickOutside, createEmptyNote } from '$lib/helpers'
+  import { getItemById, isEmptyNote, clickOutside, createEmptyNote } from '$lib/helpers'
   import type { Note } from '$lib/types'
 
   let titleContentEditable: ContentEditable
@@ -18,7 +18,7 @@
 
   $: {
     ;({ notes, currentNoteId } = $notesStore)
-    editingNote = getNoteById(notes, currentNoteId)
+    editingNote = getItemById(notes, currentNoteId)
 
     if (editingNote) note = editingNote
   }

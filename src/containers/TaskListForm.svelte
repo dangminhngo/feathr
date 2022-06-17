@@ -8,6 +8,7 @@
   import EditableTask from '$lib/components/EditableTask.svelte'
 
   import {
+    getItemById,
     isEmptyTaskList,
     lastTaskInTaskListIsEmptyTask,
     createEmptyTaskList,
@@ -15,13 +16,23 @@
     getFilteredTasks,
     clickOutside,
   } from '$lib/helpers'
-  import { taskListsStore } from '$lib/stores'
+  import { uiStore, taskListsStore } from '$lib/stores'
   import type { TaskList, Task } from '$lib/types'
 
   let titleContentEditable: ContentEditable
-  let taskList: TaskList = createEmptyTaskList()
+  let taskList: TaskList = createEmptyTaskList(),
+    taskLists: TaskList[],
+    currentTaskListId: string,
+    editingTaskList: TaskList | undefined
 
-  const { addTaskList } = taskListsStore
+  $: {
+    ;({ taskLists, currentTaskListId } = $taskListsStore)
+    editingTaskList = getItemById(taskLists, currentTaskListId)
+    if (editingTaskList) taskList = editingTaskList
+  }
+
+  const { addTaskList, updateTaskList, setCurrentTaskList } = taskListsStore
+  const { closeAllModals } = uiStore
   const dispatch = createEventDispatcher()
 
   const _addTask = () => {
@@ -39,9 +50,14 @@
   }
 
   const handleSubmit = () => {
+    closeAllModals()
     dispatch('close')
     if (isEmptyTaskList(taskList) || lastTaskInTaskListIsEmptyTask(taskList)) return
-    addTaskList(taskList)
+    if (editingTaskList) updateTaskList(taskList.id, taskList)
+    else {
+      addTaskList(taskList)
+    }
+    setCurrentTaskList('')
     goto('/app/tasks')
   }
 
@@ -49,8 +65,6 @@
   $: ({ undoneTasks, doneTasks } = getFilteredTasks(taskList))
 
   onMount(() => titleContentEditable.focus())
-
-  $: console.log(taskList)
 </script>
 
 <div class="form" use:clickOutside on:outsideclick={handleSubmit}>
@@ -86,7 +100,9 @@
       <IconButton name="brush" size="md" />
     </div>
     <div class="right">
-      <button class="close-button" on:click={handleSubmit}>Close</button>
+      <button class="close-button" on:click={handleSubmit}
+        >{isEmptyTaskList(taskList) ? 'Close' : 'Save'}</button
+      >
     </div>
   </div>
 </div>
