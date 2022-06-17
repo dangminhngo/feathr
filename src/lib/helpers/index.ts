@@ -1,6 +1,6 @@
 import type { Action } from 'svelte/types/runtime/action'
 import { v4 as uuid } from 'uuid'
-import type { Note, TaskList, Task } from '$lib/types'
+import type { Note, TaskList, Task, Tag } from '$lib/types'
 
 export function getItemById<T extends Note | TaskList>(items: T[], id: string): T | undefined {
   return items.find((item) => item.id === id)
@@ -36,6 +36,11 @@ export const createEmptyTask = (): Task => ({
   done: false,
 })
 
+export const createEmptyTag = (): Tag => ({
+  id: uuid(),
+  label: '',
+})
+
 export const isEmptyNote = (note: Note): boolean => {
   return note.title === '' && note.body === '' && !note.images.length && !note.tagIds.length
 }
@@ -63,6 +68,19 @@ export const getFilteredTasks = (
     undoneTasks: taskList.tasks.filter((t) => !t.done),
     doneTasks: taskList.tasks.filter((t) => t.done),
   }
+}
+
+export const filterTags = (tags: Tag[]): { [key: string]: Tag[] } => {
+  return tags.reduce((filtered: { [key: string]: Tag[] }, t: Tag) => {
+    const label = t.label.toLowerCase()
+    const key = label[0].toUpperCase()
+    if (!Object.prototype.hasOwnProperty.call(filtered, key)) {
+      filtered[key] = []
+    }
+    filtered[key].push(t)
+
+    return filtered
+  }, {})
 }
 
 export const clickOutside: Action<HTMLElement, undefined> = (node: HTMLElement) => {

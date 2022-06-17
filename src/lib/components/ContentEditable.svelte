@@ -25,7 +25,7 @@
 <style lang="scss">
   .content-editable {
     position: relative;
-    padding: 0.75rem 0;
+    padding: 0.5rem 0;
     width: 100%;
 
     .content {
@@ -36,7 +36,7 @@
       position: absolute;
       top: 0;
       left: 0;
-      padding: 0.75rem 0;
+      padding: 0.5rem 0;
       pointer-events: none;
       color: var(--theme-primary-400);
     }
@@ -44,7 +44,6 @@
 
   .content-editable.lg {
     font-size: var(--text-md);
-    font-weight: 500;
   }
 
   .content-editable.sm {

@@ -14,6 +14,7 @@
   import Link from '$assets/icons/link.svg'
   import MoreVerticalFull from '$assets/icons/more-vertical-f.svg'
   import Pencil from '$assets/icons/pencil.svg'
+  import PencilFull from '$assets/icons/pencil-f.svg'
   import Picture from '$assets/icons/picture.svg'
   import Pin from '$assets/icons/pin.svg'
   import PinFull from '$assets/icons/pin-f.svg'
@@ -38,6 +39,7 @@
     link: Link,
     more: MoreVerticalFull,
     pencil: Pencil,
+    pencilFull: PencilFull,
     picture: Picture,
     pin: Pin,
     pinFull: PinFull,
