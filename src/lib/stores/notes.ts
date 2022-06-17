@@ -23,9 +23,10 @@ const initialValue: NotesStore = {
       images: [],
       tagIds: [],
       pinned: true,
-      trash: false,
+      trash: true,
       createdAt: new Date(),
       updatedAt: new Date(),
+      trashedAt: new Date(),
     },
   ],
   currentNoteId: '',
@@ -56,6 +57,12 @@ const createNotesStore = (initialValue: NotesStore) => {
         return s
       })
     },
+    deleteNote: (id: string) => {
+      update((s) => {
+        s.notes = s.notes.filter((n) => n.id !== id)
+        return s
+      })
+    },
     togglePinnedNote: (id: string) => {
       update((s) => {
         s.notes = s.notes.map((n) => (n.id === id ? { ...n, pinned: !n.pinned } : n))
@@ -64,7 +71,17 @@ const createNotesStore = (initialValue: NotesStore) => {
     },
     assignTrashToNote: (id: string) => {
       update((s) => {
-        s.notes = s.notes.map((n) => (n.id === id ? { ...n, trash: true } : n))
+        s.notes = s.notes.map((n) =>
+          n.id === id ? { ...n, trash: true, trashedAt: new Date() } : n
+        )
+        return s
+      })
+    },
+    unassignTrashToNote: (id: string) => {
+      update((s) => {
+        s.notes = s.notes.map((n) =>
+          n.id === id ? { ...n, trash: false, trashedAt: undefined } : n
+        )
         return s
       })
     },

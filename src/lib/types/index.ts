@@ -33,6 +33,7 @@ export interface Note {
   trash: boolean
   createdAt: Date
   updatedAt: Date
+  trashedAt?: Date
 }
 
 export interface Task {
@@ -52,6 +53,7 @@ export interface TaskList {
   trash: boolean
   createdAt: Date
   updatedAt: Date
+  trashedAt?: Date
 }
 
 export interface UIStore {

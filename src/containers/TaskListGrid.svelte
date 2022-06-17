@@ -23,7 +23,7 @@
       bind:taskList
       on:click={() => openEditTaskListForm(taskList.id)}
       handlePinned={() => togglePinnedTaskList(taskList.id)}
-      handleDelete={() => assignTaskListToTrash(taskList.id)}
+      handleTrash={() => assignTaskListToTrash(taskList.id)}
     />
   {/each}
 </div>

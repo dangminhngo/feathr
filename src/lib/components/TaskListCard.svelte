@@ -4,7 +4,20 @@
   import { getFilteredTasks } from '$lib/helpers'
   import type { TaskList, Task } from '$lib/types'
 
-  export let taskList: TaskList, handlePinned: () => void, handleDelete: () => void
+  export let taskList: TaskList,
+    handlePinned: () => void = () => {
+      /**/
+    },
+    handleTrash: () => void = () => {
+      /**/
+    },
+    handleRestore: () => void = () => {
+      /**/
+    },
+    handleDelete: () => void = () => {
+      /**/
+    }
+
   let buttonsShow = false
 
   const handleMouseEnter = () => (buttonsShow = true)
@@ -14,7 +27,13 @@
   $: ({ undoneTasks, doneTasks } = getFilteredTasks(taskList))
 </script>
 
-<div class="task-list" on:mouseenter={handleMouseEnter} on:mouseleave={handleMouseLeave} on:click>
+<div
+  class="task-list"
+  class:deactive={taskList.trash}
+  on:mouseenter={handleMouseEnter}
+  on:mouseleave={handleMouseLeave}
+  on:click
+>
   {#if taskList.title}
     <div class="title">{taskList.title}</div>
   {/if}
@@ -35,18 +54,25 @@
   </div>
   <div class="buttons">
     <div class="left" class:pinned={taskList.pinned} class:show={buttonsShow}>
-      <IconButton
-        size="sm"
-        name={taskList.pinned ? 'pinFull' : 'pin'}
-        active={taskList.pinned}
-        on:click={handlePinned}
-      />
+      {#if !taskList.trash}
+        <IconButton
+          size="sm"
+          name={taskList.pinned ? 'pinFull' : 'pin'}
+          active={taskList.pinned}
+          on:click={handlePinned}
+        />
+      {/if}
     </div>
     <div class="right" class:show={buttonsShow}>
-      <IconButton size="sm" name="picture" />
-      <IconButton size="sm" name="tags" />
-      <IconButton size="sm" name="brush" />
-      <IconButton size="sm" name="trash" on:click={handleDelete} />
+      {#if !taskList.trash}
+        <IconButton size="sm" name="picture" />
+        <IconButton size="sm" name="tags" />
+        <IconButton size="sm" name="brush" />
+        <IconButton size="sm" name="trash" on:click={handleTrash} />
+      {:else}
+        <IconButton size="sm" name="beer" on:click={handleRestore} />
+        <IconButton size="sm" name="deleteFull" on:click={handleDelete} />
+      {/if}
     </div>
   </div>
 </div>
@@ -58,6 +84,10 @@
     flex-direction: column;
     border: 1px solid var(--theme-primary-600);
     border-radius: var(--rounded);
+  }
+
+  .task-list.deactive > * {
+    pointer-events: none;
   }
 
   .title {

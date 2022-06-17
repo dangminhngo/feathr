@@ -1,31 +1,56 @@
 <script lang="ts">
   import IconButton from '$lib/components/IconButton.svelte'
   import type { Note } from '$lib/types'
-  export let note: Note
-  export let handlePinned: () => void, handleDelete: () => void
+  export let note: Note,
+    handlePinned: () => void = () => {
+      /**/
+    },
+    handleTrash: () => void = () => {
+      /**/
+    },
+    handleRestore: () => void = () => {
+      /**/
+    },
+    handleDelete: () => void = () => {
+      /**/
+    }
+
   let buttonsShow = false
 
   const handleMouseEnter = () => (buttonsShow = true)
   const handleMouseLeave = () => (buttonsShow = false)
 </script>
 
-<div class="note" on:mouseenter={handleMouseEnter} on:mouseleave={handleMouseLeave} on:click>
+<div
+  class="note"
+  class:deactive={note.trash}
+  on:mouseenter={handleMouseEnter}
+  on:mouseleave={handleMouseLeave}
+  on:click
+>
   <div class="title">{note.title}</div>
   <div class="body">{note.body}</div>
   <div class="buttons">
     <div class="left" class:pinned={note.pinned} class:show={buttonsShow}>
-      <IconButton
-        size="sm"
-        name={note.pinned ? 'pinFull' : 'pin'}
-        active={note.pinned}
-        on:click={handlePinned}
-      />
+      {#if !note.trash}
+        <IconButton
+          size="sm"
+          name={note.pinned ? 'pinFull' : 'pin'}
+          active={note.pinned}
+          on:click={handlePinned}
+        />
+      {/if}
     </div>
     <div class="right" class:show={buttonsShow}>
-      <IconButton size="sm" name="picture" />
-      <IconButton size="sm" name="tags" />
-      <IconButton size="sm" name="brush" />
-      <IconButton size="sm" name="trash" on:click={handleDelete} />
+      {#if !note.trash}
+        <IconButton size="sm" name="picture" />
+        <IconButton size="sm" name="tags" />
+        <IconButton size="sm" name="brush" />
+        <IconButton size="sm" name="trash" on:click={handleTrash} />
+      {:else}
+        <IconButton size="sm" name="beer" on:click={handleRestore} />
+        <IconButton size="sm" name="deleteFull" on:click={handleDelete} />
+      {/if}
     </div>
   </div>
 </div>
@@ -39,6 +64,10 @@
     gap: 1rem;
     border: 1px solid var(--theme-primary-600);
     border-radius: var(--rounded);
+  }
+
+  .note.deactive > * {
+    pointer-events: none;
   }
 
   .title {

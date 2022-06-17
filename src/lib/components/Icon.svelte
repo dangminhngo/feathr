@@ -2,6 +2,7 @@
   import type { SvelteComponent } from 'svelte'
 
   import Bandage from '$assets/icons/bandage.svg'
+  import Beer from '$assets/icons/beer.svg'
   import Brush from '$assets/icons/brush.svg'
   import BrushFull from '$assets/icons/brush-f.svg'
   import Check from '$assets/icons/check.svg'
@@ -27,6 +28,7 @@
 
   const icons: { [key: string]: SvelteComponent } = {
     bandage: Bandage,
+    beer: Beer,
     brush: Brush,
     brushFull: BrushFull,
     check: Check,

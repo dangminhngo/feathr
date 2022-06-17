@@ -83,6 +83,15 @@ export const filterTags = (tags: Tag[]): { [key: string]: Tag[] } => {
   }, {})
 }
 
+export const filterTrashItems = (notes: Note[], taskLists: TaskList[]): (Note | TaskList)[] => {
+  const trashNotes = notes.filter((n) => n.trash)
+  const trashTaskLists = taskLists.filter((tl) => tl.trash)
+
+  return [...trashNotes, ...trashTaskLists].sort(
+    (a, b) => Number(a?.trashedAt) - Number(b?.trashedAt)
+  )
+}
+
 export const clickOutside: Action<HTMLElement, undefined> = (node: HTMLElement) => {
   const handleClick = (e: MouseEvent) => {
     if (node && !node.contains(e.target as HTMLElement)) {

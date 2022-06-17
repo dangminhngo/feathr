@@ -45,9 +45,10 @@ const initialValue: TaskListsStore = {
       images: [],
       tagIds: [],
       pinned: true,
-      trash: false,
+      trash: true,
       createdAt: new Date(),
       updatedAt: new Date(),
+      trashedAt: new Date(),
     },
   ],
   currentTaskListId: '',
@@ -84,8 +85,17 @@ const createTaskListsStore = (initialValue: TaskListsStore) => {
     },
     assignTaskListToTrash: (id: string) => {
       update((s) => {
-        const task = s.taskLists.find((t) => t.id === id)
-        if (task) task.trash = true
+        s.taskLists = s.taskLists.map((tl) =>
+          tl.id === id ? { ...tl, trash: true, trashedAt: new Date() } : tl
+        )
+        return s
+      })
+    },
+    unassignTaskListToTrash: (id: string) => {
+      update((s) => {
+        s.taskLists = s.taskLists.map((tl) =>
+          tl.id === id ? { ...tl, trash: false, trashedAt: undefined } : tl
+        )
         return s
       })
     },

@@ -24,7 +24,7 @@
       {note}
       on:click={() => openEditNoteForm(note.id)}
       handlePinned={() => togglePinnedNote(note.id)}
-      handleDelete={() => assignTrashToNote(note.id)}
+      handleTrash={() => assignTrashToNote(note.id)}
     />
   {/each}
 </div>
