@@ -6,7 +6,7 @@ const initialValue: UIStore = {
   navGrow: false,
   modal: {
     note: false,
-    task: false,
+    taskList: false,
     brush: false,
     tags: false,
   },
@@ -33,7 +33,7 @@ const createLayoutStore = (initialValue: UIStore) => {
       update((s) => {
         s.modal = {
           note: false,
-          task: false,
+          taskList: false,
           brush: false,
           tags: false,
         }

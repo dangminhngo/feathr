@@ -3,6 +3,7 @@
   import EditableTask from '$lib/components/EditableTask.svelte'
   import { getFilteredTasks } from '$lib/helpers'
   import type { TaskList, Task } from '$lib/types'
+
   export let taskList: TaskList, handlePinned: () => void, handleDelete: () => void
   let buttonsShow = false
 

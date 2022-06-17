@@ -58,7 +58,7 @@ export interface UIStore {
   navGrow: boolean
   modal: {
     note: boolean
-    task: boolean
+    taskList: boolean
     brush: boolean
     tags: boolean
   }

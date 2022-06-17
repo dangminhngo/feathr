@@ -1,5 +1,6 @@
 <script lang="ts">
   import FormField from '$lib/components/FormField.svelte'
+  import TaskListForm from '$containers/TaskListForm.svelte'
   import TaskListGrid from '$/containers/TaskListGrid.svelte'
   import Modal from '$lib/components/Modal.svelte'
 
@@ -16,3 +17,8 @@
 
 <FormField />
 <TaskListGrid taskLists={$taskListsStore.taskLists} />
+{#if $uiStore.modal.taskList}
+  <Modal handleOutsideClick={handleModalClose}>
+    <TaskListForm />
+  </Modal>
+{/if}
