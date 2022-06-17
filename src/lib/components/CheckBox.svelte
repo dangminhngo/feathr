@@ -4,7 +4,13 @@
 </script>
 
 <label class="label" class:checked>
-  <input class="checkbox" type="checkbox" bind:checked on:change|stopPropagation />
+  <input
+    class="checkbox"
+    type="checkbox"
+    bind:checked
+    on:click|stopPropagation
+    on:change|stopPropagation
+  />
   <Icon name="check" width={16} height={16} />
 </label>
 
