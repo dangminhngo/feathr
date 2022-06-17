@@ -36,21 +36,6 @@ export const createEmptyTask = (): Task => ({
   done: false,
 })
 
-export const addTask = (taskList: TaskList) => {
-  const task = createEmptyTask()
-  return { ...taskList, tasks: [...taskList.tasks, task] }
-}
-
-export const removeTask = (taskList: TaskList, id: string) => {
-  taskList.tasks = taskList.tasks.filter((t) => t.id !== id)
-  return taskList
-}
-
-export const toggleTask = (taskList: TaskList, id: string) => {
-  taskList.tasks = taskList.tasks.map((t) => (t.id === id ? { ...t, done: !t.done } : t))
-  return taskList
-}
-
 export const isEmptyNote = (note: Note): boolean => {
   if (note.title === '' && note.body === '' && !note.images.length && !note.tagIds.length) {
     return true
