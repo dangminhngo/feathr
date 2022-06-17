@@ -1,12 +1,11 @@
 <script lang="ts">
-  import { onMount, createEventDispatcher } from 'svelte'
+  import { onMount } from 'svelte'
   import CheckBox from '$lib/components/CheckBox.svelte'
   import ContentEditable from '$lib/components/ContentEditable.svelte'
   import Icon from '$lib/components/Icon.svelte'
   import IconButton from '$lib/components/IconButton.svelte'
   import type { Task } from '$lib/types'
 
-  const dispatch = createEventDispatcher()
   export let task: Task,
     editable = true,
     handleDelete: () => void = () => {
@@ -23,23 +22,22 @@
     showButton = true
   }
 
-  const handleCheckBoxChange = () => {
-    dispatch('toggle')
-  }
-
-  let { title, done } = task
-
   onMount(() => {
     contentEditable.focus()
   })
 </script>
 
-<div class="task" class:done on:mouseleave={handleMouseLeave} on:mouseenter={handleMouseEnter}>
+<div
+  class="task"
+  class:done={task.done}
+  on:mouseleave={handleMouseLeave}
+  on:mouseenter={handleMouseEnter}
+>
   <div class="draggable" class:show={showButton}>
     <Icon name="link" width={16} height={16} />
   </div>
-  <CheckBox bind:checked={done} on:change={handleCheckBoxChange} />
-  <ContentEditable bind:this={contentEditable} {editable} size="sm" bind:value={title} />
+  <CheckBox bind:checked={task.done} />
+  <ContentEditable bind:this={contentEditable} {editable} size="sm" bind:value={task.title} />
   <div class="buttons" class:show={showButton}>
     <IconButton size="sm" name="close" on:click={handleDelete} />
   </div>

@@ -23,22 +23,18 @@
   const { addTaskList } = taskListsStore
   const dispatch = createEventDispatcher()
 
-  const handleAddTask = () => {
+  const _addTask = () => {
     if (lastTaskInTaskListIsEmptyTask(taskList)) return
     const task = createEmptyTask()
     taskList.tasks = [...taskList.tasks, task]
   }
 
-  const handleDeleteTask = (id: string) => {
+  const _deleteTask = (id: string) => {
     taskList.tasks = taskList.tasks.filter((t) => t.id !== id)
   }
 
   const togglePinned = () => {
     taskList.pinned = !taskList.pinned
-  }
-
-  const handleToggleTask = (id: string) => {
-    taskList.tasks = taskList.tasks.map((t) => (t.id === id ? { ...t, done: !t.done } : t))
   }
 
   const closeForm = () => {
@@ -51,6 +47,8 @@
   $: ({ undoneTasks, doneTasks } = getFilteredTasks(taskList))
 
   onMount(() => titleContentEditable.focus())
+
+  $: console.log(taskList)
 </script>
 
 <div class="form" use:clickOutside on:outsideclick={closeForm}>
@@ -61,13 +59,9 @@
   />
   <hr class="sep" />
   {#each undoneTasks as task (task.id)}
-    <EditableTask
-      {task}
-      handleDelete={() => handleDeleteTask(task.id)}
-      on:toggle={() => handleToggleTask(task.id)}
-    />
+    <EditableTask bind:task handleDelete={() => _deleteTask(task.id)} />
   {/each}
-  <button class="add" on:click={handleAddTask}>
+  <button class="add" on:click={_addTask}>
     <Icon name="plus" width={16} height={16} />
     <span>Add a task</span>
   </button>
@@ -75,11 +69,7 @@
     <p>{doneTasks.length} tasks done</p>
   {/if}
   {#each doneTasks as task (task.id)}
-    <EditableTask
-      {task}
-      handleDelete={() => handleDeleteTask(task.id)}
-      on:toggle={() => handleToggleTask(task.id)}
-    />
+    <EditableTask bind:task handleDelete={() => _deleteTask(task.id)} />
   {/each}
   <div class="actions">
     <div class="left">

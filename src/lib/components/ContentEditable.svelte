@@ -6,20 +6,14 @@
     value = '',
     placeholder = ''
 
-  export function focus() {
-    input.focus()
+  export const focus = () => {
+    input?.focus()
   }
 </script>
 
 <div class="content-editable" class:lg={size === 'lg'} class:sm={size === 'sm'}>
   {#if editable}
-    <div
-      class="content"
-      contenteditable="true"
-      bind:this={input}
-      bind:textContent={value}
-      on:input
-    />
+    <div class="content" contenteditable="true" bind:this={input} bind:textContent={value} />
   {:else}
     <div class="content">{value}</div>
   {/if}

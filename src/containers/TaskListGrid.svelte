@@ -22,7 +22,7 @@
 <div class="grid">
   {#each filteredTaskLists as taskList (taskList.id)}
     <TaskListCard
-      {taskList}
+      bind:taskList
       on:click={() => openEditTaskListForm(taskList.id)}
       handlePinned={() => togglePinnedTaskList(taskList.id)}
       handleDelete={() => assignTaskListToTrash(taskList.id)}
