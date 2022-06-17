@@ -37,37 +37,19 @@ export const createEmptyTask = (): Task => ({
 })
 
 export const isEmptyNote = (note: Note): boolean => {
-  if (note.title === '' && note.body === '' && !note.images.length && !note.tagIds.length) {
-    return true
-  }
-
-  return false
+  return note.title === '' && note.body === '' && !note.images.length && !note.tagIds.length
 }
 
 export const isEmptyTaskList = (taskList: TaskList): boolean => {
-  if (taskList.title === '' && taskList.tasks.length === 0 && !taskList.tagIds.length) {
-    return true
-  }
-
-  return false
+  return taskList.title === '' && taskList.tasks.length === 0 && !taskList.tagIds.length
 }
 
 export const isEmptyTask = (task: Task): boolean => {
-  if (task.title === '' && !task.done) {
-    return true
-  }
-
-  return false
+  return task.title === ''
 }
 
 export const lastTaskInTaskListIsEmptyTask = (taskList: TaskList): boolean => {
-  if (taskList.tasks.length > 0) {
-    const lastTask = taskList.tasks[taskList.tasks.length - 1]
-    if (isEmptyTask(lastTask)) {
-      return true
-    }
-  }
-  return false
+  return taskList.tasks.length > 0 && isEmptyTask(taskList.tasks[taskList.tasks.length - 1])
 }
 
 export function filterItems<T extends Note | TaskList>(items: T[]): T[] {

@@ -25,7 +25,7 @@
       <IconButton size="sm" name="picture" />
       <IconButton size="sm" name="tags" />
       <IconButton size="sm" name="brush" />
-      <IconButton size="sm" name="delete" on:click={handleDelete} />
+      <IconButton size="sm" name="trash" on:click={handleDelete} />
     </div>
   </div>
 </div>
