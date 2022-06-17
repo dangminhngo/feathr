@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount, createEventDispatcher } from 'svelte'
+  import { goto } from '$app/navigation'
 
   import ContentEditable from '$/lib/components/ContentEditable.svelte'
   import Icon from '$lib/components/Icon.svelte'
@@ -37,10 +38,11 @@
     taskList.pinned = !taskList.pinned
   }
 
-  const closeForm = () => {
+  const handleSubmit = () => {
     dispatch('close')
     if (isEmptyTaskList(taskList) || lastTaskInTaskListIsEmptyTask(taskList)) return
     addTaskList(taskList)
+    goto('/app/tasks')
   }
 
   let undoneTasks: Task[], doneTasks: Task[]
@@ -51,7 +53,7 @@
   $: console.log(taskList)
 </script>
 
-<div class="form" use:clickOutside on:outsideclick={closeForm}>
+<div class="form" use:clickOutside on:outsideclick={handleSubmit}>
   <ContentEditable
     bind:this={titleContentEditable}
     placeholder="Title"
@@ -84,7 +86,7 @@
       <IconButton name="brush" size="md" />
     </div>
     <div class="right">
-      <button class="close-button" on:click={closeForm}>Close</button>
+      <button class="close-button" on:click={handleSubmit}>Close</button>
     </div>
   </div>
 </div>
