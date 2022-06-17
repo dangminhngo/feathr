@@ -43,7 +43,7 @@
 
   const closeForm = () => {
     dispatch('close')
-    if (isEmptyTaskList(taskList)) return
+    if (isEmptyTaskList(taskList) || lastTaskInTaskListIsEmptyTask(taskList)) return
     addTaskList(taskList)
   }
 

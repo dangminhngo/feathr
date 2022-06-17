@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { createEventDispatcher } from 'svelte'
+  import { onMount, createEventDispatcher } from 'svelte'
   import CheckBox from '$lib/components/CheckBox.svelte'
   import ContentEditable from '$lib/components/ContentEditable.svelte'
   import Icon from '$lib/components/Icon.svelte'
@@ -12,6 +12,7 @@
     handleDelete: () => void = () => {
       /**/
     }
+  let contentEditable: ContentEditable
   let showButton = false
 
   const handleMouseLeave = () => {
@@ -27,6 +28,10 @@
   }
 
   let { title, done } = task
+
+  onMount(() => {
+    contentEditable.focus()
+  })
 </script>
 
 <div class="task" class:done on:mouseleave={handleMouseLeave} on:mouseenter={handleMouseEnter}>
@@ -34,7 +39,7 @@
     <Icon name="link" width={16} height={16} />
   </div>
   <CheckBox bind:checked={done} on:change={handleCheckBoxChange} />
-  <ContentEditable {editable} size="sm" bind:value={title} />
+  <ContentEditable bind:this={contentEditable} {editable} size="sm" bind:value={title} />
   <div class="buttons" class:show={showButton}>
     <IconButton size="sm" name="close" on:click={handleDelete} />
   </div>
