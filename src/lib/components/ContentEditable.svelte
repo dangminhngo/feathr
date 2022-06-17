@@ -27,7 +27,6 @@
     position: relative;
     padding: 0.75rem 0;
     width: 100%;
-    font-weight: 500;
 
     .content {
       outline: none;

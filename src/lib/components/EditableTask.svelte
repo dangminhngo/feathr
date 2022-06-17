@@ -33,14 +33,18 @@
   on:mouseleave={handleMouseLeave}
   on:mouseenter={handleMouseEnter}
 >
-  <div class="draggable" class:show={showButton}>
-    <Icon name="link" width={16} height={16} />
-  </div>
+  {#if editable}
+    <div class="draggable" class:show={showButton}>
+      <Icon name="link" width={16} height={16} />
+    </div>
+  {/if}
   <CheckBox bind:checked={task.done} />
   <ContentEditable bind:this={contentEditable} {editable} size="sm" bind:value={task.title} />
-  <div class="buttons" class:show={showButton}>
-    <IconButton size="sm" name="close" on:click={handleDelete} />
-  </div>
+  {#if editable}
+    <div class="buttons" class:show={showButton}>
+      <IconButton size="sm" name="close" on:click={handleDelete} />
+    </div>
+  {/if}
 </div>
 
 <style lang="scss">

@@ -18,10 +18,16 @@
     <div class="title">{taskList.title}</div>
   {/if}
   <div class="tasks">
+    {#if undoneTasks.length === 0}
+      <div class="message">All tasks completed</div>
+    {/if}
     {#each undoneTasks as task (task.id)}
       <EditableTask editable={false} bind:task />
     {/each}
     <hr class="sep" />
+    {#if doneTasks.length === 0}
+      <div class="message">No tasks completed</div>
+    {/if}
     {#each doneTasks as task (task.id)}
       <EditableTask editable={false} bind:task />
     {/each}
@@ -49,13 +55,12 @@
     padding: 1rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     border: 1px solid var(--theme-primary-600);
     border-radius: var(--rounded);
   }
 
   .title {
-    padding-bottom: 0.75rem;
+    padding-bottom: 0.25rem;
     font-weight: 500;
   }
 
@@ -63,7 +68,14 @@
     border-color: var(--theme-primary-600);
   }
 
+  .message {
+    padding: 0.75rem 0;
+    font-size: var(--text-sm);
+    color: var(--theme-primary-400);
+  }
+
   .buttons {
+    margin-top: auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
