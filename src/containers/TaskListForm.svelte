@@ -10,10 +10,8 @@
     isEmptyTaskList,
     lastTaskInTaskListIsEmptyTask,
     createEmptyTaskList,
+    createEmptyTask,
     getFilteredTasks,
-    addTask,
-    removeTask,
-    toggleTask,
     clickOutside,
   } from '$lib/helpers'
   import { taskListsStore } from '$lib/stores'
@@ -27,11 +25,12 @@
 
   const handleAddTask = () => {
     if (lastTaskInTaskListIsEmptyTask(taskList)) return
-    taskList = addTask(taskList)
+    const task = createEmptyTask()
+    taskList.tasks = [...taskList.tasks, task]
   }
 
   const handleDeleteTask = (id: string) => {
-    taskList = removeTask(taskList, id)
+    taskList.tasks = taskList.tasks.filter((t) => t.id !== id)
   }
 
   const togglePinned = () => {
@@ -39,7 +38,7 @@
   }
 
   const handleToggleTask = (id: string) => {
-    taskList = toggleTask(taskList, id)
+    taskList.tasks = taskList.tasks.map((t) => (t.id === id ? { ...t, done: !t.done } : t))
   }
 
   const closeForm = () => {
