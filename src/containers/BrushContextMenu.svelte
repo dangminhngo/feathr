@@ -22,13 +22,13 @@
   .colors {
     padding: 0.25rem 0.5rem;
     font-size: var(--text-sm);
-    color: var(--theme-primary-400);
+    color: var(--theme-primary-300);
   }
 
   .list {
     margin-top: 0.5rem;
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
     gap: 0.5rem;
   }
 </style>

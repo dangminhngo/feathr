@@ -61,7 +61,6 @@
   style="background-color: {note.color ? brushPalette[note.color] : 'transparent'};"
 >
   <ContentEditable bind:this={titleContentEditable} placeholder="Title" bind:value={note.title} />
-  <hr class="sep" />
   <ContentEditable size="sm" placeholder="Body" bind:value={note.body} />
   <TagPillList ids={note.tagIds} />
   <div class="actions">
@@ -107,17 +106,13 @@
     border-radius: var(--rounded);
   }
 
-  .sep {
-    border-color: var(--theme-primary-700);
-  }
-
   .actions {
     padding-top: 0.5rem;
     padding-bottom: 0.75rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: var(--theme-primary-400);
+    color: var(--theme-primary-300);
   }
 
   .left,
@@ -131,11 +126,12 @@
     padding: 0 0.5rem;
     height: 2rem;
     font-size: var(--text-sm);
+    font-weight: 700;
     transition: all 0.15s ease-out;
     border-radius: var(--rounded);
 
     &:hover {
-      background-color: var(--theme-primary-700);
+      color: var(--theme-primary-100);
     }
   }
 </style>

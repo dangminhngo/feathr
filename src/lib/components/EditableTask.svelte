@@ -52,12 +52,11 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: var(--theme-primary-300);
   }
 
   .task.done {
     text-decoration: line-through;
-    color: var(--theme-primary-500);
+    color: var(--theme-primary-400);
   }
 
   .draggable {

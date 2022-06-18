@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount } from 'svelte'
+  import { onMount, getContext } from 'svelte'
   import { goto } from '$app/navigation'
 
   import ContentEditable from '$/lib/components/ContentEditable.svelte'
@@ -8,6 +8,8 @@
   import EditableTask from '$lib/components/EditableTask.svelte'
   import TagPillList from '$containers/TagPillList.svelte'
   import TagsContextMenu from '$containers/TagsContextMenu.svelte'
+  import BrushContextMenu from '$containers/BrushContextMenu.svelte'
+  import { themeKey } from '$lib/theming/themes'
   import { ContextMenuType } from '$lib/enums'
 
   import {
@@ -23,15 +25,9 @@
 
   let titleContentEditable: ContentEditable
   let taskList: TaskList = createEmptyTaskList(),
-    taskLists: TaskList[],
-    currentTaskListId: string,
-    editingTaskList: TaskList | undefined
+    editingTaskList = getItemById($taskListsStore.taskLists, $taskListsStore.currentTaskListId)
 
-  $: {
-    ;({ taskLists, currentTaskListId } = $taskListsStore)
-    editingTaskList = getItemById(taskLists, currentTaskListId)
-    if (editingTaskList) taskList = editingTaskList
-  }
+  if (editingTaskList) taskList = editingTaskList
 
   const _addTask = () => {
     if (lastTaskInTaskListIsEmptyTask(taskList)) return
@@ -50,10 +46,10 @@
   const { addTaskList, updateTaskList, setCurrentTaskList } = taskListsStore
   const { closeForm, closeAllModals, toggleContextMenu } = uiStore
 
-  const toggleTagsContextMenu = (id: string) => (e: MouseEvent) => {
+  const _toggleContextMenu = (type: ContextMenuType, id: string) => (e: MouseEvent) => {
     setCurrentTaskList(id)
     const rect = (e.target as HTMLButtonElement).getBoundingClientRect()
-    toggleContextMenu(ContextMenuType.Tags, {
+    toggleContextMenu(type, {
       x: rect.x,
       y: rect.y + rect.height,
     })
@@ -75,9 +71,15 @@
   $: ({ undoneTasks, doneTasks } = getFilteredTasks(taskList))
 
   onMount(() => titleContentEditable?.focus())
+
+  const { getBrushPalette } = getContext(themeKey)
+  const brushPalette = getBrushPalette()
 </script>
 
-<div class="form">
+<div
+  class="form"
+  style="background-color: {taskList.color ? brushPalette[taskList.color] : 'transparent'};"
+>
   <ContentEditable
     bind:this={titleContentEditable}
     placeholder="Title"
@@ -106,8 +108,16 @@
         on:click={togglePinned}
       />
       <IconButton name="picture" size="md" />
-      <IconButton name="tags" size="md" on:click={(e) => toggleTagsContextMenu(taskList.id)(e)} />
-      <IconButton name="brush" size="md" />
+      <IconButton
+        name="tags"
+        size="md"
+        on:click={(e) => _toggleContextMenu(ContextMenuType.Tags, taskList.id)(e)}
+      />
+      <IconButton
+        name="brush"
+        size="md"
+        on:click={(e) => _toggleContextMenu(ContextMenuType.Brush, taskList.id)(e)}
+      />
     </div>
     <div class="right">
       <button class="close-button" on:click={handleSubmit}
@@ -119,6 +129,10 @@
 
 {#if $uiStore.contextMenu.tags}
   <TagsContextMenu bind:ids={taskList.tagIds} />
+{/if}
+
+{#if $uiStore.contextMenu.brush}
+  <BrushContextMenu bind:color={taskList.color} />
 {/if}
 
 <style lang="scss">
@@ -140,6 +154,7 @@
     align-items: center;
     gap: 0.5rem;
     font-size: var(--text-sm);
+    font-weight: 500;
     border-radius: var(--rounded);
     transition: background-color 0.15s ease-out;
   }
@@ -154,17 +169,12 @@
     color: var(--theme-primary-300);
   }
 
-  .sep {
-    border-color: var(--theme-primary-500);
-  }
-
   .actions {
     padding-top: 0.5rem;
     padding-bottom: 0.75rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: var(--theme-primary-400);
   }
 
   .left,
@@ -179,10 +189,11 @@
     height: 2rem;
     border-radius: var(--rounded);
     font-size: var(--text-sm);
+    font-weight: 700;
     transition: all 0.15s ease-out;
 
     &:hover {
-      background-color: var(--theme-primary-700);
+      color: var(--theme-primary-100);
     }
   }
 </style>

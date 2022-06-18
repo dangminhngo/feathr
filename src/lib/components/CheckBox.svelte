@@ -16,7 +16,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid var(--theme-primary-500);
+    border: 2px solid var(--theme-primary-200);
     border-radius: 2px;
     color: transparent;
   }

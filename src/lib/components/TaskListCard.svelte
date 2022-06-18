@@ -1,8 +1,11 @@
 <script lang="ts">
+  import { getContext } from 'svelte'
+
   import IconButton from '$lib/components/IconButton.svelte'
   import EditableTask from '$lib/components/EditableTask.svelte'
   import TagPillList from '$containers/TagPillList.svelte'
   import { getFilteredTasks } from '$lib/helpers'
+  import { themeKey } from '$lib/theming/themes'
   import type { TaskList, Task } from '$lib/types'
 
   export let taskList: TaskList,
@@ -27,11 +30,15 @@
 
   let undoneTasks: Task[], doneTasks: Task[]
   $: ({ undoneTasks, doneTasks } = getFilteredTasks(taskList))
+
+  const { getBrushPalette } = getContext(themeKey)
+  const brushPalette = getBrushPalette()
 </script>
 
 <div
   class="task-list"
   class:trash={taskList.trash}
+  style="background-color: {taskList.color ? brushPalette[taskList.color] : 'transparent'};"
   on:mouseenter={handleMouseEnter}
   on:mouseleave={handleMouseLeave}
   on:click

@@ -1,6 +1,9 @@
 <script lang="ts">
+  import { getContext } from 'svelte'
+
   import IconButton from '$lib/components/IconButton.svelte'
   import TagPillList from '$containers/TagPillList.svelte'
+  import { themeKey } from '$lib/theming/themes'
   import type { Note } from '$lib/types'
   export let note: Note,
     active = false,
@@ -21,11 +24,15 @@
 
   const handleMouseEnter = () => (buttonsShow = true)
   const handleMouseLeave = () => (buttonsShow = false)
+
+  const { getBrushPalette } = getContext(themeKey)
+  const brushPalette = getBrushPalette()
 </script>
 
 <div
   class="note"
   class:trash={note.trash}
+  style="background-color: {note.color ? brushPalette[note.color] : 'transparent'};"
   on:mouseenter={handleMouseEnter}
   on:mouseleave={handleMouseLeave}
   on:click
@@ -89,7 +96,6 @@
   .right {
     display: flex;
     align-items: center;
-    color: var(--theme-primary-400);
     opacity: 0;
     pointer-events: none;
   }

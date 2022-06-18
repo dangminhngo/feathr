@@ -38,7 +38,7 @@
       left: 0;
       padding: 0.5rem 0;
       pointer-events: none;
-      color: var(--theme-primary-400);
+      color: var(--theme-primary-300);
     }
   }
 
