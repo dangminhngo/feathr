@@ -30,7 +30,7 @@
     note.pinned = !note.pinned
   }
 
-  onMount(() => titleContentEditable.focus())
+  onMount(() => titleContentEditable?.focus())
 
   const { setCurrentNote, addNote, updateNote } = notesStore
   const { closeForm, closeAllModals, toggleContextMenu } = uiStore

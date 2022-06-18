@@ -74,7 +74,7 @@
   let undoneTasks: Task[], doneTasks: Task[]
   $: ({ undoneTasks, doneTasks } = getFilteredTasks(taskList))
 
-  onMount(() => titleContentEditable.focus())
+  onMount(() => titleContentEditable?.focus())
 </script>
 
 <div class="form">
@@ -150,8 +150,7 @@
   }
 
   p {
-    padding-top: 0.75rem;
-    padding-bottom: 0.25rem;
+    padding: 0.25rem 0;
     font-size: var(--text-sm);
     color: var(--theme-primary-300);
   }

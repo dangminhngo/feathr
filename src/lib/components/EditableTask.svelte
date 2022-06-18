@@ -23,7 +23,7 @@
   }
 
   onMount(() => {
-    contentEditable.focus()
+    contentEditable?.focus()
   })
 </script>
 
