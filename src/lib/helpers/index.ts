@@ -100,6 +100,10 @@ export const searchTags = (tags: Tag[], keyword: string): Tag[] => {
   return tags.filter((t) => t.label.toLowerCase().includes(keyword.toLowerCase()))
 }
 
+export const getTags = (tags: Tag[], ids: string[]): Tag[] => {
+  return tags.filter((t) => ids.includes(t.id))
+}
+
 export const clickOutside: Action<HTMLElement, undefined> = (node: HTMLElement) => {
   const handleClick = (e: MouseEvent) => {
     if (node && !node.contains(e.target as HTMLElement)) {

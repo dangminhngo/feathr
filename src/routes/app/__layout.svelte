@@ -26,6 +26,7 @@
   :global(:root) {
     --text-md: 1rem;
     --text-sm: 0.875rem;
+    --text-xs: 0.75rem;
 
     --sidenav-width: 16rem;
     --button-height: 2.25rem;
@@ -33,6 +34,7 @@
 
     --rounded: 4px;
     --rounded-lg: 8px;
+    --rounded-full: 100px;
 
     --shadow: 0 0 1rem hsla(0, 0%, 0%, 0.8);
   }

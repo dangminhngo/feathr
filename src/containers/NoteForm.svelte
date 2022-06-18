@@ -4,10 +4,11 @@
 
   import ContentEditable from '$/lib/components/ContentEditable.svelte'
   import IconButton from '$lib/components/IconButton.svelte'
+  import TagPill from '$lib/components/TagPill.svelte'
   import TagsContextMenu from '$containers/TagsContextMenu.svelte'
 
-  import { uiStore, notesStore } from '$lib/stores'
-  import { getItemById, isEmptyNote, createEmptyNote } from '$lib/helpers'
+  import { uiStore, notesStore, tagsStore } from '$lib/stores'
+  import { getItemById, getTags, isEmptyNote, createEmptyNote } from '$lib/helpers'
   import type { Note } from '$lib/types'
   import { ContextMenuType } from '$lib/enums'
 
@@ -56,12 +57,19 @@
     setCurrentNote('')
     goto('/app/notes')
   }
+
+  $: tags = getTags($tagsStore.tags, note.tagIds)
 </script>
 
 <div class="form">
   <ContentEditable bind:this={titleContentEditable} placeholder="Title" bind:value={note.title} />
   <hr class="sep" />
   <ContentEditable size="sm" placeholder="Body" bind:value={note.body} />
+  <div class="tags">
+    {#each tags as tag (tag.id)}
+      <TagPill {tag} />
+    {/each}
+  </div>
   <div class="actions">
     <div class="left">
       <IconButton
@@ -81,7 +89,7 @@
     </div>
   </div>
   {#if $uiStore.contextMenu.tags}
-    <TagsContextMenu />
+    <TagsContextMenu bind:tagIds={note.tagIds} />
   {/if}
 </div>
 
@@ -94,6 +102,11 @@
 
   .sep {
     border-color: var(--theme-primary-700);
+  }
+
+  .tags {
+    display: flex;
+    gap: 0.5rem;
   }
 
   .actions {

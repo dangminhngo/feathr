@@ -6,6 +6,7 @@
   import { searchTags, clickOutside, createEmptyTag } from '$lib/helpers'
 
   let keyword = ''
+  export let tagIds: string[] = []
 
   const { closeAllContextMenus } = uiStore
   const { setCurrentNote } = notesStore
@@ -23,7 +24,18 @@
     keyword = ''
   }
 
+  const toggleTagId = (id: string) => (e: Event) => {
+    const checked = (e.target as HTMLInputElement).checked
+    if (!checked) {
+      tagIds = tagIds.filter((tid) => tid !== id)
+      return
+    }
+
+    tagIds = [...tagIds, id]
+  }
+
   $: filteredTags = searchTags($tagsStore.tags, keyword)
+  $: console.log(tagIds)
 </script>
 
 <ContextMenu>
@@ -36,7 +48,9 @@
     </div>
     <div class="list">
       {#each filteredTags as tag (tag.id)}
-        <CheckGroup>{tag.label}</CheckGroup>
+        <CheckGroup checked={tagIds.includes(tag.id)} on:change={(e) => toggleTagId(tag.id)(e)}
+          >{tag.label}</CheckGroup
+        >
       {/each}
     </div>
     {#if !filteredTags.length}

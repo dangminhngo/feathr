@@ -5,7 +5,7 @@
 </script>
 
 <label class="wrapper" class:checked>
-  <input type="checkbox" bind:checked />
+  <input type="checkbox" bind:checked on:change />
   <div class="checkbox">
     {#if checked}
       <Icon name="check" width={14} height={14} />
