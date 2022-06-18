@@ -3,6 +3,7 @@ import type { Theme } from '$lib/types'
 export const presets: Theme[] = [
   {
     name: 'Default',
+    dark: true,
     palette: {
       'primary-50': '#fafafa',
       'primary-100': '#f4f4f5',
@@ -19,6 +20,7 @@ export const presets: Theme[] = [
   },
   {
     name: 'Slate',
+    dark: true,
     palette: {
       'primary-50': '#f8fafc',
       'primary-100': '#f1f5f9',

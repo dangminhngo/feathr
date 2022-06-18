@@ -4,6 +4,7 @@
 
   import { presets, themeKey } from '$lib/theming/themes'
   import type { Theme } from '$lib/types'
+  import { brushPalettes } from '$lib/consts'
 
   export let themes = [...presets]
   let _current = themes[0].name
@@ -19,6 +20,8 @@
       theme.set(currentTheme)
       setRootColors(currentTheme)
     },
+    getTheme: () => $theme,
+    getBrushPalette: () => brushPalettes[$theme.dark ? 'dark' : 'light'],
   })
 
   const setRootColors = (theme: Theme) => {

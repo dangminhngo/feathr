@@ -16,6 +16,7 @@ export interface Palette {
 
 export interface Theme {
   name: string
+  dark: boolean
   palette: Palette
 }
 

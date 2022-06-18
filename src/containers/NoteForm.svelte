@@ -1,14 +1,16 @@
 <script lang="ts">
-  import { onMount } from 'svelte'
+  import { onMount, getContext } from 'svelte'
   import { goto } from '$app/navigation'
 
   import ContentEditable from '$/lib/components/ContentEditable.svelte'
   import IconButton from '$lib/components/IconButton.svelte'
   import TagPillList from '$containers/TagPillList.svelte'
   import TagsContextMenu from '$containers/TagsContextMenu.svelte'
+  import BrushContextMenu from '$containers/BrushContextMenu.svelte'
 
   import { uiStore, notesStore } from '$lib/stores'
   import { getItemById, isEmptyNote, createEmptyNote } from '$lib/helpers'
+  import { themeKey } from '$lib/theming/themes'
   import type { Note } from '$lib/types'
   import { ContextMenuType } from '$lib/enums'
 
@@ -25,13 +27,16 @@
 
   onMount(() => titleContentEditable?.focus())
 
+  const { getBrushPalette } = getContext(themeKey)
+  const brushPalette = getBrushPalette()
+
   const { setCurrentNote, addNote, updateNote } = notesStore
   const { closeForm, closeAllModals, toggleContextMenu } = uiStore
 
-  const toggleTagsContextMenu = (id: string) => (e: MouseEvent) => {
+  const _toggleContextMenu = (type: ContextMenuType, id: string) => (e: MouseEvent) => {
     setCurrentNote(id)
     const rect = (e.target as HTMLButtonElement).getBoundingClientRect()
-    toggleContextMenu(ContextMenuType.Tags, {
+    toggleContextMenu(type, {
       x: rect.x,
       y: rect.y + rect.height,
     })
@@ -51,7 +56,10 @@
   }
 </script>
 
-<div class="form">
+<div
+  class="form"
+  style="background-color: {note.color ? brushPalette[note.color] : 'transparent'};"
+>
   <ContentEditable bind:this={titleContentEditable} placeholder="Title" bind:value={note.title} />
   <hr class="sep" />
   <ContentEditable size="sm" placeholder="Body" bind:value={note.body} />
@@ -65,8 +73,16 @@
         active={note.pinned}
       />
       <IconButton name="picture" size="md" />
-      <IconButton name="tags" size="md" on:click={(e) => toggleTagsContextMenu(note.id)(e)} />
-      <IconButton name="brush" size="md" />
+      <IconButton
+        name="tags"
+        size="md"
+        on:click={(e) => _toggleContextMenu(ContextMenuType.Tags, note.id)(e)}
+      />
+      <IconButton
+        name="brush"
+        size="md"
+        on:click={(e) => _toggleContextMenu(ContextMenuType.Brush, note.id)(e)}
+      />
     </div>
     <div class="right">
       <button class="close-button" on:click={handleSubmit}
@@ -78,6 +94,10 @@
 
 {#if $uiStore.contextMenu.tags}
   <TagsContextMenu bind:ids={note.tagIds} />
+{/if}
+
+{#if $uiStore.contextMenu.brush}
+  <BrushContextMenu bind:color={note.color} />
 {/if}
 
 <style lang="scss">
