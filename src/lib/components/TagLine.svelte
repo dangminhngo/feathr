@@ -84,6 +84,7 @@
   }
 
   .label {
+    flex: 1;
     margin-left: 0.5rem;
   }
 
