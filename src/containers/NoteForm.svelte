@@ -4,10 +4,12 @@
 
   import ContentEditable from '$/lib/components/ContentEditable.svelte'
   import IconButton from '$lib/components/IconButton.svelte'
+  import TagsContextMenu from '$containers/TagsContextMenu.svelte'
 
   import { uiStore, notesStore } from '$lib/stores'
-  import { getItemById, isEmptyNote, clickOutside, createEmptyNote } from '$lib/helpers'
+  import { getItemById, isEmptyNote, createEmptyNote } from '$lib/helpers'
   import type { Note } from '$lib/types'
+  import { ContextMenuType } from '$lib/enums'
 
   let titleContentEditable: ContentEditable
 
@@ -31,7 +33,16 @@
 
   const dispatch = createEventDispatcher()
   const { setCurrentNote, addNote, updateNote } = notesStore
-  const { closeAllModals } = uiStore
+  const { closeAllModals, toggleContextMenu } = uiStore
+
+  const toggleTagsContextMenu = (id: string) => (e: MouseEvent) => {
+    setCurrentNote(id)
+    const rect = (e.target as HTMLButtonElement).getBoundingClientRect()
+    toggleContextMenu(ContextMenuType.Tags, {
+      x: rect.x,
+      y: rect.y + rect.height,
+    })
+  }
 
   const handleSubmit = () => {
     closeAllModals()
@@ -47,7 +58,7 @@
   }
 </script>
 
-<div class="form" use:clickOutside on:outsideclick={handleSubmit}>
+<div class="form">
   <ContentEditable bind:this={titleContentEditable} placeholder="Title" bind:value={note.title} />
   <hr class="sep" />
   <ContentEditable size="sm" placeholder="Body" bind:value={note.body} />
@@ -60,7 +71,7 @@
         active={note.pinned}
       />
       <IconButton name="picture" size="md" />
-      <IconButton name="tags" size="md" />
+      <IconButton name="tags" size="md" on:click={(e) => toggleTagsContextMenu(note.id)(e)} />
       <IconButton name="brush" size="md" />
     </div>
     <div class="right">
@@ -69,6 +80,9 @@
       >
     </div>
   </div>
+  {#if $uiStore.contextMenu.tags}
+    <TagsContextMenu />
+  {/if}
 </div>
 
 <style lang="scss">

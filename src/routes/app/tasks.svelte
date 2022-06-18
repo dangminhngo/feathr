@@ -19,7 +19,7 @@
 <TaskListGrid taskLists={$taskListsStore.taskLists} />
 
 {#if $uiStore.modal.taskList}
-  <Modal handleOutsideClick={handleModalClose}>
+  <Modal handleBackdropClick={handleModalClose}>
     <TaskListForm />
   </Modal>
 {/if}

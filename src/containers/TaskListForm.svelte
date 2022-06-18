@@ -14,7 +14,6 @@
     createEmptyTaskList,
     createEmptyTask,
     getFilteredTasks,
-    clickOutside,
   } from '$lib/helpers'
   import { uiStore, taskListsStore } from '$lib/stores'
   import type { TaskList, Task } from '$lib/types'
@@ -67,7 +66,7 @@
   onMount(() => titleContentEditable.focus())
 </script>
 
-<div class="form" use:clickOutside on:outsideclick={handleSubmit}>
+<div class="form">
   <ContentEditable
     bind:this={titleContentEditable}
     placeholder="Title"

@@ -65,5 +65,6 @@
 <style lang="scss">
   span {
     display: block;
+    pointer-events: none;
   }
 </style>

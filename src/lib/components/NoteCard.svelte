@@ -64,9 +64,6 @@
     border-radius: var(--rounded);
   }
 
-  .note.active {
-  }
-
   .note.trash > * {
     pointer-events: none;
   }

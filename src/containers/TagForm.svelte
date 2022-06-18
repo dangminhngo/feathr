@@ -1,11 +1,11 @@
 <script>
   import ContentEditable from '$lib/components/ContentEditable.svelte'
-  import { createEmptyTag, clickOutside } from '$lib/helpers'
+  import { createEmptyTag } from '$lib/helpers'
   import { tagsStore } from '$lib/stores'
 
   let tag = createEmptyTag()
 
-  const { addTag, updateTag } = tagsStore
+  const { addTag } = tagsStore
 
   const handleSubmit = () => {
     if (!tag.label) return
@@ -13,7 +13,7 @@
   }
 </script>
 
-<div class="form" use:clickOutside on:outsideclick={handleSubmit}>
+<div class="form">
   <ContentEditable placeholder="Add a tag..." bind:value={tag.label} />
   {#if tag.label}
     <button class="close-button" on:click={handleSubmit}>Save</button>

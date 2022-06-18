@@ -1,22 +1,15 @@
 <script lang="ts">
   import Portal from 'svelte-portal/src/Portal.svelte'
-  import { clickOutside } from '$lib/helpers'
 
   export let width = 30,
-    backdrop = true,
-    handleOutsideClick: () => void
+    handleBackdropClick: () => void = () => {
+      /**/
+    }
 </script>
 
 <Portal target="body">
-  {#if backdrop}
-    <div class="backdrop">&nbsp;</div>
-  {/if}
-  <div
-    class="wrapper"
-    style="width: {width}rem;"
-    use:clickOutside
-    on:outsideclick={handleOutsideClick}
-  >
+  <div class="backdrop" on:click={handleBackdropClick}>&nbsp;</div>
+  <div class="wrapper" style="width: {width}rem;">
     <slot />
   </div>
 </Portal>

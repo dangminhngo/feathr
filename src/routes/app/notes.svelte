@@ -3,7 +3,6 @@
   import NoteGrid from '$containers/NoteGrid.svelte'
   import NoteForm from '$containers/NoteForm.svelte'
   import Modal from '$lib/components/Modal.svelte'
-  import TagsContextMenu from '$containers/TagsContextMenu.svelte'
 
   import { uiStore, notesStore } from '$lib/stores'
 
@@ -20,11 +19,7 @@
 <NoteGrid notes={$notesStore.notes.filter((n) => !n.trash)} />
 
 {#if $uiStore.modal.note}
-  <Modal handleOutsideClick={handleModalClose}>
+  <Modal handleBackdropClick={handleModalClose}>
     <NoteForm />
   </Modal>
-{/if}
-
-{#if $uiStore.contextMenu.tags}
-  <TagsContextMenu />
 {/if}
