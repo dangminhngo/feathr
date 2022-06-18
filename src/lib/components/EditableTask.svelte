@@ -54,10 +54,6 @@
     gap: 0.5rem;
   }
 
-  .task:not(:last-child) {
-    border-bottom: 1px solid var(--theme-primary-800);
-  }
-
   .task.done {
     text-decoration: line-through;
     color: var(--theme-primary-500);

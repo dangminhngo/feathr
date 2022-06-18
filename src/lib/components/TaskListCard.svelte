@@ -86,7 +86,7 @@
     padding: 1rem;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.5rem;
     border: 1px solid var(--theme-primary-600);
     border-radius: var(--rounded);
   }

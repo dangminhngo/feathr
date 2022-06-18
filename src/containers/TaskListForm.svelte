@@ -83,7 +83,6 @@
     placeholder="Title"
     bind:value={taskList.title}
   />
-  <hr class="sep" />
   {#each undoneTasks as task (task.id)}
     <EditableTask bind:task handleDelete={() => _deleteTask(task.id)} />
   {/each}
