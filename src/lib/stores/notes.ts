@@ -85,6 +85,12 @@ const createNotesStore = (initialValue: NotesStore) => {
         return s
       })
     },
+    emptyTrashNotes: () => {
+      update((s) => {
+        s.notes = s.notes.filter((n) => !n.trash)
+        return s
+      })
+    },
   }
 }
 

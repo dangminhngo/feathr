@@ -1,11 +1,20 @@
 <script lang="ts">
   import Icon from '$lib/components/Icon.svelte'
   import TrashGrid from '$containers/TrashGrid.svelte'
+  import { notesStore, taskListsStore } from '$lib/stores'
+
+  const { emptyTrashNotes } = notesStore
+  const { emptyTrashTaskLists } = taskListsStore
+
+  const handleEmptyTrash = () => {
+    emptyTrashNotes()
+    emptyTrashTaskLists()
+  }
 </script>
 
 <div class="message">
   <span>All stuff in trash will be deleted in 7 days.</span>
-  <button class="empty">
+  <button class="empty" on:click={handleEmptyTrash}>
     <Icon name="deleteFull" />
     <span>Empty Trash</span>
   </button>

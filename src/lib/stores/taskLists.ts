@@ -83,6 +83,13 @@ const createTaskListsStore = (initialValue: TaskListsStore) => {
         return s
       })
     },
+    togglePinnedTaskList: (id: string) => {
+      update((s) => {
+        const task = s.taskLists.find((t) => t.id === id)
+        if (task) task.pinned = !task.pinned
+        return s
+      })
+    },
     assignTaskListToTrash: (id: string) => {
       update((s) => {
         s.taskLists = s.taskLists.map((tl) =>
@@ -99,10 +106,9 @@ const createTaskListsStore = (initialValue: TaskListsStore) => {
         return s
       })
     },
-    togglePinnedTaskList: (id: string) => {
+    emptyTrashTaskLists: () => {
       update((s) => {
-        const task = s.taskLists.find((t) => t.id === id)
-        if (task) task.pinned = !task.pinned
+        s.taskLists = s.taskLists.filter((tl) => !tl.trash)
         return s
       })
     },
