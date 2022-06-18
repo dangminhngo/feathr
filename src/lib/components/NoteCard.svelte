@@ -1,5 +1,6 @@
 <script lang="ts">
   import IconButton from '$lib/components/IconButton.svelte'
+  import TagPillList from '$containers/TagPillList.svelte'
   import type { Note } from '$lib/types'
   export let note: Note,
     active = false,
@@ -31,6 +32,7 @@
 >
   <div class="title">{note.title}</div>
   <div class="body">{note.body}</div>
+  <TagPillList ids={note.tagIds} />
   <div class="buttons">
     <div class="left" class:pinned={note.pinned} class:show={buttonsShow} class:active>
       {#if !note.trash}

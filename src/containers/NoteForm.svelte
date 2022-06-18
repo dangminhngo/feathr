@@ -1,14 +1,14 @@
 <script lang="ts">
-  import { onMount, createEventDispatcher } from 'svelte'
+  import { onMount } from 'svelte'
   import { goto } from '$app/navigation'
 
   import ContentEditable from '$/lib/components/ContentEditable.svelte'
   import IconButton from '$lib/components/IconButton.svelte'
-  import TagPill from '$lib/components/TagPill.svelte'
+  import TagPillList from '$containers/TagPillList.svelte'
   import TagsContextMenu from '$containers/TagsContextMenu.svelte'
 
-  import { uiStore, notesStore, tagsStore } from '$lib/stores'
-  import { getItemById, getTags, isEmptyNote, createEmptyNote } from '$lib/helpers'
+  import { uiStore, notesStore } from '$lib/stores'
+  import { getItemById, isEmptyNote, createEmptyNote } from '$lib/helpers'
   import type { Note } from '$lib/types'
   import { ContextMenuType } from '$lib/enums'
 
@@ -32,9 +32,8 @@
 
   onMount(() => titleContentEditable.focus())
 
-  const dispatch = createEventDispatcher()
   const { setCurrentNote, addNote, updateNote } = notesStore
-  const { closeAllModals, toggleContextMenu } = uiStore
+  const { closeForm, closeAllModals, toggleContextMenu } = uiStore
 
   const toggleTagsContextMenu = (id: string) => (e: MouseEvent) => {
     setCurrentNote(id)
@@ -47,7 +46,7 @@
 
   const handleSubmit = () => {
     closeAllModals()
-    dispatch('close')
+    closeForm()
     if (isEmptyNote(note)) return
     if (editingNote) {
       updateNote(note.id, note)
@@ -57,19 +56,13 @@
     setCurrentNote('')
     goto('/app/notes')
   }
-
-  $: tags = getTags($tagsStore.tags, note.tagIds)
 </script>
 
 <div class="form">
   <ContentEditable bind:this={titleContentEditable} placeholder="Title" bind:value={note.title} />
   <hr class="sep" />
   <ContentEditable size="sm" placeholder="Body" bind:value={note.body} />
-  <div class="tags">
-    {#each tags as tag (tag.id)}
-      <TagPill {tag} />
-    {/each}
-  </div>
+  <TagPillList ids={note.tagIds} />
   <div class="actions">
     <div class="left">
       <IconButton
@@ -88,10 +81,11 @@
       >
     </div>
   </div>
-  {#if $uiStore.contextMenu.tags}
-    <TagsContextMenu bind:tagIds={note.tagIds} />
-  {/if}
 </div>
+
+{#if $uiStore.contextMenu.tags}
+  <TagsContextMenu bind:ids={note.tagIds} />
+{/if}
 
 <style lang="scss">
   .form {
@@ -102,11 +96,6 @@
 
   .sep {
     border-color: var(--theme-primary-700);
-  }
-
-  .tags {
-    display: flex;
-    gap: 0.5rem;
   }
 
   .actions {

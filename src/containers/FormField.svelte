@@ -2,23 +2,22 @@
   import IconButton from '$lib/components/IconButton.svelte'
   import NoteForm from '$containers/NoteForm.svelte'
   import TaskListForm from '$containers/TaskListForm.svelte'
+  import { uiStore } from '$lib/stores'
+  import { FormType } from '$lib/enums'
 
-  type NoteFormType = null | 'note' | 'task'
-  let noteFormType: NoteFormType = null
-
-  const setFormType = (formType: NoteFormType) => (noteFormType = formType)
+  const { openForm } = uiStore
 </script>
 
 <div class="wrapper">
-  {#if noteFormType === 'note'}
-    <NoteForm on:close={() => setFormType(null)} />
-  {:else if noteFormType === 'task'}
-    <TaskListForm on:close={() => setFormType(null)} />
+  {#if $uiStore.form === FormType.Note}
+    <NoteForm />
+  {:else if $uiStore.form === FormType.TaskList}
+    <TaskListForm />
   {:else}
     <div class="field">
-      <div class="placeholder" on:click={() => setFormType('note')}>Add a note ...</div>
+      <div class="placeholder" on:click={() => openForm(FormType.Note)}>Add a note ...</div>
       <div class="buttons">
-        <IconButton name="taskList" on:click={() => setFormType('task')} />
+        <IconButton name="taskList" on:click={() => openForm(FormType.TaskList)} />
       </div>
     </div>
   {/if}

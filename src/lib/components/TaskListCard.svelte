@@ -1,6 +1,7 @@
 <script lang="ts">
   import IconButton from '$lib/components/IconButton.svelte'
   import EditableTask from '$lib/components/EditableTask.svelte'
+  import TagPillList from '$containers/TagPillList.svelte'
   import { getFilteredTasks } from '$lib/helpers'
   import type { TaskList, Task } from '$lib/types'
 
@@ -39,20 +40,25 @@
     <div class="title">{taskList.title}</div>
   {/if}
   <div class="tasks">
-    {#if undoneTasks.length === 0}
+    {#if taskList.tasks.length > 0 && undoneTasks.length === 0}
       <div class="message">All tasks completed</div>
     {/if}
     {#each undoneTasks as task (task.id)}
       <EditableTask editable={false} bind:task />
     {/each}
-    <hr class="sep" />
-    {#if doneTasks.length === 0}
+    {#if taskList.tasks.length === 0}
+      <div class="message">No tasks</div>
+    {:else}
+      <hr class="sep" />
+    {/if}
+    {#if taskList.tasks.length > 0 && doneTasks.length === 0}
       <div class="message">No tasks completed</div>
     {/if}
     {#each doneTasks as task (task.id)}
       <EditableTask editable={false} bind:task />
     {/each}
   </div>
+  <TagPillList ids={taskList.tagIds} />
   <div class="buttons">
     <div class="left" class:pinned={taskList.pinned} class:show={buttonsShow} class:active>
       {#if !taskList.trash}

@@ -1,9 +1,10 @@
 import { writable } from 'svelte/store'
 import type { UIStore, Position } from '$lib/types'
-import type { ModalType, ContextMenuType } from '$lib/enums'
+import { ModalType, ContextMenuType, FormType } from '$lib/enums'
 
 const initialValue: UIStore = {
   navGrow: false,
+  form: FormType.None,
   modal: {
     note: false,
     taskList: false,
@@ -29,9 +30,21 @@ const createLayoutStore = (initialValue: UIStore) => {
         return s
       })
     },
+    openForm: (type: FormType) => {
+      update((s) => {
+        s.form = type
+        return s
+      })
+    },
+    closeForm: () => {
+      update((s) => {
+        s.form = FormType.None
+        return s
+      })
+    },
     openModal: (type: ModalType) => {
       update((s) => {
-        s.modal[type as keyof typeof initialValue.modal] = true
+        s.modal[type] = true
         return s
       })
     },
@@ -46,8 +59,7 @@ const createLayoutStore = (initialValue: UIStore) => {
     },
     toggleContextMenu: (type: ContextMenuType, position: Position, open = false) => {
       update((s) => {
-        const key = type as keyof typeof initialValue.contextMenu
-        s.contextMenu[key] = open ? true : !s.contextMenu[key]
+        s.contextMenu[type] = open ? true : !s.contextMenu[type]
         s.position = position
         return s
       })

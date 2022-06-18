@@ -1,3 +1,5 @@
+import type { FormType } from '$lib/enums'
+
 export interface Palette {
   'primary-50': string
   'primary-100': string
@@ -58,6 +60,7 @@ export interface TaskList {
 
 export interface UIStore {
   navGrow: boolean
+  form: FormType
   modal: {
     note: boolean
     taskList: boolean

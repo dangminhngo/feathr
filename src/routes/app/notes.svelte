@@ -1,5 +1,5 @@
 <script lang="ts">
-  import FormField from '$lib/components/FormField.svelte'
+  import FormField from '$containers/FormField.svelte'
   import NoteGrid from '$containers/NoteGrid.svelte'
   import NoteForm from '$containers/NoteForm.svelte'
   import Modal from '$lib/components/Modal.svelte'

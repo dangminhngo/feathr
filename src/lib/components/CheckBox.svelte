@@ -3,14 +3,8 @@
   export let checked = false
 </script>
 
-<label class="label" class:checked>
-  <input
-    class="checkbox"
-    type="checkbox"
-    bind:checked
-    on:click|stopPropagation
-    on:change|stopPropagation
-  />
+<label class="label" class:checked on:click|stopPropagation>
+  <input class="checkbox" type="checkbox" bind:checked />
   <Icon name="check" width={16} height={16} />
 </label>
 

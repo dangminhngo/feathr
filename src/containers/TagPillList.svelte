@@ -1,0 +1,22 @@
+<script lang="ts">
+  import TagPill from '$lib/components/TagPill.svelte'
+  import { tagsStore } from '$lib/stores'
+  import { getTags } from '$lib/helpers'
+
+  export let ids: string[] = []
+
+  $: tags = getTags($tagsStore.tags, ids)
+</script>
+
+<div class="tag-list">
+  {#each tags as tag (tag.id)}
+    <TagPill {tag} />
+  {/each}
+</div>
+
+<style lang="scss">
+  .tag-list {
+    display: flex;
+    gap: 0.5rem;
+  }
+</style>

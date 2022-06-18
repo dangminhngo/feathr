@@ -1,11 +1,14 @@
 <script lang="ts">
-  import { onMount, createEventDispatcher } from 'svelte'
+  import { onMount } from 'svelte'
   import { goto } from '$app/navigation'
 
   import ContentEditable from '$/lib/components/ContentEditable.svelte'
   import Icon from '$lib/components/Icon.svelte'
   import IconButton from '$lib/components/IconButton.svelte'
   import EditableTask from '$lib/components/EditableTask.svelte'
+  import TagPillList from '$containers/TagPillList.svelte'
+  import TagsContextMenu from '$containers/TagsContextMenu.svelte'
+  import { ContextMenuType } from '$lib/enums'
 
   import {
     getItemById,
@@ -30,10 +33,6 @@
     if (editingTaskList) taskList = editingTaskList
   }
 
-  const { addTaskList, updateTaskList, setCurrentTaskList } = taskListsStore
-  const { closeAllModals } = uiStore
-  const dispatch = createEventDispatcher()
-
   const _addTask = () => {
     if (lastTaskInTaskListIsEmptyTask(taskList)) return
     const task = createEmptyTask()
@@ -48,9 +47,21 @@
     taskList.pinned = !taskList.pinned
   }
 
+  const { addTaskList, updateTaskList, setCurrentTaskList } = taskListsStore
+  const { closeForm, closeAllModals, toggleContextMenu } = uiStore
+
+  const toggleTagsContextMenu = (id: string) => (e: MouseEvent) => {
+    setCurrentTaskList(id)
+    const rect = (e.target as HTMLButtonElement).getBoundingClientRect()
+    toggleContextMenu(ContextMenuType.Tags, {
+      x: rect.x,
+      y: rect.y + rect.height,
+    })
+  }
+
   const handleSubmit = () => {
+    closeForm()
     closeAllModals()
-    dispatch('close')
     if (isEmptyTaskList(taskList) || lastTaskInTaskListIsEmptyTask(taskList)) return
     if (editingTaskList) updateTaskList(taskList.id, taskList)
     else {
@@ -86,6 +97,7 @@
   {#each doneTasks as task (task.id)}
     <EditableTask bind:task handleDelete={() => _deleteTask(task.id)} />
   {/each}
+  <TagPillList ids={taskList.tagIds} />
   <div class="actions">
     <div class="left">
       <IconButton
@@ -95,7 +107,7 @@
         on:click={togglePinned}
       />
       <IconButton name="picture" size="md" />
-      <IconButton name="tags" size="md" />
+      <IconButton name="tags" size="md" on:click={(e) => toggleTagsContextMenu(taskList.id)(e)} />
       <IconButton name="brush" size="md" />
     </div>
     <div class="right">
@@ -105,6 +117,10 @@
     </div>
   </div>
 </div>
+
+{#if $uiStore.contextMenu.tags}
+  <TagsContextMenu bind:ids={taskList.tagIds} />
+{/if}
 
 <style lang="scss">
   .form {

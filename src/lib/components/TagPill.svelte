@@ -9,6 +9,7 @@
 
 <style lang="scss">
   .pill {
+    cursor: pointer;
     padding: 0.15rem 0.5rem;
     border: 1px solid var(--theme-primary-700);
     border-radius: var(--rounded-full);

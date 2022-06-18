@@ -42,11 +42,11 @@ export const createEmptyTag = (): Tag => ({
 })
 
 export const isEmptyNote = (note: Note): boolean => {
-  return note.title === '' && note.body === '' && !note.images.length && !note.tagIds.length
+  return note.title === '' && note.body === '' && !note.images.length
 }
 
 export const isEmptyTaskList = (taskList: TaskList): boolean => {
-  return taskList.title === '' && taskList.tasks.length === 0 && !taskList.tagIds.length
+  return taskList.title === '' && taskList.tasks.length === 0
 }
 
 export const isEmptyTask = (task: Task): boolean => {
