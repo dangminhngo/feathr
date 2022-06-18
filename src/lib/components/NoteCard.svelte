@@ -6,12 +6,6 @@
     handlePinned: () => void = () => {
       /**/
     },
-    handleTagsContextMenu: (event: MouseEvent) => void = () => {
-      /**/
-    },
-    handleBrushContextMenu: (event: MouseEvent) => void = () => {
-      /**/
-    },
     handleTrash: () => void = () => {
       /**/
     },
@@ -50,9 +44,6 @@
     </div>
     <div class="right" class:show={buttonsShow} class:active>
       {#if !note.trash}
-        <IconButton size="sm" name="picture" />
-        <IconButton size="sm" name="tags" on:click={handleTagsContextMenu} />
-        <IconButton size="sm" name="brush" on:click={handleBrushContextMenu} />
         <IconButton size="sm" name="trash" on:click={handleTrash} />
       {:else}
         <IconButton size="sm" name="beer" on:click={handleRestore} />

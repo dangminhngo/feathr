@@ -66,9 +66,6 @@
     </div>
     <div class="right" class:show={buttonsShow} class:active>
       {#if !taskList.trash}
-        <IconButton size="sm" name="picture" />
-        <IconButton size="sm" name="tags" />
-        <IconButton size="sm" name="brush" />
         <IconButton size="sm" name="trash" on:click={handleTrash} />
       {:else}
         <IconButton size="sm" name="beer" on:click={handleRestore} />
@@ -83,6 +80,7 @@
     padding: 1rem;
     display: flex;
     flex-direction: column;
+    gap: 1rem;
     border: 1px solid var(--theme-primary-600);
     border-radius: var(--rounded);
   }
@@ -92,7 +90,6 @@
   }
 
   .title {
-    padding-bottom: 0.25rem;
     font-weight: 500;
   }
 

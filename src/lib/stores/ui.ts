@@ -44,9 +44,10 @@ const createLayoutStore = (initialValue: UIStore) => {
         return s
       })
     },
-    openContextMenu: (type: ContextMenuType, position: Position) => {
+    toggleContextMenu: (type: ContextMenuType, position: Position, open = false) => {
       update((s) => {
-        s.contextMenu[type as keyof typeof initialValue.contextMenu] = true
+        const key = type as keyof typeof initialValue.contextMenu
+        s.contextMenu[key] = open ? true : !s.contextMenu[key]
         s.position = position
         return s
       })
