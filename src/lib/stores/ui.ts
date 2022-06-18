@@ -44,6 +44,7 @@ const createLayoutStore = (initialValue: UIStore) => {
     },
     openModal: (type: ModalType) => {
       update((s) => {
+        s.form = FormType.None
         s.modal[type] = true
         return s
       })
