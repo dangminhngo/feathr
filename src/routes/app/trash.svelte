@@ -2,6 +2,7 @@
   import Icon from '$lib/components/Icon.svelte'
   import TrashGrid from '$containers/TrashGrid.svelte'
   import { notesStore, taskListsStore } from '$lib/stores'
+  import { isEmptyTrash } from '$lib/helpers'
 
   const { emptyTrashNotes } = notesStore
   const { emptyTrashTaskLists } = taskListsStore
@@ -13,11 +14,15 @@
 </script>
 
 <div class="message">
-  <span>All stuff in trash will be deleted in 7 days.</span>
-  <button class="empty" on:click={handleEmptyTrash}>
-    <Icon name="deleteFull" />
-    <span>Empty Trash</span>
-  </button>
+  {#if isEmptyTrash($notesStore.notes, $taskListsStore.taskLists)}
+    <span>Your trash is empty.</span>
+  {:else}
+    <span>All stuff in trash will be deleted in 7 days.</span>
+    <button class="empty" on:click={handleEmptyTrash}>
+      <Icon name="deleteFull" />
+      <span>Empty Trash</span>
+    </button>
+  {/if}
 </div>
 <TrashGrid />
 

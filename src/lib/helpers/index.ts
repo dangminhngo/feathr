@@ -104,6 +104,10 @@ export const getTags = (tags: Tag[], ids: string[]): Tag[] => {
   return tags.filter((t) => ids.includes(t.id))
 }
 
+export const isEmptyTrash = (notes: Note[], taskLists: TaskList[]) => {
+  return !notes.filter((n) => n.trash).length && !taskLists.filter((tl) => tl.trash).length
+}
+
 export const clickOutside: Action<HTMLElement, undefined> = (node: HTMLElement) => {
   const handleClick = (e: MouseEvent) => {
     if (node && !node.contains(e.target as HTMLElement)) {
