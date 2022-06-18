@@ -61,9 +61,12 @@ export interface UIStore {
   modal: {
     note: boolean
     taskList: boolean
-    brush: boolean
-    tags: boolean
   }
+  contextMenu: {
+    tags: boolean
+    brush: boolean
+  }
+  position: Position
 }
 
 export interface NotesStore {
@@ -79,4 +82,9 @@ export interface TaskListsStore {
 export interface TagsStore {
   tags: Tag[]
   currentTagId: string
+}
+
+export interface Position {
+  x: number
+  y: number
 }

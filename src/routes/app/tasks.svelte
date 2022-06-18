@@ -17,6 +17,7 @@
 
 <FormField />
 <TaskListGrid taskLists={$taskListsStore.taskLists} />
+
 {#if $uiStore.modal.taskList}
   <Modal handleOutsideClick={handleModalClose}>
     <TaskListForm />

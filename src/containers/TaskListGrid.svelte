@@ -21,6 +21,7 @@
   {#each filteredTaskLists as taskList (taskList.id)}
     <TaskListCard
       bind:taskList
+      active={$taskListsStore.currentTaskListId === taskList.id}
       on:click={() => openEditTaskListForm(taskList.id)}
       handlePinned={() => togglePinnedTaskList(taskList.id)}
       handleTrash={() => assignTaskListToTrash(taskList.id)}

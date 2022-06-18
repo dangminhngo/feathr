@@ -5,6 +5,7 @@
   import type { TaskList, Task } from '$lib/types'
 
   export let taskList: TaskList,
+    active = false,
     handlePinned: () => void = () => {
       /**/
     },
@@ -29,7 +30,7 @@
 
 <div
   class="task-list"
-  class:deactive={taskList.trash}
+  class:trash={taskList.trash}
   on:mouseenter={handleMouseEnter}
   on:mouseleave={handleMouseLeave}
   on:click
@@ -53,7 +54,7 @@
     {/each}
   </div>
   <div class="buttons">
-    <div class="left" class:pinned={taskList.pinned} class:show={buttonsShow}>
+    <div class="left" class:pinned={taskList.pinned} class:show={buttonsShow} class:active>
       {#if !taskList.trash}
         <IconButton
           size="sm"
@@ -63,7 +64,7 @@
         />
       {/if}
     </div>
-    <div class="right" class:show={buttonsShow}>
+    <div class="right" class:show={buttonsShow} class:active>
       {#if !taskList.trash}
         <IconButton size="sm" name="picture" />
         <IconButton size="sm" name="tags" />
@@ -86,7 +87,7 @@
     border-radius: var(--rounded);
   }
 
-  .task-list.deactive > * {
+  .task-list.trash > * {
     pointer-events: none;
   }
 
@@ -113,7 +114,18 @@
     transition: all 0.15s ease-out;
   }
 
-  .left.pinned {
+  .left,
+  .right {
+    display: flex;
+    align-items: center;
+    color: var(--theme-primary-400);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .left.pinned,
+  .left.active,
+  .right.active {
     opacity: 1;
     pointer-events: all;
   }
@@ -122,14 +134,5 @@
   .right.show {
     opacity: 1;
     pointer-events: all;
-  }
-
-  .left,
-  .right {
-    display: flex;
-    align-items: center;
-    color: var(--theme-primary-400);
-    opacity: 0;
-    pointer-events: none;
   }
 </style>

@@ -4,10 +4,10 @@
   import { filterItems } from '$lib/helpers'
   import { uiStore, notesStore } from '$lib/stores'
   import type { Note } from '$lib/types'
-  import { ModalType } from '$lib/enums'
+  import { ModalType, ContextMenuType } from '$lib/enums'
 
   const { setCurrentNote, togglePinnedNote, assignTrashToNote } = notesStore
-  const { openModal } = uiStore
+  const { openModal, openContextMenu } = uiStore
 
   export let notes: Note[] = []
   $: filteredNotes = filterItems(notes)
@@ -16,14 +16,27 @@
     setCurrentNote(id)
     openModal(ModalType.Note)
   }
+
+  const openTagsContextMenu = (id: string) => (event: MouseEvent) => {
+    const clientRect = (event.target as HTMLButtonElement).getBoundingClientRect()
+    setCurrentNote(id)
+    openContextMenu(ContextMenuType.Tags, {
+      x: clientRect.x,
+      y: clientRect.y + clientRect.height + 8,
+    })
+  }
+
+  $: console.log($notesStore, $uiStore)
 </script>
 
 <div class="grid">
   {#each filteredNotes as note (note.id)}
     <NoteCard
       {note}
+      active={$notesStore.currentNoteId === note.id}
       on:click={() => openEditNoteForm(note.id)}
       handlePinned={() => togglePinnedNote(note.id)}
+      handleTagsContextMenu={(e) => openTagsContextMenu(note.id)(e)}
       handleTrash={() => assignTrashToNote(note.id)}
     />
   {/each}

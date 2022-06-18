@@ -1,14 +1,20 @@
 import { writable } from 'svelte/store'
-import type { UIStore } from '$lib/types'
-import type { ModalType } from '$lib/enums'
+import type { UIStore, Position } from '$lib/types'
+import type { ModalType, ContextMenuType } from '$lib/enums'
 
 const initialValue: UIStore = {
   navGrow: false,
   modal: {
     note: false,
     taskList: false,
+  },
+  contextMenu: {
     brush: false,
     tags: false,
+  },
+  position: {
+    x: 0,
+    y: 0,
   },
 }
 
@@ -23,9 +29,9 @@ const createLayoutStore = (initialValue: UIStore) => {
         return s
       })
     },
-    openModal: (modalType: ModalType) => {
+    openModal: (type: ModalType) => {
       update((s) => {
-        s.modal[modalType as keyof typeof initialValue.modal] = true
+        s.modal[type as keyof typeof initialValue.modal] = true
         return s
       })
     },
@@ -34,9 +40,24 @@ const createLayoutStore = (initialValue: UIStore) => {
         s.modal = {
           note: false,
           taskList: false,
-          brush: false,
-          tags: false,
         }
+        return s
+      })
+    },
+    openContextMenu: (type: ContextMenuType, position: Position) => {
+      update((s) => {
+        s.contextMenu[type as keyof typeof initialValue.contextMenu] = true
+        s.position = position
+        return s
+      })
+    },
+    closeAllContextMenus: () => {
+      update((s) => {
+        s.contextMenu = {
+          tags: false,
+          brush: false,
+        }
+        s.position = { x: 0, y: 0 }
         return s
       })
     },

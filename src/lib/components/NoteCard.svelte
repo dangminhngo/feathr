@@ -2,7 +2,14 @@
   import IconButton from '$lib/components/IconButton.svelte'
   import type { Note } from '$lib/types'
   export let note: Note,
+    active = false,
     handlePinned: () => void = () => {
+      /**/
+    },
+    handleTagsContextMenu: (event: MouseEvent) => void = () => {
+      /**/
+    },
+    handleBrushContextMenu: (event: MouseEvent) => void = () => {
       /**/
     },
     handleTrash: () => void = () => {
@@ -23,7 +30,7 @@
 
 <div
   class="note"
-  class:deactive={note.trash}
+  class:trash={note.trash}
   on:mouseenter={handleMouseEnter}
   on:mouseleave={handleMouseLeave}
   on:click
@@ -31,7 +38,7 @@
   <div class="title">{note.title}</div>
   <div class="body">{note.body}</div>
   <div class="buttons">
-    <div class="left" class:pinned={note.pinned} class:show={buttonsShow}>
+    <div class="left" class:pinned={note.pinned} class:show={buttonsShow} class:active>
       {#if !note.trash}
         <IconButton
           size="sm"
@@ -41,11 +48,11 @@
         />
       {/if}
     </div>
-    <div class="right" class:show={buttonsShow}>
+    <div class="right" class:show={buttonsShow} class:active>
       {#if !note.trash}
         <IconButton size="sm" name="picture" />
-        <IconButton size="sm" name="tags" />
-        <IconButton size="sm" name="brush" />
+        <IconButton size="sm" name="tags" on:click={handleTagsContextMenu} />
+        <IconButton size="sm" name="brush" on:click={handleBrushContextMenu} />
         <IconButton size="sm" name="trash" on:click={handleTrash} />
       {:else}
         <IconButton size="sm" name="beer" on:click={handleRestore} />
@@ -66,7 +73,10 @@
     border-radius: var(--rounded);
   }
 
-  .note.deactive > * {
+  .note.active {
+  }
+
+  .note.trash > * {
     pointer-events: none;
   }
 
@@ -85,7 +95,18 @@
     transition: all 0.15s ease-out;
   }
 
-  .left.pinned {
+  .left,
+  .right {
+    display: flex;
+    align-items: center;
+    color: var(--theme-primary-400);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .left.pinned,
+  .left.active,
+  .right.active {
     opacity: 1;
     pointer-events: all;
   }
@@ -94,14 +115,5 @@
   .right.show {
     opacity: 1;
     pointer-events: all;
-  }
-
-  .left,
-  .right {
-    display: flex;
-    align-items: center;
-    color: var(--theme-primary-400);
-    opacity: 0;
-    pointer-events: none;
   }
 </style>

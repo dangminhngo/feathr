@@ -1,6 +1,9 @@
 export enum ModalType {
   Note = 'note',
   TaskList = 'taskList',
-  Brush = 'brush',
+}
+
+export enum ContextMenuType {
   Tags = 'tags',
+  Brush = 'brush',
 }
