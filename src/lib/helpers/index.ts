@@ -92,6 +92,14 @@ export const filterTrashItems = (notes: Note[], taskLists: TaskList[]): (Note | 
   )
 }
 
+export function searchItems<T extends Note | TaskList>(items: T[], keyword: string): T[] {
+  return items.filter((item) => item.title.toLowerCase().includes(keyword.toLowerCase()))
+}
+
+export const searchTags = (tags: Tag[], keyword: string): Tag[] => {
+  return tags.filter((t) => t.label.toLowerCase().includes(keyword.toLowerCase()))
+}
+
 export const clickOutside: Action<HTMLElement, undefined> = (node: HTMLElement) => {
   const handleClick = (e: MouseEvent) => {
     if (node && !node.contains(e.target as HTMLElement)) {
