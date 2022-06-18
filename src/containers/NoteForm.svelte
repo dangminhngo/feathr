@@ -14,17 +14,10 @@
 
   let titleContentEditable: ContentEditable
 
-  let note: Note = createEmptyNote(),
-    notes: Note[],
-    currentNoteId: string,
-    editingNote: Note | undefined
+  let note: Note = createEmptyNote()
+  const editingNote: Note | undefined = getItemById($notesStore.notes, $notesStore.currentNoteId)
 
-  $: {
-    ;({ notes, currentNoteId } = $notesStore)
-    editingNote = getItemById(notes, currentNoteId)
-
-    if (editingNote) note = editingNote
-  }
+  if (editingNote) note = editingNote
 
   const togglePinned = () => {
     note.pinned = !note.pinned

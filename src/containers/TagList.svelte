@@ -10,7 +10,6 @@
   }
 
   $: filteredTags = filterTags($tagsStore.tags)
-  $: console.log($tagsStore)
 </script>
 
 <div class="tag-list">
