@@ -44,7 +44,7 @@
     </span>
   {/if}
   <div class="label">
-    <ContentEditable bind:this={input} editable={editing} bind:value={tag.label} />
+    <ContentEditable bind:this={input} size="sm" editable={editing} bind:value={tag.label} />
   </div>
   <div class="actions" class:show={showButtons}>
     <IconButton
