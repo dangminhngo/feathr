@@ -12,7 +12,7 @@
     cursor: pointer;
     padding: 0.15rem 0.5rem;
     border-radius: var(--rounded-full);
-    background-color: var(--theme-primary-200);
+    background-color: var(--theme-primary-50);
     color: var(--theme-primary-900);
     font-size: var(--text-xs);
     font-weight: 500;
