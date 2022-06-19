@@ -3,7 +3,8 @@
   import TagsContextMenu from './TagsContextMenu.svelte'
   import { uiStore } from '$lib/stores'
 
-  export let ids: string[], color: string | undefined
+  export let ids: string[] = [],
+    color: string | undefined = undefined
 </script>
 
 {#if $uiStore.contextMenu.tags}
