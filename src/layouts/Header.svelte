@@ -12,6 +12,7 @@
   const handleSubmit = () => {
     if (!keyword) return
     goto(`/app/search/${keyword}`)
+    keyword = ''
   }
 </script>
 
