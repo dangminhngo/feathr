@@ -47,12 +47,7 @@
   <div class="buttons">
     <div class="left" class:pinned={note.pinned} class:show={buttonsShow} class:active>
       {#if !note.trash}
-        <IconButton
-          size="sm"
-          name={note.pinned ? 'pinFull' : 'pin'}
-          active={note.pinned}
-          on:click={handlePinned}
-        />
+        <IconButton size="sm" name={note.pinned ? 'pinFull' : 'pin'} on:click={handlePinned} />
       {/if}
     </div>
     <div class="right" class:show={buttonsShow} class:active>

@@ -73,12 +73,7 @@
   <div class="buttons">
     <div class="left" class:pinned={taskList.pinned} class:show={buttonsShow} class:active>
       {#if !taskList.trash}
-        <IconButton
-          size="sm"
-          name={taskList.pinned ? 'pinFull' : 'pin'}
-          active={taskList.pinned}
-          on:click={handlePinned}
-        />
+        <IconButton size="sm" name={taskList.pinned ? 'pinFull' : 'pin'} on:click={handlePinned} />
       {/if}
     </div>
     <div class="right" class:show={buttonsShow} class:active>
@@ -133,7 +128,6 @@
   .right {
     display: flex;
     align-items: center;
-    color: var(--theme-primary-400);
     opacity: 0;
     pointer-events: none;
   }
