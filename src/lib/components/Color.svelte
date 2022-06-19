@@ -31,14 +31,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid var(--theme-primary-400);
+    border: 2px solid var(--theme-primary-800);
     border-radius: 100%;
     transition: all 0.15s ease-out;
   }
 
   label.selected {
-    border-color: var(--theme-accent);
-    color: var(--theme-accent);
+    border-color: var(--theme-primary-50);
+    color: var(--theme-primary-50);
   }
 
   input {

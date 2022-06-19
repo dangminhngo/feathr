@@ -25,7 +25,7 @@
     align-items: center;
     justify-content: center;
     border-radius: var(--rounded);
-    transition: color 0.15s ease-out;
+    transition: all 0.15s ease-out;
   }
 
   button.lg {
@@ -48,6 +48,7 @@
   }
 
   button:hover {
-    color: var(--theme-accent);
+    background-color: var(--theme-primary-50);
+    color: var(--theme-primary-900);
   }
 </style>

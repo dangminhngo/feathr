@@ -193,7 +193,8 @@
     transition: all 0.15s ease-out;
 
     &:hover {
-      color: var(--theme-primary-100);
+      background-color: var(--theme-primary-50);
+      color: var(--theme-primary-900);
     }
   }
 </style>
