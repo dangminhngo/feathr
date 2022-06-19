@@ -2,7 +2,7 @@
   import { setContext, onMount } from 'svelte'
   import { writable } from 'svelte/store'
 
-  import { presets, themeKey } from '$lib/theming/themes'
+  import { presets, themeKey } from '$lib/consts'
   import type { Theme } from '$lib/types'
   import { brushPalettes } from '$lib/consts'
 

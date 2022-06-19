@@ -1,7 +1,7 @@
 <script lang="ts">
   import { page } from '$app/stores'
-  import { uiStore } from '$lib/stores'
   import Icon from '$lib/components/Icon.svelte'
+  import { uiStore } from '$lib/stores'
 
   const items = [
     {
@@ -12,7 +12,7 @@
     {
       icon: 'taskList',
       label: 'Tasks',
-      path: '/app/tasks',
+      path: '/app/tasklists',
     },
     {
       icon: 'tags',

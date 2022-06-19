@@ -11,10 +11,7 @@
     "sourceMap": true,
     "strict": true,
     "paths": {
-      "$/*": ["src/*"],
       "$assets/*": ["src/assets/*"],
-      "$containers/*": ["src/containers/*"],
-      "$layouts/*": ["src/layouts/*"],
       "$lib": ["src/lib"],
       "$lib/*": ["src/lib/*"],
       "$routes/*": ["src/routes/*"]

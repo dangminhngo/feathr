@@ -1,20 +1,17 @@
 <script lang="ts">
-  import { onMount, getContext } from 'svelte'
+  import { onMount, getContext, createEventDispatcher } from 'svelte'
   import { goto } from '$app/navigation'
-
-  import ContentEditable from '$/lib/components/ContentEditable.svelte'
+  import Field from '$lib/components/Field.svelte'
   import IconButton from '$lib/components/IconButton.svelte'
-  import TagPillList from '$containers/TagPillList.svelte'
-  import TagsContextMenu from '$containers/TagsContextMenu.svelte'
-  import BrushContextMenu from '$containers/BrushContextMenu.svelte'
-
+  import ContextMenus from '$lib/components/contextmenus/ContextMenus.svelte'
+  import TagPillGrid from '$lib/components/grids/TagPillGrid.svelte'
   import { uiStore, notesStore } from '$lib/stores'
   import { getItemById, isEmptyNote, createEmptyNote } from '$lib/helpers'
-  import { themeKey } from '$lib/theming/themes'
+  import { themeKey } from '$lib/consts'
   import type { Note } from '$lib/types'
   import { ContextMenuType } from '$lib/enums'
 
-  let titleContentEditable: ContentEditable
+  let titleField: Field
 
   let note: Note = createEmptyNote()
   const editingNote: Note | undefined = getItemById($notesStore.notes, $notesStore.currentNoteId)
@@ -25,13 +22,13 @@
     note.pinned = !note.pinned
   }
 
-  onMount(() => titleContentEditable?.focus())
+  onMount(() => titleField?.focus())
 
   const { getBrushPalette } = getContext(themeKey)
   const brushPalette = getBrushPalette()
 
   const { setCurrentNote, addNote, updateNote } = notesStore
-  const { closeForm, closeAllModals, toggleContextMenu } = uiStore
+  const { closeAllModals, toggleContextMenu } = uiStore
 
   const _toggleContextMenu = (type: ContextMenuType, id: string) => (e: MouseEvent) => {
     setCurrentNote(id)
@@ -42,9 +39,11 @@
     })
   }
 
+  const dispatch = createEventDispatcher()
+
   const handleSubmit = () => {
     closeAllModals()
-    closeForm()
+    dispatch('close')
     if (isEmptyNote(note)) return
     if (editingNote) {
       updateNote(note.id, note)
@@ -60,9 +59,9 @@
   class="form"
   style="background-color: {note.color ? brushPalette[note.color] : 'transparent'};"
 >
-  <ContentEditable bind:this={titleContentEditable} placeholder="Title" bind:value={note.title} />
-  <ContentEditable size="sm" placeholder="Body" bind:value={note.body} />
-  <TagPillList ids={note.tagIds} />
+  <Field bind:this={titleField} placeholder="Title" bind:value={note.title} />
+  <Field size="sm" placeholder="Body" bind:value={note.body} />
+  <TagPillGrid ids={note.tagIds} />
   <div class="actions">
     <div class="left">
       <IconButton
@@ -91,13 +90,7 @@
   </div>
 </div>
 
-{#if $uiStore.contextMenu.tags}
-  <TagsContextMenu bind:ids={note.tagIds} />
-{/if}
-
-{#if $uiStore.contextMenu.brush}
-  <BrushContextMenu bind:color={note.color} />
-{/if}
+<ContextMenus bind:ids={note.tagIds} bind:color={note.color} />
 
 <style lang="scss">
   .form {

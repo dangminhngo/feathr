@@ -1,6 +1,6 @@
 <script lang="ts">
-  import NoteCard from '$lib/components/NoteCard.svelte'
-  import TaskListCard from '$lib/components/TaskListCard.svelte'
+  import NoteCard from '$lib/components/items/NoteCard.svelte'
+  import TaskListCard from '$lib/components/items/TaskListCard.svelte'
   import { uiStore, notesStore, taskListsStore } from '$lib/stores'
   import { ModalType } from '$lib/enums'
   import type { Note, TaskList } from '$lib/types'

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import TagLine from '$lib/components/TagLine.svelte'
+  import EditableTag from '$lib/components/items/EditableTag.svelte'
   import { tagsStore } from '$lib/stores'
   import { filterTags } from '$lib/helpers'
 
@@ -17,7 +17,7 @@
     <div class="key">
       <p class="character">{key}</p>
       {#each filteredTags[key] as tag (tag.id)}
-        <TagLine bind:tag handleDelete={() => _deleteTag(tag.id)} />
+        <EditableTag bind:tag handleDelete={() => _deleteTag(tag.id)} />
       {/each}
     </div>
   {/each}

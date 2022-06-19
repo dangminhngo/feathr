@@ -2,10 +2,10 @@
   import { goto } from '$app/navigation'
   import { uiStore } from '$lib/stores'
 
-  import MenuButton from '$lib/components/MenuButton.svelte'
-  import SearchBox from '$lib/components/SearchBox.svelte'
   import IconButton from '$lib/components/IconButton.svelte'
-  import ProfilePictureButton from '$lib/components/ProfilePictureButton.svelte'
+  import Hamburger from './Hamburger.svelte'
+  import ProfilePicture from './ProfilePicture.svelte'
+  import Search from './Search.svelte'
 
   let keyword = ''
 
@@ -17,15 +17,11 @@
 </script>
 
 <header class="header">
-  <MenuButton on:click={uiStore.toggleNav} />
-  <SearchBox
-    placeholder="Search notes or tasks ..."
-    bind:value={keyword}
-    on:submit={handleSubmit}
-  />
+  <Hamburger on:click={uiStore.toggleNav} />
+  <Search placeholder="Search notes or tasks ..." bind:value={keyword} on:submit={handleSubmit} />
   <div class="buttons">
     <IconButton name="cog" on:click={() => console.log('Clicked')} />
-    <ProfilePictureButton />
+    <ProfilePicture />
   </div>
 </header>
 

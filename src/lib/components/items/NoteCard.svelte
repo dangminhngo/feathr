@@ -2,8 +2,8 @@
   import { getContext } from 'svelte'
 
   import IconButton from '$lib/components/IconButton.svelte'
-  import TagPillList from '$containers/TagPillList.svelte'
-  import { themeKey } from '$lib/theming/themes'
+  import TagPillGrid from '$lib/components/grids/TagPillGrid.svelte'
+  import { themeKey } from '$lib/consts'
   import type { Note } from '$lib/types'
   export let note: Note,
     active = false,
@@ -43,7 +43,7 @@
 >
   <div class="title">{note.title}</div>
   <div class="body">{note.body}</div>
-  <TagPillList ids={note.tagIds} />
+  <TagPillGrid ids={note.tagIds} />
   <div class="buttons">
     <div class="left" class:pinned={note.pinned} class:show={buttonsShow} class:active>
       {#if !note.trash}

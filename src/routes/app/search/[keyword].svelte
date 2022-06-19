@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from '$app/stores'
-  import SearchGrid from '$containers/SearchGrid.svelte'
+  import SearchGrid from '$lib/components/grids/SearchGrid.svelte'
   import { notesStore, taskListsStore } from '$lib/stores'
   import { getSearchResults } from '$lib/helpers'
 

@@ -1,5 +1,5 @@
 <script>
-  import ContentEditable from '$lib/components/ContentEditable.svelte'
+  import Field from '$lib/components/Field.svelte'
   import { createEmptyTag } from '$lib/helpers'
   import { tagsStore } from '$lib/stores'
 
@@ -14,7 +14,7 @@
 </script>
 
 <div class="form">
-  <ContentEditable placeholder="Add a tag..." bind:value={tag.label} />
+  <Field placeholder="Add a tag..." bind:value={tag.label} />
   {#if tag.label}
     <button class="close-button" on:click={handleSubmit}>Save</button>
   {/if}

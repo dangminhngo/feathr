@@ -1,4 +1,4 @@
-<button class="menu-button" on:click>
+<button class="hamburger" on:click>
   <div>
     <span>&nbsp;</span>
     <span>&nbsp;</span>
@@ -7,7 +7,7 @@
 </button>
 
 <style lang="scss">
-  .menu-button {
+  .hamburger {
     cursor: pointer;
     width: var(--button-height);
     height: var(--button-height);

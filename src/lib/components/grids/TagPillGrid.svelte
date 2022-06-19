@@ -1,5 +1,5 @@
 <script lang="ts">
-  import TagPill from '$lib/components/TagPill.svelte'
+  import TagPill from '$lib/components/items/TagPill.svelte'
   import { tagsStore } from '$lib/stores'
   import { getTags } from '$lib/helpers'
 

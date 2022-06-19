@@ -1,6 +1,6 @@
 <script lang="ts">
   import Icon from '$lib/components/Icon.svelte'
-  import TrashGrid from '$containers/TrashGrid.svelte'
+  import TrashGrid from '$lib/components/grids/TrashGrid.svelte'
   import { notesStore, taskListsStore } from '$lib/stores'
   import { isEmptyTrash } from '$lib/helpers'
 

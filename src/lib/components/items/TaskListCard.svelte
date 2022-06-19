@@ -6,9 +6,9 @@
 
   import IconButton from '$lib/components/IconButton.svelte'
   import EditableTask from '$lib/components/EditableTask.svelte'
-  import TagPillList from '$containers/TagPillList.svelte'
+  import TagPillGrid from '$lib/components/grids/TagPillGrid.svelte'
   import { getFilteredTasks } from '$lib/helpers'
-  import { themeKey } from '$lib/theming/themes'
+  import { themeKey } from '$lib/consts'
   import type { TaskList, Task } from '$lib/types'
 
   export let taskList: TaskList,
@@ -94,7 +94,7 @@
       </div>
     {/each}
   </div>
-  <TagPillList ids={taskList.tagIds} />
+  <TagPillGrid ids={taskList.tagIds} />
   <div class="buttons">
     <div class="left" class:pinned={taskList.pinned} class:show={buttonsShow} class:active>
       {#if !taskList.trash}

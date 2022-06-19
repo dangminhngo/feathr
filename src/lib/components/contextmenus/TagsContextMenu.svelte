@@ -1,7 +1,7 @@
 <script lang="ts">
   import Icon from '$lib/components/Icon.svelte'
-  import ContextMenu from '$containers/ContextMenu.svelte'
-  import CheckGroup from '$lib/components/CheckGroup.svelte'
+  import ContextMenuWrapper from './ContextMenuWrapper.svelte'
+  import CheckboxField from './CheckboxField.svelte'
   import { uiStore, notesStore, tagsStore } from '$lib/stores'
   import { searchTags, clickOutside, createEmptyTag } from '$lib/helpers'
 
@@ -37,7 +37,7 @@
   $: filteredTags = searchTags($tagsStore.tags, keyword)
 </script>
 
-<ContextMenu>
+<ContextMenuWrapper>
   <div class="tags" use:clickOutside on:outsideclick={handleCloseContextMenu}>
     <div class="form">
       <input type="text" placeholder="Search tags ..." bind:value={keyword} />
@@ -47,9 +47,9 @@
     </div>
     <div class="list">
       {#each filteredTags as tag (tag.id)}
-        <CheckGroup checked={ids.includes(tag.id)} on:change={(e) => toggleTagId(tag.id)(e)}
-          >{tag.label}</CheckGroup
-        >
+        <CheckboxField checked={ids.includes(tag.id)} on:change={(e) => toggleTagId(tag.id)(e)}>
+          {tag.label}
+        </CheckboxField>
       {/each}
     </div>
     {#if !filteredTags.length}
@@ -59,7 +59,7 @@
       </button>
     {/if}
   </div>
-</ContextMenu>
+</ContextMenuWrapper>
 
 <style lang="scss">
   .tags {

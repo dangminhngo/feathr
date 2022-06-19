@@ -1,22 +1,22 @@
 <script lang="ts">
-  import ContextMenu from '$containers/ContextMenu.svelte'
-  import Color from '$lib/components/Color.svelte'
+  import ContextMenuWrapper from './ContextMenuWrapper.svelte'
+  import SelectableColorCircle from './SelectableColorCircle.svelte'
   import { colorKeys } from '$lib/consts'
 
   export let color: string | undefined = undefined
 </script>
 
-<ContextMenu>
+<ContextMenuWrapper>
   <div class="colors">
     <p>Choose your favorite color</p>
     <div class="list">
-      <Color bind:group={color} name="color" value={undefined} />
+      <SelectableColorCircle bind:group={color} name="color" value={undefined} />
       {#each colorKeys as key}
-        <Color bind:group={color} name="color" value={key} />
+        <SelectableColorCircle bind:group={color} name="color" value={key} />
       {/each}
     </div>
   </div>
-</ContextMenu>
+</ContextMenuWrapper>
 
 <style lang="scss">
   .colors {

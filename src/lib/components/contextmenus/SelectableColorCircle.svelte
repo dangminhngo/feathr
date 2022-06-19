@@ -2,7 +2,7 @@
   import { getContext } from 'svelte'
 
   import Icon from '$lib/components/Icon.svelte'
-  import { themeKey } from '$lib/theming/themes'
+  import { themeKey } from '$lib/consts'
 
   export let name: string,
     value: string | undefined = undefined,

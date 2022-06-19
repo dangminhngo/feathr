@@ -1,26 +1,8 @@
 <script lang="ts">
-  import ThemeContext from '$lib/theming/ThemeContext.svelte'
-  import Header from '$layouts/Header.svelte'
-  import Nav from '$layouts/Nav.svelte'
-  import Modal from '$lib/components/Modal.svelte'
-  import NoteForm from '$containers/NoteForm.svelte'
-  import TaskListForm from '$containers/TaskListForm.svelte'
-
-  import { uiStore, notesStore, taskListsStore } from '$lib/stores'
-
-  const { setCurrentTaskList } = taskListsStore
-  const { setCurrentNote } = notesStore
-  const { closeAllModals } = uiStore
-
-  const handleNoteModalClose = () => {
-    setCurrentNote('')
-    closeAllModals()
-  }
-
-  const handleTaskListModalClose = () => {
-    setCurrentTaskList('')
-    closeAllModals()
-  }
+  import ThemeContext from '$lib/contexts/ThemeContext.svelte'
+  import Header from '$lib/components/layouts/Header.svelte'
+  import Nav from '$lib/components/layouts/Nav.svelte'
+  import Modals from '$lib/components/modals/Modals.svelte'
 </script>
 
 <svelte:head>
@@ -39,18 +21,7 @@
       <slot />
     </main>
   </div>
-
-  {#if $uiStore.modal.note}
-    <Modal handleBackdropClick={handleNoteModalClose}>
-      <NoteForm />
-    </Modal>
-  {/if}
-
-  {#if $uiStore.modal.taskList}
-    <Modal handleBackdropClick={handleTaskListModalClose}>
-      <TaskListForm />
-    </Modal>
-  {/if}
+  <Modals />
 </ThemeContext>
 
 <style lang="scss">

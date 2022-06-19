@@ -1,5 +1,5 @@
 <script lang="ts">
-  import TaskListCard from '$lib/components/TaskListCard.svelte'
+  import TaskListCard from '$lib/components/items/TaskListCard.svelte'
   import { uiStore, taskListsStore } from '$lib/stores'
   import { filterItems } from '$lib/helpers'
   import type { TaskList } from '$lib/types'

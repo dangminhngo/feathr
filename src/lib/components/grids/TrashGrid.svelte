@@ -1,6 +1,6 @@
 <script lang="ts">
-  import NoteCard from '$lib/components/NoteCard.svelte'
-  import TaskListCard from '$lib/components/TaskListCard.svelte'
+  import NoteCard from '$lib/components/items/NoteCard.svelte'
+  import TaskListCard from '$lib/components/items/TaskListCard.svelte'
   import { notesStore, taskListsStore } from '$lib/stores'
   import { filterTrashItems } from '$lib/helpers'
 

@@ -1,7 +1,7 @@
 <script lang="ts">
-  import TagForm from '$containers/TagForm.svelte'
-  import TaskList from '$containers/TagList.svelte'
+  import TagForm from '$lib/components/forms/TagForm.svelte'
+  import TagGrid from '$lib/components/grids/TagGrid.svelte'
 </script>
 
 <TagForm />
-<TaskList />
+<TagGrid />

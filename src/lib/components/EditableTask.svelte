@@ -1,9 +1,9 @@
 <script lang="ts">
   import { onMount } from 'svelte'
-  import CheckBox from '$lib/components/CheckBox.svelte'
-  import ContentEditable from '$lib/components/ContentEditable.svelte'
-  import Icon from '$lib/components/Icon.svelte'
-  import IconButton from '$lib/components/IconButton.svelte'
+  import Checkbox from './Checkbox.svelte'
+  import Field from './Field.svelte'
+  import Icon from './Icon.svelte'
+  import IconButton from './IconButton.svelte'
   import type { Task } from '$lib/types'
 
   export let task: Task,
@@ -12,7 +12,7 @@
     handleDelete: () => void = () => {
       /**/
     }
-  let contentEditable: ContentEditable
+  let contentEditable: Field
   let showButton = false
 
   const handleMouseLeave = () => {
@@ -39,8 +39,8 @@
       <Icon name="link" width={16} height={16} />
     </div>
   {/if}
-  <CheckBox bind:checked={task.done} {alt} />
-  <ContentEditable bind:this={contentEditable} {editable} size="sm" bind:value={task.title} />
+  <Checkbox bind:checked={task.done} {alt} />
+  <Field bind:this={contentEditable} {editable} size="sm" bind:value={task.title} />
   {#if editable}
     <div class="buttons" class:show={showButton}>
       <IconButton size="sm" name="close" on:click={handleDelete} />

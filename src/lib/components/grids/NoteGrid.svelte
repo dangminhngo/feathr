@@ -1,5 +1,5 @@
 <script lang="ts">
-  import NoteCard from '$lib/components/NoteCard.svelte'
+  import NoteCard from '$lib/components/items/NoteCard.svelte'
 
   import { filterItems } from '$lib/helpers'
   import { uiStore, notesStore } from '$lib/stores'

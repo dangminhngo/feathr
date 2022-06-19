@@ -1,20 +1,17 @@
 <script lang="ts">
-  import { onMount, getContext } from 'svelte'
+  import { onMount, getContext, createEventDispatcher } from 'svelte'
   import { goto } from '$app/navigation'
   import { quintOut } from 'svelte/easing'
   import { crossfade } from 'svelte/transition'
   import { flip } from 'svelte/animate'
-
-  import ContentEditable from '$/lib/components/ContentEditable.svelte'
+  import EditableTask from '$lib/components/EditableTask.svelte'
+  import Field from '$lib/components/Field.svelte'
   import Icon from '$lib/components/Icon.svelte'
   import IconButton from '$lib/components/IconButton.svelte'
-  import EditableTask from '$lib/components/EditableTask.svelte'
-  import TagPillList from '$containers/TagPillList.svelte'
-  import TagsContextMenu from '$containers/TagsContextMenu.svelte'
-  import BrushContextMenu from '$containers/BrushContextMenu.svelte'
-  import { themeKey } from '$lib/theming/themes'
+  import ContextMenus from '$lib/components/contextmenus/ContextMenus.svelte'
+  import TagPillGrid from '$lib/components/grids/TagPillGrid.svelte'
+  import { themeKey } from '$lib/consts'
   import { ContextMenuType } from '$lib/enums'
-
   import {
     getItemById,
     isEmptyTaskList,
@@ -26,7 +23,7 @@
   import { uiStore, taskListsStore } from '$lib/stores'
   import type { TaskList, Task } from '$lib/types'
 
-  let titleContentEditable: ContentEditable
+  let titleField: Field
   let taskList: TaskList = createEmptyTaskList(),
     editingTaskList = getItemById($taskListsStore.taskLists, $taskListsStore.currentTaskListId)
 
@@ -65,7 +62,7 @@
   }
 
   const { addTaskList, updateTaskList, setCurrentTaskList } = taskListsStore
-  const { closeForm, closeAllModals, toggleContextMenu } = uiStore
+  const { closeAllModals, toggleContextMenu } = uiStore
 
   const _toggleContextMenu = (type: ContextMenuType, id: string) => (e: MouseEvent) => {
     setCurrentTaskList(id)
@@ -76,9 +73,10 @@
     })
   }
 
+  const dispatch = createEventDispatcher()
   const handleSubmit = () => {
-    closeForm()
     closeAllModals()
+    dispatch('close')
     if (isEmptyTaskList(taskList) || lastTaskInTaskListIsEmptyTask(taskList)) return
     if (editingTaskList) updateTaskList(taskList.id, taskList)
     else {
@@ -91,7 +89,7 @@
   let undoneTasks: Task[], doneTasks: Task[]
   $: ({ undoneTasks, doneTasks } = getFilteredTasks(taskList))
 
-  onMount(() => titleContentEditable?.focus())
+  onMount(() => titleField?.focus())
 
   const { getBrushPalette } = getContext(themeKey)
   const brushPalette = getBrushPalette()
@@ -101,11 +99,7 @@
   class="form"
   style="background-color: {taskList.color ? brushPalette[taskList.color] : 'transparent'};"
 >
-  <ContentEditable
-    bind:this={titleContentEditable}
-    placeholder="Title"
-    bind:value={taskList.title}
-  />
+  <Field bind:this={titleField} placeholder="Title" bind:value={taskList.title} />
   {#each undoneTasks as task (task.id)}
     <div in:receive|local={{ key: task.id }} out:send|local={{ key: task.id }} animate:flip>
       <EditableTask bind:task handleDelete={() => _deleteTask(task.id)} alt={!!taskList.color} />
@@ -123,7 +117,7 @@
       <EditableTask bind:task handleDelete={() => _deleteTask(task.id)} alt={!!taskList.color} />
     </div>
   {/each}
-  <TagPillList ids={taskList.tagIds} />
+  <TagPillGrid ids={taskList.tagIds} />
   <div class="actions">
     <div class="left">
       <IconButton
@@ -152,13 +146,7 @@
   </div>
 </div>
 
-{#if $uiStore.contextMenu.tags}
-  <TagsContextMenu bind:ids={taskList.tagIds} />
-{/if}
-
-{#if $uiStore.contextMenu.brush}
-  <BrushContextMenu bind:color={taskList.color} />
-{/if}
+<ContextMenus bind:ids={taskList.tagIds} bind:color={taskList.color} />
 
 <style lang="scss">
   .form {

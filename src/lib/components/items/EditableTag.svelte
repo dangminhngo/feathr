@@ -1,12 +1,12 @@
 <script lang="ts">
   import Icon from '$lib/components/Icon.svelte'
   import IconButton from '$lib/components/IconButton.svelte'
-  import ContentEditable from '$lib/components/ContentEditable.svelte'
+  import Field from '$lib/components/Field.svelte'
   import { clickOutside } from '$lib/helpers'
   import type { Tag } from '$lib/types'
 
   export let tag: Tag, handleDelete: () => void
-  let input: ContentEditable,
+  let input: Field,
     showButtons = false,
     editing = false
 
@@ -44,7 +44,7 @@
     </span>
   {/if}
   <div class="label">
-    <ContentEditable bind:this={input} size="sm" editable={editing} bind:value={tag.label} />
+    <Field bind:this={input} size="sm" editable={editing} bind:value={tag.label} />
   </div>
   <div class="actions" class:show={showButtons}>
     <IconButton
