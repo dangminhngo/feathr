@@ -1,6 +1,9 @@
 <script lang="ts">
   import { onMount, getContext } from 'svelte'
   import { goto } from '$app/navigation'
+  import { quintOut } from 'svelte/easing'
+  import { crossfade } from 'svelte/transition'
+  import { flip } from 'svelte/animate'
 
   import ContentEditable from '$/lib/components/ContentEditable.svelte'
   import Icon from '$lib/components/Icon.svelte'
@@ -28,6 +31,24 @@
     editingTaskList = getItemById($taskListsStore.taskLists, $taskListsStore.currentTaskListId)
 
   if (editingTaskList) taskList = { ...editingTaskList }
+
+  const [send, receive] = crossfade({
+    duration: (d) => Math.sqrt(d * 200),
+
+    fallback(node) {
+      const style = getComputedStyle(node)
+      const transform = style.transform === 'none' ? '' : style.transform
+
+      return {
+        duration: 600,
+        easing: quintOut,
+        css: (t) => `
+					transform: ${transform} scale(${t});
+					opacity: ${t}
+				`,
+      }
+    },
+  })
 
   const _addTask = () => {
     if (lastTaskInTaskListIsEmptyTask(taskList)) return
@@ -86,7 +107,9 @@
     bind:value={taskList.title}
   />
   {#each undoneTasks as task (task.id)}
-    <EditableTask bind:task handleDelete={() => _deleteTask(task.id)} alt={!!taskList.color} />
+    <div in:receive|local={{ key: task.id }} out:send|local={{ key: task.id }} animate:flip>
+      <EditableTask bind:task handleDelete={() => _deleteTask(task.id)} alt={!!taskList.color} />
+    </div>
   {/each}
   <button class="add" on:click={_addTask}>
     <Icon name="plus" width={16} height={16} />
@@ -96,7 +119,9 @@
     <p>{doneTasks.length} tasks done</p>
   {/if}
   {#each doneTasks as task (task.id)}
-    <EditableTask bind:task handleDelete={() => _deleteTask(task.id)} alt={!!taskList.color} />
+    <div in:receive|local={{ key: task.id }} out:send|local={{ key: task.id }} animate:flip>
+      <EditableTask bind:task handleDelete={() => _deleteTask(task.id)} alt={!!taskList.color} />
+    </div>
   {/each}
   <TagPillList ids={taskList.tagIds} />
   <div class="actions">

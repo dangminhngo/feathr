@@ -1,5 +1,8 @@
 <script lang="ts">
   import { getContext } from 'svelte'
+  import { quintOut } from 'svelte/easing'
+  import { crossfade } from 'svelte/transition'
+  import { flip } from 'svelte/animate'
 
   import IconButton from '$lib/components/IconButton.svelte'
   import EditableTask from '$lib/components/EditableTask.svelte'
@@ -24,6 +27,24 @@
     }
 
   let buttonsShow = false
+
+  const [send, receive] = crossfade({
+    duration: (d) => Math.sqrt(d * 200),
+
+    fallback(node) {
+      const style = getComputedStyle(node)
+      const transform = style.transform === 'none' ? '' : style.transform
+
+      return {
+        duration: 600,
+        easing: quintOut,
+        css: (t) => `
+					transform: ${transform} scale(${t});
+					opacity: ${t}
+				`,
+      }
+    },
+  })
 
   const handleMouseEnter = () => (buttonsShow = true)
   const handleMouseLeave = () => (buttonsShow = false)
@@ -55,7 +76,9 @@
       <div class="message">All tasks completed</div>
     {/if}
     {#each undoneTasks as task (task.id)}
-      <EditableTask editable={false} bind:task alt={!!taskList.color} />
+      <div in:receive|local={{ key: task.id }} out:send|local={{ key: task.id }} animate:flip>
+        <EditableTask editable={false} bind:task alt={!!taskList.color} />
+      </div>
     {/each}
     {#if taskList.tasks.length === 0}
       <div class="message">No tasks</div>
@@ -66,7 +89,9 @@
       <div class="message">No tasks completed</div>
     {/if}
     {#each doneTasks as task (task.id)}
-      <EditableTask editable={false} bind:task alt={!!taskList.color} />
+      <div in:receive|local={{ key: task.id }} out:send|local={{ key: task.id }} animate:flip>
+        <EditableTask editable={false} bind:task alt={!!taskList.color} />
+      </div>
     {/each}
   </div>
   <TagPillList ids={taskList.tagIds} />
