@@ -8,8 +8,8 @@
   export let taskLists: TaskList[] = []
   $: filteredTaskLists = filterItems(taskLists)
 
+  const { setCurrentTaskList, togglePinnedTaskList, assignTrashToTaskList } = taskListsStore
   const { openModal } = uiStore
-  const { setCurrentTaskList, togglePinnedTaskList, assignTaskListToTrash } = taskListsStore
 
   const openEditTaskListForm = (id: string) => {
     setCurrentTaskList(id)
@@ -24,7 +24,7 @@
       active={$taskListsStore.currentTaskListId === taskList.id}
       on:click={() => openEditTaskListForm(taskList.id)}
       handlePinned={() => togglePinnedTaskList(taskList.id)}
-      handleTrash={() => assignTaskListToTrash(taskList.id)}
+      handleTrash={() => assignTrashToTaskList(taskList.id)}
     />
   {/each}
 </div>

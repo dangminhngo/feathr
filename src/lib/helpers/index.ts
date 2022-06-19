@@ -93,7 +93,23 @@ export const filterTrashItems = (notes: Note[], taskLists: TaskList[]): (Note | 
 }
 
 export function searchItems<T extends Note | TaskList>(items: T[], keyword: string): T[] {
-  return items.filter((item) => item.title.toLowerCase().includes(keyword.toLowerCase()))
+  return items.filter(
+    (item) => !item.trash && item.title.toLowerCase().includes(keyword.toLowerCase())
+  )
+}
+
+export const getSearchResults = (
+  notes: Note[],
+  taskLists: TaskList[],
+  keyword: string
+): (Note | TaskList)[] => {
+  const resultNotes = searchItems(notes, keyword)
+  const resultTaskLists = searchItems(taskLists, keyword)
+  return [...resultNotes, ...resultTaskLists].sort((a, b) => {
+    if (a.title > b.title) return 1
+    if (a.title < b.title) return -1
+    return 0
+  })
 }
 
 export const searchTags = (tags: Tag[], keyword: string): Tag[] => {

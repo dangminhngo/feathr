@@ -1,25 +1,9 @@
 <script lang="ts">
   import FormField from '$containers/FormField.svelte'
-  import TaskListForm from '$containers/TaskListForm.svelte'
   import TaskListGrid from '$/containers/TaskListGrid.svelte'
-  import Modal from '$lib/components/Modal.svelte'
 
-  import { uiStore, taskListsStore } from '$lib/stores'
-
-  const { setCurrentTaskList } = taskListsStore
-  const { closeAllModals } = uiStore
-
-  const handleModalClose = () => {
-    setCurrentTaskList('')
-    closeAllModals()
-  }
+  import { taskListsStore } from '$lib/stores'
 </script>
 
 <FormField />
 <TaskListGrid taskLists={$taskListsStore.taskLists} />
-
-{#if $uiStore.modal.taskList}
-  <Modal handleBackdropClick={handleModalClose}>
-    <TaskListForm />
-  </Modal>
-{/if}

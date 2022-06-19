@@ -5,7 +5,7 @@
   import { filterTrashItems } from '$lib/helpers'
 
   const { deleteNote, unassignTrashToNote } = notesStore
-  const { deleteTaskList, unassignTaskListToTrash } = taskListsStore
+  const { deleteTaskList, unassignTrashToTaskList } = taskListsStore
 
   const _deleteNote = (id: string) => {
     deleteNote(id)
@@ -20,7 +20,7 @@
   }
 
   const _unassignTrashToTaskList = (id: string) => {
-    unassignTaskListToTrash(id)
+    unassignTrashToTaskList(id)
   }
 
   $: trashItems = filterTrashItems($notesStore.notes, $taskListsStore.taskLists)

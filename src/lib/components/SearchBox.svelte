@@ -4,7 +4,7 @@
     placeholder = ''
 </script>
 
-<form>
+<form on:submit|preventDefault>
   <input type="text" bind:value {placeholder} />
   <Icon class="icon" name="search" />
 </form>

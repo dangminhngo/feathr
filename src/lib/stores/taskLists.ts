@@ -90,7 +90,7 @@ const createTaskListsStore = (initialValue: TaskListsStore) => {
         return s
       })
     },
-    assignTaskListToTrash: (id: string) => {
+    assignTrashToTaskList: (id: string) => {
       update((s) => {
         s.taskLists = s.taskLists.map((tl) =>
           tl.id === id ? { ...tl, trash: true, trashedAt: new Date() } : tl
@@ -98,7 +98,7 @@ const createTaskListsStore = (initialValue: TaskListsStore) => {
         return s
       })
     },
-    unassignTaskListToTrash: (id: string) => {
+    unassignTrashToTaskList: (id: string) => {
       update((s) => {
         s.taskLists = s.taskLists.map((tl) =>
           tl.id === id ? { ...tl, trash: false, trashedAt: undefined } : tl
