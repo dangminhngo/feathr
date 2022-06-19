@@ -27,7 +27,7 @@
   let taskList: TaskList = createEmptyTaskList(),
     editingTaskList = getItemById($taskListsStore.taskLists, $taskListsStore.currentTaskListId)
 
-  if (editingTaskList) taskList = editingTaskList
+  if (editingTaskList) taskList = { ...editingTaskList }
 
   const _addTask = () => {
     if (lastTaskInTaskListIsEmptyTask(taskList)) return

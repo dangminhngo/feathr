@@ -19,7 +19,7 @@
   let note: Note = createEmptyNote()
   const editingNote: Note | undefined = getItemById($notesStore.notes, $notesStore.currentNoteId)
 
-  if (editingNote) note = editingNote
+  if (editingNote) note = { ...editingNote }
 
   const togglePinned = () => {
     note.pinned = !note.pinned
