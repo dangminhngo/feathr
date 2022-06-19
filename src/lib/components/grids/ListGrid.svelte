@@ -17,7 +17,7 @@
   }
 </script>
 
-<div class="grid">
+<div class="wrapper" class:grid={!$uiStore.listView} class:list={$uiStore.listView}>
   {#each filteredLists as list (list.id)}
     <ListCard
       bind:list
@@ -30,10 +30,21 @@
 </div>
 
 <style lang="scss">
-  .grid {
+  .wrapper {
     padding: 2rem 0;
+  }
+
+  .grid {
     display: grid;
     grid-template-columns: repeat(5, 20rem);
+    gap: 1.5rem;
+  }
+
+  .list {
+    margin: 0 auto;
+    width: 30rem;
+    display: flex;
+    flex-direction: column;
     gap: 1.5rem;
   }
 </style>

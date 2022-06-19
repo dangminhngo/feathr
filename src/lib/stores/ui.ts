@@ -34,6 +34,12 @@ const createLayoutStore = (initialValue: UIStore) => {
         return s
       })
     },
+    toggleListView: () => {
+      update((s) => {
+        s.listView = !s.listView
+        return s
+      })
+    },
     openModal: (type: ModalType) => {
       update((s) => {
         s.modal[type] = true
