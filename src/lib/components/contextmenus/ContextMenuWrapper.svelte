@@ -1,15 +1,15 @@
 <script lang="ts">
   import Portal from 'svelte-portal/src/Portal.svelte'
-  import { uiStore, notesStore, taskListsStore } from '$lib/stores'
+  import { uiStore, notesStore, listsStore } from '$lib/stores'
   import { clickOutside } from '$lib/helpers'
 
   const { setCurrentNote } = notesStore
-  const { setCurrentTaskList } = taskListsStore
+  const { setCurrentList } = listsStore
   const { closeAllContextMenus } = uiStore
 
   const handleCloseContextMenu = () => {
     setCurrentNote('')
-    setCurrentTaskList('')
+    setCurrentList('')
     closeAllContextMenus()
   }
 </script>

@@ -43,7 +43,7 @@ export interface Task {
   done: boolean
 }
 
-export interface TaskList {
+export interface List {
   id: string
   title: string
   tasks: Task[]
@@ -61,7 +61,7 @@ export interface UIStore {
   navGrow: boolean
   modal: {
     note: boolean
-    taskList: boolean
+    list: boolean
   }
   contextMenu: {
     tags: boolean
@@ -75,9 +75,9 @@ export interface NotesStore {
   currentNoteId: string
 }
 
-export interface TaskListsStore {
-  taskLists: TaskList[]
-  currentTaskListId: string
+export interface ListsStore {
+  lists: List[]
+  currentListId: string
 }
 
 export interface TagsStore {

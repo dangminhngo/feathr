@@ -1,20 +1,20 @@
 <script lang="ts">
   import Icon from '$lib/components/Icon.svelte'
   import TrashGrid from '$lib/components/grids/TrashGrid.svelte'
-  import { notesStore, taskListsStore } from '$lib/stores'
+  import { notesStore, listsStore } from '$lib/stores'
   import { isEmptyTrash } from '$lib/helpers'
 
   const { emptyTrashNotes } = notesStore
-  const { emptyTrashTaskLists } = taskListsStore
+  const { emptyTrashLists } = listsStore
 
   const handleEmptyTrash = () => {
     emptyTrashNotes()
-    emptyTrashTaskLists()
+    emptyTrashLists()
   }
 </script>
 
 <div class="message">
-  {#if isEmptyTrash($notesStore.notes, $taskListsStore.taskLists)}
+  {#if isEmptyTrash($notesStore.notes, $listsStore.lists)}
     <span>Your trash is empty.</span>
   {:else}
     <span>All stuff in trash will be deleted in 7 days.</span>

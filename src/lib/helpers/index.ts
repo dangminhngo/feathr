@@ -1,8 +1,8 @@
 import type { Action } from 'svelte/types/runtime/action'
 import { v4 as uuid } from 'uuid'
-import type { Note, TaskList, Task, Tag } from '$lib/types'
+import type { Note, List, Task, Tag } from '$lib/types'
 
-export function getItemById<T extends Note | TaskList>(items: T[], id: string): T | undefined {
+export function getItemById<T extends Note | List>(items: T[], id: string): T | undefined {
   return items.find((item) => item.id === id)
 }
 
@@ -18,7 +18,7 @@ export const createEmptyNote = (): Note => ({
   updatedAt: new Date(),
 })
 
-export const createEmptyTaskList = (): TaskList => ({
+export const createEmptyList = (): List => ({
   id: uuid(),
   title: '',
   tasks: [],
@@ -45,28 +45,26 @@ export const isEmptyNote = (note: Note): boolean => {
   return note.title === '' && note.body === '' && !note.images.length
 }
 
-export const isEmptyTaskList = (taskList: TaskList): boolean => {
-  return taskList.title === '' && taskList.tasks.length === 0
+export const isEmptyList = (list: List): boolean => {
+  return list.title === '' && list.tasks.length === 0
 }
 
 export const isEmptyTask = (task: Task): boolean => {
   return task.title === ''
 }
 
-export const lastTaskInTaskListIsEmptyTask = (taskList: TaskList): boolean => {
-  return taskList.tasks.length > 0 && isEmptyTask(taskList.tasks[taskList.tasks.length - 1])
+export const lastTaskInListIsEmptyTask = (list: List): boolean => {
+  return list.tasks.length > 0 && isEmptyTask(list.tasks[list.tasks.length - 1])
 }
 
-export function filterItems<T extends Note | TaskList>(items: T[]): T[] {
+export function filterItems<T extends Note | List>(items: T[]): T[] {
   return items.filter((item) => !item.trash).sort((a, b) => Number(b.pinned) - Number(a.pinned))
 }
 
-export const getFilteredTasks = (
-  taskList: TaskList
-): { undoneTasks: Task[]; doneTasks: Task[] } => {
+export const getFilteredTasks = (list: List): { undoneTasks: Task[]; doneTasks: Task[] } => {
   return {
-    undoneTasks: taskList.tasks.filter((t) => !t.done),
-    doneTasks: taskList.tasks.filter((t) => t.done),
+    undoneTasks: list.tasks.filter((t) => !t.done),
+    doneTasks: list.tasks.filter((t) => t.done),
   }
 }
 
@@ -83,16 +81,14 @@ export const filterTags = (tags: Tag[]): { [key: string]: Tag[] } => {
   }, {})
 }
 
-export const filterTrashItems = (notes: Note[], taskLists: TaskList[]): (Note | TaskList)[] => {
+export const filterTrashItems = (notes: Note[], lists: List[]): (Note | List)[] => {
   const trashNotes = notes.filter((n) => n.trash)
-  const trashTaskLists = taskLists.filter((tl) => tl.trash)
+  const trashLists = lists.filter((l) => l.trash)
 
-  return [...trashNotes, ...trashTaskLists].sort(
-    (a, b) => Number(a?.trashedAt) - Number(b?.trashedAt)
-  )
+  return [...trashNotes, ...trashLists].sort((a, b) => Number(a?.trashedAt) - Number(b?.trashedAt))
 }
 
-export function searchItems<T extends Note | TaskList>(items: T[], keyword: string): T[] {
+export function searchItems<T extends Note | List>(items: T[], keyword: string): T[] {
   return items.filter(
     (item) => !item.trash && item.title.toLowerCase().includes(keyword.toLowerCase())
   )
@@ -100,12 +96,12 @@ export function searchItems<T extends Note | TaskList>(items: T[], keyword: stri
 
 export const getSearchResults = (
   notes: Note[],
-  taskLists: TaskList[],
+  lists: List[],
   keyword: string
-): (Note | TaskList)[] => {
+): (Note | List)[] => {
   const resultNotes = searchItems(notes, keyword)
-  const resultTaskLists = searchItems(taskLists, keyword)
-  return [...resultNotes, ...resultTaskLists].sort((a, b) => {
+  const resultLists = searchItems(lists, keyword)
+  return [...resultNotes, ...resultLists].sort((a, b) => {
     if (a.title > b.title) return 1
     if (a.title < b.title) return -1
     return 0
@@ -120,8 +116,8 @@ export const getTags = (tags: Tag[], ids: string[]): Tag[] => {
   return tags.filter((t) => ids.includes(t.id))
 }
 
-export const isEmptyTrash = (notes: Note[], taskLists: TaskList[]) => {
-  return !notes.filter((n) => n.trash).length && !taskLists.filter((tl) => tl.trash).length
+export const isEmptyTrash = (notes: Note[], lists: List[]) => {
+  return !notes.filter((n) => n.trash).length && !lists.filter((tl) => tl.trash).length
 }
 
 export const clickOutside: Action<HTMLElement, undefined> = (node: HTMLElement) => {

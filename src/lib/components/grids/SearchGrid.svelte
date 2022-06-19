@@ -1,13 +1,13 @@
 <script lang="ts">
   import NoteCard from '$lib/components/items/NoteCard.svelte'
-  import TaskListCard from '$lib/components/items/TaskListCard.svelte'
-  import { uiStore, notesStore, taskListsStore } from '$lib/stores'
+  import ListCard from '$lib/components/items/ListCard.svelte'
+  import { uiStore, notesStore, listsStore } from '$lib/stores'
   import { ModalType } from '$lib/enums'
-  import type { Note, TaskList } from '$lib/types'
+  import type { Note, List } from '$lib/types'
 
-  export let items: (Note | TaskList)[] = []
+  export let items: (Note | List)[] = []
   const { setCurrentNote, togglePinnedNote, assignTrashToNote } = notesStore
-  const { setCurrentTaskList, togglePinnedTaskList, assignTrashToTaskList } = taskListsStore
+  const { setCurrentList, togglePinnedList, assignTrashToList } = listsStore
   const { openModal } = uiStore
 
   const openEditNoteForm = (id: string) => {
@@ -15,21 +15,21 @@
     openModal(ModalType.Note)
   }
 
-  const openEditTaskListForm = (id: string) => {
-    setCurrentTaskList(id)
-    openModal(ModalType.TaskList)
+  const openEditListForm = (id: string) => {
+    setCurrentList(id)
+    openModal(ModalType.List)
   }
 </script>
 
 <div class="grid">
   {#each items as item (item.id)}
     {#if 'tasks' in item}
-      <TaskListCard
-        taskList={item}
-        active={$taskListsStore.currentTaskListId === item.id}
-        on:click={() => openEditTaskListForm(item.id)}
-        handlePinned={() => togglePinnedTaskList(item.id)}
-        handleTrash={() => assignTrashToTaskList(item.id)}
+      <ListCard
+        list={item}
+        active={$listsStore.currentListId === item.id}
+        on:click={() => openEditListForm(item.id)}
+        handlePinned={() => togglePinnedList(item.id)}
+        handleTrash={() => assignTrashToList(item.id)}
       />
     {:else}
       <NoteCard

@@ -1,10 +1,10 @@
 import { writable } from 'svelte/store'
 import { v4 as uuid } from 'uuid'
 
-import type { TaskListsStore, TaskList } from '$lib/types'
+import type { ListsStore, List } from '$lib/types'
 
-const initialValue: TaskListsStore = {
-  taskLists: [
+const initialValue: ListsStore = {
+  lists: [
     {
       id: uuid(),
       title: 'This is the first task',
@@ -51,68 +51,68 @@ const initialValue: TaskListsStore = {
       trashedAt: new Date(),
     },
   ],
-  currentTaskListId: '',
+  currentListId: '',
 }
 
-const createTaskListsStore = (initialValue: TaskListsStore) => {
+const createListsStore = (initialValue: ListsStore) => {
   const { subscribe, update } = writable(initialValue)
 
   return {
     subscribe,
-    setCurrentTaskList: (id: string) => {
+    setCurrentList: (id: string) => {
       update((s) => {
-        s.currentTaskListId = id
+        s.currentListId = id
         return s
       })
     },
-    addTaskList: (taskList: TaskList) => {
+    addList: (list: List) => {
       update((s) => {
-        s.taskLists.push(taskList)
+        s.lists.push(list)
         return s
       })
     },
-    updateTaskList: (id: string, updateTaskList: TaskList) => {
+    updateList: (id: string, updateList: List) => {
       update((s) => {
-        s.taskLists = s.taskLists.map((tl) => (tl.id === id ? { ...tl, ...updateTaskList } : tl))
+        s.lists = s.lists.map((l) => (l.id === id ? { ...l, ...updateList } : l))
         return s
       })
     },
-    deleteTaskList: (id: string) => {
+    deleteList: (id: string) => {
       update((s) => {
-        s.taskLists = s.taskLists.filter((t) => t.id !== id)
+        s.lists = s.lists.filter((l) => l.id !== id)
         return s
       })
     },
-    togglePinnedTaskList: (id: string) => {
+    togglePinnedList: (id: string) => {
       update((s) => {
-        const task = s.taskLists.find((t) => t.id === id)
-        if (task) task.pinned = !task.pinned
+        const list = s.lists.find((l) => l.id === id)
+        if (list) list.pinned = !list.pinned
         return s
       })
     },
-    assignTrashToTaskList: (id: string) => {
+    assignTrashToList: (id: string) => {
       update((s) => {
-        s.taskLists = s.taskLists.map((tl) =>
-          tl.id === id ? { ...tl, trash: true, trashedAt: new Date() } : tl
+        s.lists = s.lists.map((l) =>
+          l.id === id ? { ...l, trash: true, trashedAt: new Date() } : l
         )
         return s
       })
     },
-    unassignTrashToTaskList: (id: string) => {
+    unassignTrashToList: (id: string) => {
       update((s) => {
-        s.taskLists = s.taskLists.map((tl) =>
-          tl.id === id ? { ...tl, trash: false, trashedAt: undefined } : tl
+        s.lists = s.lists.map((l) =>
+          l.id === id ? { ...l, trash: false, trashedAt: undefined } : l
         )
         return s
       })
     },
-    emptyTrashTaskLists: () => {
+    emptyTrashLists: () => {
       update((s) => {
-        s.taskLists = s.taskLists.filter((tl) => !tl.trash)
+        s.lists = s.lists.filter((l) => !l.trash)
         return s
       })
     },
   }
 }
 
-export const taskListsStore = createTaskListsStore(initialValue)
+export const listsStore = createListsStore(initialValue)

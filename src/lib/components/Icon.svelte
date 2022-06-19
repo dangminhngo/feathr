@@ -23,7 +23,7 @@
   import Search from '$assets/icons/search.svg'
   import Tag from '$assets/icons/tag.svg'
   import Tags from '$assets/icons/tags.svg'
-  import TaskList from '$assets/icons/task-list.svg'
+  import List from '$assets/icons/task-list.svg'
   import Trash from '$assets/icons/trash.svg'
 
   const icons: { [key: string]: SvelteComponent } = {
@@ -49,7 +49,7 @@
     search: Search,
     tag: Tag,
     tags: Tags,
-    taskList: TaskList,
+    list: List,
     trash: Trash,
   }
 

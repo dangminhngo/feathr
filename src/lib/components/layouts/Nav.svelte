@@ -10,9 +10,9 @@
       path: '/app/notes',
     },
     {
-      icon: 'taskList',
-      label: 'Task Lists',
-      path: '/app/tasklists',
+      icon: 'list',
+      label: 'Lists',
+      path: '/app/lists',
     },
     {
       icon: 'tags',

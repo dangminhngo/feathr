@@ -1,11 +1,11 @@
 <script lang="ts">
   import ModalWrapper from '$lib/components/modals/ModalWrapper.svelte'
   import NoteForm from '$lib/components/forms/NoteForm.svelte'
-  import TaskListForm from '$lib/components/forms/TaskListForm.svelte'
+  import ListForm from '$lib/components/forms/ListForm.svelte'
 
-  import { uiStore, notesStore, taskListsStore } from '$lib/stores'
+  import { uiStore, notesStore, listsStore } from '$lib/stores'
 
-  const { setCurrentTaskList } = taskListsStore
+  const { setCurrentList } = listsStore
   const { setCurrentNote } = notesStore
   const { closeAllModals } = uiStore
 
@@ -14,8 +14,8 @@
     closeAllModals()
   }
 
-  const handleTaskListModalClose = () => {
-    setCurrentTaskList('')
+  const handleListModalClose = () => {
+    setCurrentList('')
     closeAllModals()
   }
 </script>
@@ -26,8 +26,8 @@
   </ModalWrapper>
 {/if}
 
-{#if $uiStore.modal.taskList}
-  <ModalWrapper handleBackdropClick={handleTaskListModalClose}>
-    <TaskListForm />
+{#if $uiStore.modal.list}
+  <ModalWrapper handleBackdropClick={handleListModalClose}>
+    <ListForm />
   </ModalWrapper>
 {/if}

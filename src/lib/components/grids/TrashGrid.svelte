@@ -1,38 +1,38 @@
 <script lang="ts">
   import NoteCard from '$lib/components/items/NoteCard.svelte'
-  import TaskListCard from '$lib/components/items/TaskListCard.svelte'
-  import { notesStore, taskListsStore } from '$lib/stores'
+  import ListCard from '$lib/components/items/ListCard.svelte'
+  import { notesStore, listsStore } from '$lib/stores'
   import { filterTrashItems } from '$lib/helpers'
 
   const { deleteNote, unassignTrashToNote } = notesStore
-  const { deleteTaskList, unassignTrashToTaskList } = taskListsStore
+  const { deleteList, unassignTrashToList } = listsStore
 
   const _deleteNote = (id: string) => {
     deleteNote(id)
   }
 
-  const _deleteTaskList = (id: string) => {
-    deleteTaskList(id)
+  const _deleteList = (id: string) => {
+    deleteList(id)
   }
 
   const _unassignTrashToNote = (id: string) => {
     unassignTrashToNote(id)
   }
 
-  const _unassignTrashToTaskList = (id: string) => {
-    unassignTrashToTaskList(id)
+  const _unassignTrashToList = (id: string) => {
+    unassignTrashToList(id)
   }
 
-  $: trashItems = filterTrashItems($notesStore.notes, $taskListsStore.taskLists)
+  $: trashItems = filterTrashItems($notesStore.notes, $listsStore.lists)
 </script>
 
 <div class="grid">
   {#each trashItems as item (item.id)}
     {#if 'tasks' in item}
-      <TaskListCard
-        taskList={item}
-        handleRestore={() => _unassignTrashToTaskList(item.id)}
-        handleDelete={() => _deleteTaskList(item.id)}
+      <ListCard
+        list={item}
+        handleRestore={() => _unassignTrashToList(item.id)}
+        handleDelete={() => _deleteList(item.id)}
       />
     {:else}
       <NoteCard

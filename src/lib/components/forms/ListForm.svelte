@@ -14,20 +14,20 @@
   import { ContextMenuType } from '$lib/enums'
   import {
     getItemById,
-    isEmptyTaskList,
-    lastTaskInTaskListIsEmptyTask,
-    createEmptyTaskList,
+    isEmptyList,
+    lastTaskInListIsEmptyTask,
+    createEmptyList,
     createEmptyTask,
     getFilteredTasks,
   } from '$lib/helpers'
-  import { uiStore, taskListsStore } from '$lib/stores'
-  import type { TaskList, Task } from '$lib/types'
+  import { uiStore, listsStore } from '$lib/stores'
+  import type { List, Task } from '$lib/types'
 
   let titleField: Field
-  let taskList: TaskList = createEmptyTaskList(),
-    editingTaskList = getItemById($taskListsStore.taskLists, $taskListsStore.currentTaskListId)
+  let list: List = createEmptyList(),
+    editingList = getItemById($listsStore.lists, $listsStore.currentListId)
 
-  if (editingTaskList) taskList = { ...editingTaskList }
+  if (editingList) list = { ...editingList }
 
   const [send, receive] = crossfade({
     duration: (d) => Math.sqrt(d * 200),
@@ -48,24 +48,24 @@
   })
 
   const _addTask = () => {
-    if (lastTaskInTaskListIsEmptyTask(taskList)) return
+    if (lastTaskInListIsEmptyTask(list)) return
     const task = createEmptyTask()
-    taskList.tasks = [...taskList.tasks, task]
+    list.tasks = [...list.tasks, task]
   }
 
   const _deleteTask = (id: string) => {
-    taskList.tasks = taskList.tasks.filter((t) => t.id !== id)
+    list.tasks = list.tasks.filter((l) => l.id !== id)
   }
 
   const togglePinned = () => {
-    taskList.pinned = !taskList.pinned
+    list.pinned = !list.pinned
   }
 
-  const { addTaskList, updateTaskList, setCurrentTaskList } = taskListsStore
+  const { addList, updateList, setCurrentList } = listsStore
   const { closeAllModals, toggleContextMenu } = uiStore
 
   const _toggleContextMenu = (type: ContextMenuType, id: string) => (e: MouseEvent) => {
-    setCurrentTaskList(id)
+    setCurrentList(id)
     const rect = (e.target as HTMLButtonElement).getBoundingClientRect()
     toggleContextMenu(type, {
       x: rect.x,
@@ -77,17 +77,17 @@
   const handleSubmit = () => {
     closeAllModals()
     dispatch('close')
-    if (isEmptyTaskList(taskList) || lastTaskInTaskListIsEmptyTask(taskList)) return
-    if (editingTaskList) updateTaskList(taskList.id, taskList)
+    if (isEmptyList(list) || lastTaskInListIsEmptyTask(list)) return
+    if (editingList) updateList(list.id, list)
     else {
-      addTaskList(taskList)
+      addList(list)
     }
-    setCurrentTaskList('')
+    setCurrentList('')
     goto('/app/tasks')
   }
 
   let undoneTasks: Task[], doneTasks: Task[]
-  $: ({ undoneTasks, doneTasks } = getFilteredTasks(taskList))
+  $: ({ undoneTasks, doneTasks } = getFilteredTasks(list))
 
   onMount(() => titleField?.focus())
 
@@ -97,12 +97,12 @@
 
 <div
   class="form"
-  style="background-color: {taskList.color ? brushPalette[taskList.color] : 'transparent'};"
+  style="background-color: {list.color ? brushPalette[list.color] : 'transparent'};"
 >
-  <Field bind:this={titleField} placeholder="Title" bind:value={taskList.title} />
+  <Field bind:this={titleField} placeholder="Title" bind:value={list.title} />
   {#each undoneTasks as task (task.id)}
     <div in:receive|local={{ key: task.id }} out:send|local={{ key: task.id }} animate:flip>
-      <EditableTask bind:task handleDelete={() => _deleteTask(task.id)} alt={!!taskList.color} />
+      <EditableTask bind:task handleDelete={() => _deleteTask(task.id)} alt={!!list.color} />
     </div>
   {/each}
   <button class="add" on:click={_addTask}>
@@ -114,39 +114,39 @@
   {/if}
   {#each doneTasks as task (task.id)}
     <div in:receive|local={{ key: task.id }} out:send|local={{ key: task.id }} animate:flip>
-      <EditableTask bind:task handleDelete={() => _deleteTask(task.id)} alt={!!taskList.color} />
+      <EditableTask bind:task handleDelete={() => _deleteTask(task.id)} alt={!!list.color} />
     </div>
   {/each}
-  <TagPillGrid ids={taskList.tagIds} />
+  <TagPillGrid ids={list.tagIds} />
   <div class="actions">
     <div class="left">
       <IconButton
-        name={taskList.pinned ? 'pinFull' : 'pin'}
+        name={list.pinned ? 'pinFull' : 'pin'}
         size="md"
-        active={taskList.pinned}
+        active={list.pinned}
         on:click={togglePinned}
       />
       <IconButton name="picture" size="md" />
       <IconButton
         name="tags"
         size="md"
-        on:click={(e) => _toggleContextMenu(ContextMenuType.Tags, taskList.id)(e)}
+        on:click={(e) => _toggleContextMenu(ContextMenuType.Tags, list.id)(e)}
       />
       <IconButton
         name="brush"
         size="md"
-        on:click={(e) => _toggleContextMenu(ContextMenuType.Brush, taskList.id)(e)}
+        on:click={(e) => _toggleContextMenu(ContextMenuType.Brush, list.id)(e)}
       />
     </div>
     <div class="right">
       <button class="close-button" on:click={handleSubmit}
-        >{isEmptyTaskList(taskList) ? 'Close' : 'Save'}</button
+        >{isEmptyList(list) ? 'Close' : 'Save'}</button
       >
     </div>
   </div>
 </div>
 
-<ContextMenus bind:ids={taskList.tagIds} bind:color={taskList.color} />
+<ContextMenus bind:ids={list.tagIds} bind:color={list.color} />
 
 <style lang="scss">
   .form {
