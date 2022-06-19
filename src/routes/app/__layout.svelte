@@ -67,7 +67,7 @@
     --rounded-lg: 8px;
     --rounded-full: 100px;
 
-    --shadow: 0 0 1rem hsla(0, 0%, 0%, 0.8);
+    --shadow: 0 0 0.5rem hsla(0, 0%, 0%, 0.4);
   }
 
   :global(*, *::before, *::after) {

@@ -30,7 +30,6 @@
     top: 25%;
     left: 50%;
     transform: translate(-50%, 0);
-    border: 1px solid var(--theme-primary-700);
     border-radius: var(--rounded);
     background-color: var(--theme-primary-900);
     box-shadow: var(--shadow);
