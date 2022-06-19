@@ -1,5 +1,6 @@
 <script lang="ts">
   import { getContext } from 'svelte'
+  import Button from '$lib/components/Button.svelte'
   import ModalWrapper from './ModalWrapper.svelte'
   import SelectedThemeCircle from './SelectedThemeCircle.svelte'
   import { uiStore } from '$lib/stores'
@@ -28,7 +29,7 @@
           <SelectedThemeCircle bind:group={currentThemeName} name="theme" theme={preset} />
         {/each}
       </div>
-      <button class="save" on:click={handleSubmit}>Save</button>
+      <Button on:click={handleSubmit}>Save</Button>
     </div>
   </ModalWrapper>
 {/if}
@@ -45,21 +46,5 @@
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     gap: 0.5rem;
-  }
-
-  .save {
-    align-self: flex-end;
-    cursor: pointer;
-    padding: 0 0.5rem;
-    height: 2rem;
-    border-radius: var(--rounded);
-    font-size: var(--text-sm);
-    font-weight: 700;
-    transition: all 0.15s ease-out;
-
-    &:hover {
-      background-color: var(--theme-primary-50);
-      color: var(--theme-primary-900);
-    }
   }
 </style>

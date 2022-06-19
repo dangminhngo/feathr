@@ -3,6 +3,7 @@
   import { quintOut } from 'svelte/easing'
   import { crossfade } from 'svelte/transition'
   import { flip } from 'svelte/animate'
+  import Button from '$lib/components/Button.svelte'
   import EditableTask from '$lib/components/EditableTask.svelte'
   import Field from '$lib/components/Field.svelte'
   import Icon from '$lib/components/Icon.svelte'
@@ -137,9 +138,7 @@
       />
     </div>
     <div class="right">
-      <button class="close-button" on:click={handleSubmit}
-        >{isEmptyList(list) ? 'Close' : 'Save'}</button
-      >
+      <Button on:click={handleSubmit}>{isEmptyList(list) ? 'Close' : 'Save'}</Button>
     </div>
   </div>
 </div>
@@ -192,20 +191,5 @@
   .right {
     display: flex;
     align-items: center;
-  }
-
-  .close-button {
-    cursor: pointer;
-    padding: 0 0.5rem;
-    height: 2rem;
-    border-radius: var(--rounded);
-    font-size: var(--text-sm);
-    font-weight: 700;
-    transition: all 0.15s ease-out;
-
-    &:hover {
-      background-color: var(--theme-primary-50);
-      color: var(--theme-primary-900);
-    }
   }
 </style>

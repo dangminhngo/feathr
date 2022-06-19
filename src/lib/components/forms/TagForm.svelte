@@ -1,4 +1,5 @@
 <script>
+  import Button from '$lib/components/Button.svelte'
   import Field from '$lib/components/Field.svelte'
   import { createEmptyTag } from '$lib/helpers'
   import { tagsStore } from '$lib/stores'
@@ -16,35 +17,18 @@
 <div class="form">
   <Field placeholder="Add a tag..." bind:value={tag.label} />
   {#if tag.label}
-    <button class="close-button" on:click={handleSubmit}>Save</button>
+    <Button on:click={handleSubmit}>Save</Button>
   {/if}
 </div>
 
 <style lang="scss">
   .form {
-    position: relative;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding-left: 1rem;
     width: 30rem;
+    display: flex;
+    align-items: stretch;
     border: 1px solid var(--theme-primary-600);
     border-radius: var(--rounded);
-  }
-
-  .close-button {
-    cursor: pointer;
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 0 0.5rem;
-    height: 100%;
-    border-radius: var(--rounded);
-    font-size: var(--text-sm);
-    font-weight: 700;
-    transition: all 0.15s ease-out;
-
-    &:hover {
-      background-color: var(--theme-primary-50);
-      color: var(--theme-primary-900);
-    }
   }
 </style>
