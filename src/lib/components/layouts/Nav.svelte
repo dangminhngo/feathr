@@ -11,7 +11,7 @@
     },
     {
       icon: 'taskList',
-      label: 'Tasks',
+      label: 'Task Lists',
       path: '/app/tasklists',
     },
     {
