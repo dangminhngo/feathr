@@ -2,6 +2,7 @@
   import ThemeContext from '$lib/contexts/ThemeContext.svelte'
   import Header from '$lib/components/layouts/Header.svelte'
   import Nav from '$lib/components/layouts/Nav.svelte'
+  import GlobalContextMenus from '$lib/components/contextmenus/GlobalContextMenus.svelte'
   import Modals from '$lib/components/modals/Modals.svelte'
 </script>
 
@@ -22,6 +23,7 @@
     </main>
   </div>
   <Modals />
+  <GlobalContextMenus />
 </ThemeContext>
 
 <style lang="scss">

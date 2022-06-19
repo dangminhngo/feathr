@@ -7,7 +7,7 @@
   import Field from '$lib/components/Field.svelte'
   import Icon from '$lib/components/Icon.svelte'
   import IconButton from '$lib/components/IconButton.svelte'
-  import ContextMenus from '$lib/components/contextmenus/ContextMenus.svelte'
+  import FormContextMenus from '$lib/components/contextmenus/FormContextMenus.svelte'
   import TagPillGrid from '$lib/components/grids/TagPillGrid.svelte'
   import { themeKey } from '$lib/consts'
   import { ContextMenuType } from '$lib/enums'
@@ -144,7 +144,7 @@
   </div>
 </div>
 
-<ContextMenus bind:ids={list.tagIds} bind:color={list.color} />
+<FormContextMenus bind:ids={list.tagIds} bind:color={list.color} />
 
 <style lang="scss">
   .form {

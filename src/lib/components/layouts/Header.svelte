@@ -1,10 +1,11 @@
 <script lang="ts">
   import { goto } from '$app/navigation'
-  import { uiStore } from '$lib/stores'
-
+  import IconButton from '$lib/components/IconButton.svelte'
   import Hamburger from './Hamburger.svelte'
   import ProfilePicture from './ProfilePicture.svelte'
   import Search from './Search.svelte'
+  import { uiStore } from '$lib/stores'
+  import { ContextMenuType } from '$lib/enums'
 
   let keyword = ''
 
@@ -13,12 +14,22 @@
     goto(`/app/search/${keyword}`)
     keyword = ''
   }
+
+  const { toggleContextMenu } = uiStore
+  const handleToggleSettingsContextMenu = (e: MouseEvent) => {
+    const rect = (e.target as HTMLButtonElement).getBoundingClientRect()
+    toggleContextMenu(ContextMenuType.Settings, {
+      x: rect.x + rect.width - 160,
+      y: rect.y + rect.height + 14,
+    })
+  }
 </script>
 
 <header class="header">
   <Hamburger on:click={uiStore.toggleNav} />
   <Search placeholder="Search notes or tasks ..." bind:value={keyword} on:submit={handleSubmit} />
   <div class="buttons">
+    <IconButton name="cog" on:click={handleToggleSettingsContextMenu} />
     <ProfilePicture />
   </div>
 </header>

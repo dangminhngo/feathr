@@ -4,9 +4,13 @@ import type { ModalType, ContextMenuType } from '$lib/enums'
 
 const initialValue: UIStore = {
   navGrow: false,
+  listView: false,
   modal: {
     note: false,
     list: false,
+    themes: false,
+    shortcuts: false,
+    about: false,
   },
   contextMenu: {
     tags: false,
@@ -41,6 +45,9 @@ const createLayoutStore = (initialValue: UIStore) => {
         s.modal = {
           note: false,
           list: false,
+          themes: false,
+          shortcuts: false,
+          about: false,
         }
         return s
       })

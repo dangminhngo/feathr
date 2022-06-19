@@ -5,5 +5,5 @@
   import { listsStore } from '$lib/stores'
 </script>
 
-<PlaceholderField component={ListForm} placeholder="Add a task list ..." />
+<PlaceholderField component={ListForm} placeholder="Add a list ..." />
 <ListGrid lists={$listsStore.lists} />

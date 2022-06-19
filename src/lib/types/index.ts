@@ -59,9 +59,13 @@ export interface List {
 
 export interface UIStore {
   navGrow: boolean
+  listView: boolean
   modal: {
     note: boolean
     list: boolean
+    themes: boolean
+    shortcuts: boolean
+    about: boolean
   }
   contextMenu: {
     tags: boolean

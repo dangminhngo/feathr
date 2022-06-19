@@ -4,7 +4,7 @@
     email = 'jacktheripper@gmail.com'
 </script>
 
-<button>
+<button on:click>
   <img src={url} alt={email} />
 </button>
 

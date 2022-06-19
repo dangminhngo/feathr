@@ -2,7 +2,7 @@
   import { onMount, getContext, createEventDispatcher } from 'svelte'
   import Field from '$lib/components/Field.svelte'
   import IconButton from '$lib/components/IconButton.svelte'
-  import ContextMenus from '$lib/components/contextmenus/ContextMenus.svelte'
+  import FormContextMenus from '$lib/components/contextmenus/FormContextMenus.svelte'
   import TagPillGrid from '$lib/components/grids/TagPillGrid.svelte'
   import { uiStore, notesStore } from '$lib/stores'
   import { getItemById, isEmptyNote, createEmptyNote } from '$lib/helpers'
@@ -88,7 +88,7 @@
   </div>
 </div>
 
-<ContextMenus bind:ids={note.tagIds} bind:color={note.color} />
+<FormContextMenus bind:ids={note.tagIds} bind:color={note.color} />
 
 <style lang="scss">
   .form {

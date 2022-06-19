@@ -1,33 +1,13 @@
 <script lang="ts">
-  import ModalWrapper from '$lib/components/modals/ModalWrapper.svelte'
-  import NoteForm from '$lib/components/forms/NoteForm.svelte'
-  import ListForm from '$lib/components/forms/ListForm.svelte'
-
-  import { uiStore, notesStore, listsStore } from '$lib/stores'
-
-  const { setCurrentList } = listsStore
-  const { setCurrentNote } = notesStore
-  const { closeAllModals } = uiStore
-
-  const handleNoteModalClose = () => {
-    setCurrentNote('')
-    closeAllModals()
-  }
-
-  const handleListModalClose = () => {
-    setCurrentList('')
-    closeAllModals()
-  }
+  import NoteFormModal from './NoteFormModal.svelte'
+  import ListFormModal from './ListFormModal.svelte'
+  import ThemesModal from './ThemesModal.svelte'
+  import ShortcutsModal from './ShortcutsModal.svelte'
+  import AboutModal from './AboutModal.svelte'
 </script>
 
-{#if $uiStore.modal.note}
-  <ModalWrapper handleBackdropClick={handleNoteModalClose}>
-    <NoteForm />
-  </ModalWrapper>
-{/if}
-
-{#if $uiStore.modal.list}
-  <ModalWrapper handleBackdropClick={handleListModalClose}>
-    <ListForm />
-  </ModalWrapper>
-{/if}
+<NoteFormModal />
+<ListFormModal />
+<ThemesModal />
+<ShortcutsModal />
+<AboutModal />
