@@ -37,7 +37,7 @@
   .character {
     margin-bottom: 0.5rem;
     padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--theme-primary-800);
-    color: var(--theme-primary-600);
+    border-bottom: 1px solid var(--theme-primary-700);
+    color: var(--theme-primary-500);
   }
 </style>

@@ -39,11 +39,12 @@
     height: 100%;
     border-radius: var(--rounded);
     font-size: var(--text-sm);
-    color: var(--theme-primary-400);
+    font-weight: 700;
     transition: all 0.15s ease-out;
 
     &:hover {
-      background-color: var(--theme-primary-700);
+      background-color: var(--theme-primary-50);
+      color: var(--theme-primary-900);
     }
   }
 </style>

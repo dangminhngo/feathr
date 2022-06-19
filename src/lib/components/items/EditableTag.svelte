@@ -62,7 +62,6 @@
     align-items: center;
     border-radius: var(--rounded);
     font-size: var(--text-sm);
-    color: var(--theme-primary-400);
     transition: all 0.15s ease-out;
   }
 
@@ -94,7 +93,6 @@
     align-items: center;
     opacity: 0;
     pointer-events: none;
-    color: var(--theme-primary-400);
     transition: all 0.15s ease-out;
   }
 
