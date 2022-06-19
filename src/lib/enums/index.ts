@@ -5,5 +5,6 @@ export enum ModalType {
 
 export enum ContextMenuType {
   Tags = 'tags',
-  Brush = 'brush',
+  Background = 'background',
+  Settings = 'settings',
 }

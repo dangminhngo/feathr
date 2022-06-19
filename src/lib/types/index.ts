@@ -65,7 +65,8 @@ export interface UIStore {
   }
   contextMenu: {
     tags: boolean
-    brush: boolean
+    background: boolean
+    settings: boolean
   }
   position: Position
 }

@@ -10,6 +10,6 @@
   <TagsContextMenu bind:ids />
 {/if}
 
-{#if $uiStore.contextMenu.brush}
+{#if $uiStore.contextMenu.background}
   <BackgroundContextMenu bind:color />
 {/if}

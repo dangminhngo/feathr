@@ -9,8 +9,9 @@ const initialValue: UIStore = {
     list: false,
   },
   contextMenu: {
-    brush: false,
     tags: false,
+    background: false,
+    settings: false,
   },
   position: {
     x: 0,
@@ -55,7 +56,8 @@ const createLayoutStore = (initialValue: UIStore) => {
       update((s) => {
         s.contextMenu = {
           tags: false,
-          brush: false,
+          background: false,
+          settings: false,
         }
         s.position = { x: 0, y: 0 }
         return s

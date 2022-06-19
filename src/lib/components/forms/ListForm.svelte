@@ -133,7 +133,7 @@
       <IconButton
         name="brush"
         size="md"
-        on:click={(e) => _toggleContextMenu(ContextMenuType.Brush, list.id)(e)}
+        on:click={(e) => _toggleContextMenu(ContextMenuType.Background, list.id)(e)}
       />
     </div>
     <div class="right">
