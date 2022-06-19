@@ -1,6 +1,5 @@
 <script lang="ts">
   import { onMount, getContext, createEventDispatcher } from 'svelte'
-  import { goto } from '$app/navigation'
   import { quintOut } from 'svelte/easing'
   import { crossfade } from 'svelte/transition'
   import { flip } from 'svelte/animate'
@@ -83,7 +82,6 @@
       addList(list)
     }
     setCurrentList('')
-    goto('/app/tasks')
   }
 
   let undoneTasks: Task[], doneTasks: Task[]

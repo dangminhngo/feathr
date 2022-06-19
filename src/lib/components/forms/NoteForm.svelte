@@ -1,6 +1,5 @@
 <script lang="ts">
   import { onMount, getContext, createEventDispatcher } from 'svelte'
-  import { goto } from '$app/navigation'
   import Field from '$lib/components/Field.svelte'
   import IconButton from '$lib/components/IconButton.svelte'
   import ContextMenus from '$lib/components/contextmenus/ContextMenus.svelte'
@@ -51,7 +50,6 @@
       addNote(note)
     }
     setCurrentNote('')
-    goto('/app/notes')
   }
 </script>
 
