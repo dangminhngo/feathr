@@ -86,7 +86,7 @@
     bind:value={taskList.title}
   />
   {#each undoneTasks as task (task.id)}
-    <EditableTask bind:task handleDelete={() => _deleteTask(task.id)} />
+    <EditableTask bind:task handleDelete={() => _deleteTask(task.id)} alt={!!taskList.color} />
   {/each}
   <button class="add" on:click={_addTask}>
     <Icon name="plus" width={16} height={16} />
@@ -96,7 +96,7 @@
     <p>{doneTasks.length} tasks done</p>
   {/if}
   {#each doneTasks as task (task.id)}
-    <EditableTask bind:task handleDelete={() => _deleteTask(task.id)} />
+    <EditableTask bind:task handleDelete={() => _deleteTask(task.id)} alt={!!taskList.color} />
   {/each}
   <TagPillList ids={taskList.tagIds} />
   <div class="actions">

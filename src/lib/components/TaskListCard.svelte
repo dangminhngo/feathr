@@ -38,7 +38,11 @@
 <div
   class="task-list"
   class:trash={taskList.trash}
-  style="background-color: {taskList.color ? brushPalette[taskList.color] : 'transparent'};"
+  style="background-color: {taskList.color
+    ? brushPalette[taskList.color]
+    : 'transparent'}; border-color: {taskList.color
+    ? brushPalette[taskList.color]
+    : 'var(--theme-primary-700)'};"
   on:mouseenter={handleMouseEnter}
   on:mouseleave={handleMouseLeave}
   on:click
@@ -51,7 +55,7 @@
       <div class="message">All tasks completed</div>
     {/if}
     {#each undoneTasks as task (task.id)}
-      <EditableTask editable={false} bind:task />
+      <EditableTask editable={false} bind:task alt={!!taskList.color} />
     {/each}
     {#if taskList.tasks.length === 0}
       <div class="message">No tasks</div>
@@ -62,7 +66,7 @@
       <div class="message">No tasks completed</div>
     {/if}
     {#each doneTasks as task (task.id)}
-      <EditableTask editable={false} bind:task />
+      <EditableTask editable={false} bind:task alt={!!taskList.color} />
     {/each}
   </div>
   <TagPillList ids={taskList.tagIds} />
@@ -94,7 +98,8 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    border: 1px solid var(--theme-primary-600);
+    border-width: 1px;
+    border-style: solid;
     border-radius: var(--rounded);
   }
 
@@ -107,13 +112,13 @@
   }
 
   .sep {
-    border-color: var(--theme-primary-600);
+    border: 1px solid var(--theme-primary-400);
   }
 
   .message {
     padding: 0.75rem 0;
     font-size: var(--text-sm);
-    color: var(--theme-primary-400);
+    color: var(--theme-primary-200);
   }
 
   .buttons {

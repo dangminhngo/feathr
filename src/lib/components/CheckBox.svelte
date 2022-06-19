@@ -1,9 +1,10 @@
 <script lang="ts">
   import Icon from '$lib/components/Icon.svelte'
-  export let checked = false
+  export let checked = false,
+    alt = false
 </script>
 
-<label class="label" class:checked on:click|stopPropagation>
+<label class="label" class:checked class:alt on:click|stopPropagation>
   <input class="checkbox" type="checkbox" bind:checked />
   <Icon name="check" width={16} height={16} />
 </label>
@@ -25,6 +26,12 @@
     border: 2px solid var(--theme-accent);
     background-color: var(--theme-accent);
     color: var(--theme-primary-50);
+  }
+
+  .label.checked.alt {
+    border: 2px solid var(--theme-primary-50);
+    background-color: var(--theme-primary-50);
+    color: var(--theme-accent);
   }
 
   .checkbox {

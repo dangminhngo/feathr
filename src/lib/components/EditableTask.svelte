@@ -8,6 +8,7 @@
 
   export let task: Task,
     editable = true,
+    alt = false,
     handleDelete: () => void = () => {
       /**/
     }
@@ -38,7 +39,7 @@
       <Icon name="link" width={16} height={16} />
     </div>
   {/if}
-  <CheckBox bind:checked={task.done} />
+  <CheckBox bind:checked={task.done} {alt} />
   <ContentEditable bind:this={contentEditable} {editable} size="sm" bind:value={task.title} />
   {#if editable}
     <div class="buttons" class:show={showButton}>
@@ -56,7 +57,7 @@
 
   .task.done {
     text-decoration: line-through;
-    color: var(--theme-primary-400);
+    color: var(--theme-primary-300);
   }
 
   .draggable {

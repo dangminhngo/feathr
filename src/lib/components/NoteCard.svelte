@@ -32,7 +32,11 @@
 <div
   class="note"
   class:trash={note.trash}
-  style="background-color: {note.color ? brushPalette[note.color] : 'transparent'};"
+  style="background-color: {note.color
+    ? brushPalette[note.color]
+    : 'transparent'}; border-color: {note.color
+    ? brushPalette[note.color]
+    : 'var(--theme-primary-700)'};"
   on:mouseenter={handleMouseEnter}
   on:mouseleave={handleMouseLeave}
   on:click
@@ -69,7 +73,8 @@
     flex-direction: column;
     justify-content: space-between;
     gap: 1rem;
-    border: 1px solid var(--theme-primary-600);
+    border-width: 1px;
+    border-style: solid;
     border-radius: var(--rounded);
   }
 
