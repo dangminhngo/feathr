@@ -1,10 +1,15 @@
 <script lang="ts">
   import SignIn from '$lib/components/forms/SignIn.svelte'
+
+  type SignInEvent = SignIn['$$events_def']['signin']
+  const handleSignIn = ({ detail }: SignInEvent) => {
+    console.log(detail)
+  }
 </script>
 
 <div class="wrapper">
   <p>Sign in to Feathr</p>
-  <SignIn />
+  <SignIn on:signin={handleSignIn} />
   <div class="navigate">
     New to Feathr? <a href="/auth/signup">Sign up</a>
   </div>

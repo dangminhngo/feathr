@@ -1,13 +1,22 @@
 <script lang="ts">
+  import { createEventDispatcher } from 'svelte'
   import TextInput from '$lib/components/TextInput.svelte'
   import PasswordInput from '$lib/components/PasswordInput.svelte'
   import Button from '$lib/components/Button.svelte'
 
   let email = '',
     password = ''
+
+  const dispatch = createEventDispatcher()
+  const handleSubmit = () => {
+    dispatch('signup', {
+      email,
+      password,
+    })
+  }
 </script>
 
-<form>
+<form on:submit|preventDefault={handleSubmit}>
   <TextInput label="Email" placeholder="Enter your email" bind:value={email} />
   <PasswordInput label="Password" placeholder="Enter your password" bind:value={password} />
   <Button size="lg" variant="primary" stretch={true} on:click={() => console.log('Sign Up')}

@@ -1,10 +1,15 @@
 <script lang="ts">
   import SignUp from '$lib/components/forms/SignUp.svelte'
+
+  type SignUpEvent = SignUp['$$events_def']['signup']
+  const handleSignUp = ({ detail }: SignUpEvent) => {
+    console.log(detail)
+  }
 </script>
 
 <div class="wrapper">
   <p>Create an account</p>
-  <SignUp />
+  <SignUp on:signup={handleSignUp} />
   <div class="navigate">
     Already have an account? <a href="/auth/signin">Sign in</a>
   </div>

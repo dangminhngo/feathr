@@ -6,7 +6,7 @@
 
 <div>
   <span>{label}</span>
-  <input type="text" {placeholder} {value} />
+  <input type="text" {placeholder} bind:value />
 </div>
 
 <style lang="scss">

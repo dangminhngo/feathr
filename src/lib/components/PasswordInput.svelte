@@ -6,7 +6,7 @@
 
 <div>
   <span>{label}</span>
-  <input type="password" {placeholder} {value} />
+  <input type="password" {placeholder} bind:value />
 </div>
 
 <style lang="scss">
