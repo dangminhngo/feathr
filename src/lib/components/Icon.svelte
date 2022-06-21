@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { SvelteComponent } from 'svelte'
 
+  import Logo from '$assets/icons/logo.svg'
   import Bandage from '$assets/icons/bandage.svg'
   import Beer from '$assets/icons/beer.svg'
   import Brush from '$assets/icons/brush.svg'
@@ -27,6 +28,7 @@
   import Trash from '$assets/icons/trash.svg'
 
   const icons: { [key: string]: SvelteComponent } = {
+    logo: Logo,
     bandage: Bandage,
     beer: Beer,
     brush: Brush,

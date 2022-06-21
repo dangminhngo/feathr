@@ -43,7 +43,7 @@
   }
 
   .content-editable.lg {
-    font-size: var(--text-md);
+    font-size: var(--text-base);
   }
 
   .content-editable.sm {
