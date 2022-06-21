@@ -10,7 +10,9 @@
 <form>
   <TextInput label="Email" placeholder="Enter your email" bind:value={email} />
   <PasswordInput label="Password" placeholder="Enter your password" bind:value={password} />
-  <Button variant="primary" stretch={true} on:click={() => console.log('Sign Up')}>Sign up</Button>
+  <Button size="lg" variant="primary" stretch={true} on:click={() => console.log('Sign Up')}
+    >Sign up</Button
+  >
 </form>
 
 <style lang="scss">
