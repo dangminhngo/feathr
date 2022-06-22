@@ -2,12 +2,12 @@
   import NoteCard from '$lib/components/items/NoteCard.svelte'
 
   import { filterItems } from '$lib/helpers'
-  import { uiStore, notesStore } from '$lib/stores'
+  import { uiState, notesState } from '$lib/state'
   import type { Note } from '$lib/types'
   import { ModalType } from '$lib/enums'
 
-  const { setCurrentNote, togglePinnedNote, assignTrashToNote } = notesStore
-  const { openModal } = uiStore
+  const { setCurrentNote, togglePinnedNote, assignTrashToNote } = notesState
+  const { openModal } = uiState
 
   export let notes: Note[] = []
   $: filteredNotes = filterItems(notes)
@@ -18,11 +18,11 @@
   }
 </script>
 
-<div class="wrapper" class:grid={!$uiStore.listView} class:list={$uiStore.listView}>
+<div class="wrapper" class:grid={!$uiState.listView} class:list={$uiState.listView}>
   {#each filteredNotes as note (note.id)}
     <NoteCard
       {note}
-      active={$notesStore.currentNoteId === note.id}
+      active={$notesState.currentNoteId === note.id}
       on:click={() => openEditNoteForm(note.id)}
       handlePinned={() => togglePinnedNote(note.id)}
       handleTrash={() => assignTrashToNote(note.id)}

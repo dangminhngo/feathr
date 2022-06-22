@@ -1,13 +1,13 @@
 import { writable } from 'svelte/store'
-import type { User, AuthStore } from '$lib/types'
+import type { User, AuthState } from '$lib/types'
 
-const initialValue: AuthStore = {
+export const initialAuthState: AuthState = {
   isAuth: false,
   authUser: null,
 }
 
-const createAuthStore = (initialValue: AuthStore) => {
-  const { subscribe, update } = writable(initialValue)
+const createAuthState = (initialState: AuthState) => {
+  const { subscribe, update } = writable(initialState)
 
   return {
     subscribe,
@@ -28,4 +28,4 @@ const createAuthStore = (initialValue: AuthStore) => {
   }
 }
 
-export const authStore = createAuthStore(initialValue)
+export const authState = createAuthState(initialAuthState)

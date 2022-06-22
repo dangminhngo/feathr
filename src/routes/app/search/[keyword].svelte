@@ -1,12 +1,12 @@
 <script lang="ts">
   import { page } from '$app/stores'
   import SearchGrid from '$lib/components/grids/SearchGrid.svelte'
-  import { notesStore, listsStore } from '$lib/stores'
+  import { notesState, listsState } from '$lib/state'
   import { getSearchResults } from '$lib/helpers'
 
   const keyword = $page.params.keyword
 
-  $: items = getSearchResults($notesStore.notes, $listsStore.lists, keyword)
+  $: items = getSearchResults($notesState.notes, $listsState.lists, keyword)
 </script>
 
 <div class="message">Search results for <strong>{keyword}</strong></div>

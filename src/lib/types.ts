@@ -63,12 +63,12 @@ export interface User {
   photoURL: string
 }
 
-export interface AuthStore {
+export interface AuthState {
   isAuth: boolean
   authUser: User | null
 }
 
-export interface UIStore {
+export interface UiState {
   navGrow: boolean
   listView: boolean
   modal: {
@@ -88,17 +88,17 @@ export interface UIStore {
   position: Position
 }
 
-export interface NotesStore {
+export interface NotesState {
   notes: Note[]
   currentNoteId: string
 }
 
-export interface ListsStore {
+export interface ListsState {
   lists: List[]
   currentListId: string
 }
 
-export interface TagsStore {
+export interface TagsState {
   tags: Tag[]
   currentTagId: string
 }

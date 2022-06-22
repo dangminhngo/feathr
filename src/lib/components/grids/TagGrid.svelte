@@ -1,15 +1,15 @@
 <script lang="ts">
   import EditableTag from '$lib/components/items/EditableTag.svelte'
-  import { tagsStore } from '$lib/stores'
+  import { tagsState } from '$lib/state'
   import { filterTags } from '$lib/helpers'
 
-  const { deleteTag } = tagsStore
+  const { deleteTag } = tagsState
 
   const _deleteTag = (id: string) => {
     deleteTag(id)
   }
 
-  $: filteredTags = filterTags($tagsStore.tags)
+  $: filteredTags = filterTags($tagsState.tags)
 </script>
 
 <div class="tag-list">

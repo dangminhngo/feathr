@@ -6,10 +6,10 @@ import {
 } from 'firebase/auth'
 import { getDoc, setDoc } from 'firebase/firestore'
 import { userDoc } from './firestore'
-import { authStore } from '$lib/stores'
+import { authState } from '$lib/state'
 import { getDefaultUserPhotoURL } from '$lib/helpers'
 
-const { setAuth, resetAuth } = authStore
+const { setAuth, resetAuth } = authState
 const auth = getAuth()
 
 export const signUp = async (email: string, password: string) => {

@@ -5,7 +5,7 @@
   import IconButton from '$lib/components/IconButton.svelte'
   import FormContextMenus from '$lib/components/contextmenus/FormContextMenus.svelte'
   import TagPillGrid from '$lib/components/grids/TagPillGrid.svelte'
-  import { uiStore, notesStore } from '$lib/stores'
+  import { uiState, notesState } from '$lib/state'
   import { getItemById, isEmptyNote, createEmptyNote } from '$lib/helpers'
   import { themeKey } from '$lib/consts'
   import type { Note } from '$lib/types'
@@ -14,7 +14,7 @@
   let titleField: Field
 
   let note: Note = createEmptyNote()
-  const editingNote: Note | undefined = getItemById($notesStore.notes, $notesStore.currentNoteId)
+  const editingNote: Note | undefined = getItemById($notesState.notes, $notesState.currentNoteId)
 
   if (editingNote) note = { ...editingNote }
 
@@ -27,8 +27,8 @@
   const { getBrushPalette } = getContext(themeKey)
   const brushPalette = getBrushPalette()
 
-  const { setCurrentNote, addNote, updateNote } = notesStore
-  const { closeAllModals, toggleContextMenu } = uiStore
+  const { setCurrentNote, addNote, updateNote } = notesState
+  const { closeAllModals, toggleContextMenu } = uiState
 
   const _toggleContextMenu = (type: ContextMenuType, id: string) => (e: MouseEvent) => {
     setCurrentNote(id)

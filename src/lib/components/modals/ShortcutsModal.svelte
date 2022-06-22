@@ -1,14 +1,14 @@
 <script lang="ts">
   import ModalWrapper from './ModalWrapper.svelte'
-  import { uiStore } from '$lib/stores'
+  import { uiState } from '$lib/state'
 
-  const { closeAllContextMenus, closeAllModals } = uiStore
+  const { closeAllContextMenus, closeAllModals } = uiState
   const handleModalClose = () => {
     closeAllContextMenus()
     closeAllModals()
   }
 </script>
 
-{#if $uiStore.modal.shortcuts}
+{#if $uiState.modal.shortcuts}
   <ModalWrapper handleBackdropClick={handleModalClose}>Shortcuts</ModalWrapper>
 {/if}

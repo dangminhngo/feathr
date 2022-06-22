@@ -2,10 +2,10 @@
   import ModalWrapper from '$lib/components/modals/ModalWrapper.svelte'
   import NoteForm from '$lib/components/forms/NoteForm.svelte'
 
-  import { uiStore, notesStore } from '$lib/stores'
+  import { uiState, notesState } from '$lib/state'
 
-  const { setCurrentNote } = notesStore
-  const { closeAllModals } = uiStore
+  const { setCurrentNote } = notesState
+  const { closeAllModals } = uiState
 
   const handleModalClose = () => {
     setCurrentNote('')
@@ -13,7 +13,7 @@
   }
 </script>
 
-{#if $uiStore.modal.note}
+{#if $uiState.modal.note}
   <ModalWrapper handleBackdropClick={handleModalClose}>
     <NoteForm />
   </ModalWrapper>

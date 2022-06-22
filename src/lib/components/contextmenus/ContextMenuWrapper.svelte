@@ -1,11 +1,11 @@
 <script lang="ts">
   import Portal from 'svelte-portal/src/Portal.svelte'
-  import { uiStore, notesStore, listsStore } from '$lib/stores'
+  import { uiState, notesState, listsState } from '$lib/state'
   import { clickOutside } from '$lib/helpers'
 
-  const { setCurrentNote } = notesStore
-  const { setCurrentList } = listsStore
-  const { closeAllContextMenus } = uiStore
+  const { setCurrentNote } = notesState
+  const { setCurrentList } = listsState
+  const { closeAllContextMenus } = uiState
 
   const handleCloseContextMenu = () => {
     setCurrentNote('')
@@ -17,7 +17,7 @@
 <Portal target="body">
   <div
     class="context-menu"
-    style="top: {$uiStore.position.y}px; left: {$uiStore.position.x}px;"
+    style="top: {$uiState.position.y}px; left: {$uiState.position.x}px;"
     use:clickOutside
     on:outsideclick={handleCloseContextMenu}
   >

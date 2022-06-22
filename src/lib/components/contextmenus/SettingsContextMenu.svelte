@@ -1,9 +1,9 @@
 <script lang="ts">
   import ContextMenuWrapper from './ContextMenuWrapper.svelte'
-  import { uiStore } from '$lib/stores'
+  import { uiState } from '$lib/state'
   import { ModalType } from '$lib/enums'
 
-  const { toggleListView, closeAllContextMenus, openModal } = uiStore
+  const { toggleListView, closeAllContextMenus, openModal } = uiState
   const _toggleModal = (type: ModalType) => {
     closeAllContextMenus()
     openModal(type)
@@ -13,7 +13,7 @@
 <ContextMenuWrapper>
   <div class="settings">
     <div role="menuitem" on:click={toggleListView}>
-      {$uiStore.listView ? 'Grid view' : 'List view'}
+      {$uiState.listView ? 'Grid view' : 'List view'}
     </div>
     <div role="menuitem" on:click={() => _toggleModal(ModalType.Themes)}>Change theme</div>
     <div role="menuitem" on:click={() => _toggleModal(ModalType.Shortcuts)}>Shortcuts</div>

@@ -3,13 +3,13 @@
   import Button from '$lib/components/Button.svelte'
   import ModalWrapper from './ModalWrapper.svelte'
   import SelectedThemeCircle from './SelectedThemeCircle.svelte'
-  import { uiStore } from '$lib/stores'
+  import { uiState } from '$lib/state'
   import { presets, themeKey } from '$lib/consts'
 
   const { getTheme, setTheme } = getContext(themeKey)
   let currentThemeName = getTheme().name
 
-  const { closeAllModals } = uiStore
+  const { closeAllModals } = uiState
   const handleModalClose = () => {
     closeAllModals()
   }
@@ -20,7 +20,7 @@
   }
 </script>
 
-{#if $uiStore.modal.themes}
+{#if $uiState.modal.themes}
   <ModalWrapper handleBackdropClick={handleModalClose}>
     <div class="wrapper">
       <p>Choose your theme</p>

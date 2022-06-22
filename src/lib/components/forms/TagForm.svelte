@@ -2,11 +2,11 @@
   import Button from '$lib/components/Button.svelte'
   import Field from '$lib/components/Field.svelte'
   import { createEmptyTag } from '$lib/helpers'
-  import { tagsStore } from '$lib/stores'
+  import { tagsState } from '$lib/state'
 
   let tag = createEmptyTag()
 
-  const { addTag } = tagsStore
+  const { addTag } = tagsState
 
   const handleSubmit = () => {
     if (!tag.label) return

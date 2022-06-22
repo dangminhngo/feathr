@@ -1,9 +1,9 @@
 import { v4 as uuid } from 'uuid'
 
 import { writable } from 'svelte/store'
-import type { NotesStore, Note } from '$lib/types'
+import type { NotesState, Note } from '$lib/types'
 
-const initialValue: NotesStore = {
+export const initialNotesState: NotesState = {
   notes: [
     {
       id: uuid(),
@@ -32,8 +32,8 @@ const initialValue: NotesStore = {
   currentNoteId: '',
 }
 
-const createNotesStore = (initialValue: NotesStore) => {
-  const { subscribe, update } = writable(initialValue)
+const createNotesState = (initialState: NotesState) => {
+  const { subscribe, update } = writable(initialState)
 
   return {
     subscribe,
@@ -94,4 +94,4 @@ const createNotesStore = (initialValue: NotesStore) => {
   }
 }
 
-export const notesStore = createNotesStore(initialValue)
+export const notesState = createNotesState(initialNotesState)

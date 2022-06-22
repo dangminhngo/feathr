@@ -1,8 +1,8 @@
 import { writable } from 'svelte/store'
 import { v4 as uuid } from 'uuid'
-import type { TagsStore, Tag } from '../types'
+import type { TagsState, Tag } from '../types'
 
-const initialValue: TagsStore = {
+export const initialTagsState: TagsState = {
   tags: [
     {
       id: uuid(),
@@ -28,8 +28,8 @@ const initialValue: TagsStore = {
   currentTagId: '',
 }
 
-const createTagsStore = (initialValue: TagsStore) => {
-  const { subscribe, update } = writable(initialValue)
+const createTagsState = (initialState: TagsState) => {
+  const { subscribe, update } = writable(initialState)
 
   return {
     subscribe,
@@ -54,4 +54,4 @@ const createTagsStore = (initialValue: TagsStore) => {
   }
 }
 
-export const tagsStore = createTagsStore(initialValue)
+export const tagsState = createTagsState(initialTagsState)

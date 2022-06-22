@@ -1,11 +1,11 @@
 <script lang="ts">
   import TagPill from '$lib/components/items/TagPill.svelte'
-  import { tagsStore } from '$lib/stores'
+  import { tagsState } from '$lib/state'
   import { getTags } from '$lib/helpers'
 
   export let ids: string[] = []
 
-  $: tags = getTags($tagsStore.tags, ids)
+  $: tags = getTags($tagsState.tags, ids)
 </script>
 
 <div class="tag-list">

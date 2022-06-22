@@ -1,6 +1,6 @@
 <script lang="ts">
   import ListCard from '$lib/components/items/ListCard.svelte'
-  import { uiStore, listsStore } from '$lib/stores'
+  import { uiState, listsState } from '$lib/state'
   import { filterItems } from '$lib/helpers'
   import type { List } from '$lib/types'
   import { ModalType } from '$lib/enums'
@@ -8,8 +8,8 @@
   export let lists: List[] = []
   $: filteredLists = filterItems(lists)
 
-  const { setCurrentList, togglePinnedList, assignTrashToList } = listsStore
-  const { openModal } = uiStore
+  const { setCurrentList, togglePinnedList, assignTrashToList } = listsState
+  const { openModal } = uiState
 
   const openEditListForm = (id: string) => {
     setCurrentList(id)
@@ -17,11 +17,11 @@
   }
 </script>
 
-<div class="wrapper" class:grid={!$uiStore.listView} class:list={$uiStore.listView}>
+<div class="wrapper" class:grid={!$uiState.listView} class:list={$uiState.listView}>
   {#each filteredLists as list (list.id)}
     <ListCard
       bind:list
-      active={$listsStore.currentListId === list.id}
+      active={$listsState.currentListId === list.id}
       on:click={() => openEditListForm(list.id)}
       handlePinned={() => togglePinnedList(list.id)}
       handleTrash={() => assignTrashToList(list.id)}

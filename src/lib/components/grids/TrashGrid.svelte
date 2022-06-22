@@ -1,11 +1,11 @@
 <script lang="ts">
   import NoteCard from '$lib/components/items/NoteCard.svelte'
   import ListCard from '$lib/components/items/ListCard.svelte'
-  import { notesStore, listsStore } from '$lib/stores'
+  import { notesState, listsState } from '$lib/state'
   import { filterTrashItems } from '$lib/helpers'
 
-  const { deleteNote, unassignTrashToNote } = notesStore
-  const { deleteList, unassignTrashToList } = listsStore
+  const { deleteNote, unassignTrashToNote } = notesState
+  const { deleteList, unassignTrashToList } = listsState
 
   const _deleteNote = (id: string) => {
     deleteNote(id)
@@ -23,7 +23,7 @@
     unassignTrashToList(id)
   }
 
-  $: trashItems = filterTrashItems($notesStore.notes, $listsStore.lists)
+  $: trashItems = filterTrashItems($notesState.notes, $listsState.lists)
 </script>
 
 <div class="grid">

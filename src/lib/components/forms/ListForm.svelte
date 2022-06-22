@@ -20,12 +20,12 @@
     createEmptyTask,
     getFilteredTasks,
   } from '$lib/helpers'
-  import { uiStore, listsStore } from '$lib/stores'
+  import { uiState, listsState } from '$lib/state'
   import type { List, Task } from '$lib/types'
 
   let titleField: Field
   let list: List = createEmptyList(),
-    editingList = getItemById($listsStore.lists, $listsStore.currentListId)
+    editingList = getItemById($listsState.lists, $listsState.currentListId)
 
   if (editingList) list = { ...editingList }
 
@@ -61,8 +61,8 @@
     list.pinned = !list.pinned
   }
 
-  const { addList, updateList, setCurrentList } = listsStore
-  const { closeAllModals, toggleContextMenu } = uiStore
+  const { addList, updateList, setCurrentList } = listsState
+  const { closeAllModals, toggleContextMenu } = uiState
 
   const _toggleContextMenu = (type: ContextMenuType, id: string) => (e: MouseEvent) => {
     setCurrentList(id)

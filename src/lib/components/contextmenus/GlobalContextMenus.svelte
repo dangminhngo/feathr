@@ -1,13 +1,13 @@
 <script lang="ts">
   import SettingsContextMenu from './SettingsContextMenu.svelte'
   import UserAccountContextMenu from './UserAccountContextMenu.svelte'
-  import { uiStore } from '$lib/stores'
+  import { uiState } from '$lib/state'
 </script>
 
-{#if $uiStore.contextMenu.settings}
+{#if $uiState.contextMenu.settings}
   <SettingsContextMenu />
 {/if}
 
-{#if $uiStore.contextMenu.account}
+{#if $uiState.contextMenu.account}
   <UserAccountContextMenu />
 {/if}

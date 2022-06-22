@@ -1,8 +1,8 @@
 import { writable } from 'svelte/store'
-import type { UIStore, Position } from '$lib/types'
+import type { UiState, Position } from '$lib/types'
 import type { ModalType, ContextMenuType } from '$lib/enums'
 
-const initialValue: UIStore = {
+export const initialUiState: UiState = {
   navGrow: false,
   listView: false,
   modal: {
@@ -25,8 +25,8 @@ const initialValue: UIStore = {
   },
 }
 
-const createLayoutStore = (initialValue: UIStore) => {
-  const { subscribe, update } = writable(initialValue)
+const createLayoutStore = (initialState: UiState) => {
+  const { subscribe, update } = writable(initialState)
 
   return {
     subscribe,
@@ -83,4 +83,4 @@ const createLayoutStore = (initialValue: UIStore) => {
   }
 }
 
-export const uiStore = createLayoutStore(initialValue)
+export const uiState = createLayoutStore(initialUiState)

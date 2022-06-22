@@ -1,7 +1,7 @@
 <script lang="ts">
   import { page } from '$app/stores'
   import Icon from '$lib/components/Icon.svelte'
-  import { uiStore } from '$lib/stores'
+  import { uiState } from '$lib/state'
 
   const items = [
     {
@@ -27,7 +27,7 @@
   ]
 </script>
 
-<nav class:grow={$uiStore.navGrow}>
+<nav class:grow={$uiState.navGrow}>
   {#each items as { icon, label, path }}
     <a class:active={$page.url.pathname === path} href={path}>
       <span>

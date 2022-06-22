@@ -1,16 +1,16 @@
 <script lang="ts">
   import BackgroundContextMenu from './BackgroundContextMenu.svelte'
   import TagsContextMenu from './TagsContextMenu.svelte'
-  import { uiStore } from '$lib/stores'
+  import { uiState } from '$lib/state'
 
   export let ids: string[] = [],
     color: string | undefined = undefined
 </script>
 
-{#if $uiStore.contextMenu.tags}
+{#if $uiState.contextMenu.tags}
   <TagsContextMenu bind:ids />
 {/if}
 
-{#if $uiStore.contextMenu.background}
+{#if $uiState.contextMenu.background}
   <BackgroundContextMenu bind:color />
 {/if}

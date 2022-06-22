@@ -2,15 +2,15 @@
   import Icon from '$lib/components/Icon.svelte'
   import ContextMenuWrapper from './ContextMenuWrapper.svelte'
   import CheckboxField from './CheckboxField.svelte'
-  import { uiStore, notesStore, tagsStore } from '$lib/stores'
+  import { uiState, notesState, tagsState } from '$lib/state'
   import { searchTags, clickOutside, createEmptyTag } from '$lib/helpers'
 
   let keyword = ''
   export let ids: string[] = []
 
-  const { closeAllContextMenus } = uiStore
-  const { setCurrentNote } = notesStore
-  const { addTag } = tagsStore
+  const { closeAllContextMenus } = uiState
+  const { setCurrentNote } = notesState
+  const { addTag } = tagsState
 
   const handleCloseContextMenu = () => {
     setCurrentNote('')
@@ -34,7 +34,7 @@
     ids = [...ids, id]
   }
 
-  $: filteredTags = searchTags($tagsStore.tags, keyword)
+  $: filteredTags = searchTags($tagsState.tags, keyword)
 </script>
 
 <ContextMenuWrapper>

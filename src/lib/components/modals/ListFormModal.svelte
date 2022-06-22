@@ -2,10 +2,10 @@
   import ModalWrapper from '$lib/components/modals/ModalWrapper.svelte'
   import ListForm from '$lib/components/forms/ListForm.svelte'
 
-  import { uiStore, listsStore } from '$lib/stores'
+  import { uiState, listsState } from '$lib/state'
 
-  const { setCurrentList } = listsStore
-  const { closeAllModals } = uiStore
+  const { setCurrentList } = listsState
+  const { closeAllModals } = uiState
 
   const handleModalClose = () => {
     setCurrentList('')
@@ -13,7 +13,7 @@
   }
 </script>
 
-{#if $uiStore.modal.list}
+{#if $uiState.modal.list}
   <ModalWrapper handleBackdropClick={handleModalClose}>
     <ListForm />
   </ModalWrapper>
