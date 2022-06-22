@@ -1,7 +1,5 @@
 <script lang="ts">
-  export let url =
-      'https://s3.amazonaws.com/cms-assets.tutsplus.com/uploads/users/810/profiles/19338/profileImage/profile-square-extra-small.png',
-    email = 'jacktheripper@gmail.com'
+  export let url: string, email: string
 </script>
 
 <button on:click>
@@ -25,6 +23,7 @@
   }
 
   img {
+    pointer-events: none;
     width: 1.5rem;
     height: 1.5rem;
     border-radius: 100%;

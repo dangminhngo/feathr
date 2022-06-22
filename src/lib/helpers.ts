@@ -137,3 +137,14 @@ export const clickOutside: Action<HTMLElement, undefined> = (node: HTMLElement) 
     },
   }
 }
+
+export const getDefaultUserPhotoURL = (email: string | null): string => {
+  let username: string | undefined
+
+  if (!email) {
+    username = 'Default'
+  }
+
+  username = email?.split('@')[0]
+  return `https://ui-avatars.com/api/?name=${username}&background=random&color=random&size=128&length=2&bold=true`
+}

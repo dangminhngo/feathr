@@ -1,9 +1,13 @@
 <script lang="ts">
+  import { goto } from '$app/navigation'
   import SignUp from '$lib/components/forms/SignUp.svelte'
+  import { signUp } from '$lib/firebase/auth'
 
   type SignUpEvent = SignUp['$$events_def']['signup']
-  const handleSignUp = ({ detail }: SignUpEvent) => {
-    console.log(detail)
+  const handleSignUp = async ({ detail }: SignUpEvent) => {
+    const { email, password } = detail
+    await signUp(email, password)
+    goto('/app/notes')
   }
 </script>
 

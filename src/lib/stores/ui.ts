@@ -11,11 +11,13 @@ const initialValue: UIStore = {
     themes: false,
     shortcuts: false,
     about: false,
+    account: false,
   },
   contextMenu: {
     tags: false,
     background: false,
     settings: false,
+    account: false,
   },
   position: {
     x: 0,
@@ -54,6 +56,7 @@ const createLayoutStore = (initialValue: UIStore) => {
           themes: false,
           shortcuts: false,
           about: false,
+          account: false,
         }
         return s
       })
@@ -71,6 +74,7 @@ const createLayoutStore = (initialValue: UIStore) => {
           tags: false,
           background: false,
           settings: false,
+          account: false,
         }
         s.position = { x: 0, y: 0 }
         return s

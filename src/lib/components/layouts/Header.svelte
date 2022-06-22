@@ -4,7 +4,7 @@
   import Hamburger from './Hamburger.svelte'
   import ProfilePicture from './ProfilePicture.svelte'
   import Search from './Search.svelte'
-  import { uiStore } from '$lib/stores'
+  import { authStore, uiStore } from '$lib/stores'
   import { ContextMenuType } from '$lib/enums'
 
   let keyword = ''
@@ -16,9 +16,9 @@
   }
 
   const { toggleContextMenu } = uiStore
-  const handleToggleSettingsContextMenu = (e: MouseEvent) => {
+  const _toggleContextMenu = (type: ContextMenuType) => (e: MouseEvent) => {
     const rect = (e.target as HTMLButtonElement).getBoundingClientRect()
-    toggleContextMenu(ContextMenuType.Settings, {
+    toggleContextMenu(type, {
       x: rect.x + rect.width - 160,
       y: rect.y + rect.height + 14,
     })
@@ -29,8 +29,14 @@
   <Hamburger on:click={uiStore.toggleNav} />
   <Search placeholder="Search notes or tasks ..." bind:value={keyword} on:submit={handleSubmit} />
   <div class="buttons">
-    <IconButton name="cog" on:click={handleToggleSettingsContextMenu} />
-    <ProfilePicture />
+    <IconButton name="cog" on:click={(e) => _toggleContextMenu(ContextMenuType.Settings)(e)} />
+    {#if $authStore.isAuth && $authStore.authUser}
+      <ProfilePicture
+        url={$authStore.authUser?.photoURL}
+        email={$authStore.authUser?.email}
+        on:click={(e) => _toggleContextMenu(ContextMenuType.Account)(e)}
+      />
+    {/if}
   </div>
 </header>
 

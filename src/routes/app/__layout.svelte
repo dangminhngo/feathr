@@ -19,6 +19,11 @@
 </ThemeContext>
 
 <style lang="scss">
+  :global(body) {
+    background-color: var(--theme-primary-900);
+    color: var(--theme-primary-200);
+  }
+
   .main {
     display: flex;
   }

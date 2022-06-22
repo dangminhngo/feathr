@@ -57,6 +57,17 @@ export interface List {
   trashedAt?: Date
 }
 
+export interface User {
+  uid: string
+  email: string
+  photoURL: string
+}
+
+export interface AuthStore {
+  isAuth: boolean
+  authUser: User | null
+}
+
 export interface UIStore {
   navGrow: boolean
   listView: boolean
@@ -66,11 +77,13 @@ export interface UIStore {
     themes: boolean
     shortcuts: boolean
     about: boolean
+    account: boolean
   }
   contextMenu: {
     tags: boolean
     background: boolean
     settings: boolean
+    account: boolean
   }
   position: Position
 }
