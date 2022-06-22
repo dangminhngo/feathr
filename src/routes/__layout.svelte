@@ -1,3 +1,12 @@
+<script context="module" lang="ts">
+  import type { Load } from '@sveltejs/kit'
+  import { authGuard } from '$lib/guard'
+
+  export const load: Load = (params) => {
+    return authGuard(params)
+  }
+</script>
+
 <svelte:head>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
