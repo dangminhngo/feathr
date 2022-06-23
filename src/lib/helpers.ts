@@ -68,8 +68,8 @@ export const getFilteredTasks = (list: List): { undoneTasks: Task[]; doneTasks: 
   }
 }
 
-export const filterTags = (tags: Tag[]): { [key: string]: Tag[] } => {
-  return tags.reduce((filtered: { [key: string]: Tag[] }, t: Tag) => {
+export const filterTags = (tags: Tag[]): { character: string; tags: Tag[] }[] => {
+  const obj = tags.reduce((filtered: { [key: string]: Tag[] }, t: Tag) => {
     const label = t.label.toLowerCase()
     const key = label[0].toUpperCase()
     if (!Object.prototype.hasOwnProperty.call(filtered, key)) {
@@ -79,6 +79,14 @@ export const filterTags = (tags: Tag[]): { [key: string]: Tag[] } => {
 
     return filtered
   }, {})
+
+  return Object.keys(obj)
+    .map((key) => ({ character: key, tags: obj[key] }))
+    .sort((a, b) => {
+      if (a.character > b.character) return 1
+      if (a.character < b.character) return -1
+      return 0
+    })
 }
 
 export const filterTrashItems = (notes: Note[], lists: List[]): (Note | List)[] => {
