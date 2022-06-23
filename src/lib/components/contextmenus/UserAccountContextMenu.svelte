@@ -2,7 +2,7 @@
   import { goto } from '$app/navigation'
   import ContextMenuWrapper from './ContextMenuWrapper.svelte'
   import { logOut } from '$lib/firebase/auth'
-  import { uiState } from '$lib/state'
+  import { uiState, authState } from '$lib/state'
   import { ModalType } from '$lib/enums'
 
   const { closeAllContextMenus, openModal } = uiState
@@ -13,6 +13,7 @@
 
   const handleLogOut = async () => {
     await logOut()
+    authState.unmount()
     goto('/auth/signin')
   }
 </script>

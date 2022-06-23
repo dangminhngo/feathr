@@ -1,10 +1,21 @@
 <script context="module" lang="ts">
   import type { Load } from '@sveltejs/kit'
-  import { authGuard } from '$lib/guard'
+  import guard from '$lib/guard'
 
   export const load: Load = (params) => {
-    return authGuard(params)
+    return guard(params)
   }
+</script>
+
+<script lang="ts">
+  import { onMount } from 'svelte'
+  import { authState } from '$lib/state'
+
+  onMount(() => {
+    authState.mount()
+  })
+
+  $: console.log($authState)
 </script>
 
 <svelte:head>

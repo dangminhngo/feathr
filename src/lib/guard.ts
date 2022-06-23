@@ -1,49 +1,37 @@
 import type { Load } from '@sveltejs/kit'
-import { authState, initialAuthState } from '$lib/state'
+import publicRoutes from '$lib/data/publicRoutes.json'
 
-export const authGuard: Load = ({ url }) => {
-  let auth = { ...initialAuthState }
-  authState.subscribe((state) => (auth = state))
-  const isAuth = auth.isAuth
+const isClient = typeof window !== 'undefined'
+
+const guard: Load = ({ url }) => {
+  if (!isClient) {
+    return {}
+  }
+
+  let isAuth = false
+  const json = localStorage.getItem('authState')
+
+  if (json) {
+    isAuth = JSON.parse(json).isAuth
+  }
+
   const pathname = url.pathname
 
-  const routes = [
-    {
-      pathname: '/',
-      private: false,
-    },
-    {
-      pathname: '/auth/signup',
-      private: false,
-    },
-    {
-      pathname: '/auth/signin',
-      private: false,
-    },
-    {
-      pathname: '/app/notes',
-      private: true,
-    },
-    {
-      pathname: '/app/lists',
-      private: true,
-    },
-    {
-      pathname: '/app/tags',
-      private: true,
-    },
-    {
-      pathname: '/app/trash',
-      private: true,
-    },
-  ]
-
-  if (!isAuth && routes.find((route) => route.pathname === pathname && route.private)) {
+  if (isAuth && publicRoutes.includes(pathname)) {
     return {
-      status: 302,
+      status: 301,
+      redirect: '/app/notes',
+    }
+  }
+
+  if (!isAuth && !publicRoutes.includes(pathname)) {
+    return {
+      status: 301,
       redirect: '/auth/signin',
     }
   }
 
   return {}
 }
+
+export default guard

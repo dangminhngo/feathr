@@ -1,5 +1,5 @@
-import { writable } from 'svelte/store'
 import type { User, AuthState } from '$lib/types'
+import savable from '$lib/savable'
 
 export const initialAuthState: AuthState = {
   isAuth: false,
@@ -7,10 +7,11 @@ export const initialAuthState: AuthState = {
 }
 
 const createAuthState = (initialState: AuthState) => {
-  const { subscribe, update } = writable(initialState)
+  const { update, ...props } = savable<AuthState>('authState', initialState)
 
   return {
-    subscribe,
+    ...props,
+    update,
     setAuth: (user: User) => {
       update((s) => {
         s.isAuth = true
