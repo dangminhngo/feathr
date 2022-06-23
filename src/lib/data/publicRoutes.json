@@ -1,5 +1,1 @@
-[
-  "/",
-  "/auth/signup",
-  "/auth/signin"
-]
+["/", "/auth/signup", "/auth/signin"]
