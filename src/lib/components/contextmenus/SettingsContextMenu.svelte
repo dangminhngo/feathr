@@ -13,7 +13,7 @@
 <ContextMenuWrapper>
   <div class="settings">
     <div role="menuitem" on:click={toggleListView}>
-      {$uiState.listView ? 'Grid view' : 'List view'}
+      {$uiState.listView ? 'Change to grid view' : 'Change to list view'}
     </div>
     <div role="menuitem" on:click={() => _toggleModal(ModalType.Themes)}>Change theme</div>
     <div role="menuitem" on:click={() => _toggleModal(ModalType.Shortcuts)}>Shortcuts</div>
