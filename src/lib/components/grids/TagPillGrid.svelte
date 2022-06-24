@@ -18,7 +18,6 @@
 
 <style lang="scss">
   .tag-list {
-    padding: 0.5rem 0;
     display: flex;
     gap: 0.5rem;
   }

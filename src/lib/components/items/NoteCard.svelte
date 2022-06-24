@@ -65,7 +65,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 1rem;
+    gap: 0.75rem;
     border-width: 1px;
     border-style: solid;
     border-radius: var(--rounded);

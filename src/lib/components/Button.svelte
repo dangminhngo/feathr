@@ -13,16 +13,15 @@
     cursor: pointer;
     padding: 0.375em 0.75em;
     border-radius: var(--rounded);
+    font-weight: 500;
   }
 
   button.base {
     font-size: var(--text-sm);
-    font-weight: 500;
   }
 
   button.lg {
     font-size: var(--text-base);
-    font-weight: 700;
   }
 
   button.default {

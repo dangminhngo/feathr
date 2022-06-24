@@ -127,7 +127,7 @@
     padding: 1rem;
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.75rem;
     border-width: 1px;
     border-style: solid;
     border-radius: var(--rounded);
