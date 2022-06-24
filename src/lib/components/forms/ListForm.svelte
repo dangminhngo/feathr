@@ -160,7 +160,7 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    gap: 1rem;
+    gap: 0.5rem;
     border-radius: var(--rounded);
   }
 
