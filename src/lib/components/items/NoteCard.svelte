@@ -25,9 +25,9 @@
   const handleMouseEnter = () => (buttonsShow = true)
   const handleMouseLeave = () => (buttonsShow = false)
 
-  const { getBrushPalette } = getContext(themeKey)
-  const brushPalette = getBrushPalette()
-  $: color = brushPalette[note.color]
+  const { getPalette } = getContext(themeKey)
+  const palette = getPalette()
+  $: color = palette[note.color]
 </script>
 
 <div

@@ -10,6 +10,8 @@ export interface Palette {
   'primary-800': string
   'primary-900': string
   accent: string
+  'accent-light': string
+  'accent-dark': string
 }
 
 export interface Theme {

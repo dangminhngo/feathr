@@ -24,8 +24,8 @@
 
   onMount(() => titleField?.focus())
 
-  const { getBrushPalette } = getContext(themeKey)
-  const brushPalette = getBrushPalette()
+  const { getPalette } = getContext(themeKey)
+  const palette = getPalette()
 
   const { setCurrentNote, addNote, updateNote } = notesState
   const { closeAllModals, toggleContextMenu } = uiState

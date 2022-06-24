@@ -95,8 +95,8 @@
 
   onMount(() => titleField?.focus())
 
-  const { getBrushPalette } = getContext(themeKey)
-  const brushPalette = getBrushPalette()
+  const { getPalette } = getContext(themeKey)
+  const palette = getPalette()
 </script>
 
 <div class="form">

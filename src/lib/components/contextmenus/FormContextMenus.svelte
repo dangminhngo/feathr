@@ -1,5 +1,5 @@
 <script lang="ts">
-  import BackgroundContextMenu from './BackgroundContextMenu.svelte'
+  import PaletteContextMenu from './PaletteContextMenu.svelte'
   import TagsContextMenu from './TagsContextMenu.svelte'
   import { uiState } from '$lib/state'
 
@@ -12,5 +12,5 @@
 {/if}
 
 {#if $uiState.contextMenu.background}
-  <BackgroundContextMenu bind:color />
+  <PaletteContextMenu bind:color />
 {/if}

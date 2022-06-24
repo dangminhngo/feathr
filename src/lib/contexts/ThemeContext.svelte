@@ -2,9 +2,10 @@
   import { setContext, onMount } from 'svelte'
   import { writable } from 'svelte/store'
 
-  import { presets, themeKey } from '$lib/consts'
+  import presets from '$lib/data/themes.json'
+  import palettes from '$lib/data/palettes.json'
+  import { themeKey } from '$lib/consts'
   import type { Theme } from '$lib/types'
-  import { brushPalettes } from '$lib/consts'
 
   export let themes = [...presets]
   let _current = themes[0].name
@@ -21,7 +22,7 @@
       setRootColors(currentTheme)
     },
     getTheme: () => $theme,
-    getBrushPalette: () => brushPalettes[$theme.dark ? 'dark' : 'light'],
+    getPalette: () => palettes[$theme.dark ? 'dark' : 'light'],
   })
 
   const setRootColors = (theme: Theme) => {

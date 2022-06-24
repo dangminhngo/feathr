@@ -54,9 +54,9 @@
   let undoneTasks: Task[], doneTasks: Task[]
   $: ({ undoneTasks, doneTasks } = getFilteredTasks(list))
 
-  const { getBrushPalette } = getContext(themeKey)
-  const brushPalette = getBrushPalette()
-  $: color = brushPalette[list.color]
+  const { getPalette } = getContext(themeKey)
+  const palette = getPalette()
+  $: color = palette[list.color]
 
   const _updateList = async () => {
     await firestore.updateList(list.id, list)

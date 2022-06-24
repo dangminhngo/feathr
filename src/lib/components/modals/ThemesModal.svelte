@@ -4,7 +4,8 @@
   import ModalWrapper from './ModalWrapper.svelte'
   import SelectedThemeCircle from './SelectedThemeCircle.svelte'
   import { uiState } from '$lib/state'
-  import { presets, themeKey } from '$lib/consts'
+  import presets from '$lib/data/themes.json'
+  import { themeKey } from '$lib/consts'
 
   const { getTheme, setTheme } = getContext(themeKey)
   let currentThemeName = getTheme().name

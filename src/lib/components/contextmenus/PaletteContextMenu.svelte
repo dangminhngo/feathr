@@ -1,9 +1,10 @@
 <script lang="ts">
   import ContextMenuWrapper from './ContextMenuWrapper.svelte'
   import SelectableColorCircle from './SelectableColorCircle.svelte'
-  import { colorKeys } from '$lib/consts'
+  import palettes from '$lib/data/palettes.json'
 
   export let color = 'default'
+  const keys = Object.keys(palettes.light)
 </script>
 
 <ContextMenuWrapper>
@@ -11,7 +12,7 @@
     <p>Choose your favorite color</p>
     <div class="list">
       <SelectableColorCircle bind:group={color} name="color" value="default" />
-      {#each colorKeys as key}
+      {#each keys as key}
         <SelectableColorCircle bind:group={color} name="color" value={key} />
       {/each}
     </div>
