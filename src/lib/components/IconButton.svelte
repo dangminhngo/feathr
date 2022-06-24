@@ -5,11 +5,7 @@
     size: 'lg' | 'md' | 'sm' = 'lg',
     active = false
 
-  const getIconSize = (size: 'lg' | 'md' | 'sm'): number => {
-    if (size === 'lg') return 20
-    if (size === 'md') return 18
-    return 16
-  }
+  const getIconSize = (size: 'lg' | 'md' | 'sm'): number => (size === 'lg' ? 20 : 18)
 </script>
 
 <button
@@ -38,13 +34,13 @@
   }
 
   button.md {
-    width: 1.75rem;
-    height: 1.75rem;
+    width: 1.875rem;
+    height: 1.875rem;
   }
 
   button.sm {
-    width: 1.25rem;
-    height: 1.25rem;
+    width: 1.5rem;
+    height: 1.5rem;
   }
 
   button.active {

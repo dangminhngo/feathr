@@ -1,6 +1,7 @@
 <script lang="ts">
   import NoteCard from '$lib/components/items/NoteCard.svelte'
   import ListCard from '$lib/components/items/ListCard.svelte'
+  import firestore from '$lib/firebase/firestore'
   import { uiState, notesState, listsState } from '$lib/state'
   import { ModalType } from '$lib/enums'
   import type { Note, List } from '$lib/types'
@@ -10,14 +11,34 @@
   const { setCurrentList, togglePinnedList, assignTrashToList } = listsState
   const { openModal } = uiState
 
-  const openEditNoteForm = (id: string) => {
+  const _openEditNoteForm = (id: string) => {
     setCurrentNote(id)
     openModal(ModalType.Note)
   }
 
-  const openEditListForm = (id: string) => {
+  const _openEditListForm = (id: string) => {
     setCurrentList(id)
     openModal(ModalType.List)
+  }
+
+  const _togglePinnedNote = async (id: string, pinned: boolean) => {
+    await firestore.updateNote(id, { pinned: !pinned })
+    togglePinnedNote(id)
+  }
+
+  const _assignTrashToNote = async (id: string) => {
+    await firestore.updateNote(id, { trash: true })
+    assignTrashToNote(id)
+  }
+
+  const _togglePinnedList = async (id: string, pinned: boolean) => {
+    await firestore.updateList(id, { pinned: !pinned })
+    togglePinnedList(id)
+  }
+
+  const _assignTrashToList = async (id: string) => {
+    await firestore.updateList(id, { trash: true })
+    assignTrashToList(id)
   }
 </script>
 
@@ -27,17 +48,17 @@
       <ListCard
         list={item}
         active={$listsState.currentListId === item.id}
-        on:click={() => openEditListForm(item.id)}
-        handlePinned={() => togglePinnedList(item.id)}
-        handleTrash={() => assignTrashToList(item.id)}
+        on:click={() => _openEditListForm(item.id)}
+        handlePinned={() => _togglePinnedList(item.id, item.pinned)}
+        handleTrash={() => _assignTrashToList(item.id)}
       />
     {:else}
       <NoteCard
         note={item}
         active={$notesState.currentNoteId === item.id}
-        on:click={() => openEditNoteForm(item.id)}
-        handlePinned={() => togglePinnedNote(item.id)}
-        handleTrash={() => assignTrashToNote(item.id)}
+        on:click={() => _openEditNoteForm(item.id)}
+        handlePinned={() => _togglePinnedNote(item.id, item.pinned)}
+        handleTrash={() => _assignTrashToNote(item.id)}
       />
     {/if}
   {/each}

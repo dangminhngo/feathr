@@ -13,15 +13,18 @@
     deleteNote(id)
   }
 
-  const _deleteList = (id: string) => {
+  const _deleteList = async (id: string) => {
+    await firestore.deleteList(id)
     deleteList(id)
   }
 
-  const _unassignTrashToNote = (id: string) => {
+  const _unassignTrashToNote = async (id: string) => {
+    await firestore.updateNote(id, { trash: false })
     unassignTrashToNote(id)
   }
 
-  const _unassignTrashToList = (id: string) => {
+  const _unassignTrashToList = async (id: string) => {
+    await firestore.updateList(id, { trash: false })
     unassignTrashToList(id)
   }
 
@@ -40,7 +43,7 @@
       <NoteCard
         note={item}
         handleRestore={() => _unassignTrashToNote(item.id)}
-        handleDelete={async () => await _deleteNote(item.id)}
+        handleDelete={() => _deleteNote(item.id)}
       />
     {/if}
   {/each}

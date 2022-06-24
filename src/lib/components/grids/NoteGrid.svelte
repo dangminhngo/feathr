@@ -1,6 +1,6 @@
 <script lang="ts">
   import NoteCard from '$lib/components/items/NoteCard.svelte'
-
+  import firestore from '$lib/firebase/firestore'
   import { filterItems } from '$lib/helpers'
   import { uiState, notesState } from '$lib/state'
   import type { Note } from '$lib/types'
@@ -12,9 +12,19 @@
   export let notes: Note[] = []
   $: filteredNotes = filterItems(notes)
 
-  const openEditNoteForm = (id: string) => {
+  const _openEditNoteForm = (id: string) => {
     setCurrentNote(id)
     openModal(ModalType.Note)
+  }
+
+  const _togglePinnedNote = async (id: string, pinned: boolean) => {
+    await firestore.updateNote(id, { pinned: !pinned })
+    togglePinnedNote(id)
+  }
+
+  const _assignTrashToNote = async (id: string) => {
+    await firestore.updateNote(id, { trash: true })
+    assignTrashToNote(id)
   }
 </script>
 
@@ -23,9 +33,9 @@
     <NoteCard
       {note}
       active={$notesState.currentNoteId === note.id}
-      on:click={() => openEditNoteForm(note.id)}
-      handlePinned={() => togglePinnedNote(note.id)}
-      handleTrash={() => assignTrashToNote(note.id)}
+      on:click={() => _openEditNoteForm(note.id)}
+      handlePinned={() => _togglePinnedNote(note.id, note.pinned)}
+      handleTrash={() => _assignTrashToNote(note.id)}
     />
   {/each}
 </div>

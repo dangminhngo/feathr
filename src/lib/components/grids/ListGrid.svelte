@@ -1,5 +1,6 @@
 <script lang="ts">
   import ListCard from '$lib/components/items/ListCard.svelte'
+  import firestore from '$lib/firebase/firestore'
   import { uiState, listsState } from '$lib/state'
   import { filterItems } from '$lib/helpers'
   import type { List } from '$lib/types'
@@ -11,9 +12,19 @@
   const { setCurrentList, togglePinnedList, assignTrashToList } = listsState
   const { openModal } = uiState
 
-  const openEditListForm = (id: string) => {
+  const _openEditListForm = (id: string) => {
     setCurrentList(id)
     openModal(ModalType.List)
+  }
+
+  const _togglePinnedList = async (id: string, pinned: boolean) => {
+    await firestore.updateList(id, { pinned: !pinned })
+    togglePinnedList(id)
+  }
+
+  const _assignTrashToList = async (id: string) => {
+    await firestore.updateList(id, { trash: true })
+    assignTrashToList(id)
   }
 </script>
 
@@ -22,9 +33,9 @@
     <ListCard
       bind:list
       active={$listsState.currentListId === list.id}
-      on:click={() => openEditListForm(list.id)}
-      handlePinned={() => togglePinnedList(list.id)}
-      handleTrash={() => assignTrashToList(list.id)}
+      on:click={() => _openEditListForm(list.id)}
+      handlePinned={() => _togglePinnedList(list.id, list.pinned)}
+      handleTrash={() => _assignTrashToList(list.id)}
     />
   {/each}
 </div>
