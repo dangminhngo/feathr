@@ -27,7 +27,7 @@
 
 <header class="header">
   <Hamburger on:click={uiState.toggleNav} />
-  <Search placeholder="Search notes or tasks ..." bind:value={keyword} on:submit={handleSubmit} />
+  <Search placeholder="Search notes or lists ..." bind:value={keyword} on:submit={handleSubmit} />
   <div class="buttons">
     <IconButton name="cog" on:click={(e) => _toggleContextMenu(ContextMenuType.Settings)(e)} />
     {#if $authState.isAuth && $authState.authUser}
