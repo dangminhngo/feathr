@@ -1,13 +1,15 @@
 <script lang="ts">
   import Icon from '$lib/components/Icon.svelte'
   import TrashGrid from '$lib/components/grids/TrashGrid.svelte'
+  import firestore from '$lib/firebase/firestore'
   import { notesState, listsState } from '$lib/state'
   import { isEmptyTrash } from '$lib/helpers'
 
   const { emptyTrashNotes } = notesState
   const { emptyTrashLists } = listsState
 
-  const handleEmptyTrash = () => {
+  const handleEmptyTrash = async () => {
+    await firestore.emptyTrash()
     emptyTrashNotes()
     emptyTrashLists()
   }

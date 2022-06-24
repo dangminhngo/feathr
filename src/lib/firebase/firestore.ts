@@ -1,5 +1,6 @@
 import { get } from 'svelte/store'
 import {
+  writeBatch,
   collection,
   deleteDoc,
   doc,
@@ -7,6 +8,8 @@ import {
   getFirestore,
   setDoc,
   updateDoc,
+  query,
+  where,
 } from 'firebase/firestore'
 import app from './app'
 import { authState } from '$lib/state'
@@ -14,6 +17,7 @@ import type { Note, List, Tag } from '$lib/types'
 
 const db = getFirestore(app)
 
+const batch = writeBatch(db)
 export const userDoc = (id: string) => doc(db, 'users', id)
 const noteDoc = (userId: string, id: string) => doc(db, 'users', userId, 'notes', id)
 const listDoc = (userId: string, id: string) => doc(db, 'users', userId, 'lists', id)
@@ -94,6 +98,23 @@ const deleteTag = async (payload: string) => {
   await deleteDoc(tagRef)
 }
 
+const emptyTrash = async () => {
+  const userId = getUserIdFromAuthState()
+  const trashNotesQuery = query(
+    collection(db, 'users', userId, 'notes'),
+    where('trash', '==', true)
+  )
+  const trashListsQuery = query(
+    collection(db, 'users', userId, 'lists'),
+    where('trash', '==', true)
+  )
+  const trashNotesQuerySnapshot = await getDocs(trashNotesQuery)
+  const trashListsQuerySnapshot = await getDocs(trashListsQuery)
+  trashNotesQuerySnapshot.forEach((doc) => batch.delete(doc.ref))
+  trashListsQuerySnapshot.forEach((doc) => batch.delete(doc.ref))
+  await batch.commit()
+}
+
 export default {
   addNote,
   updateNote,
@@ -104,4 +125,5 @@ export default {
   addTag,
   updateTag,
   deleteTag,
+  emptyTrash,
 }
