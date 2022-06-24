@@ -35,25 +35,11 @@ export const fetchInitialData = async () => {
   const listsQuerySnapshot = await getDocs(collection(db, 'users', userId, 'lists'))
   const tagsQuerySnapshot = await getDocs(collection(db, 'users', userId, 'tags'))
 
-  const notes: Note[] = notesQuerySnapshot.docs.map((doc) => {
-    const data = doc.data()
-    data.id = doc.id
-    return data as Note
-  })
-
-  const lists: List[] = listsQuerySnapshot.docs.map((doc) => {
-    const data = doc.data()
-    data.id = doc.id
-    return data as List
-  })
-
-  const tags: Tag[] = tagsQuerySnapshot.docs.map((doc) => {
-    const data = doc.data()
-    data.id = doc.id
-    return data as Tag
-  })
-
-  return { notes, lists, tags }
+  return {
+    notes: notesQuerySnapshot.docs.map((doc) => doc.data() as Note),
+    lists: listsQuerySnapshot.docs.map((doc) => doc.data() as List),
+    tags: tagsQuerySnapshot.docs.map((doc) => doc.data() as Tag),
+  }
 }
 
 const addNote = async (payload: Note) => {
