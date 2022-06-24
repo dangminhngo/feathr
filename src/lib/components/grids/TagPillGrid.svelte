@@ -8,11 +8,13 @@
   $: tags = getTags($tagsState.tags, ids)
 </script>
 
-<div class="tag-list">
-  {#each tags as tag (tag.id)}
-    <TagPill {tag} />
-  {/each}
-</div>
+{#if tags.length > 0}
+  <div class="tag-list">
+    {#each tags as tag (tag.id)}
+      <TagPill {tag} />
+    {/each}
+  </div>
+{/if}
 
 <style lang="scss">
   .tag-list {

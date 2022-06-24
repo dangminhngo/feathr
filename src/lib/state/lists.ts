@@ -1,64 +1,18 @@
 import { writable } from 'svelte/store'
-import { v4 as uuid } from 'uuid'
 
 import type { ListsState, List } from '$lib/types'
 
 export const initialListsState: ListsState = {
-  lists: [
-    {
-      id: uuid(),
-      title: 'This is the first task',
-      tasks: [
-        {
-          id: uuid(),
-          title: 'Task A',
-          done: true,
-        },
-        {
-          id: uuid(),
-          title: 'Task A',
-          done: false,
-        },
-      ],
-      images: [],
-      tagIds: [],
-      pinned: false,
-      trash: false,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-    {
-      id: uuid(),
-      title: 'This is the second task',
-      tasks: [
-        {
-          id: uuid(),
-          title: 'Task A',
-          done: true,
-        },
-        {
-          id: uuid(),
-          title: 'Task B',
-          done: false,
-        },
-      ],
-      images: [],
-      tagIds: [],
-      pinned: true,
-      trash: true,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      trashedAt: new Date(),
-    },
-  ],
+  lists: [],
   currentListId: '',
 }
 
 const createListsState = (initialState: ListsState) => {
-  const { subscribe, update } = writable(initialState)
+  const { subscribe, update, set } = writable(initialState)
 
   return {
     subscribe,
+    set,
     setCurrentList: (id: string) => {
       update((s) => {
         s.currentListId = id

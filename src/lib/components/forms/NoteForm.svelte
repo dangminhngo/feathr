@@ -5,16 +5,16 @@
   import IconButton from '$lib/components/IconButton.svelte'
   import FormContextMenus from '$lib/components/contextmenus/FormContextMenus.svelte'
   import TagPillGrid from '$lib/components/grids/TagPillGrid.svelte'
+  import firestore from '$lib/firebase/firestore'
   import { uiState, notesState } from '$lib/state'
   import { getItemById, isEmptyNote, createEmptyNote } from '$lib/helpers'
   import { themeKey } from '$lib/consts'
-  import type { Note } from '$lib/types'
   import { ContextMenuType } from '$lib/enums'
 
   let titleField: Field
 
-  let note: Note = createEmptyNote()
-  const editingNote: Note | undefined = getItemById($notesState.notes, $notesState.currentNoteId)
+  let note = createEmptyNote()
+  const editingNote = getItemById($notesState.notes, $notesState.currentNoteId)
 
   if (editingNote) note = { ...editingNote }
 
@@ -41,25 +41,24 @@
 
   const dispatch = createEventDispatcher()
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     closeAllModals()
     dispatch('close')
     if (isEmptyNote(note)) return
     if (editingNote) {
+      await firestore.updateNote(note)
       updateNote(note.id, note)
     } else {
+      await firestore.addNote(note)
       addNote(note)
     }
     setCurrentNote('')
   }
 </script>
 
-<div
-  class="form"
-  style="background-color: {note.color ? brushPalette[note.color] : 'transparent'};"
->
-  <Field bind:this={titleField} placeholder="Title" bind:value={note.title} />
-  <Field size="sm" placeholder="Body" bind:value={note.body} />
+<div class="form">
+  <Field bind:this={titleField} name="Title" placeholder="Title" bind:value={note.title} />
+  <Field name="Body" placeholder="Body" bind:value={note.body} />
   <TagPillGrid ids={note.tagIds} />
   <div class="actions">
     <div class="left">
@@ -91,14 +90,16 @@
 
 <style lang="scss">
   .form {
-    padding: 0 1rem;
+    padding: 1rem;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1rem;
     border-radius: var(--rounded);
   }
 
   .actions {
-    padding-top: 0.5rem;
-    padding-bottom: 0.75rem;
     display: flex;
     align-items: center;
     justify-content: space-between;

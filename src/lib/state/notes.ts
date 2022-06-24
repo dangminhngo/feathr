@@ -33,10 +33,11 @@ export const initialNotesState: NotesState = {
 }
 
 const createNotesState = (initialState: NotesState) => {
-  const { subscribe, update } = writable(initialState)
+  const { subscribe, update, set } = writable(initialState)
 
   return {
     subscribe,
+    set,
     setCurrentNote: (id: string) => {
       update((s) => {
         s.currentNoteId = id

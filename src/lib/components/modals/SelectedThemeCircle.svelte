@@ -4,7 +4,6 @@
   export let name: string, theme: Theme, group: string
 
   $: selected = group === theme.name
-  $: console.log(group, theme)
 </script>
 
 <label class:selected>

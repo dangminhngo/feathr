@@ -21,7 +21,7 @@
 </script>
 
 {#if $uiState.modal.themes}
-  <ModalWrapper handleBackdropClick={handleModalClose}>
+  <ModalWrapper title="Themes" handleClose={handleModalClose}>
     <div class="wrapper">
       <p>Choose your theme</p>
       <div class="grid">
@@ -40,6 +40,11 @@
     display: flex;
     flex-direction: column;
     gap: 1rem;
+  }
+
+  p {
+    font-size: var(--text-sm);
+    color: var(--theme-primary-400);
   }
 
   .grid {

@@ -16,7 +16,6 @@
 
 <style lang="scss">
   .wrapper {
-    cursor: pointer;
     margin: 0 auto;
     width: 30rem;
     border: 1px solid var(--theme-primary-700);

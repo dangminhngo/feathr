@@ -1,8 +1,7 @@
 <script lang="ts">
   let input: HTMLDivElement
 
-  export let editable = true,
-    size: 'lg' | 'sm' = 'lg',
+  export let name = 'Field',
     value = '',
     placeholder = ''
 
@@ -11,22 +10,36 @@
   }
 </script>
 
-<div class="content-editable" class:lg={size === 'lg'} class:sm={size === 'sm'}>
-  {#if editable}
+<div class="field">
+  <span class="name">{name}</span>
+  <div class="content-editable">
     <div class="content" contenteditable="true" bind:this={input} bind:textContent={value} />
-  {:else}
-    <div class="content">{value}</div>
-  {/if}
-  {#if !value}
-    <div class="placeholder">{placeholder}</div>
-  {/if}
+    {#if !value}
+      <div class="placeholder">{placeholder}</div>
+    {/if}
+  </div>
 </div>
 
 <style lang="scss">
+  .field {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .name {
+    margin-bottom: 0.375rem;
+    font-size: var(--text-xs);
+    font-weight: 500;
+    color: var(--theme-primary-400);
+  }
+
   .content-editable {
     position: relative;
-    padding: 0.5rem 0;
+    padding: 0.5rem 1rem;
     width: 100%;
+    border: 1px solid var(--theme-primary-800);
+    border-radius: var(--rounded);
+    font-size: var(--text-sm);
 
     .content {
       outline: none;
@@ -36,17 +49,9 @@
       position: absolute;
       top: 0;
       left: 0;
-      padding: 0.5rem 0;
+      padding: 0.5rem 1rem;
       pointer-events: none;
-      color: var(--theme-primary-300);
+      color: var(--theme-primary-500);
     }
-  }
-
-  .content-editable.lg {
-    font-size: var(--text-base);
-  }
-
-  .content-editable.sm {
-    font-size: var(--text-sm);
   }
 </style>

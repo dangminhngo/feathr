@@ -14,8 +14,6 @@
   onMount(() => {
     authState.mount()
   })
-
-  $: console.log($authState)
 </script>
 
 <svelte:head>

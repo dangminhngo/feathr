@@ -1,7 +1,6 @@
 <script lang="ts">
   import { onMount } from 'svelte'
   import Checkbox from './Checkbox.svelte'
-  import Field from './Field.svelte'
   import Icon from './Icon.svelte'
   import IconButton from './IconButton.svelte'
   import type { Task } from '$lib/types'
@@ -12,8 +11,8 @@
     handleDelete: () => void = () => {
       /**/
     }
-  let contentEditable: Field
-  let showButton = false
+  let titleField: HTMLInputElement,
+    showButton = false
 
   const handleMouseLeave = () => {
     showButton = false
@@ -24,7 +23,7 @@
   }
 
   onMount(() => {
-    contentEditable?.focus()
+    titleField?.focus()
   })
 </script>
 
@@ -40,7 +39,17 @@
     </div>
   {/if}
   <Checkbox bind:checked={task.done} {alt} />
-  <Field bind:this={contentEditable} {editable} size="sm" bind:value={task.title} />
+  {#if editable}
+    <input
+      class="field"
+      bind:this={titleField}
+      type="text"
+      placeholder="Enter your task"
+      bind:value={task.title}
+    />
+  {:else}
+    <span class="field">{task.title}</span>
+  {/if}
   {#if editable}
     <div class="buttons" class:show={showButton}>
       <IconButton size="sm" name="close" on:click={handleDelete} />
@@ -65,6 +74,11 @@
     opacity: 0;
     pointer-events: none;
     color: var(--theme-primary-400);
+  }
+
+  .field {
+    flex: 1;
+    font-size: var(--text-sm);
   }
 
   .buttons {

@@ -9,5 +9,5 @@
 </script>
 
 {#if $uiState.modal.about}
-  <ModalWrapper handleBackdropClick={handleModalClose}>About</ModalWrapper>
+  <ModalWrapper handleClose={handleModalClose}>About</ModalWrapper>
 {/if}

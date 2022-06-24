@@ -5,7 +5,11 @@
     size: 'lg' | 'md' | 'sm' = 'lg',
     active = false
 
-  const iconSize = size !== 'sm' ? 20 : 18
+  const getIconSize = (size: 'lg' | 'md' | 'sm'): number => {
+    if (size === 'lg') return 20
+    if (size === 'md') return 18
+    return 16
+  }
 </script>
 
 <button
@@ -15,7 +19,7 @@
   class:active
   on:click|stopPropagation
 >
-  <Icon class="icon" {name} width={iconSize} height={iconSize} />
+  <Icon class="icon" {name} size={getIconSize(size)} />
 </button>
 
 <style lang="scss">
@@ -34,13 +38,13 @@
   }
 
   button.md {
-    width: 2rem;
-    height: 2rem;
+    width: 1.75rem;
+    height: 1.75rem;
   }
 
   button.sm {
-    width: 1.75rem;
-    height: 1.75rem;
+    width: 1.25rem;
+    height: 1.25rem;
   }
 
   button.active {

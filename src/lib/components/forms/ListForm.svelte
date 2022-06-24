@@ -10,6 +10,8 @@
   import IconButton from '$lib/components/IconButton.svelte'
   import FormContextMenus from '$lib/components/contextmenus/FormContextMenus.svelte'
   import TagPillGrid from '$lib/components/grids/TagPillGrid.svelte'
+  import TaskList from '$lib/components/grids/TaskList.svelte'
+  import firestore from '$lib/firebase/firestore'
   import { themeKey } from '$lib/consts'
   import { ContextMenuType } from '$lib/enums'
   import {
@@ -74,12 +76,15 @@
   }
 
   const dispatch = createEventDispatcher()
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     closeAllModals()
     dispatch('close')
     if (isEmptyList(list) || lastTaskInListIsEmptyTask(list)) return
-    if (editingList) updateList(list.id, list)
-    else {
+    if (editingList) {
+      await firestore.updateList(list)
+      updateList(list.id, list)
+    } else {
+      await firestore.addList(list)
       addList(list)
     }
     setCurrentList('')
@@ -94,28 +99,31 @@
   const brushPalette = getBrushPalette()
 </script>
 
-<div
-  class="form"
-  style="background-color: {list.color ? brushPalette[list.color] : 'transparent'};"
->
-  <Field bind:this={titleField} placeholder="Title" bind:value={list.title} />
-  {#each undoneTasks as task (task.id)}
-    <div in:receive|local={{ key: task.id }} out:send|local={{ key: task.id }} animate:flip>
-      <EditableTask bind:task handleDelete={() => _deleteTask(task.id)} alt={!!list.color} />
-    </div>
-  {/each}
+<div class="form">
+  <Field bind:this={titleField} name="Title" placeholder="Title" bind:value={list.title} />
+  {#if undoneTasks.length}
+    <TaskList>
+      {#each undoneTasks as task (task.id)}
+        <div in:receive|local={{ key: task.id }} out:send|local={{ key: task.id }} animate:flip>
+          <EditableTask bind:task handleDelete={() => _deleteTask(task.id)} alt={!!list.color} />
+        </div>
+      {/each}
+    </TaskList>
+  {/if}
   <button class="add" on:click={_addTask}>
     <Icon name="plus" width={16} height={16} />
     <span>Add a task</span>
   </button>
-  {#if doneTasks.length !== 0}
-    <p>{doneTasks.length} tasks done</p>
+  {#if doneTasks.length}
+    <TaskList>
+      <p>{doneTasks.length} tasks done</p>
+      {#each doneTasks as task (task.id)}
+        <div in:receive|local={{ key: task.id }} out:send|local={{ key: task.id }} animate:flip>
+          <EditableTask bind:task handleDelete={() => _deleteTask(task.id)} alt={!!list.color} />
+        </div>
+      {/each}
+    </TaskList>
   {/if}
-  {#each doneTasks as task (task.id)}
-    <div in:receive|local={{ key: task.id }} out:send|local={{ key: task.id }} animate:flip>
-      <EditableTask bind:task handleDelete={() => _deleteTask(task.id)} alt={!!list.color} />
-    </div>
-  {/each}
   <TagPillGrid ids={list.tagIds} />
   <div class="actions">
     <div class="left">
@@ -147,19 +155,18 @@
 
 <style lang="scss">
   .form {
-    padding: 0 1rem;
+    padding: 1rem;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: stretch;
+    gap: 1rem;
+    border-radius: var(--rounded);
   }
 
   .add {
     cursor: pointer;
-    margin: 0.5rem 0;
-    padding-left: 1.5rem;
-    padding-top: 0.25rem;
-    padding-bottom: 0.25rem;
+    padding: 0.375rem 0.5rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -180,8 +187,6 @@
   }
 
   .actions {
-    padding-top: 0.5rem;
-    padding-bottom: 0.75rem;
     display: flex;
     align-items: center;
     justify-content: space-between;

@@ -21,6 +21,7 @@
   import Pin from '$assets/icons/pin.svg'
   import PinFull from '$assets/icons/pin-f.svg'
   import Plus from '$assets/icons/plus.svg'
+  import Save from '$assets/icons/save.svg'
   import Search from '$assets/icons/search.svg'
   import Tag from '$assets/icons/tag.svg'
   import Tags from '$assets/icons/tags.svg'
@@ -48,6 +49,7 @@
     pin: Pin,
     pinFull: PinFull,
     plus: Plus,
+    save: Save,
     search: Search,
     tag: Tag,
     tags: Tags,
@@ -56,11 +58,10 @@
   }
 
   export let name: string,
-    width = 20,
-    height = 20
+    size = 20
 </script>
 
-<span class={$$props.class} style="width: {width}px; height: {height}px;">
+<span class={$$props.class} style="width: {size}px; height: {size}px;">
   <svelte:component this={icons[name]} width="100%" height="100%" />
 </span>
 

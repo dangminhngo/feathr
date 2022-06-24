@@ -14,7 +14,7 @@
 </script>
 
 {#if $uiState.modal.list}
-  <ModalWrapper handleBackdropClick={handleModalClose}>
+  <ModalWrapper title="List" handleClose={handleModalClose}>
     <ListForm />
   </ModalWrapper>
 {/if}

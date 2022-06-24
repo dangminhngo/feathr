@@ -1,18 +1,27 @@
 <script lang="ts">
+  import { quintOut } from 'svelte/easing'
   import { fade, scale } from 'svelte/transition'
   import Portal from 'svelte-portal/src/Portal.svelte'
+  import IconButton from '$lib/components/IconButton.svelte'
 
   export let width = 30,
-    handleBackdropClick: () => void = () => {
+    title = 'Modal',
+    handleClose: () => void = () => {
       /**/
     }
 </script>
 
 <Portal target="body">
-  <div class="backdrop" transition:fade={{ duration: 150 }} on:click={handleBackdropClick}>
-    &nbsp;
-  </div>
-  <div class="wrapper" transition:scale={{ duration: 250 }} style="width: {width}rem;">
+  <div class="backdrop" transition:fade={{ duration: 150 }} on:click={handleClose}>&nbsp;</div>
+  <div
+    class="wrapper"
+    transition:scale={{ duration: 350, easing: quintOut }}
+    style="width: {width}rem;"
+  >
+    <div class="titlebar">
+      <span>{title}</span>
+      <IconButton size="sm" name="close" on:click={handleClose} />
+    </div>
     <slot />
   </div>
 </Portal>
@@ -36,5 +45,17 @@
     border-radius: var(--rounded);
     background-color: var(--theme-primary-900);
     box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+
+  .titlebar {
+    padding: 0.25rem 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--theme-accent);
+    color: var(--theme-primary-50);
+    font-size: var(--text-sm);
+    font-weight: 500;
   }
 </style>

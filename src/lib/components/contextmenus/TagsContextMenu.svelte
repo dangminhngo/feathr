@@ -2,6 +2,7 @@
   import Icon from '$lib/components/Icon.svelte'
   import ContextMenuWrapper from './ContextMenuWrapper.svelte'
   import CheckboxField from './CheckboxField.svelte'
+  import firestore from '$lib/firebase/firestore'
   import { uiState, notesState, tagsState } from '$lib/state'
   import { searchTags, clickOutside, createEmptyTag } from '$lib/helpers'
 
@@ -17,9 +18,10 @@
     closeAllContextMenus()
   }
 
-  const handleAddTagWithKeyword = () => {
+  const handleAddTagWithKeyword = async () => {
     const tag = createEmptyTag()
     tag.label = keyword
+    firestore.addTag(tag)
     addTag(tag)
     keyword = ''
   }

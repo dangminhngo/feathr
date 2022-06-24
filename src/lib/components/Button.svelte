@@ -11,7 +11,7 @@
 <style lang="scss">
   button {
     cursor: pointer;
-    padding: 0.5em 1em;
+    padding: 0.375em 0.75em;
     border-radius: var(--rounded);
   }
 

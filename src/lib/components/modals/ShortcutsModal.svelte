@@ -10,5 +10,5 @@
 </script>
 
 {#if $uiState.modal.shortcuts}
-  <ModalWrapper handleBackdropClick={handleModalClose}>Shortcuts</ModalWrapper>
+  <ModalWrapper handleClose={handleModalClose}>Shortcuts</ModalWrapper>
 {/if}

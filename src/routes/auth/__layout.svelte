@@ -4,7 +4,7 @@
 
 <section>
   <a href="/" class="logo">
-    <Icon name="logo" width={80} height={80} />
+    <Icon name="logo" size={96} />
   </a>
   <slot />
 </section>

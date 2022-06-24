@@ -1,13 +1,15 @@
 <script lang="ts">
   import NoteCard from '$lib/components/items/NoteCard.svelte'
   import ListCard from '$lib/components/items/ListCard.svelte'
+  import firestore from '$lib/firebase/firestore'
   import { notesState, listsState } from '$lib/state'
   import { filterTrashItems } from '$lib/helpers'
 
   const { deleteNote, unassignTrashToNote } = notesState
   const { deleteList, unassignTrashToList } = listsState
 
-  const _deleteNote = (id: string) => {
+  const _deleteNote = async (id: string) => {
+    await firestore.deleteNote(id)
     deleteNote(id)
   }
 
@@ -38,7 +40,7 @@
       <NoteCard
         note={item}
         handleRestore={() => _unassignTrashToNote(item.id)}
-        handleDelete={() => _deleteNote(item.id)}
+        handleDelete={async () => await _deleteNote(item.id)}
       />
     {/if}
   {/each}

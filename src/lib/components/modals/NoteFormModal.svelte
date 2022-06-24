@@ -14,7 +14,7 @@
 </script>
 
 {#if $uiState.modal.note}
-  <ModalWrapper handleBackdropClick={handleModalClose}>
+  <ModalWrapper title="Note" handleClose={handleModalClose}>
     <NoteForm />
   </ModalWrapper>
 {/if}

@@ -58,7 +58,7 @@ export interface List {
 }
 
 export interface User {
-  uid: string
+  id: string
   email: string
   photoURL: string
 }
@@ -74,6 +74,7 @@ export interface UiState {
   modal: {
     note: boolean
     list: boolean
+    tag: boolean
     themes: boolean
     shortcuts: boolean
     about: boolean

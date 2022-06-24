@@ -1,6 +1,7 @@
 export enum ModalType {
   Note = 'note',
   List = 'list',
+  Tag = 'tag',
   Themes = 'themes',
   Shortcuts = 'shortcuts',
   About = 'about',

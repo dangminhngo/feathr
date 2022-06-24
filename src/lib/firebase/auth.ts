@@ -21,18 +21,24 @@ export const signUp = async (email: string, password: string) => {
       throw new Error('Cannot authenticate this user')
     }
 
-    const userRef = userDoc(auth.currentUser.uid)
+    const userRef = userDoc(user.uid)
     await setDoc(userRef, {
+      id: userRef.id,
       email: user.email,
       photoURL: getDefaultUserPhotoURL(user.email),
     })
+
     const authUserSnapshot = await getDoc(userRef)
     const authUser = authUserSnapshot.data()
 
+    if (!authUser) {
+      throw new Error('Cannot authenticate this user')
+    }
+
     setAuth({
-      uid: authUser?.uid,
-      email: authUser?.email,
-      photoURL: authUser?.photoURL,
+      id: authUserSnapshot.id,
+      email: authUser.email,
+      photoURL: authUser.photoURL,
     })
   } catch (err) {
     console.log(err)
@@ -51,8 +57,12 @@ export const signIn = async (email: string, password: string) => {
     const authUserSnapshot = await getDoc(userRef)
     const authUser = authUserSnapshot.data()
 
+    if (!authUser) {
+      throw new Error('Something went wrong')
+    }
+
     setAuth({
-      uid: authUser?.uid,
+      id: authUserSnapshot.id,
       email: authUser?.email,
       photoURL: authUser?.photoURL,
     })

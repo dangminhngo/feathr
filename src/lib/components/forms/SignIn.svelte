@@ -19,9 +19,7 @@
 <form on:submit|preventDefault={handleSubmit}>
   <TextInput label="Email" placeholder="Enter your email" bind:value={email} />
   <PasswordInput label="Password" placeholder="Enter your password" bind:value={password} />
-  <Button size="lg" variant="primary" stretch={true} on:click={() => console.log('Sign Up')}
-    >Sign in</Button
-  >
+  <Button size="lg" variant="primary" stretch={true}>Sign in</Button>
 </form>
 
 <style lang="scss">

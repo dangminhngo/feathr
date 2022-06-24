@@ -2,7 +2,7 @@ import type { Action } from 'svelte/types/runtime/action'
 import { v4 as uuid } from 'uuid'
 import type { Note, List, Task, Tag } from '$lib/types'
 
-export function getItemById<T extends Note | List>(items: T[], id: string): T | undefined {
+export function getItemById<T extends Note | List | Tag>(items: T[], id: string): T | undefined {
   return items.find((item) => item.id === id)
 }
 
@@ -42,15 +42,19 @@ export const createEmptyTag = (): Tag => ({
 })
 
 export const isEmptyNote = (note: Note): boolean => {
-  return note.title === '' && note.body === '' && !note.images.length
+  return !note.title && note.body === '' && !note.images.length
 }
 
 export const isEmptyList = (list: List): boolean => {
-  return list.title === '' && list.tasks.length === 0
+  return !list.title && list.tasks.length === 0
 }
 
 export const isEmptyTask = (task: Task): boolean => {
-  return task.title === ''
+  return !task.title
+}
+
+export const isEmptyTag = (tag: Tag): boolean => {
+  return !tag.label
 }
 
 export const lastTaskInListIsEmptyTask = (list: List): boolean => {

@@ -7,6 +7,7 @@
   import IconButton from '$lib/components/IconButton.svelte'
   import EditableTask from '$lib/components/EditableTask.svelte'
   import TagPillGrid from '$lib/components/grids/TagPillGrid.svelte'
+  import TaskList from '$lib/components/grids/TaskList.svelte'
   import { getFilteredTasks } from '$lib/helpers'
   import { themeKey } from '$lib/consts'
   import type { List, Task } from '$lib/types'
@@ -72,27 +73,31 @@
     <div class="title">{list.title}</div>
   {/if}
   <div class="tasks">
-    {#if list.tasks.length > 0 && undoneTasks.length === 0}
-      <div class="message">All tasks completed</div>
-    {/if}
-    {#each undoneTasks as task (task.id)}
-      <div in:receive|local={{ key: task.id }} out:send|local={{ key: task.id }} animate:flip>
-        <EditableTask editable={false} bind:task alt={!!list.color} />
-      </div>
-    {/each}
+    <TaskList>
+      {#if list.tasks.length > 0 && undoneTasks.length === 0}
+        <div class="message">All tasks completed</div>
+      {/if}
+      {#each undoneTasks as task (task.id)}
+        <div in:receive|local={{ key: task.id }} out:send|local={{ key: task.id }} animate:flip>
+          <EditableTask editable={false} bind:task alt={!!list.color} />
+        </div>
+      {/each}
+    </TaskList>
     {#if list.tasks.length === 0}
       <div class="message">No tasks</div>
     {:else}
       <hr class="sep" />
     {/if}
-    {#if list.tasks.length > 0 && doneTasks.length === 0}
-      <div class="message">No tasks completed</div>
-    {/if}
-    {#each doneTasks as task (task.id)}
-      <div in:receive|local={{ key: task.id }} out:send|local={{ key: task.id }} animate:flip>
-        <EditableTask editable={false} bind:task alt={!!list.color} />
-      </div>
-    {/each}
+    <TaskList>
+      {#if list.tasks.length > 0 && doneTasks.length === 0}
+        <div class="message">No tasks completed</div>
+      {/if}
+      {#each doneTasks as task (task.id)}
+        <div in:receive|local={{ key: task.id }} out:send|local={{ key: task.id }} animate:flip>
+          <EditableTask editable={false} bind:task alt={!!list.color} />
+        </div>
+      {/each}
+    </TaskList>
   </div>
   <TagPillGrid ids={list.tagIds} />
   <div class="buttons">
@@ -117,7 +122,7 @@
     padding: 1rem;
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 1rem;
     border-width: 1px;
     border-style: solid;
     border-radius: var(--rounded);
@@ -135,10 +140,15 @@
     border: 1px solid var(--theme-primary-400);
   }
 
+  .tasks {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
   .message {
-    padding: 0.75rem 0;
     font-size: var(--text-sm);
-    color: var(--theme-primary-200);
+    color: var(--theme-primary-400);
   }
 
   .buttons {

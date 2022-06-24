@@ -8,6 +8,7 @@ export const initialUiState: UiState = {
   modal: {
     note: false,
     list: false,
+    tag: false,
     themes: false,
     shortcuts: false,
     about: false,
@@ -53,6 +54,7 @@ const createLayoutStore = (initialState: UiState) => {
         s.modal = {
           note: false,
           list: false,
+          tag: false,
           themes: false,
           shortcuts: false,
           about: false,

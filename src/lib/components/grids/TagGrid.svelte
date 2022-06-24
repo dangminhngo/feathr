@@ -1,23 +1,36 @@
 <script lang="ts">
-  import EditableTag from '$lib/components/items/EditableTag.svelte'
-  import { tagsState } from '$lib/state'
+  import TagCard from '$lib/components/items/TagCard.svelte'
+  import firestore from '$lib/firebase/firestore'
+  import { uiState, tagsState } from '$lib/state'
   import { filterTags } from '$lib/helpers'
+  import { ModalType } from '$lib/enums'
 
-  const { deleteTag } = tagsState
+  const { setCurrentTag, deleteTag } = tagsState
+  const { openModal } = uiState
 
-  const _deleteTag = (id: string) => {
+  const _deleteTag = async (id: string) => {
+    await firestore.deleteTag(id)
     deleteTag(id)
+  }
+
+  const _openTagFormModal = (id: string) => {
+    setCurrentTag(id)
+    openModal(ModalType.Tag)
   }
 
   $: filteredTags = filterTags($tagsState.tags)
 </script>
 
 <div class="tag-list">
-  {#each Object.keys(filteredTags) as key}
+  {#each filteredTags as { character, tags } (character)}
     <div class="key">
-      <p class="character">{key}</p>
-      {#each filteredTags[key] as tag (tag.id)}
-        <EditableTag bind:tag handleDelete={() => _deleteTag(tag.id)} />
+      <p class="character">{character}</p>
+      {#each tags as tag (tag.id)}
+        <TagCard
+          bind:tag
+          on:click={() => _openTagFormModal(tag.id)}
+          handleDelete={async () => await _deleteTag(tag.id)}
+        />
       {/each}
     </div>
   {/each}

@@ -1,34 +1,62 @@
-<script>
+<script lang="ts">
+  import { onMount, createEventDispatcher } from 'svelte'
   import Button from '$lib/components/Button.svelte'
   import Field from '$lib/components/Field.svelte'
-  import { createEmptyTag } from '$lib/helpers'
-  import { tagsState } from '$lib/state'
+  import firestore from '$lib/firebase/firestore'
+  import { createEmptyTag, getItemById, isEmptyTag } from '$lib/helpers'
+  import { uiState, tagsState } from '$lib/state'
+  import type { Tag } from '$lib/types'
 
-  let tag = createEmptyTag()
+  let tag = createEmptyTag(),
+    labelField: Field
+  const editingTag = getItemById<Tag>($tagsState.tags, $tagsState.currentTagId)
+  if (editingTag) tag = { ...editingTag }
 
-  const { addTag } = tagsState
+  const { closeAllModals } = uiState
+  const { setCurrentTag, addTag, updateTag } = tagsState
+  const dispatch = createEventDispatcher()
 
-  const handleSubmit = () => {
-    if (!tag.label) return
-    addTag(tag)
+  const handleSubmit = async () => {
+    dispatch('close')
+    if (isEmptyTag(tag)) return
+    if (editingTag) {
+      await firestore.updateTag(tag)
+      updateTag(tag.id, tag)
+    } else {
+      await firestore.addTag(tag)
+      addTag(tag)
+    }
+    setCurrentTag('')
+    closeAllModals()
   }
+
+  onMount(() => {
+    labelField?.focus()
+  })
 </script>
 
 <div class="form">
-  <Field placeholder="Add a tag..." bind:value={tag.label} />
-  {#if tag.label}
-    <Button on:click={handleSubmit}>Save</Button>
-  {/if}
+  <Field bind:this={labelField} name="Label" placeholder="Label" bind:value={tag.label} />
+  <div class="actions">
+    <Button on:click={handleSubmit}>{tag.label ? 'Save' : 'Close'}</Button>
+  </div>
 </div>
 
 <style lang="scss">
   .form {
-    margin: 0 auto;
-    padding-left: 1rem;
-    width: 30rem;
+    padding: 1rem;
+    width: 100%;
     display: flex;
+    flex-direction: column;
     align-items: stretch;
-    border: 1px solid var(--theme-primary-600);
+    gap: 1rem;
     border-radius: var(--rounded);
+  }
+
+  .actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    color: var(--theme-primary-300);
   }
 </style>
