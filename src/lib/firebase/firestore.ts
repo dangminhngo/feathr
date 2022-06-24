@@ -3,6 +3,7 @@ import {
   collection,
   deleteDoc,
   doc,
+  getDoc,
   getDocs,
   getFirestore,
   setDoc,
@@ -17,8 +18,6 @@ const db = getFirestore(app)
 export const userDoc = (id: string) => doc(db, 'users', id)
 const noteDoc = (userId: string, id: string) => doc(db, 'users', userId, 'notes', id)
 const listDoc = (userId: string, id: string) => doc(db, 'users', userId, 'lists', id)
-const taskDoc = (userId: string, listId: string, id: string) =>
-  doc(db, 'users', userId, 'lists', listId, 'tasks', id)
 const tagDoc = (userId: string, id: string) => doc(db, 'users', userId, 'tags', id)
 
 const getUserIdFromAuthState = () => {
@@ -78,24 +77,6 @@ const deleteList = async (payload: string) => {
   await deleteDoc(listRef)
 }
 
-const addTask = async (listId: string, payload: Task) => {
-  const userId = getUserIdFromAuthState()
-  const taskRef = taskDoc(userId, listId, payload.id)
-  await setDoc(taskRef, payload)
-}
-
-const updateTask = async (listId: string, payload: Task) => {
-  const userId = getUserIdFromAuthState()
-  const taskRef = taskDoc(userId, listId, payload.id)
-  await updateDoc(taskRef, { ...payload })
-}
-
-const deleteTask = async (listId: string, payload: string) => {
-  const userId = getUserIdFromAuthState()
-  const taskRef = taskDoc(userId, listId, payload)
-  await deleteDoc(taskRef)
-}
-
 const addTag = async (payload: Tag) => {
   const userId = getUserIdFromAuthState()
   const tagRef = tagDoc(userId, payload.id)
@@ -121,9 +102,6 @@ export default {
   addList,
   updateList,
   deleteList,
-  addTask,
-  updateTask,
-  deleteTask,
   addTag,
   updateTag,
   deleteTag,

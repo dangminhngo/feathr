@@ -8,6 +8,7 @@
   import EditableTask from '$lib/components/EditableTask.svelte'
   import TagPillGrid from '$lib/components/grids/TagPillGrid.svelte'
   import TaskList from '$lib/components/grids/TaskList.svelte'
+  import firestore from '$lib/firebase/firestore'
   import { getFilteredTasks } from '$lib/helpers'
   import { themeKey } from '$lib/consts'
   import type { List, Task } from '$lib/types'
@@ -55,6 +56,12 @@
 
   const { getBrushPalette } = getContext(themeKey)
   const brushPalette = getBrushPalette()
+
+  const _updateList = async () => {
+    await firestore.updateList(list)
+  }
+
+  $: list, _updateList()
 </script>
 
 <div
