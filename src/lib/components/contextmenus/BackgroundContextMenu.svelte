@@ -3,14 +3,14 @@
   import SelectableColorCircle from './SelectableColorCircle.svelte'
   import { colorKeys } from '$lib/consts'
 
-  export let color: string | undefined = undefined
+  export let color = 'default'
 </script>
 
 <ContextMenuWrapper>
   <div class="colors">
     <p>Choose your favorite color</p>
     <div class="list">
-      <SelectableColorCircle bind:group={color} name="color" value={undefined} />
+      <SelectableColorCircle bind:group={color} name="color" value="default" />
       {#each colorKeys as key}
         <SelectableColorCircle bind:group={color} name="color" value={key} />
       {/each}

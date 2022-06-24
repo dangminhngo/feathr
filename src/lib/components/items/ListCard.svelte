@@ -56,6 +56,7 @@
 
   const { getBrushPalette } = getContext(themeKey)
   const brushPalette = getBrushPalette()
+  $: color = brushPalette[list.color]
 
   const _updateList = async () => {
     await firestore.updateList(list)
@@ -67,11 +68,8 @@
 <div
   class="task-list"
   class:trash={list.trash}
-  style="background-color: {list.color
-    ? brushPalette[list.color]
-    : 'transparent'}; border-color: {list.color
-    ? brushPalette[list.color]
-    : 'var(--theme-primary-700)'};"
+  style="background-color: {color ?? 'transparent'}; border-color: {color ??
+    'var(--theme-primary-700)'};"
   on:mouseenter={handleMouseEnter}
   on:mouseleave={handleMouseLeave}
   on:click

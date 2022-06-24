@@ -29,7 +29,7 @@ export interface Note {
   body: string
   images: string[]
   tagIds: string[]
-  color?: string
+  color: string
   pinned: boolean
   trash: boolean
   createdAt: Date
@@ -49,7 +49,7 @@ export interface List {
   tasks: Task[]
   images: string[]
   tagIds: string[]
-  color?: string
+  color: string
   pinned: boolean
   trash: boolean
   createdAt: Date

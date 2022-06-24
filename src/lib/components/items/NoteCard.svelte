@@ -27,16 +27,14 @@
 
   const { getBrushPalette } = getContext(themeKey)
   const brushPalette = getBrushPalette()
+  $: color = brushPalette[note.color]
 </script>
 
 <div
   class="note"
   class:trash={note.trash}
-  style="background-color: {note.color
-    ? brushPalette[note.color]
-    : 'transparent'}; border-color: {note.color
-    ? brushPalette[note.color]
-    : 'var(--theme-primary-700)'};"
+  style="background-color: {color ?? 'transparent'}; border-color: {color ??
+    'var(--theme-primary-700)'};"
   on:mouseenter={handleMouseEnter}
   on:mouseleave={handleMouseLeave}
   on:click

@@ -4,31 +4,7 @@ import { writable } from 'svelte/store'
 import type { NotesState, Note } from '$lib/types'
 
 export const initialNotesState: NotesState = {
-  notes: [
-    {
-      id: uuid(),
-      title: 'This is the first note',
-      body: 'This is the first note body',
-      images: [],
-      tagIds: [],
-      pinned: false,
-      trash: false,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-    {
-      id: uuid(),
-      title: 'This is the second note',
-      body: 'This is the second note body',
-      images: [],
-      tagIds: [],
-      pinned: true,
-      trash: true,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-      trashedAt: new Date(),
-    },
-  ],
+  notes: [],
   currentNoteId: '',
 }
 

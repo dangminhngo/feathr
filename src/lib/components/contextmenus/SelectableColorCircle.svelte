@@ -5,7 +5,7 @@
   import { themeKey } from '$lib/consts'
 
   export let name: string,
-    value: string | undefined = undefined,
+    value = 'default',
     group: string | undefined = undefined
   $: selected = group === value
 
@@ -15,7 +15,9 @@
 
 <label
   class:selected
-  style="background-color: {value ? brushPalette[value] : 'var(--theme-primary-900)'};"
+  style="background-color: {value !== 'default'
+    ? brushPalette[value]
+    : 'var(--theme-primary-900)'};"
 >
   <input type="radio" bind:group {name} {value} />
   {#if selected}
