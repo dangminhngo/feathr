@@ -59,7 +59,7 @@
   $: color = brushPalette[list.color]
 
   const _updateList = async () => {
-    await firestore.updateList(list)
+    await firestore.updateList(list.id, list)
   }
 
   $: list, _updateList()

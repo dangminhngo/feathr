@@ -20,7 +20,7 @@
     dispatch('close')
     if (isEmptyTag(tag)) return
     if (editingTag) {
-      await firestore.updateTag(tag)
+      await firestore.updateTag(tag.id, tag)
       updateTag(tag.id, tag)
     } else {
       await firestore.addTag(tag)

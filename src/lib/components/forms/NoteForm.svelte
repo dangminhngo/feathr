@@ -46,7 +46,7 @@
     dispatch('close')
     if (isEmptyNote(note)) return
     if (editingNote) {
-      await firestore.updateNote(note)
+      await firestore.updateNote(note.id, note)
       updateNote(note.id, note)
     } else {
       await firestore.addNote(note)

@@ -81,7 +81,7 @@
     dispatch('close')
     if (isEmptyList(list) || lastTaskInListIsEmptyTask(list)) return
     if (editingList) {
-      await firestore.updateList(list)
+      await firestore.updateList(list.id, list)
       updateList(list.id, list)
     } else {
       await firestore.addList(list)

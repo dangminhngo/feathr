@@ -3,7 +3,6 @@ import {
   collection,
   deleteDoc,
   doc,
-  getDoc,
   getDocs,
   getFirestore,
   setDoc,
@@ -11,7 +10,7 @@ import {
 } from 'firebase/firestore'
 import app from './app'
 import { authState } from '$lib/state'
-import type { Note, List, Task, Tag } from '$lib/types'
+import type { Note, List, Tag } from '$lib/types'
 
 const db = getFirestore(app)
 
@@ -47,9 +46,9 @@ const addNote = async (payload: Note) => {
   await setDoc(noteRef, payload)
 }
 
-const updateNote = async (payload: Note) => {
+const updateNote = async (id: string, payload: Partial<Note>) => {
   const userId = getUserIdFromAuthState()
-  const noteRef = noteDoc(userId, payload.id)
+  const noteRef = noteDoc(userId, id)
   await updateDoc(noteRef, { ...payload })
 }
 
@@ -65,9 +64,9 @@ const addList = async (payload: List) => {
   await setDoc(listRef, payload)
 }
 
-const updateList = async (payload: List) => {
+const updateList = async (id: string, payload: Partial<List>) => {
   const userId = getUserIdFromAuthState()
-  const listRef = listDoc(userId, payload.id)
+  const listRef = listDoc(userId, id)
   await updateDoc(listRef, { ...payload })
 }
 
@@ -83,9 +82,9 @@ const addTag = async (payload: Tag) => {
   await setDoc(tagRef, payload)
 }
 
-const updateTag = async (payload: Tag) => {
+const updateTag = async (id: string, payload: Partial<Tag>) => {
   const userId = getUserIdFromAuthState()
-  const tagRef = tagDoc(userId, payload.id)
+  const tagRef = tagDoc(userId, id)
   await updateDoc(tagRef, { ...payload })
 }
 
