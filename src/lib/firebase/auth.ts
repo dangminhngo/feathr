@@ -28,15 +28,15 @@ export const signUp = async (email: string, password: string) => {
       photoURL: getDefaultUserPhotoURL(user.email),
     })
 
-    const authUserSnapshot = await getDoc(userRef)
-    const authUser = authUserSnapshot.data()
+    const authUserSnap = await getDoc(userRef)
+    const authUser = authUserSnap.data()
 
     if (!authUser) {
       throw new Error('Cannot authenticate this user')
     }
 
     setAuth({
-      id: authUserSnapshot.id,
+      id: authUserSnap.id,
       email: authUser.email,
       photoURL: authUser.photoURL,
     })
@@ -54,15 +54,15 @@ export const signIn = async (email: string, password: string) => {
     }
 
     const userRef = userDoc(auth.currentUser.uid)
-    const authUserSnapshot = await getDoc(userRef)
-    const authUser = authUserSnapshot.data()
+    const authUserSnap = await getDoc(userRef)
+    const authUser = authUserSnap.data()
 
     if (!authUser) {
       throw new Error('Something went wrong')
     }
 
     setAuth({
-      id: authUserSnapshot.id,
+      id: authUserSnap.id,
       email: authUser?.email,
       photoURL: authUser?.photoURL,
     })

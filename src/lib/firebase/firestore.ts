@@ -1,9 +1,11 @@
 import { get } from 'svelte/store'
 import {
+  arrayRemove,
   writeBatch,
   collection,
   deleteDoc,
   doc,
+  getDoc,
   getDocs,
   getFirestore,
   setDoc,
@@ -95,6 +97,29 @@ const updateTag = async (id: string, payload: Partial<Tag>) => {
 const deleteTag = async (payload: string) => {
   const userId = getUserIdFromAuthState()
   const tagRef = tagDoc(userId, payload)
+  const tagSnap = await getDoc(tagRef)
+  const removeId = tagSnap.data()?.id
+  const notesQuery = query(
+    collection(db, 'users', userId, 'notes'),
+    where('tagIds', 'array-contains', removeId)
+  )
+  const listsQuery = query(
+    collection(db, 'users', userId, 'lists'),
+    where('tagIds', 'array-contains', removeId)
+  )
+  const notesQuerySnap = await getDocs(notesQuery)
+  const listsQuerySnap = await getDocs(listsQuery)
+  notesQuerySnap.forEach((doc) =>
+    batch.update(doc.ref, {
+      tagIds: arrayRemove(removeId),
+    })
+  )
+  listsQuerySnap.forEach((doc) =>
+    batch.update(doc.ref, {
+      tagIds: arrayRemove(removeId),
+    })
+  )
+  await batch.commit()
   await deleteDoc(tagRef)
 }
 
