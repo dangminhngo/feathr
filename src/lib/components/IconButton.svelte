@@ -3,7 +3,8 @@
 
   export let name = '',
     size: 'lg' | 'md' | 'sm' = 'lg',
-    active = false
+    active = false,
+    color = ''
 
   const getIconSize = (size: 'lg' | 'md' | 'sm'): number => (size === 'lg' ? 20 : 18)
 </script>
@@ -13,9 +14,10 @@
   class:md={size === 'md'}
   class:sm={size === 'sm'}
   class:active
+  style="color: {color};"
   on:click|stopPropagation
 >
-  <Icon class="icon" {name} size={getIconSize(size)} />
+  <Icon {name} size={getIconSize(size)} />
 </button>
 
 <style lang="scss">

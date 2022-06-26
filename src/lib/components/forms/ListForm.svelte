@@ -140,9 +140,10 @@
         on:click={(e) => _toggleContextMenu(ContextMenuType.Tags, list.id)(e)}
       />
       <IconButton
-        name="brush"
+        name={list.color !== 'default' ? 'brushFull' : 'brush'}
         size="md"
         on:click={(e) => _toggleContextMenu(ContextMenuType.Background, list.id)(e)}
+        color={palette[list.color]}
       />
     </div>
     <div class="right">

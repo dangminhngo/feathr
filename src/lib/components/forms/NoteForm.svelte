@@ -75,9 +75,10 @@
         on:click={(e) => _toggleContextMenu(ContextMenuType.Tags, note.id)(e)}
       />
       <IconButton
-        name="brush"
+        name={note.color !== 'default' ? 'brushFull' : 'brush'}
         size="md"
         on:click={(e) => _toggleContextMenu(ContextMenuType.Background, note.id)(e)}
+        color={palette[note.color]}
       />
     </div>
     <div class="right">
