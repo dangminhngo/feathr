@@ -7,12 +7,14 @@
     loading = false,
     disabled = false
 
-  let buttonRef: HTMLButtonElement, width: number, height: number
+  let buttonRef: HTMLButtonElement,
+    width = 'auto',
+    height = 'auto'
 
   onMount(() => {
     const rect = buttonRef.getBoundingClientRect()
-    width = rect.width
-    height = rect.height
+    width = `${rect.width}px`
+    height = `${rect.height}px`
   })
 </script>
 
@@ -20,7 +22,7 @@
   bind:this={buttonRef}
   class={`${size} ${variant}`}
   class:stretch
-  style="width: {width}px; height: {height}px;"
+  style="width: {width}; height: {height};"
   {disabled}
   on:click
 >
