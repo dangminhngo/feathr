@@ -4,6 +4,8 @@
   import PasswordInput from '$lib/components/PasswordInput.svelte'
   import Button from '$lib/components/Button.svelte'
 
+  export let loading = false
+
   let email = '',
     password = ''
 
@@ -19,7 +21,7 @@
 <form on:submit|preventDefault={handleSubmit}>
   <TextInput label="Email" placeholder="Enter your email" bind:value={email} />
   <PasswordInput label="Password" placeholder="Enter your password" bind:value={password} />
-  <Button size="lg" variant="primary" stretch={true}>Sign up</Button>
+  <Button size="lg" variant="primary" stretch={true} {loading} disabled={loading}>Sign up</Button>
 </form>
 
 <style lang="scss">

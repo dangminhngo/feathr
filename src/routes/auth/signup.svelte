@@ -3,17 +3,21 @@
   import SignUp from '$lib/components/forms/SignUp.svelte'
   import { signUp } from '$lib/firebase/auth'
 
+  let loading = false
+
   type SignUpEvent = SignUp['$$events_def']['signup']
   const handleSignUp = async ({ detail }: SignUpEvent) => {
     const { email, password } = detail
+    loading = true
     await signUp(email, password)
+    loading = false
     goto('/app/notes')
   }
 </script>
 
 <div class="wrapper">
   <p>Create an account</p>
-  <SignUp on:signup={handleSignUp} />
+  <SignUp on:signup={handleSignUp} {loading} />
   <div class="navigate">
     Already have an account? <a href="/auth/signin">Sign in</a>
   </div>

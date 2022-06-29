@@ -3,17 +3,25 @@
   import SignIn from '$lib/components/forms/SignIn.svelte'
   import { signIn } from '$lib/firebase/auth'
 
+  let loading = false
+
   type SignInEvent = SignIn['$$events_def']['signin']
   const handleSignIn = async ({ detail }: SignInEvent) => {
-    const { email, password } = detail
-    await signIn(email, password)
-    goto('/app/notes')
+    try {
+      const { email, password } = detail
+      loading = true
+      await signIn(email, password)
+      loading = false
+      goto('/app/notes')
+    } catch (err) {
+      console.log(err)
+    }
   }
 </script>
 
 <div class="wrapper">
   <p>Sign in to Feathr</p>
-  <SignIn on:signin={handleSignIn} />
+  <SignIn on:signin={handleSignIn} {loading} />
   <div class="navigate">
     New to Feathr? <a href="/auth/signup">Sign up</a>
   </div>

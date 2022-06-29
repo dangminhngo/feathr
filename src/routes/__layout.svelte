@@ -40,6 +40,8 @@
     --clr-primary-800: #27272a;
     --clr-primary-900: #18181b;
     --clr-accent: #6366f1;
+    --clr-accent-light: #818cf8;
+    --clr-accent-dark: #4f46e5;
     --clr-white: #ffffff;
 
     --text-lg: 1.25rem;
