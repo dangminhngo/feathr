@@ -44,7 +44,7 @@ export const createEmptyTag = (): Tag => ({
 })
 
 export const isEmptyNote = (note: Note): boolean => {
-  return !note.title && note.body === '' && !note.images.length
+  return !note.title && !note.body && !note.images.length
 }
 
 export const isEmptyList = (list: List): boolean => {

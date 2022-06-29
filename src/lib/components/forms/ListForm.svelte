@@ -8,10 +8,14 @@
   import Field from '$lib/components/Field.svelte'
   import Icon from '$lib/components/Icon.svelte'
   import IconButton from '$lib/components/IconButton.svelte'
+  import Image from '$lib/components/Image.svelte'
+  import ImageGrid from '$lib/components/ImageGrid.svelte'
+  import UploadImageButton from '$lib/components/UploadImageButton.svelte'
   import FormContextMenus from '$lib/components/contextmenus/FormContextMenus.svelte'
   import TagPillGrid from '$lib/components/grids/TagPillGrid.svelte'
   import TaskList from '$lib/components/grids/TaskList.svelte'
   import firestore from '$lib/firebase/firestore'
+  import storage from '$lib/firebase/storage'
   import { themeKey } from '$lib/consts'
   import { ContextMenuType } from '$lib/enums'
   import {
@@ -75,6 +79,16 @@
     })
   }
 
+  let uploadingImage = false
+
+  const handleImageChange = async (e: Event) => {
+    uploadingImage = true
+    const files = (e.target as HTMLInputElement).files
+    const urls = await storage.uploadImage(files)
+    list.images = [...list.images, ...urls]
+    uploadingImage = false
+  }
+
   const dispatch = createEventDispatcher()
   const handleSubmit = async () => {
     closeAllModals()
@@ -100,6 +114,16 @@
 </script>
 
 <div class="form">
+  {#if list.images.length > 0}
+    <ImageGrid>
+      {#each list.images as image}
+        <Image src={image} alt={list.id} />
+      {/each}
+    </ImageGrid>
+  {/if}
+  {#if uploadingImage}
+    <p class="uploading-message">Uploading images ...</p>
+  {/if}
   <Field bind:this={titleField} name="Title" placeholder="Title" bind:value={list.title} />
   {#if undoneTasks.length}
     <TaskList>
@@ -133,7 +157,7 @@
         active={list.pinned}
         on:click={togglePinned}
       />
-      <IconButton name="picture" size="md" />
+      <UploadImageButton on:change={handleImageChange} />
       <IconButton
         name="tags"
         size="md"
@@ -197,5 +221,10 @@
   .right {
     display: flex;
     align-items: center;
+  }
+
+  .uploading-message {
+    font-size: var(--text-sm);
+    font-weight: 700;
   }
 </style>

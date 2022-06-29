@@ -3,9 +3,13 @@
   import Button from '$lib/components/Button.svelte'
   import Field from '$lib/components/Field.svelte'
   import IconButton from '$lib/components/IconButton.svelte'
+  import Image from '$lib/components/Image.svelte'
+  import ImageGrid from '$lib/components/ImageGrid.svelte'
+  import UploadImageButton from '$lib/components/UploadImageButton.svelte'
   import FormContextMenus from '$lib/components/contextmenus/FormContextMenus.svelte'
   import TagPillGrid from '$lib/components/grids/TagPillGrid.svelte'
   import firestore from '$lib/firebase/firestore'
+  import storage from '$lib/firebase/storage'
   import { uiState, notesState } from '$lib/state'
   import { getItemById, isEmptyNote, createEmptyNote } from '$lib/helpers'
   import { themeKey } from '$lib/consts'
@@ -39,6 +43,16 @@
     })
   }
 
+  let uploadingImage = false
+
+  const handleImageChange = async (e: Event) => {
+    uploadingImage = true
+    const files = (e.target as HTMLInputElement).files
+    const urls = await storage.uploadImage(files)
+    note.images = [...note.images, ...urls]
+    uploadingImage = false
+  }
+
   const dispatch = createEventDispatcher()
 
   const handleSubmit = async () => {
@@ -57,6 +71,16 @@
 </script>
 
 <div class="form">
+  {#if note.images.length > 0}
+    <ImageGrid>
+      {#each note.images as image}
+        <Image src={image} alt={note.id} />
+      {/each}
+    </ImageGrid>
+  {/if}
+  {#if uploadingImage}
+    <p class="uploading-message">Uploading images ...</p>
+  {/if}
   <Field bind:this={titleField} name="Title" placeholder="Title" bind:value={note.title} />
   <Field name="Body" placeholder="Body" bind:value={note.body} />
   <TagPillGrid ids={note.tagIds} />
@@ -68,7 +92,7 @@
         on:click={togglePinned}
         active={note.pinned}
       />
-      <IconButton name="picture" size="md" />
+      <UploadImageButton on:change={handleImageChange} />
       <IconButton
         name="tags"
         size="md"
@@ -111,5 +135,10 @@
   .right {
     display: flex;
     align-items: center;
+  }
+
+  .uploading-message {
+    font-size: var(--text-sm);
+    font-weight: 700;
   }
 </style>
