@@ -13,8 +13,8 @@
 
   onMount(() => {
     const rect = buttonRef.getBoundingClientRect()
-    width = `${rect.width}px`
-    height = `${rect.height}px`
+    width = rect.width ? `${rect.width}px` : 'auto'
+    height = rect.height ? `${rect.height}px` : 'auto'
   })
 </script>
 
