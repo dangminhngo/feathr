@@ -24,7 +24,7 @@
   class:stretch
   style="width: {width}; height: {height};"
   {disabled}
-  on:click
+  on:click|stopPropagation
 >
   {#if loading}
     <span class="dot">&nbsp;</span>

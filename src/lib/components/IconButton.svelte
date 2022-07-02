@@ -17,7 +17,7 @@
   class:active
   style="color: {color};"
   {disabled}
-  on:click
+  on:click|stopPropagation
 >
   <Icon {name} size={getIconSize(size)} />
 </button>
