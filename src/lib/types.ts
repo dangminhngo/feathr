@@ -110,3 +110,16 @@ export interface Position {
   x: number
   y: number
 }
+
+type ValidateErrorsObject<T> = {
+  [field in keyof T]?: string
+}
+
+export type ValidateErrors<T> = ValidateErrorsObject<T> | null
+
+export interface ValidateReturn<T> {
+  data: T
+  errors: ValidateErrors<T>
+}
+
+export type AuthData = { email: string; password: string }

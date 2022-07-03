@@ -2,12 +2,22 @@
   import { goto } from '$app/navigation'
   import SignIn from '$lib/components/forms/SignIn.svelte'
   import { signIn } from '$lib/firebase/auth'
+  import { validateSignInForm } from '$lib/validate'
+  import type { ValidateErrors, AuthData } from '$lib/types'
 
-  let loading = false
+  let loading = false,
+    errors: ValidateErrors<AuthData> = null
 
   type SignInEvent = SignIn['$$events_def']['signin']
   const handleSignIn = async ({ detail }: SignInEvent) => {
     try {
+      const validate = validateSignInForm(detail)
+
+      if (validate.errors) {
+        errors = validate.errors
+        return
+      }
+
       const { email, password } = detail
       loading = true
       await signIn(email, password)
@@ -21,7 +31,7 @@
 
 <div class="wrapper">
   <p>Sign in to Feathr</p>
-  <SignIn on:signin={handleSignIn} {loading} />
+  <SignIn on:signin={handleSignIn} {loading} {errors} />
   <div class="navigate">
     New to Feathr? <a href="/auth/signup">Sign up</a>
   </div>
