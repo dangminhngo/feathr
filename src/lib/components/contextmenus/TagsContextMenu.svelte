@@ -54,7 +54,7 @@
         </CheckboxField>
       {/each}
     </div>
-    {#if !filteredTags.length}
+    {#if !filteredTags.length && keyword}
       <button class="add" on:click={handleAddTagWithKeyword}>
         <Icon name="plus" width={16} height={16} />
         <span>Add <strong>{keyword}</strong></span>
