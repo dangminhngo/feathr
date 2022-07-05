@@ -211,12 +211,7 @@
   <TagPillGrid ids={list.tagIds} />
   <div class="actions">
     <div class="left">
-      <IconButton
-        name={list.pinned ? 'pinFull' : 'pin'}
-        size="md"
-        active={list.pinned}
-        on:click={togglePinned}
-      />
+      <IconButton name={list.pinned ? 'pinFull' : 'pin'} size="md" on:click={togglePinned} />
       <UploadImageButton on:change={handleImageChange} />
       <IconButton
         name="tags"

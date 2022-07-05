@@ -89,12 +89,7 @@
   <TagPillGrid ids={note.tagIds} />
   <div class="actions">
     <div class="left">
-      <IconButton
-        name={note.pinned ? 'pinFull' : 'pin'}
-        size="md"
-        on:click={togglePinned}
-        active={note.pinned}
-      />
+      <IconButton name={note.pinned ? 'pinFull' : 'pin'} size="md" on:click={togglePinned} />
       <UploadImageButton on:change={handleImageChange} />
       <IconButton
         name="tags"
