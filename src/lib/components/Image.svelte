@@ -8,7 +8,10 @@
 
 <style lang="scss">
   div {
-    position: relative;
+    height: min-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: var(--rounded);
     overflow: hidden;
   }

@@ -3,6 +3,8 @@
 
   import IconButton from '$lib/components/IconButton.svelte'
   import TagPillGrid from '$lib/components/grids/TagPillGrid.svelte'
+  import ImageGrid from '$lib/components/ImageGrid.svelte'
+  import Image from '$lib/components/Image.svelte'
   import { themeKey } from '$lib/consts'
   import type { Note } from '$lib/types'
   export let note: Note,
@@ -39,6 +41,11 @@
   on:mouseleave={handleMouseLeave}
   on:click
 >
+  <ImageGrid cols={2}>
+    {#each note.images as image}
+      <Image src={image} alt={note.title} />
+    {/each}
+  </ImageGrid>
   <div class="title">{note.title}</div>
   <div class="body">{note.body}</div>
   <TagPillGrid ids={note.tagIds} />

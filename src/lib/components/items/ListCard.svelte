@@ -8,6 +8,8 @@
   import EditableTask from '$lib/components/EditableTask.svelte'
   import TagPillGrid from '$lib/components/grids/TagPillGrid.svelte'
   import TaskList from '$lib/components/grids/TaskList.svelte'
+  import ImageGrid from '$lib/components/ImageGrid.svelte'
+  import Image from '$lib/components/Image.svelte'
   import firestore from '$lib/firebase/firestore'
   import { getFilteredTasks } from '$lib/helpers'
   import { themeKey } from '$lib/consts'
@@ -74,6 +76,11 @@
   on:mouseleave={handleMouseLeave}
   on:click
 >
+  <ImageGrid cols={2}>
+    {#each list.images as image}
+      <Image src={image} alt={list.title} />
+    {/each}
+  </ImageGrid>
   {#if list.title}
     <div class="title">{list.title}</div>
   {/if}

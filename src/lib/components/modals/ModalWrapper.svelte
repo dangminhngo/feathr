@@ -22,7 +22,9 @@
       <span>{title}</span>
       <IconButton size="sm" name="close" on:click={handleClose} />
     </div>
-    <slot />
+    <div class="container">
+      <slot />
+    </div>
   </div>
 </Portal>
 
@@ -57,5 +59,10 @@
     color: var(--theme-primary-50);
     font-size: var(--text-sm);
     font-weight: 500;
+  }
+
+  .container {
+    max-height: 40vh;
+    overflow: auto;
   }
 </style>
