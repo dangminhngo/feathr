@@ -41,7 +41,12 @@
   on:mouseenter={handleMouseEnter}
 >
   {#if editable}
-    <div class="draggable" class:show={showButton} on:mousedown={handleGrabIndicatorMouseDown}>
+    <div
+      class="draggable"
+      class:done={task.done}
+      class:show={showButton}
+      on:mousedown={handleGrabIndicatorMouseDown}
+    >
       <Icon name="link" width={16} height={16} />
     </div>
   {/if}
@@ -81,6 +86,12 @@
     opacity: 0;
     pointer-events: none;
     color: var(--theme-primary-400);
+  }
+
+  .draggable.done,
+  .draggable.done.show {
+    opacity: 0;
+    pointer-events: none;
   }
 
   .field {
