@@ -41,7 +41,7 @@
 
   .wrapper {
     position: absolute;
-    top: 25%;
+    top: 20%;
     left: 50%;
     transform: translate(-50%, 0);
     border-radius: var(--rounded);
@@ -62,7 +62,7 @@
   }
 
   .container {
-    max-height: 40vh;
+    max-height: 50vh;
     overflow: auto;
   }
 </style>
