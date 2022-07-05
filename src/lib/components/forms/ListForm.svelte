@@ -153,7 +153,10 @@
   $: console.log(list.tasks, dragHovering, draggableTaskId)
 </script>
 
-<div class="form">
+<div
+  class="form"
+  style="background-color: {list.color !== 'default' ? palette[list.color] : 'transparent'}"
+>
   {#if list.images.length > 0}
     <ImageGrid>
       {#each list.images as image}
@@ -224,7 +227,6 @@
         name={list.color !== 'default' ? 'brushFull' : 'brush'}
         size="md"
         on:click={(e) => _toggleContextMenu(ContextMenuType.Background, list.id)(e)}
-        color={palette[list.color]}
       />
     </div>
     <div class="right">

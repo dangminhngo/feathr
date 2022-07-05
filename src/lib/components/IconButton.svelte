@@ -4,7 +4,6 @@
   export let name = '',
     size: 'lg' | 'md' | 'sm' = 'lg',
     active = false,
-    color = '',
     disabled = false
 
   const getIconSize = (size: 'lg' | 'md' | 'sm'): number => (size === 'lg' ? 20 : 18)
@@ -15,7 +14,6 @@
   class:md={size === 'md'}
   class:sm={size === 'sm'}
   class:active
-  style="color: {color};"
   {disabled}
   on:click|stopPropagation
 >

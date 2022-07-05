@@ -30,14 +30,13 @@
     margin-bottom: 0.375rem;
     font-size: var(--text-xs);
     font-weight: 500;
-    color: var(--theme-primary-400);
   }
 
   .content-editable {
     position: relative;
     padding: 0.5rem 1rem;
     width: 100%;
-    border: 1px solid var(--theme-primary-800);
+    border: 1px solid hsla(0, 100%, 100%, 0.15);
     border-radius: var(--rounded);
     font-size: var(--text-sm);
 

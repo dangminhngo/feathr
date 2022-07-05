@@ -70,7 +70,10 @@
   }
 </script>
 
-<div class="form">
+<div
+  class="form"
+  style="background-color: {note.color !== 'default' ? palette[note.color] : 'transparent'}"
+>
   {#if note.images.length > 0}
     <ImageGrid>
       {#each note.images as image}
@@ -102,7 +105,6 @@
         name={note.color !== 'default' ? 'brushFull' : 'brush'}
         size="md"
         on:click={(e) => _toggleContextMenu(ContextMenuType.Background, note.id)(e)}
-        color={palette[note.color]}
       />
     </div>
     <div class="right">

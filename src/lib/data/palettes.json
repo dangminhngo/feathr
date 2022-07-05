@@ -13,16 +13,16 @@
     "grey": "#9ca3af"
   },
   "dark": {
-    "red": "#f87171",
-    "orange": "#fb923c",
-    "yellow": "#eab308",
-    "green": "#15803d",
-    "teal": "#0f766e",
-    "cyan": "#0e7490",
-    "blue": "#1e40af",
-    "purple": "#5b21b6",
-    "magenta": "#86198f",
-    "brown": "#623b04",
-    "grey": "#374151"
+    "red": "#560404",
+    "orange": "#793802",
+    "yellow": "#755904",
+    "green": "#0c4c24",
+    "teal": "#08463f",
+    "cyan": "#073948",
+    "blue": "#18338c",
+    "purple": "#36136d",
+    "magenta": "#420c47",
+    "brown": "#271701",
+    "grey": "#212730"
   }
 }
