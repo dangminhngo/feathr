@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount } from 'svelte'
+  import { onMount, createEventDispatcher } from 'svelte'
   import Checkbox from './Checkbox.svelte'
   import Icon from './Icon.svelte'
   import IconButton from './IconButton.svelte'
@@ -22,6 +22,13 @@
     showButton = true
   }
 
+  const dispatch = createEventDispatcher()
+  const handleGrabIndicatorMouseDown = () => {
+    dispatch('dragging', {
+      id: task.id,
+    })
+  }
+
   onMount(() => {
     titleField?.focus()
   })
@@ -34,7 +41,7 @@
   on:mouseenter={handleMouseEnter}
 >
   {#if editable}
-    <div class="draggable" class:show={showButton}>
+    <div class="draggable" class:show={showButton} on:mousedown={handleGrabIndicatorMouseDown}>
       <Icon name="link" width={16} height={16} />
     </div>
   {/if}
@@ -78,6 +85,7 @@
 
   .field {
     flex: 1;
+    padding: 0.5rem 0;
     font-size: var(--text-sm);
   }
 

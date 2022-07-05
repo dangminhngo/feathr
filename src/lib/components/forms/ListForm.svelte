@@ -25,11 +25,14 @@
     createEmptyList,
     createEmptyTask,
     getFilteredTasks,
+    reorderList,
   } from '$lib/helpers'
   import { uiState, listsState } from '$lib/state'
   import type { List, Task } from '$lib/types'
 
-  let titleField: Field
+  let titleField: Field,
+    dragHovering: number | null = null,
+    draggableTaskId: string | null = null
   let list: List = createEmptyList(),
     editingList = getItemById($listsState.lists, $listsState.currentListId)
 
@@ -104,13 +107,50 @@
     setCurrentList('')
   }
 
+  const handleTaskDragStart = (e: DragEvent, index: number) => {
+    if (!e.dataTransfer) {
+      throw new Error('dataTransfer is null')
+    }
+
+    console.log(index)
+
+    e.dataTransfer.effectAllowed = 'move'
+    e.dataTransfer.dropEffect = 'move'
+    const start = index
+    e.dataTransfer.setData('text/plain', String(start))
+  }
+
+  const handleTaskDrop = (e: DragEvent, target: number) => {
+    if (!e.dataTransfer) {
+      throw new Error('dataTransfer is null')
+    }
+
+    console.log(target)
+
+    e.dataTransfer.dropEffect = 'move'
+    const start = +e.dataTransfer.getData('text/plain')
+    list.tasks = reorderList(list.tasks, start, target)
+    dragHovering = null
+  }
+
+  type DraggingEvent = EditableTask['$$events_def']['signin']
+  const handleTaskDragging = ({ detail }: DraggingEvent) => {
+    draggableTaskId = detail.id
+  }
+
+  const handleTaskDragEnd = () => {
+    draggableTaskId = null
+  }
+
   let undoneTasks: Task[], doneTasks: Task[]
   $: ({ undoneTasks, doneTasks } = getFilteredTasks(list))
 
-  onMount(() => titleField?.focus())
-
   const { getPalette } = getContext(themeKey)
   const palette = getPalette()
+
+  onMount(() => titleField?.focus())
+
+  $: console.log(list.tasks, dragHovering, draggableTaskId)
 </script>
 
 <div class="form">
@@ -127,9 +167,26 @@
   <Field bind:this={titleField} name="Title" placeholder="Title" bind:value={list.title} />
   {#if undoneTasks.length}
     <TaskList>
-      {#each undoneTasks as task (task.id)}
-        <div in:receive|local={{ key: task.id }} out:send|local={{ key: task.id }} animate:flip>
-          <EditableTask bind:task handleDelete={() => _deleteTask(task.id)} alt={!!list.color} />
+      {#each undoneTasks as task, index (task.id)}
+        <div
+          class="task-wrapper"
+          draggable={draggableTaskId === task.id}
+          class:hovering={dragHovering === index}
+          in:receive|local={{ key: task.id }}
+          out:send|local={{ key: task.id }}
+          animate:flip
+          on:dragover|preventDefault
+          on:dragstart={(e) => handleTaskDragStart(e, index)}
+          on:dragenter={() => (dragHovering = index)}
+          on:drop|preventDefault={(e) => handleTaskDrop(e, index)}
+          on:dragend={handleTaskDragEnd}
+        >
+          <EditableTask
+            bind:task
+            handleDelete={() => _deleteTask(task.id)}
+            alt={!!list.color}
+            on:dragging={handleTaskDragging}
+          />
         </div>
       {/each}
     </TaskList>
@@ -226,5 +283,9 @@
   .uploading-message {
     font-size: var(--text-sm);
     font-weight: 700;
+  }
+
+  .task-wrapper.hovering {
+    background-color: var(--theme-accent);
   }
 </style>

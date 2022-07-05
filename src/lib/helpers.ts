@@ -152,6 +152,20 @@ export const clickOutside: Action<HTMLElement, undefined> = (node: HTMLElement) 
   }
 }
 
+export function reorderList<T>(list: T[], start: number, target: number): T[] {
+  const result = [...list]
+
+  if (start < target) {
+    result.splice(target + 1, 0, result[start])
+    result.splice(start, 1)
+  } else {
+    result.splice(target, 0, result[start])
+    result.splice(start + 1, 1)
+  }
+
+  return result
+}
+
 export const getDefaultUserPhotoURL = (email: string | null): string => {
   let username: string | undefined
 
