@@ -1,6 +1,7 @@
 <script lang="ts">
   import Icon from '$lib/components/Icon.svelte'
   import IconButton from '$lib/components/IconButton.svelte'
+  import Confirm from '$lib/components/Confirm.svelte'
   import type { Tag } from '$lib/types'
 
   export let tag: Tag, handleDelete: () => void
@@ -24,7 +25,16 @@
     {tag.label}
   </div>
   <div class="actions" class:show={showButtons}>
-    <IconButton name="close" on:click={handleDelete} />
+    <Confirm let:confirm>
+      <IconButton name="close" on:click={() => confirm(handleDelete)} />
+      <span slot="message">
+        Do you want to delete tag "{tag.label}"?
+      </span>
+      <span slot="description">
+        Tag "{tag.label}" will be removed from your notes and lists. This action cannot be undone.
+      </span>
+      <span slot="confirm"> Delete </span>
+    </Confirm>
   </div>
 </div>
 
