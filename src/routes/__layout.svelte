@@ -44,12 +44,12 @@
     --clr-accent-dark: #4f46e5;
     --clr-white: #ffffff;
     --clr-danger: #f87171;
+    --clr-danger-light: #f98d8d;
 
     --text-lg: 1.25rem;
     --text-base: 1rem;
     --text-sm: 0.875rem;
     --text-xs: 0.75rem;
-    --text-2xs: 0.625rem;
 
     --sidenav-width: 16rem;
     --button-height: 2.25rem;

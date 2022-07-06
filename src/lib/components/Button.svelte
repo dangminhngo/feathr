@@ -2,7 +2,7 @@
   import { onMount } from 'svelte'
 
   export let size: 'base' | 'lg' = 'base',
-    variant: 'default' | 'primary' = 'default',
+    variant: 'default' | 'primary' | 'danger' = 'default',
     stretch = false,
     loading = false,
     disabled = false
@@ -72,6 +72,15 @@
 
   button.primary:hover {
     background-color: var(--clr-accent-light);
+  }
+
+  button.danger {
+    background-color: var(--clr-danger);
+    color: var(--clr-white);
+  }
+
+  button.danger:hover {
+    background-color: var(--clr-danger-light);
   }
 
   button.stretch {
