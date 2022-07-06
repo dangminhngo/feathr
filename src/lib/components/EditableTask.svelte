@@ -85,7 +85,6 @@
     cursor: grabbing;
     opacity: 0;
     pointer-events: none;
-    color: var(--theme-primary-400);
   }
 
   .draggable.done,

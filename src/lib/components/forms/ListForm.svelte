@@ -112,8 +112,6 @@
       throw new Error('dataTransfer is null')
     }
 
-    console.log(index)
-
     e.dataTransfer.effectAllowed = 'move'
     e.dataTransfer.dropEffect = 'move'
     const start = index
@@ -124,8 +122,6 @@
     if (!e.dataTransfer) {
       throw new Error('dataTransfer is null')
     }
-
-    console.log(target)
 
     e.dataTransfer.dropEffect = 'move'
     const start = +e.dataTransfer.getData('text/plain')
@@ -149,8 +145,6 @@
   const palette = getPalette()
 
   onMount(() => titleField?.focus())
-
-  $: console.log(list.tasks, dragHovering, draggableTaskId)
 </script>
 
 <div
