@@ -30,6 +30,7 @@
       <span slot="description">
         This action will delete permanently all items in your trash and cannot be undone.
       </span>
+      <span slot="confirm"> Empty trash </span>
     </Confirm>
   {/if}
 </div>
@@ -49,12 +50,11 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    background-color: var(--theme-primary-700);
     border-radius: var(--rounded);
+    border: 1px solid var(--clr-danger);
+    color: var(--clr-danger);
+    font-weight: 500;
+    font-size: var(--text-sm);
     transition: background-color 0.15s ease-out;
-  }
-
-  .empty:hover {
-    background-color: var(--theme-accent);
   }
 </style>
