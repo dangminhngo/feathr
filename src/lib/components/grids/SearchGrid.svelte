@@ -42,7 +42,7 @@
   }
 </script>
 
-<div class="grid">
+<div class="search-grid" class:grid={!$uiState.listView} class:list={$uiState.listView}>
   {#each items as item (item.id)}
     {#if 'tasks' in item}
       <ListCard
@@ -65,10 +65,21 @@
 </div>
 
 <style lang="scss">
-  .grid {
+  .search-grid {
     padding: 2rem 0;
+  }
+
+  .grid {
     display: grid;
     grid-template-columns: repeat(5, 20rem);
+    gap: 1.5rem;
+  }
+
+  .list {
+    margin: 0 auto;
+    width: 30rem;
+    display: flex;
+    flex-direction: column;
     gap: 1.5rem;
   }
 </style>

@@ -2,11 +2,11 @@
   "name": "feathr",
   "version": "0.0.1",
   "scripts": {
-    "dev": "svelte-kit dev",
-    "build": "svelte-kit build",
+    "dev": "vite dev",
+    "build": "vite build",
     "package": "svelte-kit package",
-    "preview": "svelte-kit preview",
-    "prepare": "husky install",
+    "preview": "vite preview",
+    "prepare": "svelte-kit sync && husky install",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
     "lint": "prettier --check --plugin-search-dir=. . && eslint .",
@@ -32,12 +32,13 @@
     "svelte-check": "^2.7.1",
     "svelte-preprocess": "^4.10.6",
     "tslib": "^2.3.1",
-    "typescript": "^4.7.2"
+    "typescript": "^4.7.4"
   },
   "type": "module",
   "dependencies": {
-    "firebase": "^9.8.3",
+    "firebase": "^9.8.4",
     "svelte-portal": "^2.2.0",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "vite": "^2.9.13"
   }
 }
