@@ -5,6 +5,7 @@
   import TagPillGrid from '$lib/components/grids/TagPillGrid.svelte'
   import ImageGrid from '$lib/components/ImageGrid.svelte'
   import Image from '$lib/components/Image.svelte'
+  import Confirm from '$lib/components/Confirm.svelte'
   import { themeKey } from '$lib/consts'
   import type { Note } from '$lib/types'
   export let note: Note,
@@ -60,7 +61,14 @@
         <IconButton size="sm" name="trash" on:click={handleTrash} />
       {:else}
         <IconButton size="sm" name="beer" on:click={handleRestore} />
-        <IconButton size="sm" name="deleteFull" on:click={handleDelete} />
+        <Confirm let:confirm>
+          <IconButton size="sm" name="deleteFull" on:click={() => confirm(handleDelete)} />
+          <span slot="message"> Are you sure to delete this note? </span>
+          <span slot="description">
+            This note will be permanently deleted and cannot be undone.
+          </span>
+          <span slot="confirm"> Delete </span>
+        </Confirm>
       {/if}
     </div>
   </div>
