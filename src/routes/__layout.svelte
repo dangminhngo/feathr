@@ -69,8 +69,8 @@
   }
 
   :global(body) {
-    color: var(--theme-primary-200);
-    background-color: var(--theme-primary-900);
+    color: var(--clr-primary-200);
+    background-color: var(--clr-primary-900);
     font-size: 1rem;
     font-family: 'Roboto', sans-serif;
     overflow: hidden;

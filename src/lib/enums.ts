@@ -14,3 +14,9 @@ export enum ContextMenuType {
   Settings = 'settings',
   Account = 'account',
 }
+
+export enum FirebaseErrorCode {
+  USER_NOT_FOUND = 'auth/user-not-found',
+  EMAIL_ALREADY_IN_USE = 'auth/email-already-in-use',
+  WRONG_PASSWORD = 'auth/wrong-password',
+}

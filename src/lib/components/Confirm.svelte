@@ -98,7 +98,7 @@
 
   .desc {
     margin-top: 0.5rem;
-    font-size: var(--text-xs);
+    font-size: var(--text-sm);
     color: var(--theme-primary-400);
   }
 

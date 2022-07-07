@@ -45,6 +45,6 @@
 
   span {
     color: var(--clr-danger);
-    font-size: var(--text-2xs);
+    font-size: var(--text-xs);
   }
 </style>
