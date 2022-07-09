@@ -8,11 +8,9 @@
   const { dismiss } = uiState
 
   onMount(() => {
-    console.log('mounted')
     const timeout = setTimeout(() => {
       dismiss()
-    }, 2000)
-    console.log(timeout)
+    }, 6000)
 
     return () => clearTimeout(timeout)
   })
@@ -32,8 +30,8 @@
 <style lang="scss">
   .notification {
     position: fixed;
-    left: 2rem;
-    bottom: 2rem;
+    left: 1rem;
+    bottom: 1rem;
     padding: 0.5rem 0.5rem 0.5rem 1rem;
     min-width: 25vw;
     display: flex;
