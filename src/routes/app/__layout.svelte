@@ -4,9 +4,12 @@
   import Header from '$lib/components/layouts/Header.svelte'
   import Nav from '$lib/components/layouts/Nav.svelte'
   import GlobalContextMenus from '$lib/components/contextmenus/GlobalContextMenus.svelte'
+  import Notification from '$lib/components/Notification.svelte'
   import Modals from '$lib/components/modals/Modals.svelte'
-  import { notesState, listsState, tagsState } from '$lib/state'
+  import { uiState, notesState, listsState, tagsState } from '$lib/state'
   import { fetchInitialData } from '$lib/firebase/firestore'
+
+  const { notify } = uiState
 
   onMount(async () => {
     try {
@@ -16,7 +19,9 @@
       $listsState.lists = lists
       $tagsState.tags = tags
     } catch (err) {
-      console.log(err)
+      if (err instanceof Error) {
+        notify(err.message, true)
+      }
     }
   })
 </script>
@@ -31,6 +36,9 @@
   </div>
   <Modals />
   <GlobalContextMenus />
+  {#if $uiState.notification}
+    <Notification />
+  {/if}
 </ThemeContext>
 
 <style lang="scss">

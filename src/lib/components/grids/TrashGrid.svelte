@@ -2,30 +2,35 @@
   import NoteCard from '$lib/components/items/NoteCard.svelte'
   import ListCard from '$lib/components/items/ListCard.svelte'
   import firestore from '$lib/firebase/firestore'
-  import { notesState, listsState } from '$lib/state'
+  import { uiState, notesState, listsState } from '$lib/state'
   import { filterTrashItems } from '$lib/helpers'
 
   const { deleteNote, unassignTrashToNote } = notesState
   const { deleteList, unassignTrashToList } = listsState
+  const { notify } = uiState
 
   const _deleteNote = async (id: string) => {
     await firestore.deleteNote(id)
     deleteNote(id)
+    notify('A note has been permanenly deleted')
   }
 
   const _deleteList = async (id: string) => {
     await firestore.deleteList(id)
     deleteList(id)
+    notify('A list has been permanenly deleted')
   }
 
   const _unassignTrashToNote = async (id: string) => {
     await firestore.updateNote(id, { trash: false })
     unassignTrashToNote(id)
+    notify('A note has been restored from trash')
   }
 
   const _unassignTrashToList = async (id: string) => {
     await firestore.updateList(id, { trash: false })
     unassignTrashToList(id)
+    notify('A list has been restored from trash')
   }
 
   $: trashItems = filterTrashItems($notesState.notes, $listsState.lists)

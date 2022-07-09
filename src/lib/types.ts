@@ -89,6 +89,10 @@ export interface UiState {
     account: boolean
   }
   position: Position
+  notification: {
+    error: boolean
+    message: string
+  } | null
 }
 
 export interface NotesState {

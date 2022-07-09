@@ -6,11 +6,12 @@
   import { ModalType } from '$lib/enums'
 
   const { setCurrentTag, deleteTag } = tagsState
-  const { openModal } = uiState
+  const { openModal, notify } = uiState
 
   const _deleteTag = async (id: string) => {
     await firestore.deleteTag(id)
     deleteTag(id)
+    notify('A tag has been deleted')
   }
 
   const _openTagFormModal = (id: string) => {

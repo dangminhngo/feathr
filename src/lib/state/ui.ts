@@ -24,6 +24,7 @@ export const initialUiState: UiState = {
     x: 0,
     y: 0,
   },
+  notification: null,
 }
 
 const createLayoutStore = (initialState: UiState) => {
@@ -79,6 +80,21 @@ const createLayoutStore = (initialState: UiState) => {
           account: false,
         }
         s.position = { x: 0, y: 0 }
+        return s
+      })
+    },
+    notify: (message: string, error = false) => {
+      update((s) => {
+        s.notification = {
+          error,
+          message,
+        }
+        return s
+      })
+    },
+    dismiss: () => {
+      update((s) => {
+        s.notification = null
         return s
       })
     },

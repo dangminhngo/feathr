@@ -10,7 +10,7 @@
   $: filteredLists = filterItems(lists)
 
   const { setCurrentList, togglePinnedList, assignTrashToList } = listsState
-  const { openModal } = uiState
+  const { openModal, notify } = uiState
 
   const _openEditListForm = (id: string) => {
     setCurrentList(id)
@@ -20,11 +20,13 @@
   const _togglePinnedList = async (id: string, pinned: boolean) => {
     await firestore.updateList(id, { pinned: !pinned })
     togglePinnedList(id)
+    notify(pinned ? 'A list is unpinned' : 'A list is pinned')
   }
 
   const _assignTrashToList = async (id: string) => {
     await firestore.updateList(id, { trash: true })
     assignTrashToList(id)
+    notify('A list has been moved to trash')
   }
 </script>
 

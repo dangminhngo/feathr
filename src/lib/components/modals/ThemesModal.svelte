@@ -10,7 +10,7 @@
   const { getTheme, setTheme } = getContext(themeKey)
   let currentThemeName = getTheme().name
 
-  const { closeAllModals } = uiState
+  const { closeAllModals, notify } = uiState
   const handleModalClose = () => {
     closeAllModals()
   }
@@ -18,6 +18,7 @@
   const handleSubmit = () => {
     setTheme(currentThemeName)
     closeAllModals()
+    notify(`Theme ${currentThemeName} has been applied`)
   }
 </script>
 

@@ -27,7 +27,6 @@
       loading = false
       goto('/app/notes')
     } catch (err) {
-      console.log(err)
       loading = false
 
       if (err instanceof FirebaseError) {

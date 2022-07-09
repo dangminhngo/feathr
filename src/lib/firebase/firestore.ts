@@ -19,7 +19,6 @@ import type { Note, List, Tag } from '$lib/types'
 
 const db = getFirestore(app)
 
-const batch = writeBatch(db)
 export const userDoc = (id: string) => doc(db, 'users', id)
 const noteDoc = (userId: string, id: string) => doc(db, 'users', userId, 'notes', id)
 const listDoc = (userId: string, id: string) => doc(db, 'users', userId, 'lists', id)
@@ -109,6 +108,9 @@ const deleteTag = async (payload: string) => {
   )
   const notesQuerySnap = await getDocs(notesQuery)
   const listsQuerySnap = await getDocs(listsQuery)
+
+  const batch = writeBatch(db)
+
   notesQuerySnap.forEach((doc) =>
     batch.update(doc.ref, {
       tagIds: arrayRemove(removeId),
@@ -135,6 +137,8 @@ const emptyTrash = async () => {
   )
   const trashNotesQuerySnapshot = await getDocs(trashNotesQuery)
   const trashListsQuerySnapshot = await getDocs(trashListsQuery)
+
+  const batch = writeBatch(db)
   trashNotesQuerySnapshot.forEach((doc) => batch.delete(doc.ref))
   trashListsQuerySnapshot.forEach((doc) => batch.delete(doc.ref))
   await batch.commit()

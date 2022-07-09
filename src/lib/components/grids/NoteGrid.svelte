@@ -7,7 +7,7 @@
   import { ModalType } from '$lib/enums'
 
   const { setCurrentNote, togglePinnedNote, assignTrashToNote } = notesState
-  const { openModal } = uiState
+  const { openModal, notify } = uiState
 
   export let notes: Note[] = []
   $: filteredNotes = filterItems(notes)
@@ -20,11 +20,13 @@
   const _togglePinnedNote = async (id: string, pinned: boolean) => {
     await firestore.updateNote(id, { pinned: !pinned })
     togglePinnedNote(id)
+    notify(pinned ? 'A note is unpinned' : 'A note is pinned')
   }
 
   const _assignTrashToNote = async (id: string) => {
     await firestore.updateNote(id, { trash: true })
     assignTrashToNote(id)
+    notify('A note has been moved to trash')
   }
 </script>
 
