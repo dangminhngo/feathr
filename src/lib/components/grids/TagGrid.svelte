@@ -1,5 +1,6 @@
 <script lang="ts">
   import TagCard from '$lib/components/items/TagCard.svelte'
+  import EmptyGrid from './EmptyGrid.svelte'
   import firestore from '$lib/firebase/firestore'
   import { uiState, tagsState } from '$lib/state'
   import { filterTags } from '$lib/helpers'
@@ -22,20 +23,26 @@
   $: filteredTags = filterTags($tagsState.tags)
 </script>
 
-<div class="tag-list">
-  {#each filteredTags as { character, tags } (character)}
-    <div class="key">
-      <p class="character">{character}</p>
-      {#each tags as tag (tag.id)}
-        <TagCard
-          bind:tag
-          on:click={() => _openTagFormModal(tag.id)}
-          handleDelete={async () => await _deleteTag(tag.id)}
-        />
-      {/each}
-    </div>
-  {/each}
-</div>
+{#if filteredTags.length > 0}
+  <div class="tag-list">
+    {#each filteredTags as { character, tags } (character)}
+      <div class="key">
+        <p class="character">{character}</p>
+        {#each tags as tag (tag.id)}
+          <TagCard
+            bind:tag
+            on:click={() => _openTagFormModal(tag.id)}
+            handleDelete={async () => await _deleteTag(tag.id)}
+          />
+        {/each}
+      </div>
+    {/each}
+  </div>
+{:else}
+  <EmptyGrid type="tag">
+    <span slot="message"> You have no tags. Tap "Add a tag" to add a new tag. </span>
+  </EmptyGrid>
+{/if}
 
 <style lang="scss">
   .tag-list {

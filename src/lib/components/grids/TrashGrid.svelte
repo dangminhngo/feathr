@@ -1,6 +1,7 @@
 <script lang="ts">
   import NoteCard from '$lib/components/items/NoteCard.svelte'
   import ListCard from '$lib/components/items/ListCard.svelte'
+  import EmptyGrid from './EmptyGrid.svelte'
   import firestore from '$lib/firebase/firestore'
   import { uiState, notesState, listsState } from '$lib/state'
   import { filterTrashItems } from '$lib/helpers'
@@ -36,23 +37,29 @@
   $: trashItems = filterTrashItems($notesState.notes, $listsState.lists)
 </script>
 
-<div class="grid">
-  {#each trashItems as item (item.id)}
-    {#if 'tasks' in item}
-      <ListCard
-        list={item}
-        handleRestore={() => _unassignTrashToList(item.id)}
-        handleDelete={() => _deleteList(item.id)}
-      />
-    {:else}
-      <NoteCard
-        note={item}
-        handleRestore={() => _unassignTrashToNote(item.id)}
-        handleDelete={() => _deleteNote(item.id)}
-      />
-    {/if}
-  {/each}
-</div>
+{#if trashItems.length > 0}
+  <div class="grid">
+    {#each trashItems as item (item.id)}
+      {#if 'tasks' in item}
+        <ListCard
+          list={item}
+          handleRestore={() => _unassignTrashToList(item.id)}
+          handleDelete={() => _deleteList(item.id)}
+        />
+      {:else}
+        <NoteCard
+          note={item}
+          handleRestore={() => _unassignTrashToNote(item.id)}
+          handleDelete={() => _deleteNote(item.id)}
+        />
+      {/if}
+    {/each}
+  </div>
+{:else}
+  <EmptyGrid type="trash">
+    <span slot="message"> You have no items in your trash </span>
+  </EmptyGrid>
+{/if}
 
 <style lang="scss">
   .grid {

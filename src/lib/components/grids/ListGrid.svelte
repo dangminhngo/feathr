@@ -1,5 +1,6 @@
 <script lang="ts">
   import ListCard from '$lib/components/items/ListCard.svelte'
+  import EmptyGrid from './EmptyGrid.svelte'
   import firestore from '$lib/firebase/firestore'
   import { uiState, listsState } from '$lib/state'
   import { filterItems } from '$lib/helpers'
@@ -30,17 +31,23 @@
   }
 </script>
 
-<div class="wrapper" class:grid={!$uiState.listView} class:list={$uiState.listView}>
-  {#each filteredLists as list (list.id)}
-    <ListCard
-      bind:list
-      active={$listsState.currentListId === list.id}
-      on:click={() => _openEditListForm(list.id)}
-      handlePinned={() => _togglePinnedList(list.id, list.pinned)}
-      handleTrash={() => _assignTrashToList(list.id)}
-    />
-  {/each}
-</div>
+{#if filteredLists.length > 0}
+  <div class="wrapper" class:grid={!$uiState.listView} class:list={$uiState.listView}>
+    {#each filteredLists as list (list.id)}
+      <ListCard
+        bind:list
+        active={$listsState.currentListId === list.id}
+        on:click={() => _openEditListForm(list.id)}
+        handlePinned={() => _togglePinnedList(list.id, list.pinned)}
+        handleTrash={() => _assignTrashToList(list.id)}
+      />
+    {/each}
+  </div>
+{:else}
+  <EmptyGrid type="list">
+    <span slot="message"> You have no lists. Tap "Add a list" to add a new list. </span>
+  </EmptyGrid>
+{/if}
 
 <style lang="scss">
   .wrapper {

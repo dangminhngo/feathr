@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount, tick } from 'svelte'
   import ThemeContext from '$lib/contexts/ThemeContext.svelte'
+  import LoadingBar from '$lib/components/LoadingBar.svelte'
   import Header from '$lib/components/layouts/Header.svelte'
   import Nav from '$lib/components/layouts/Nav.svelte'
   import GlobalContextMenus from '$lib/components/contextmenus/GlobalContextMenus.svelte'
@@ -10,6 +11,7 @@
   import { fetchInitialData } from '$lib/firebase/firestore'
 
   const { notify } = uiState
+  let loading = true
 
   onMount(async () => {
     try {
@@ -18,8 +20,10 @@
       $notesState.notes = notes
       $listsState.lists = lists
       $tagsState.tags = tags
+      loading = false
     } catch (err) {
       if (err instanceof Error) {
+        loading = false
         notify(err.message, true)
       }
     }
@@ -30,9 +34,13 @@
   <Header />
   <div class="main">
     <Nav />
-    <main>
-      <slot />
-    </main>
+    {#if loading}
+      <LoadingBar />
+    {:else}
+      <main>
+        <slot />
+      </main>
+    {/if}
   </div>
   <Modals />
   <GlobalContextMenus />

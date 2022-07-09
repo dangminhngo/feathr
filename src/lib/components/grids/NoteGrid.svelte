@@ -1,5 +1,6 @@
 <script lang="ts">
   import NoteCard from '$lib/components/items/NoteCard.svelte'
+  import EmptyGrid from './EmptyGrid.svelte'
   import firestore from '$lib/firebase/firestore'
   import { filterItems } from '$lib/helpers'
   import { uiState, notesState } from '$lib/state'
@@ -30,17 +31,23 @@
   }
 </script>
 
-<div class="wrapper" class:grid={!$uiState.listView} class:list={$uiState.listView}>
-  {#each filteredNotes as note (note.id)}
-    <NoteCard
-      {note}
-      active={$notesState.currentNoteId === note.id}
-      on:click={() => _openEditNoteForm(note.id)}
-      handlePinned={() => _togglePinnedNote(note.id, note.pinned)}
-      handleTrash={() => _assignTrashToNote(note.id)}
-    />
-  {/each}
-</div>
+{#if filteredNotes.length > 0}
+  <div class="wrapper" class:grid={!$uiState.listView} class:list={$uiState.listView}>
+    {#each filteredNotes as note (note.id)}
+      <NoteCard
+        {note}
+        active={$notesState.currentNoteId === note.id}
+        on:click={() => _openEditNoteForm(note.id)}
+        handlePinned={() => _togglePinnedNote(note.id, note.pinned)}
+        handleTrash={() => _assignTrashToNote(note.id)}
+      />
+    {/each}
+  </div>
+{:else}
+  <EmptyGrid>
+    <span slot="message"> You have no notes. Tap "Add a note" to add a new note. </span>
+  </EmptyGrid>
+{/if}
 
 <style lang="scss">
   .wrapper {
