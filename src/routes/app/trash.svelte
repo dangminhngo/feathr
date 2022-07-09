@@ -3,16 +3,18 @@
   import TrashGrid from '$lib/components/grids/TrashGrid.svelte'
   import Confirm from '$lib/components/Confirm.svelte'
   import firestore from '$lib/firebase/firestore'
-  import { notesState, listsState } from '$lib/state'
+  import { uiState, notesState, listsState } from '$lib/state'
   import { isEmptyTrash } from '$lib/helpers'
 
   const { emptyTrashNotes } = notesState
   const { emptyTrashLists } = listsState
+  const { notify } = uiState
 
   const handleEmptyTrash = async () => {
     await firestore.emptyTrash()
     emptyTrashNotes()
     emptyTrashLists()
+    notify('Your trash has been emptied')
   }
 </script>
 
