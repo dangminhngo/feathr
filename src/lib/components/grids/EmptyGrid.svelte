@@ -3,12 +3,14 @@
   import listImage from '$assets/images/list.svg'
   import tagImage from '$assets/images/tag.svg'
   import trashImage from '$assets/images/trash.svg'
+  import searchImage from '$assets/images/search.svg'
 
   const images: { [key: string]: string } = {
     note: noteImage,
     list: listImage,
     tag: tagImage,
     trash: trashImage,
+    search: searchImage,
   }
 
   export let type: keyof typeof images = 'note'
