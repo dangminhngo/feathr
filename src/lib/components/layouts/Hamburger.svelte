@@ -9,8 +9,8 @@
 <style lang="scss">
   .hamburger {
     cursor: pointer;
-    width: var(--button-height);
-    height: var(--button-height);
+    width: var(--button-size);
+    height: var(--button-size);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -23,8 +23,8 @@
 
     div {
       position: relative;
-      width: 1rem;
-      height: 0.75rem;
+      width: 1.125rem;
+      height: 0.875rem;
     }
 
     span {
@@ -42,11 +42,11 @@
     }
 
     span:nth-child(2) {
-      top: 5px;
+      top: 6px;
     }
 
     span:nth-child(3) {
-      top: 10px;
+      top: 12px;
     }
   }
 </style>

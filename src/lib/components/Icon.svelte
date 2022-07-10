@@ -60,7 +60,10 @@
     size = 20
 </script>
 
-<span class={$$props.class} style="width: {size}px; height: {size}px;">
+<span
+  class={$$props.class}
+  style="min-width: {size}px; max-width: {size}px; min-height: {size}px; max-height: {size}px"
+>
   <svelte:component this={icons[name]} width="100%" height="100%" />
 </span>
 

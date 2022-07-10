@@ -9,8 +9,8 @@
 <style lang="scss">
   button {
     cursor: pointer;
-    width: var(--button-height);
-    height: var(--button-height);
+    width: var(--button-size);
+    height: var(--button-size);
     display: flex;
     align-items: center;
     justify-content: center;

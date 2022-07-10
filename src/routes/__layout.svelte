@@ -51,8 +51,9 @@
     --text-sm: 0.875rem;
     --text-xs: 0.75rem;
 
-    --sidenav-width: 16rem;
-    --button-height: 2.25rem;
+    --sidenav-width: 5.25rem;
+    --sidenav-grow-width: 16rem;
+    --button-size: 2.25rem;
     --input-height: 2.25rem;
 
     --rounded: 4px;

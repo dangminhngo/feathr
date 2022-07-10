@@ -29,73 +29,72 @@
 
 <nav class:grow={$uiState.navGrow}>
   {#each items as { icon, label, path }}
-    <a class:active={$page.url.pathname === path} class:danger={label === 'Trash'} href={path}>
-      <span>
+    <a
+      class="nav-link"
+      class:active={$page.url.pathname === path}
+      class:danger={label === 'Trash'}
+      href={path}
+    >
+      <div class="icon">
         <Icon name={icon} />
-      </span>
-      <span>{label}</span>
+      </div>
+      <span class="label">{label}</span>
     </a>
   {/each}
 </nav>
 
 <style lang="scss">
   nav {
-    padding: 0.25rem 0;
-    min-width: 5rem;
+    min-width: var(--sidenav-width);
     height: calc(100vh - 4rem);
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    background-color: transparent;
-    transition: background-color 0.25s ease-out, min-width 0.15s ease-out;
+    background-color: var(--theme-primary-800);
+    transition: min-width 0.15s ease-out;
+  }
 
-    &.grow {
-      min-width: var(--sidenav-width);
-      background-color: var(--theme-primary-800);
-    }
+  nav.grow {
+    min-width: var(--sidenav-grow-width);
+  }
 
-    &.grow > a,
-    &.grow > a:link,
-    &.grow > a:visited {
-      margin: 0;
-      padding: 0.75rem 1.5rem;
-    }
+  .nav-link,
+  .nav-link:link,
+  .nav-link:visited {
+    padding-left: 2rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    transition: background-color 0.15s ease-out;
 
-    &.grow > a > span:nth-child(2) {
-      display: block;
-    }
-
-    a,
-    a:link,
-    a:visited {
-      margin: 0 1.125rem;
-      padding: 0.75rem;
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      border-radius: var(--rounded);
-      color: var(--theme-primary-300);
-      font-size: var(--text-sm);
-      font-weight: 500;
-      transition: background-color 0.15s ease-out;
-    }
-
-    a span:nth-child(2) {
-      display: none;
-    }
-
-    a:hover {
+    &:hover {
       background-color: var(--theme-primary-700);
-      color: var(--theme-primary-50);
     }
 
-    a.active {
+    &.active {
       background-color: var(--theme-accent);
-      color: var(--theme-primary-50);
     }
 
-    a.danger {
+    &.danger {
       color: var(--clr-danger);
     }
+  }
+
+  nav.grow > .nav-link,
+  nav.grow > .nav-link:link,
+  nav.grow > .nav-link:visited {
+    padding-left: 2rem;
+  }
+
+  .label {
+    display: none;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    transition-delay: 0.125s;
+  }
+
+  nav.grow .label {
+    display: block;
   }
 </style>
