@@ -16,9 +16,11 @@
   }
 
   const handleSubmit = () => {
-    setTheme(currentThemeName)
     closeAllModals()
-    notify(`Theme ${currentThemeName} has been applied`)
+    if (currentThemeName !== getTheme().name) {
+      setTheme(currentThemeName)
+      notify(`Theme ${currentThemeName} has been applied`)
+    }
   }
 </script>
 
