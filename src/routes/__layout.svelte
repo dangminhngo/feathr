@@ -52,7 +52,7 @@
     --text-xs: 0.75rem;
 
     --sidenav-width: 5.25rem;
-    --sidenav-grow-width: 16rem;
+    --sidenav-grow-width: 14rem;
     --button-size: 2.25rem;
     --input-height: 2.25rem;
 
