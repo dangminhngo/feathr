@@ -29,7 +29,7 @@
 
 <nav class:grow={$uiState.navGrow}>
   {#each items as { icon, label, path }}
-    <a class:active={$page.url.pathname === path} href={path}>
+    <a class:active={$page.url.pathname === path} class:danger={label === 'Trash'} href={path}>
       <span>
         <Icon name={icon} />
       </span>
@@ -58,7 +58,7 @@
     &.grow > a:link,
     &.grow > a:visited {
       margin: 0;
-      padding: 0.25rem 1.5rem;
+      padding: 0.75rem 1.5rem;
     }
 
     &.grow > a > span:nth-child(2) {
@@ -69,7 +69,7 @@
     a:link,
     a:visited {
       margin: 0 1.125rem;
-      padding: 0.25rem;
+      padding: 0.75rem;
       display: flex;
       align-items: center;
       gap: 1.5rem;
@@ -78,10 +78,6 @@
       font-size: var(--text-sm);
       font-weight: 500;
       transition: background-color 0.15s ease-out;
-    }
-
-    a span:first-child {
-      padding: 0.5rem;
     }
 
     a span:nth-child(2) {
@@ -96,6 +92,10 @@
     a.active {
       background-color: var(--theme-accent);
       color: var(--theme-primary-50);
+    }
+
+    a.danger {
+      color: var(--clr-danger);
     }
   }
 </style>
