@@ -41,15 +41,18 @@
     padding: 1rem;
     display: flex;
     flex-direction: column;
+    align-items: flex-end;
     gap: 1rem;
   }
 
   p {
+    align-self: flex-start;
     font-size: var(--text-sm);
     color: var(--theme-primary-400);
   }
 
   .grid {
+    align-self: flex-start;
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     gap: 0.5rem;
