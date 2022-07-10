@@ -20,7 +20,7 @@
     right: 1rem;
     transform: translateY(-50%);
     display: block;
-    color: var(--theme-primary-500);
+    color: var(--theme-search-fg-placeholder);
   }
 
   input {
@@ -28,11 +28,11 @@
     width: 20rem;
     height: var(--input-height);
     border-radius: var(--rounded);
-    background-color: var(--theme-primary-800);
-    color: var(--theme-primary-200);
+    background-color: var(--theme-search-bg);
+    color: var(--theme-search-fg);
 
     &::placeholder {
-      color: var(--theme-primary-500);
+      color: var(--theme-search-fg-placeholder);
     }
   }
 </style>

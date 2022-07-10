@@ -50,7 +50,8 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    background-color: var(--theme-primary-800);
+    background-color: var(--theme-nav-bg);
+    color: var(--theme-nav-fg);
     transition: min-width 0.15s ease-out;
   }
 
@@ -69,16 +70,17 @@
     transition: all 0.15s ease-out;
 
     &:hover {
-      background-color: var(--theme-primary-700);
+      background-color: var(--theme-nav-bg-hover);
+      color: var(--theme-nav-fg-hover);
     }
 
     &.active {
-      background-color: var(--theme-accent);
-      color: var(--theme-primary-50);
+      background-color: var(--theme-nav-bg-active);
+      color: var(--theme-nav-fg-active);
     }
 
     &.danger {
-      color: var(--clr-danger);
+      color: var(--theme-danger);
     }
   }
 

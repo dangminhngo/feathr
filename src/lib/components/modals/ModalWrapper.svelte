@@ -20,7 +20,7 @@
   >
     <div class="titlebar">
       <span>{title}</span>
-      <IconButton size="sm" name="close" on:click={handleClose} />
+      <IconButton size="sm" variant="none" name="close" on:click={handleClose} />
     </div>
     <div class="container">
       <slot />
@@ -35,8 +35,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: var(--theme-primary-800);
-    opacity: 0.75;
+    background-color: var(--theme-backdrop);
   }
 
   .wrapper {
@@ -45,7 +44,7 @@
     left: 50%;
     transform: translate(-50%, 0);
     border-radius: var(--rounded);
-    background-color: var(--theme-primary-900);
+    background-color: var(--theme-bg);
     box-shadow: var(--shadow);
     overflow: hidden;
   }
@@ -56,7 +55,7 @@
     align-items: center;
     justify-content: space-between;
     background-color: var(--theme-accent);
-    color: var(--theme-primary-50);
+    color: var(--theme-fg);
     font-size: var(--text-sm);
     font-weight: 500;
   }

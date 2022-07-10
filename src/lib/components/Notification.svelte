@@ -38,12 +38,13 @@
     align-items: center;
     justify-content: space-between;
     border-radius: var(--rounded);
-    background-color: var(--theme-primary-800);
+    background-color: var(--theme-notification-bg);
+    color: var(--theme-notification-fg);
     box-shadow: var(--shadow);
   }
 
   .notification.error {
-    color: var(--clr-danger);
+    color: var(--theme-danger);
   }
 
   button {

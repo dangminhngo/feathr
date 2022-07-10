@@ -36,8 +36,8 @@
     position: relative;
     padding: 0.5rem 1rem;
     width: 100%;
-    border: 1px solid hsla(0, 100%, 100%, 0.15);
     border-radius: var(--rounded);
+    border: 1px solid var(--theme-field-border);
     font-size: var(--text-sm);
 
     .content {
@@ -50,7 +50,7 @@
       left: 0;
       padding: 0.5rem 1rem;
       pointer-events: none;
-      color: var(--theme-primary-500);
+      color: var(--theme-field-fg-placeholder);
     }
   }
 </style>

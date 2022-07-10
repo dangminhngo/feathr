@@ -12,6 +12,7 @@
   import Download from '$assets/icons/download.svg'
   import Feather from '$assets/icons/feather.svg'
   import Link from '$assets/icons/link.svg'
+  import Menu from '$assets/icons/menu.svg'
   import MoreVerticalFull from '$assets/icons/more-vertical-f.svg'
   import Pencil from '$assets/icons/pencil.svg'
   import PencilFull from '$assets/icons/pencil-f.svg'
@@ -41,6 +42,7 @@
     download: Download,
     feather: Feather,
     link: Link,
+    menu: Menu,
     more: MoreVerticalFull,
     pencil: Pencil,
     pencilFull: PencilFull,

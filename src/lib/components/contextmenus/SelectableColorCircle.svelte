@@ -15,7 +15,7 @@
 
 <label
   class:selected
-  style="background-color: {value !== 'default' ? palette[value] : 'var(--theme-primary-900)'};"
+  style="background-color: {value !== 'default' ? palette[value] : 'var(--theme-bg)'};"
 >
   <input type="radio" bind:group {name} {value} />
   {#if selected}
@@ -31,14 +31,14 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid var(--theme-primary-800);
+    border: 2px solid transparent;
     border-radius: 100%;
     transition: all 0.15s ease-out;
   }
 
   label.selected {
-    border-color: var(--theme-primary-50);
-    color: var(--theme-primary-50);
+    border-color: var(--theme-fg);
+    color: var(--theme-fg);
   }
 
   input {

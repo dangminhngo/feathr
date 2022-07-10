@@ -6,7 +6,7 @@
   .bar {
     width: 100%;
     height: 0.25rem;
-    background-color: var(--theme-primary-600);
+    background-color: var(--theme-sep);
     border-radius: var(--rounded-full);
     overflow: hidden;
   }

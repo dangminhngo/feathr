@@ -37,7 +37,8 @@
     user-select: none;
 
     &:hover {
-      background-color: var(--theme-primary-700);
+      background-color: var(--theme-context-menu-bg-hover);
+      color: var(--theme-context-menu-fg-hover);
     }
   }
 </style>

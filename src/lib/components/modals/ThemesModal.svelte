@@ -50,7 +50,7 @@
   p {
     align-self: flex-start;
     font-size: var(--text-sm);
-    color: var(--theme-primary-400);
+    color: var(--theme-fg-dim);
   }
 
   .grid {

@@ -19,7 +19,7 @@
     cursor: text;
     margin: 0 auto;
     width: 30rem;
-    border: 1px solid var(--theme-primary-700);
+    border: 1px solid var(--theme-sep);
     border-radius: var(--rounded);
     box-shadow: var(--shadow);
   }

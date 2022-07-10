@@ -76,12 +76,12 @@
     display: flex;
     align-items: center;
     border-radius: var(--rounded);
-    background-color: var(--theme-primary-900);
+    background-color: var(--theme-bg);
     font-size: var(--text-sm);
   }
 
   .icon {
-    color: var(--theme-primary-400);
+    color: var(--theme-fg-dim);
   }
 
   .add {

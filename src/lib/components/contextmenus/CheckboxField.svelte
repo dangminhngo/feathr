@@ -6,12 +6,12 @@
 
 <label class="wrapper" class:checked>
   <input type="checkbox" bind:checked on:change />
-  <div class="checkbox">
+  <span class="checkbox">
     {#if checked}
-      <Icon name="check" width={14} height={14} />
+      <Icon name="check" width={16} height={16} />
     {/if}
-  </div>
-  <slot />
+  </span>
+  <span><slot /></span>
 </label>
 
 <style lang="scss">
@@ -22,15 +22,10 @@
     align-items: center;
     gap: 0.75rem;
     font-size: var(--text-sm);
-    color: var(--theme-primary-400);
-  }
-
-  .wrapper:hover {
-    background-color: var(--theme-primary-700);
   }
 
   .wrapper.checked {
-    color: var(--theme-primary-200);
+    color: var(--theme-fg);
   }
 
   input {
@@ -43,7 +38,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid var(--theme-primary-400);
+    border: 1px solid var(--theme-fg);
     border-radius: 2px;
   }
 </style>

@@ -31,7 +31,8 @@
     z-index: 1000;
     padding: 0.25rem 0;
     border-radius: var(--rounded);
-    background-color: var(--theme-primary-800);
+    background-color: var(--theme-context-menu-bg);
+    color: var(--theme-context-menu-fg);
     box-shadow: var(--shadow);
   }
 </style>

@@ -97,7 +97,7 @@
         on:click={(e) => _toggleContextMenu(ContextMenuType.Tags, note.id)(e)}
       />
       <IconButton
-        name={note.color !== 'default' ? 'brushFull' : 'brush'}
+        name="brush"
         size="md"
         on:click={(e) => _toggleContextMenu(ContextMenuType.Background, note.id)(e)}
       />
@@ -125,7 +125,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: var(--theme-primary-300);
+    color: var(--theme-fg);
   }
 
   .left,

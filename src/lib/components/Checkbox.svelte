@@ -17,7 +17,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid var(--theme-primary-200);
+    border: 2px solid var(--theme-fg);
     border-radius: 2px;
     color: transparent;
   }
@@ -25,12 +25,12 @@
   .label.checked {
     border: 2px solid var(--theme-accent);
     background-color: var(--theme-accent);
-    color: var(--theme-primary-50);
+    color: var(--theme-fg);
   }
 
   .label.checked.alt {
-    border: 2px solid var(--theme-primary-50);
-    background-color: var(--theme-primary-50);
+    border: 2px solid var(--theme-fg);
+    background-color: var(--theme-fg);
     color: var(--theme-accent);
   }
 

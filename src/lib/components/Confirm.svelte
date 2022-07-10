@@ -76,8 +76,7 @@
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: var(--theme-primary-800);
-    opacity: 0.75;
+    background-color: var(--theme-backdrop);
   }
 
   .wrapper {
@@ -91,7 +90,8 @@
     align-items: stretch;
     gap: 1rem;
     border-radius: var(--rounded);
-    background-color: var(--theme-primary-900);
+    background-color: var(--theme-bg);
+    color: var(--theme-fg);
     box-shadow: var(--shadow);
     overflow: hidden;
   }
@@ -99,7 +99,7 @@
   .desc {
     margin-top: 0.5rem;
     font-size: var(--text-sm);
-    color: var(--theme-primary-400);
+    color: var(--theme-fg-dim);
   }
 
   .buttons {

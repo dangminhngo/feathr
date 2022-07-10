@@ -78,7 +78,7 @@
 
   .task.done {
     text-decoration: line-through;
-    color: var(--theme-primary-300);
+    color: var(--theme-fg);
   }
 
   .draggable {
@@ -102,7 +102,7 @@
   .buttons {
     opacity: 0;
     pointer-events: none;
-    color: var(--theme-primary-400);
+    color: var(--theme-fg-dim);
   }
 
   .draggable.show,

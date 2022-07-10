@@ -71,8 +71,7 @@
 <div
   class="task-list"
   class:trash={list.trash}
-  style="background-color: {color ?? 'transparent'}; border-color: {color ??
-    'var(--theme-primary-700)'};"
+  style="background-color: {color ?? 'transparent'}; border-color: {color ?? 'var(--theme-sep)'};"
   on:mouseenter={handleMouseEnter}
   on:mouseleave={handleMouseLeave}
   on:click
@@ -157,7 +156,7 @@
   }
 
   .sep {
-    border: 1px solid var(--theme-primary-400);
+    border: 1px solid var(--theme-sep);
   }
 
   .tasks {
@@ -168,7 +167,7 @@
 
   .message {
     font-size: var(--text-sm);
-    color: var(--theme-primary-400);
+    color: var(--theme-fg-dim);
   }
 
   .buttons {

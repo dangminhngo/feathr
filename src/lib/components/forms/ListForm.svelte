@@ -213,7 +213,7 @@
         on:click={(e) => _toggleContextMenu(ContextMenuType.Tags, list.id)(e)}
       />
       <IconButton
-        name={list.color !== 'default' ? 'brushFull' : 'brush'}
+        name="brush"
         size="md"
         on:click={(e) => _toggleContextMenu(ContextMenuType.Background, list.id)(e)}
       />
@@ -246,17 +246,17 @@
     font-size: var(--text-sm);
     font-weight: 500;
     border-radius: var(--rounded);
-    transition: background-color 0.15s ease-out;
+    transition: color 0.15s ease-out;
   }
 
   .add:hover {
-    background-color: var(--theme-primary-700);
+    color: var(--theme-accent);
   }
 
   p {
     padding: 0.25rem 0;
     font-size: var(--text-sm);
-    color: var(--theme-primary-300);
+    color: var(--theme-fg);
   }
 
   .actions {

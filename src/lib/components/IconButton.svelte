@@ -3,6 +3,7 @@
 
   export let name = '',
     size: 'lg' | 'md' | 'sm' = 'lg',
+    variant: 'none' | 'base' = 'base',
     active = false,
     disabled = false
 
@@ -13,6 +14,7 @@
   class:lg={size === 'lg'}
   class:md={size === 'md'}
   class:sm={size === 'sm'}
+  class:none={variant === 'none'}
   class:active
   {disabled}
   on:click|stopPropagation
@@ -27,6 +29,8 @@
     align-items: center;
     justify-content: center;
     border-radius: var(--rounded);
+    background-color: var(--theme-icon-button-bg);
+    color: var(--theme-icon-button-fg);
     transition: all 0.15s ease-out;
   }
 
@@ -50,7 +54,12 @@
   }
 
   button:hover {
-    background-color: var(--theme-primary-50);
-    color: var(--theme-primary-900);
+    background-color: var(--theme-icon-button-bg-hover);
+    color: var(--theme-icon-button-fg-hover);
+  }
+
+  button.none {
+    background-color: transparent;
+    color: inherit;
   }
 </style>

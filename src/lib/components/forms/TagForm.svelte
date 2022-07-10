@@ -57,6 +57,5 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    color: var(--theme-primary-300);
   }
 </style>

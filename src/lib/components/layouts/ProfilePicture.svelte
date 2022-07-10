@@ -18,14 +18,11 @@
     transition: background-color 0.15s ease-out;
   }
 
-  button:hover {
-    background-color: var(--theme-primary-700);
-  }
-
   img {
     pointer-events: none;
     width: 1.5rem;
     height: 1.5rem;
     border-radius: 100%;
+    border: 1px solid var(--theme-sep);
   }
 </style>

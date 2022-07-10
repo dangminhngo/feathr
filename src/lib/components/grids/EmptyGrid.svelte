@@ -38,6 +38,6 @@
   }
 
   p {
-    color: var(--theme-primary-400);
+    color: var(--theme-fg-dim);
   }
 </style>

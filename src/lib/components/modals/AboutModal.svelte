@@ -39,7 +39,6 @@
     padding: 1rem;
     display: flex;
     gap: 6rem;
-    color: var(--theme-primary-300);
   }
 
   .left {
@@ -57,7 +56,11 @@
   a:link,
   a:visited,
   a:active {
-    color: var(--theme-accent-light);
+    color: var(--theme-accent);
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 
   .contact {

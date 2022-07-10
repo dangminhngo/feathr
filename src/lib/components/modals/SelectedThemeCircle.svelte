@@ -9,8 +9,8 @@
 <label class:selected>
   <input type="radio" bind:group {name} value={theme.name} />
   <div class="circle">
-    <span style="background-color: {theme.palette['primary-900']}">&nbsp;</span>
-    <span style="background-color: {theme.palette.accent}">&nbsp;</span>
+    <span style="background-color: {theme.colors.bg}">&nbsp;</span>
+    <span style="background-color: {theme.colors.accent}">&nbsp;</span>
     {#if selected}
       <span class="icon">
         <Icon name="check" width={24} height={24} />
@@ -36,13 +36,13 @@
     height: 3rem;
     display: flex;
     align-items: stretch;
-    border: 2px solid var(--theme-primary-800);
+    border: 2px solid var(--theme-sep);
     border-radius: 100%;
     overflow: hidden;
   }
 
   .selected > .circle {
-    border-color: var(--theme-primary-50);
+    border-color: var(--theme-fg);
   }
 
   input {
@@ -59,15 +59,15 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: var(--theme-primary-50);
+    color: var(--theme-fg);
   }
 
   .name {
     cursor: pointer;
-    color: var(--theme-primary-400);
+    color: var(--theme-fg-dim);
   }
 
   .selected > .name {
-    color: var(--theme-primary-50);
+    color: var(--theme-fg);
   }
 </style>

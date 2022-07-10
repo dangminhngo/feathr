@@ -1,7 +1,6 @@
 <script lang="ts">
   import { goto } from '$app/navigation'
   import IconButton from '$lib/components/IconButton.svelte'
-  import Hamburger from './Hamburger.svelte'
   import ProfilePicture from './ProfilePicture.svelte'
   import Search from './Search.svelte'
   import { authState, uiState } from '$lib/state'
@@ -26,7 +25,7 @@
 </script>
 
 <header class="header">
-  <Hamburger on:click={uiState.toggleNav} />
+  <IconButton name="menu" on:click={uiState.toggleNav} />
   <Search placeholder="Search notes or lists ..." bind:value={keyword} on:submit={handleSubmit} />
   <div class="buttons">
     <IconButton name="cog" on:click={(e) => _toggleContextMenu(ContextMenuType.Settings)(e)} />
@@ -46,7 +45,9 @@
     display: flex;
     align-items: center;
     gap: 1.5rem;
-    border-bottom: 1px solid var(--theme-primary-700);
+    border-bottom: 1px solid var(--theme-sep);
+    background-color: var(--theme-header-bg);
+    color: var(--theme-header-fg);
   }
 
   .buttons {

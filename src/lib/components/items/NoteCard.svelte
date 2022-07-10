@@ -36,8 +36,7 @@
 <div
   class="note"
   class:trash={note.trash}
-  style="background-color: {color ?? 'transparent'}; border-color: {color ??
-    'var(--theme-primary-700)'};"
+  style="background-color: {color ?? 'transparent'}; border-color: {color ?? 'var(--theme-sep)'};"
   on:mouseenter={handleMouseEnter}
   on:mouseleave={handleMouseLeave}
   on:click

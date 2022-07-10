@@ -1,10 +1,14 @@
 <script lang="ts">
+  import { getContext } from 'svelte'
   import ContextMenuWrapper from './ContextMenuWrapper.svelte'
   import SelectableColorCircle from './SelectableColorCircle.svelte'
-  import palettes from '$lib/data/palettes.json'
+  import { themeKey } from '$lib/consts'
+
+  const { getPalette } = getContext(themeKey)
+  const palette = getPalette()
 
   export let color = 'default'
-  const keys = Object.keys(palettes.light)
+  const keys = Object.keys(palette)
 </script>
 
 <ContextMenuWrapper>
@@ -23,7 +27,6 @@
   .colors {
     padding: 0.25rem 0.5rem;
     font-size: var(--text-sm);
-    color: var(--theme-primary-300);
   }
 
   .list {

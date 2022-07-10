@@ -18,12 +18,14 @@
     align-items: center;
     justify-content: center;
     border-radius: var(--rounded);
+    background-color: var(--theme-icon-button-bg);
+    color: var(--theme-icon-button-fg);
     transition: all 0.15s ease-out;
   }
 
   label:hover {
-    background-color: var(--theme-primary-50);
-    color: var(--theme-primary-900);
+    background-color: var(--theme-icon-button-bg-hover);
+    color: var(--theme-icon-button-fg-hover);
   }
 
   input {

@@ -3,7 +3,6 @@
   import { writable } from 'svelte/store'
 
   import presets from '$lib/data/themes.json'
-  import palettes from '$lib/data/palettes.json'
   import { themeKey } from '$lib/consts'
   import type { Theme } from '$lib/types'
 
@@ -22,12 +21,12 @@
       setRootColors(currentTheme)
     },
     getTheme: () => $theme,
-    getPalette: () => palettes[$theme.dark ? 'dark' : 'light'],
+    getPalette: () => $theme.palette,
   })
 
   const setRootColors = (theme: Theme) => {
     document.documentElement.style.setProperty('--theme-name', theme.name)
-    for (let [prop, color] of Object.entries(theme.palette)) {
+    for (let [prop, color] of Object.entries(theme.colors)) {
       let cssVarName = `--theme-${prop}`
       document.documentElement.style.setProperty(cssVarName, color)
     }

@@ -51,8 +51,8 @@
 
 <style lang="scss">
   :global(body) {
-    background-color: var(--theme-primary-900);
-    color: var(--theme-primary-200);
+    background-color: var(--theme-bg);
+    color: var(--theme-fg);
   }
 
   .main {

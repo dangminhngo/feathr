@@ -57,30 +57,18 @@
   }
 
   button.default {
-    background-color: var(--theme-primary-300);
-    color: var(--theme-primary-900);
-  }
-
-  button.default:hover {
-    background-color: var(--theme-primary-50);
+    background-color: var(--theme-fg);
+    color: var(--theme-bg);
   }
 
   button.primary {
-    background-color: var(--clr-accent);
-    color: var(--clr-white);
-  }
-
-  button.primary:hover {
-    background-color: var(--clr-accent-light);
+    background-color: var(--theme-accent, var(--clr-accent));
+    color: var(--theme-fg, var(--clr-primary-200));
   }
 
   button.danger {
-    background-color: var(--clr-danger);
-    color: var(--clr-white);
-  }
-
-  button.danger:hover {
-    background-color: var(--clr-danger-light);
+    background-color: var(--theme-danger);
+    color: var(--theme-fg);
   }
 
   button.stretch {

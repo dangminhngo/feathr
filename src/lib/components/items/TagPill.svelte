@@ -12,8 +12,8 @@
     cursor: pointer;
     padding: 0.15rem 0.5rem;
     border-radius: var(--rounded);
-    background-color: var(--theme-primary-50);
-    color: var(--theme-primary-800);
+    background-color: var(--theme-fg);
+    color: var(--theme-bg);
     font-size: var(--text-xs);
     font-weight: 500;
   }

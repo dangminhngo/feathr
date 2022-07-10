@@ -26,7 +26,7 @@
   </div>
   <div class="actions" class:show={showButtons}>
     <Confirm let:confirm>
-      <IconButton name="close" on:click={() => confirm(handleDelete)} />
+      <IconButton name="close" variant="none" on:click={() => confirm(handleDelete)} />
       <span slot="message">
         Do you want to delete tag "{tag.label}"?
       </span>
@@ -49,8 +49,7 @@
   }
 
   .tag:hover {
-    background-color: var(--theme-primary-800);
-    color: var(--theme-primary-100);
+    background-color: var(--theme-bg-dim);
   }
 
   .icon {
