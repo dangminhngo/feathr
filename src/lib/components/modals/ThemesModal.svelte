@@ -54,9 +54,9 @@
   }
 
   .grid {
-    align-self: flex-start;
+    align-self: stretch;
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 0.5rem;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: center;
   }
 </style>

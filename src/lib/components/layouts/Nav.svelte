@@ -66,7 +66,7 @@
     display: flex;
     align-items: center;
     gap: 2rem;
-    transition: background-color 0.15s ease-out;
+    transition: all 0.15s ease-out;
 
     &:hover {
       background-color: var(--theme-primary-700);
@@ -74,6 +74,7 @@
 
     &.active {
       background-color: var(--theme-accent);
+      color: var(--theme-primary-50);
     }
 
     &.danger {

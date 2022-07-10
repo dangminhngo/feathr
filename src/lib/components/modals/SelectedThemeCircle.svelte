@@ -69,6 +69,5 @@
 
   .selected > .name {
     color: var(--theme-primary-50);
-    font-weight: 700;
   }
 </style>
