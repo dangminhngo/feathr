@@ -60,6 +60,19 @@ const createListsState = (initialState: ListsState) => {
         return s
       })
     },
+    removeTagFromList: (id: string, tagId: string) => {
+      update((s) => {
+        s.lists = s.lists.map((l) =>
+          l.id === id
+            ? {
+                ...l,
+                tagIds: l.tagIds.filter((tid) => tid !== tagId),
+              }
+            : l
+        )
+        return s
+      })
+    },
     emptyTrashLists: () => {
       update((s) => {
         s.lists = s.lists.filter((l) => !l.trash)

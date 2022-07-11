@@ -125,6 +125,22 @@ const deleteTag = async (payload: string) => {
   await deleteDoc(tagRef)
 }
 
+const removeTagFromNote = async (id: string, payload: string) => {
+  const userId = getUserIdFromAuthState()
+  const noteRef = noteDoc(userId, id)
+  await updateDoc(noteRef, {
+    tagIds: arrayRemove(payload),
+  })
+}
+
+const removeTagFromList = async (id: string, payload: string) => {
+  const userId = getUserIdFromAuthState()
+  const listRef = listDoc(userId, id)
+  await updateDoc(listRef, {
+    tagIds: arrayRemove(payload),
+  })
+}
+
 const emptyTrash = async () => {
   const userId = getUserIdFromAuthState()
   const trashNotesQuery = query(
@@ -154,5 +170,7 @@ export default {
   addTag,
   updateTag,
   deleteTag,
+  removeTagFromList,
+  removeTagFromNote,
   emptyTrash,
 }

@@ -111,7 +111,7 @@
       {/each}
     </TaskList>
   </div>
-  <TagPillGrid ids={list.tagIds} />
+  <TagPillGrid itemId={list.id} type="list" ids={list.tagIds} />
   <div class="buttons">
     <div class="left" class:pinned={list.pinned} class:show={buttonsShow} class:active>
       {#if !list.trash}

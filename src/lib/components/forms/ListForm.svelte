@@ -202,7 +202,7 @@
       {/each}
     </TaskList>
   {/if}
-  <TagPillGrid ids={list.tagIds} />
+  <TagPillGrid itemId={list.id} type="list" ids={list.tagIds} />
   <div class="actions">
     <div class="left">
       <IconButton name={list.pinned ? 'pinFull' : 'pin'} size="md" on:click={togglePinned} />

@@ -37,6 +37,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 1rem;
     border-radius: var(--rounded);
     background-color: var(--theme-notification-bg);
     color: var(--theme-notification-fg);

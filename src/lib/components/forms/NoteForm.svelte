@@ -86,7 +86,7 @@
   {/if}
   <Field bind:this={titleField} name="Title" placeholder="Title" bind:value={note.title} />
   <Field name="Body" placeholder="Body" bind:value={note.body} />
-  <TagPillGrid ids={note.tagIds} />
+  <TagPillGrid itemId={note.id} ids={note.tagIds} />
   <div class="actions">
     <div class="left">
       <IconButton name={note.pinned ? 'pinFull' : 'pin'} size="md" on:click={togglePinned} />

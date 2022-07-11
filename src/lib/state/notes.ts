@@ -1,5 +1,3 @@
-import { v4 as uuid } from 'uuid'
-
 import { writable } from 'svelte/store'
 import type { NotesState, Note } from '$lib/types'
 
@@ -58,6 +56,19 @@ const createNotesState = (initialState: NotesState) => {
       update((s) => {
         s.notes = s.notes.map((n) =>
           n.id === id ? { ...n, trash: false, trashedAt: undefined } : n
+        )
+        return s
+      })
+    },
+    removeTagFromNote: (id: string, tagId: string) => {
+      update((s) => {
+        s.notes = s.notes.map((n) =>
+          n.id === id
+            ? {
+                ...n,
+                tagIds: n.tagIds.filter((tid) => tid !== tagId),
+              }
+            : n
         )
         return s
       })

@@ -48,7 +48,7 @@
   </ImageGrid>
   <div class="title">{note.title}</div>
   <div class="body">{note.body}</div>
-  <TagPillGrid ids={note.tagIds} />
+  <TagPillGrid itemId={note.id} ids={note.tagIds} />
   <div class="buttons">
     <div class="left" class:pinned={note.pinned} class:show={buttonsShow} class:active>
       {#if !note.trash}
