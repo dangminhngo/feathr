@@ -1,14 +1,10 @@
 <script lang="ts">
   import Logo from '$assets/icons/logo.svg'
   import Bandage from '$assets/icons/bandage.svg'
-  import Beer from '$assets/icons/beer.svg'
   import Brush from '$assets/icons/brush.svg'
-  import BrushFull from '$assets/icons/brush-f.svg'
   import Check from '$assets/icons/check.svg'
   import Close from '$assets/icons/close.svg'
   import Cog from '$assets/icons/cog.svg'
-  import DeleteFull from '$assets/icons/delete-f.svg'
-  import Delete from '$assets/icons/delete.svg'
   import Download from '$assets/icons/download.svg'
   import Feather from '$assets/icons/feather.svg'
   import Link from '$assets/icons/link.svg'
@@ -20,25 +16,23 @@
   import Pin from '$assets/icons/pin.svg'
   import PinFull from '$assets/icons/pin-f.svg'
   import Plus from '$assets/icons/plus.svg'
+  import Redo from '$assets/icons/redo.svg'
   import Save from '$assets/icons/save.svg'
   import Search from '$assets/icons/search.svg'
   import Tag from '$assets/icons/tag.svg'
   import Tags from '$assets/icons/tags.svg'
   import List from '$assets/icons/task-list.svg'
   import Trash from '$assets/icons/trash.svg'
+  import TrashFull from '$assets/icons/trash-f.svg'
 
   // NOTE: string for svelte component type, no error????
   const icons: { [key: string]: string } = {
     logo: Logo,
     bandage: Bandage,
-    beer: Beer,
     brush: Brush,
-    brushFull: BrushFull,
     check: Check,
     close: Close,
     cog: Cog,
-    deleteFull: DeleteFull,
-    delete: Delete,
     download: Download,
     feather: Feather,
     link: Link,
@@ -50,12 +44,14 @@
     pin: Pin,
     pinFull: PinFull,
     plus: Plus,
+    redo: Redo,
     save: Save,
     search: Search,
     tag: Tag,
     tags: Tags,
     list: List,
     trash: Trash,
+    trashFull: TrashFull,
   }
 
   export let name: string,

@@ -25,7 +25,7 @@
     <span>All stuff in trash will be deleted in 7 days.</span>
     <Confirm let:confirm>
       <button class="empty" on:click={() => confirm(handleEmptyTrash)}>
-        <Icon name="deleteFull" />
+        <Icon name="trashFull" />
         <span>Empty Trash</span>
       </button>
       <span slot="message"> Are you sure to empty your trash? </span>
