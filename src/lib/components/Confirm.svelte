@@ -81,7 +81,7 @@
 
   .wrapper {
     position: absolute;
-    top: 20%;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, 0);
     padding: 1rem;
