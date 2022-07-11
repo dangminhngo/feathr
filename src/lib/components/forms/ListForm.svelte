@@ -246,11 +246,11 @@
     font-size: var(--text-sm);
     font-weight: 500;
     border-radius: var(--rounded);
-    transition: color 0.15s ease-out;
+    transition: background-color 0.15s ease-out;
   }
 
   .add:hover {
-    color: var(--theme-accent);
+    background-color: var(--theme-bg-dim);
   }
 
   p {
