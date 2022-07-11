@@ -75,6 +75,7 @@
 
 <style lang="scss">
   .note {
+    flex: 0 0 20rem;
     padding: 1rem;
     display: flex;
     flex-direction: column;

@@ -69,7 +69,7 @@
 </script>
 
 <div
-  class="task-list"
+  class="list"
   class:trash={list.trash}
   style="background-color: {color ?? 'transparent'}; border-color: {color ?? 'var(--theme-sep)'};"
   on:mouseenter={handleMouseEnter}
@@ -137,7 +137,8 @@
 </div>
 
 <style lang="scss">
-  .task-list {
+  .list {
+    flex: 0 0 20rem;
     padding: 1rem;
     display: flex;
     flex-direction: column;
@@ -147,7 +148,7 @@
     border-radius: var(--rounded);
   }
 
-  .task-list.trash > * {
+  .list.trash > * {
     pointer-events: none;
   }
 

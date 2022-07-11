@@ -55,8 +55,8 @@
   }
 
   .grid {
-    display: grid;
-    grid-template-columns: repeat(5, 20rem);
+    display: flex;
+    flex-wrap: wrap;
     gap: 1.5rem;
   }
 
