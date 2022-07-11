@@ -42,12 +42,11 @@
 
     &:hover {
       background-color: var(--theme-context-menu-bg-hover);
-      color: var(--theme-context-menu-fg-hover);
     }
   }
 
   .logout {
-    color: var(--theme-accent);
+    color: var(--theme-danger);
     font-weight: 500;
   }
 </style>
