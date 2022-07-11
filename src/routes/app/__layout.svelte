@@ -44,7 +44,7 @@
   </div>
   <Modals />
   <GlobalContextMenus />
-  {#if $uiState.notification}
+  {#if $uiState.notification.isShow}
     <Notification />
   {/if}
 </ThemeContext>

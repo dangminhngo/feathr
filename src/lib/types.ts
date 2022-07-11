@@ -75,9 +75,10 @@ export interface UiState {
   }
   position: Position
   notification: {
+    isShow: boolean
     error: boolean
     message: string
-  } | null
+  }
 }
 
 export interface NotesState {
